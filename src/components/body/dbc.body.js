@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import LeftNavigation from './left.navigation/left.navigation';
-import RightContent from './content.area/cards.list';
-// import RightContent from './content.area/cards.list';
+import ContentArea from './content.area/content.area';
 
 const DBCBody = () => {
     // const [data, setData] = useState("Hello, how are you?");
@@ -13,7 +12,7 @@ const DBCBody = () => {
     return (
         <div>
             <LeftNavigation />
-            <RightContent />
+            <ContentArea />
         </div>
     )
 }
