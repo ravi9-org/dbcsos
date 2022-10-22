@@ -1,0 +1,92 @@
+.dbc-app{
+
+}
+
+/* Begin :  custom style for native browser scroll bar*/
+
+body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar,
+.dbc-app:not(.dbc-app-on-macintosh) *::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar {
+  background: rgba(255, 255, 255, 1);
+}
+
+.dbc-app:not(.dbc-app-on-macintosh) *::-webkit-scrollbar:hover {
+  background: rgba(255, 255, 255, 0);
+}
+
+.dbc-app:not(.dbc-app-on-macintosh) *:hover::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb,
+.dbc-app:not(.dbc-app-on-macintosh) *::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 6px solid transparent;
+  min-height: 50px;
+  background-color: transparent;
+}
+
+body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 16px 16px 0px rgb(128 130 133);
+}
+
+body.dbc-app:not(.dbc-app-on-macintosh):hover::-webkit-scrollbar-thumb,
+.dbc-app:not(.dbc-app-on-macintosh) *:hover::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 16px 16px 0px rgb(128 130 133);
+}
+
+.dbc-app:not(.dbc-app-on-macintosh) .dbc-app-dark-area:hover::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 16px 16px 0px rgba(255, 255, 255, 0.75);
+}
+
+body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
+.dbc-app:not(.dbc-app-on-macintosh) *::-webkit-scrollbar-thumb:hover {
+  border: 4px solid transparent;
+  -webkit-box-shadow: inset 16px 16px 0px rgb(128 130 133);
+  background-color: transparent;
+}
+
+.dbc-app:not(.dbc-app-on-macintosh) *.dbc-app-dark-scrollable-area:hover::-webkit-scrollbar-thumb,
+.dbc-app:not(.dbc-app-on-macintosh) *.dbc-app-dark-scrollable-area::-webkit-scrollbar-thumb:hover {
+  -webkit-box-shadow: inset 16px 16px 0px #eeeeee;
+}
+
+.dbc-app .dbc-app-normal-scrolling {
+  overflow-x: auto;
+  overflow-y: auto;
+  overflow: overlay !important;
+}
+
+.dbc-app:not(.dbc-app-on-macintosh) .dbc-app-normal-scrolling {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(128 130 133) transparent;
+}
+
+.dbc-app:not(.dbc-app-on-macintosh) *.dbc-app-dark-scrollable-area:hover {
+  scrollbar-color: #eeeeee transparent;
+}
+
+.dbc-app .dbc-app-normal-scrolling {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/*TODO: Will be moved to hisos side - End*/
+
+/* End :  custom style for native browser scroll bar*/
+
+.dbc-app .dbc-company-logo {
+    background: #1fc;
+}
+
+.dbc-app .dbc-header .dbc-company-logo {
+    background: #ffc;
+}
+
+.dbc-app .dbc-footer .dbc-company-logo {
+    background: #ffc;
+}
