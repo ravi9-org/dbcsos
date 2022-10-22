@@ -9,6 +9,7 @@ In the project directory, you can run:
 It downloads all the required node modules that helps for this project.
 And it won't update package-lock.json. If package-lock.json needs to be updated
 with latest node module's information then run "npm install" or "npm i".
+Make sure that you have node version 16 or above.
 
 
 ### `npm run build`
@@ -30,3 +31,8 @@ NOTE: this needs live server hook
 
 This is similar to "npm start" but concurrently it runs json server which provides
 you the mock db json to your application.
+
+
+## Troubleshooting
+
+### Any issue while running "npm install", then run `npm cache clean --force' command and then run "npm install"
