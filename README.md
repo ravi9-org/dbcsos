@@ -4,7 +4,7 @@
 
 In the project directory, you can run:
 
-### `npm ci`
+### `npm install`
 
 It downloads all the required node modules that helps for this project.
 And it won't update package-lock.json. If package-lock.json needs to be updated
