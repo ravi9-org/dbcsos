@@ -2,9 +2,9 @@ import React, { useState, useRef } from "react";
 
 const DBCNotification = () => {
   return (
-    <>
-      <div>This is header notification area text</div>
-    </>
+    <div className="dbc-user-notification-wrapper">
+      <div>Notification</div>
+    </div>
   );
 };
 

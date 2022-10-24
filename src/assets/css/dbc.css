@@ -1,6 +1,4 @@
-.dbc-app{
-
-}
+.dbc-app {}
 
 /* Begin :  custom style for native browser scroll bar*/
 
@@ -80,13 +78,52 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 /* End :  custom style for native browser scroll bar*/
 
 .dbc-app .dbc-company-logo {
-    background: #1fc;
+  background: #1fc;
 }
 
 .dbc-app .dbc-header .dbc-company-logo {
-    background: #ffc;
+  background: #ffc;
 }
 
 .dbc-app .dbc-footer .dbc-company-logo {
-    background: #ffc;
+  background: #ffc;
+}
+
+.dbc-app .dbc-global-mask {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+}
+
+.dbc-app .dbc-global-mask .dbc-global-mask-loading-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  height: 100%;
+  width: 100%;
+}
+
+.dbc-app .dbc-hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* TEMP changes */
+.dbc-app .dbc-header-wrapper {
+  background-color: lightseagreen;
+  display: flex;
+}
+
+.dbc-app .dbc-body-wrapper {
+  background-color: lightskyblue;
+}
+
+.dbc-app .dbc-footer-wrapper {
+  background-color: lightblue;
 }

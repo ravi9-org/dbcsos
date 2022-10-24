@@ -10,7 +10,7 @@ const DBCBody = () => {
     //     return data + ":" + name;
     // }, [data]);
     return (
-        <div>
+        <div className="dbc-body-wrapper">
             <LeftNavigation />
             <ContentArea />
         </div>

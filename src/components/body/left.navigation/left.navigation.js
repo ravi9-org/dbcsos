@@ -9,7 +9,7 @@ const LeftNavigation = () => {
   //     return data + ":" + name;
   // }, [data]);
   return (
-    <div>
+    <div className="dbc-left-navigation-wrapper">
       This is left navigation.
       <Link to="/cards">
         Cards

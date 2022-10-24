@@ -7,10 +7,13 @@
     "node": ">= 16"
   },
   "dependencies": {
+    "axios": "^1.1.3",
+    "bootstrap": "^5.2.2",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
     "react-router-dom": "^6.4.2",
+    "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
@@ -18,14 +21,16 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "concurrently": "^7.4.0",
-    "json-server": "^0.17.0"
+    "json-server": "^0.17.0",
+    "json-server-auth": "^2.1.0",
+    "jsonwebtoken": "^8.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dbcsos-json-server": "json-server --watch mock_data/db.json --port 3004",
+    "dbcsos-json-server": "json-server-auth --watch mock_data/db.json --port 3004",
     "dev-start": "concurrently \"npm run dbcsos-json-server\" \"npm run start\""
   },
   "eslintConfig": {
