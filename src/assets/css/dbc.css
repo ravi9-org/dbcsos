@@ -115,7 +115,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 /* TEMP changes */
-.dbc-app .dbc-header-wrapper {
+/* .dbc-app .dbc-header-wrapper {
   background-color: lightseagreen;
   display: flex;
 }
@@ -126,4 +126,4 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbc-app .dbc-footer-wrapper {
   background-color: lightblue;
-}
+} */

@@ -2,8 +2,13 @@ import React, { useEffect, useRef, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Utils from "../utils";
 import ContextComponent from "../app.context";
+import "../../assets/css/login.css";
+import LoginLeftBGImg from "../../assets/img/login-bg.png";
+import LoginRightBGImg from "../../assets/img/logo-on-white-bg.png";
 
-const Login = () => {
+import { Container, Card, Form, Button } from "react-bootstrap";
+
+const LoginForm = () => {
   const HIDDEN_CLASS = "dbc-hidden";
   let emailField = useRef(null);
   let userPasswordField = useRef(null);
@@ -96,54 +101,99 @@ const Login = () => {
   let defaultPwdValue = "user_1";
 
   return (
-    <div>
-      <div className="dbs-login-user-email-wrapper">
-        <div className="dbs-login-user-email-row-wrapper">
-          <label>Enter email:</label>
-          <input
-            type="text"
-            name="email"
-            defaultValue={defaultEmailValue}
-            ref={emailField}
-            placeholder="Enter login email here..."
-            onBlur={emailFocusOutEventHandler}
-          />
-        </div>
-        <div
-          className={`dbs-login-user-email-err-msg dbc-hidden`}
-          ref={emailErrMsgDiv}
-        >
-          Email field cannot be left blank...
-        </div>
-      </div>
-      <div className="dbs-login-user-pwd-wrapper">
-        <div className="dbs-login-user-pwd-row-wrapper">
-          <label>Enter password:</label>
-          <input
-            type="password"
-            name="email"
-            defaultValue={defaultPwdValue}
-            ref={userPasswordField}
-            placeholder="Enter password here..."
-            onBlur={userPwdFocusOutEventHandler}
-          />
-        </div>
-        <div
-          className={`dbs-login-user-pwd-err-msg  dbc-hidden`}
-          ref={userPwdErrMsgDiv}
-        >
-          User password field cannot be left blank...
-        </div>
-      </div>
-      <div className="dbs-login-user-submit-wrapper">
-        <button onClick={onClickHandler}>Submit</button>
-      </div>
+    <Container className="vh-100 vw-100 p-0 m-0 mw-100 mh-100">
+      <Card className="p-0 m-0 w-100 h-100 border-0">
+        <Form className="form w-100 h-100 d-flex">
+          <div className="dbs-login-page-left-side h-100 w-50 overflow-hidden">
+            <img
+              className="h-100 w-50"
+              src={LoginLeftBGImg}
+              alt="Welcome to our Digital Business Card Form"
+            />
+            <div className="vh-100 dbc-login-logo-text-wrapper">
+              <div className="h-100 dbc-login-logo-text align-items-center">
+                Welcome to our Digital Business Card Platform
+              </div>
+            </div>
+          </div>
 
-      <div        className={"dbs-login-user-pwd-err-msg"}      >
-        {formErrorMsg}
-      </div>
-    </div>
+          <div className="dbs-login-page-right-side w-50 h-100">
+            <div className="dbs-login-page-right-top-logo">
+              <img
+                src={LoginRightBGImg}
+                className="d-flex justify-content-end"
+                alt="digital business cards"
+              />
+            </div>
+
+            <div className="dbc-login-form-wrapper">
+              <div className="dbc-login-form-headings text-left">
+                <div className="dbc-login-form-text-login">Log in</div>
+                <div className="dbc-login-form-text-desc">
+                  Please log in to your account.
+                </div>
+              </div>
+
+              <div className="dbc-login-form">
+                <div className="dbc-login-form-input-wrapper">
+                  <input
+                    // className={` ${warnemail ? "dbs-login-form-input-warning" : ""}`}
+                    className={`dbc-login-form-input dbc-login-form-input-email`}
+                    type="text"
+                    placeholder="Enter email"
+                    name="email"
+                    // value={inputs.email}
+                    // onChange={inputEvent}
+                  />
+                  {/* <p className={` ${danger ? "danger" : ""}`}> */}
+                  <p className={``}>Please enter a valid email address.</p>
+                </div>
+                <div className="dbc-login-form-input-wrapper">
+                  <input
+                    // className={` ${warnpass ? "dbs-login-form-input-warning" : ""}`}
+                    className={`dbc-login-form-input dbc-login-form-input-password`}
+                    type="password"
+                    placeholder="Enter Password"
+                    name="password"
+                    // value={inputs.password}
+                    // onChange={inputEvent}
+                  />
+                  {/* <p className={` ${danger ? "danger" : ""}`}> */}
+                  <p className={``}>Please enter password.</p>
+                </div>
+                <div className="dbs-login-remember-reset">
+                  <div className="dbs-login-remember-wrapper">
+                    <input
+                      className="form-check-input dbs-login-remember-checkbox p-0 m-0"
+                      type="checkbox"
+                    />
+                    <div className="dbs-login-remember-label">Remember me</div>
+                  </div>
+                  <div className="dbs-login-reset-wrapper">Reset password?</div>
+                </div>
+
+                <div className="btn w-100 h-100 p-0 m-0 dbs-login-form-btn-wrapper">
+                  <Button
+                    className="w-100 m-0 p-0 dbs-login-form-btn"
+                    type="submit"
+                  >
+                    Login
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <div className="dbs-login-footer-wrapper">
+              <div className="dbs-login-footer text-uppercase">
+                <div className="dbs-login-footer-msg-1">worldwide reach,</div>
+                <div className="dbs-login-footer-msg-2">human touch</div>
+              </div>
+            </div>
+          </div>
+        </Form>
+      </Card>
+    </Container>
   );
 };
 
-export default Login;
+export default LoginForm;
