@@ -127,3 +127,34 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .dbc-app .dbc-footer-wrapper {
   background-color: lightblue;
 } */
+
+/*Header start*/
+.dbc-app .dbc-header-left-logo-wrapper,
+.dbc-app .dbc-header-right-bg-wrapper div {
+    display: flex;
+    align-items: center;
+}
+
+.dbc-app .dbc-logo {
+    background: url("../img/company-logo.png") no-repeat;
+    height: 80px;
+    width: 140px;
+    background-size: contain;
+}
+
+.dbc-app .dbc-header-right-bg {
+    background: url("../img/sos-header-right-bg.png") no-repeat;
+    height: 100px;
+    width: 69px;
+    background-size: contain;
+}
+
+.dbc-app .dbc-notification-icon {
+    background: url("../img/notification_icon.png") no-repeat;    
+    width: 19px;    
+    height: 22.5px;
+    background-size: contain;
+    margin: 0.5rem 1rem;
+
+}
+/*Header end*/

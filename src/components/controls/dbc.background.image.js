@@ -2,7 +2,7 @@ import React from 'react'
 
 const DBCBackgroundImage = () => {
   return (
-    <div>background image here</div>
+    <div className="dbc-header-right-bg"></div>
   )
 }
 

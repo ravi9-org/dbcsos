@@ -2,7 +2,7 @@ import React from 'react';
 
 const DBCLogo = () => {
   return (
-    <div>Logo here</div>
+    <div className="dbc-logo"></div>
   )
 }
 
