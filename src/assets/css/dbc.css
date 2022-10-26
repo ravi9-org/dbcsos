@@ -131,31 +131,78 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 /*Header start*/
 .dbc-app .dbc-header-left-logo-wrapper,
-.dbc-app .dbc-header-right-bg-wrapper div {
-    display: flex;
-    align-items: center;
+.dbc-app .dbc-header-right-bg-wrapper > div {
+  display: flex;
+  align-items: center;
 }
 
 .dbc-app .dbc-logo {
-    background: url("../img/company-logo.png") no-repeat;
-    height: 80px;
-    width: 140px;
-    background-size: contain;
+  background: url("../img/company-logo.png") no-repeat;
+  height: 80px;
+  width: 140px;
+  background-size: contain;
 }
 
 .dbc-app .dbc-header-right-bg {
-    background: url("../img/sos-header-right-bg.png") no-repeat;
-    height: 100px;
-    width: 69px;
-    background-size: contain;
+  background: url("../img/sos-header-right-bg.png") no-repeat;
+  height: 100px;
+  width: 69px;
+  background-size: contain;
 }
 
 .dbc-app .dbc-notification-icon {
-    background: url("../img/notification_icon.png") no-repeat;    
-    width: 19px;    
-    height: 22.5px;
-    background-size: contain;
-    margin: 0.5rem 1rem;
+  background: url("../img/notification_icon.png") no-repeat;
+  width: 19px;
+  height: 22.5px;
+  background-size: contain;
+  margin: 0.5rem 1rem;
 
+}
+
+.dbs-header-profile-image {
+  height: 26px;
+  width: 26px;
+  cursor: pointer;
+}
+
+.dbs-header-user-profile-firstname {
+  margin-left: 5px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.aaa {
+  position: relative;
+}
+
+.bbb {
+  position: relative;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 2px;
+    box-sizing: border-box;
+    color: #333;
+    cursor: default;
+    outline: none;
+    padding: 8px 2px;
+    transition: all 200ms ease;
+    width: auto;
+    text-align: end;
+    width: 100%;
+    right: 0px;
+}
+
+.ccc {
+  background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 0 rgb(0 0 0 / 6%);
+    box-sizing: border-box;
+    margin-top: -1px;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 1000;
 }
 /*Header end*/
