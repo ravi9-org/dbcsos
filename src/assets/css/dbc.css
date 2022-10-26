@@ -96,6 +96,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-color: rgba(0, 0, 0, 0.5);
   top: 0;
   left: 0;
+  z-index: 1;
 }
 
 .dbc-app .dbc-global-mask .dbc-global-mask-loading-text {

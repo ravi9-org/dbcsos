@@ -5,7 +5,7 @@ import Utils from "../utils";
 
 const DBCUserProfileMenu = () => {
   let navigate = useNavigate();
-  let [canRedirectToLogin, setCanRedirectToLogin] = useState(false);
+  let { canRedirectToLogin, setCanRedirectToLogin } = useContext(ContextComponent);
   let [userDisplayName, setUserDisplayName] = useState("");
   useEffect(() => {
     const success = (res) => {

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import Utils from "../utils";
 import ContextComponent from "../app.context";
 import "../../assets/css/login.css";
@@ -9,12 +10,15 @@ import LoginRightBGImg from "../../assets/img/logo-on-white-bg.png";
 import { Container, Card, Form, Button } from "react-bootstrap";
 
 const LoginForm = () => {
-  const HIDDEN_CLASS = "dbc-hidden";
+  const HIDDEN_CLASS = "d-none";
   let emailField = useRef(null);
   let userPasswordField = useRef(null);
+  let rememberMe = useRef(null);
   let emailErrMsgDiv = useRef(null);
   let userPwdErrMsgDiv = useRef(null);
-  let { setLoadingState } = useContext(ContextComponent);
+  let gloablError = useRef(null);
+  let { setLoadingState, setCanRedirectToLanding } =
+    useContext(ContextComponent);
   let [formErrorMsg, setFormErrorMsg] = useState("");
   let navigate = useNavigate();
 
@@ -66,6 +70,7 @@ const LoginForm = () => {
       let params = {
         email: email,
         userPwd: userPwd,
+        rememberMe: rememberMe.current.checked,
       };
       setLoadingState(true);
       Utils.executeLoginRESTAPI(params).then(loginCallback);
@@ -77,7 +82,6 @@ const LoginForm = () => {
   const emailFocusOutEventHandler = (e) => {
     e.preventDefault();
     let email = emailField.current.value || "";
-    console.log(email.length);
     if (email.length === 0) {
       toggleErrMsgClass(emailField, emailErrMsgDiv, true);
     } else {
@@ -95,10 +99,16 @@ const LoginForm = () => {
     }
   };
 
+  Utils.userSessionExists() && setCanRedirectToLanding(true);
+
   useEffect(() => {}, []);
 
-  let defaultEmailValue = "user_1@company.com";
-  let defaultPwdValue = "user_1";
+  useEffect(() => {
+    gloablError.current.classList[formErrorMsg?.trim().length ? 'remove': 'add']('d-none');
+  }, [formErrorMsg]);
+
+  // let defaultEmailValue = "user_1@company.com";
+  // let defaultPwdValue = "user_1";
 
   return (
     <Container className="vh-100 vw-100 p-0 m-0 mw-100 mh-100">
@@ -142,30 +152,39 @@ const LoginForm = () => {
                     type="text"
                     placeholder="Enter email"
                     name="email"
-                    // value={inputs.email}
-                    // onChange={inputEvent}
+                    required
+                    ref={emailField}
+                    //value={defaultEmailValue}
+                    onChange={emailFocusOutEventHandler}
                   />
                   {/* <p className={` ${danger ? "danger" : ""}`}> */}
-                  <p className={``}>Please enter a valid email address.</p>
+                  <p ref={emailErrMsgDiv} className="d-none">
+                    Please enter a valid email address.
+                  </p>
                 </div>
                 <div className="dbc-login-form-input-wrapper">
                   <input
                     // className={` ${warnpass ? "dbs-login-form-input-warning" : ""}`}
                     className={`dbc-login-form-input dbc-login-form-input-password`}
                     type="password"
+                    ref={userPasswordField}
                     placeholder="Enter Password"
                     name="password"
-                    // value={inputs.password}
-                    // onChange={inputEvent}
+                    required
+                    //value={defaultPwdValue}
+                    onChange={userPwdFocusOutEventHandler}
                   />
                   {/* <p className={` ${danger ? "danger" : ""}`}> */}
-                  <p className={``}>Please enter password.</p>
+                  <p ref={userPwdErrMsgDiv} className="d-none">
+                    Please enter password.
+                  </p>
                 </div>
                 <div className="dbs-login-remember-reset">
                   <div className="dbs-login-remember-wrapper">
                     <input
                       className="form-check-input dbs-login-remember-checkbox p-0 m-0"
                       type="checkbox"
+                      ref={rememberMe}
                     />
                     <div className="dbs-login-remember-label">Remember me</div>
                   </div>
@@ -176,10 +195,15 @@ const LoginForm = () => {
                   <Button
                     className="w-100 m-0 p-0 dbs-login-form-btn"
                     type="submit"
+                    onClick={onClickHandler}
                   >
                     Login
                   </Button>
                 </div>
+              </div>
+
+              <div className="dbc-login-global-error d-none" ref={gloablError}>
+                {formErrorMsg}
               </div>
             </div>
 

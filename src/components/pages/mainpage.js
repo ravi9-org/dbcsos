@@ -10,13 +10,20 @@ function MainPage() {
 
   let [loadingState, setLoadingState] = useState(false);
   let [canRedirectToLogin, setCanRedirectToLogin] = useState(false);
+  let [canRedirectToLanding, setCanRedirectToLanding] = useState(false);
   let navigate = useNavigate();
 
   useEffect(() => {
     document.body.classList.add("dbc-app");
+
     if (canRedirectToLogin) {
       setCanRedirectToLogin(false);
       navigate("/login");
+    }
+    
+    if (canRedirectToLanding) {
+      setCanRedirectToLanding(false);
+      navigate("/");
     }
   });
 
@@ -25,7 +32,9 @@ function MainPage() {
       loadingState,
       setLoadingState,
       canRedirectToLogin,
-      setCanRedirectToLogin
+      setCanRedirectToLogin,
+      canRedirectToLanding,
+      setCanRedirectToLanding
     }}>
       <Mask />
       <Routes>

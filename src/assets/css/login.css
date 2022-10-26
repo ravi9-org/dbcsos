@@ -104,6 +104,7 @@
     height: 16px;
     width: 16px;
     display: flex;
+    cursor: pointer;
 }
 
 .dbs-login-remember-label {
@@ -219,11 +220,22 @@
 }
 
 
+.dbc-login-global-error {
+    border: 1px solid red;
+    margin-top: 15px;
+    padding-left: 10px;
+    border-left: 5px solid red;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    background-color: #f8d7da;
+    display: flex;
+    position: relative;
+    justify-content: left;
+    height: 29px;
+}
+
 
 @media (max-width:864px) {
-    .container {
-        background-color: lightgray;
-    }
     .container .card,
     .container .card .dbs-login-page-right-side {
         min-width: 100%;

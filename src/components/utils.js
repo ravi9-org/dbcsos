@@ -25,7 +25,11 @@ const PARAMS = {
   },
 };
 
-const STORAGE = window.localStorage;
+const LOCAL_STORAGE = window.localStorage;
+const STORAGE = LOCAL_STORAGE;
+
+const TTL = 1800000;
+const LONG_TTL = 180000000;
 
 const SESSION = "dbc_session";
 const TOKEN = "accessToken";
@@ -35,7 +39,7 @@ const USERID = "id";
 const STATUS_OK = 200;
 
 const userSessionExists = () => {
-  let sessionExists = getSession();
+  let sessionExists = !isObjectEmpty(getSession());
   return !!sessionExists;
 };
 
@@ -44,7 +48,15 @@ const createSession = (userObj) => {
   storageObj[TOKEN] = userObj.accessToken;
   storageObj[EMAIL] = userObj.user.email;
   storageObj[USERID] = userObj.user.id;
-  STORAGE.setItem(SESSION, JSON.stringify(storageObj));
+
+  const now = new Date();
+
+  const storageValue = {
+    value: storageObj,
+    expiry: now.getTime() + (userObj.rememberMe ? LONG_TTL : TTL),
+  };
+
+  STORAGE.setItem(SESSION, JSON.stringify(storageValue));
 };
 
 const deleteSession = (info) => {
@@ -52,8 +64,21 @@ const deleteSession = (info) => {
 };
 
 const getSession = () => {
-  let session = JSON.parse(STORAGE.getItem(SESSION)) || {};
-  return session;
+  const itemStr = STORAGE.getItem(SESSION);
+  if (!itemStr) {
+    return {};
+  }
+  const item = JSON.parse(itemStr);
+  const now = new Date();
+
+  if (now.getTime() > item.expiry) {
+    STORAGE.removeItem(SESSION);
+    return {};
+  }
+  return item.value;
+
+  // let session = JSON.parse(STORAGE.getItem(SESSION)) || {};
+  // return session;
 };
 
 const getToken = (session = getSession()) => {
@@ -76,10 +101,14 @@ const getSpecSessionValue = (session = getSession(), sessionkey) => {
   return value;
 };
 
+const isObjectEmpty = (obj = {}) => {
+  return Object.keys(obj).length === 0;
+};
+
 const getUserProfile = () => {
   const myPromise = new Promise((resolve, reject) => {
     let session = getSession();
-    if (Object.keys(session).length === 0) {
+    if (isObjectEmpty(session).length === 0) {
       reject({
         redirect: true,
         message: "No session establised till now...",
@@ -148,7 +177,7 @@ const executeLoginRESTAPI = (params) => {
     let success = (res) => {
       if (res.status === STATUS_OK) {
         deleteSession();
-        createSession(res.data);
+        createSession({...res.data, 'rememberMe': params.rememberMe});
       }
       resolve({
         redirect: true,
