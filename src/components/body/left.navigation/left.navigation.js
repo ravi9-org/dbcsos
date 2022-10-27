@@ -5,10 +5,10 @@ const LeftNavigation = () => {
   return (
     <div className="dbc-left-navigation-wrapper">
       This is left navigation.
-      <Link to="/cards">
+      <Link className="dbc-navmenu-item" to="/cards">
         Cards
       </Link>
-      <Link to="/templates">
+      <Link className="dbc-navmenu-item" to="/templates">
         Template list
       </Link>
     </div>

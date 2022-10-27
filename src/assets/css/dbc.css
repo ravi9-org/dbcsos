@@ -120,16 +120,13 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-color: lightseagreen;
   display: flex;
 }
-
-.dbc-app .dbc-body-wrapper {
-  background-color: lightskyblue;
-}
-
-.dbc-app .dbc-footer-wrapper {
-  background-color: lightblue;
-} */
+ */
 
 /*Header start*/
+.dbc-app .dbc-header-wrapper {
+  height: 100px;
+}
+
 .dbc-app .dbc-header-left-logo-wrapper,
 .dbc-app .dbc-header-right-bg-wrapper > div {
   display: flex;
@@ -171,6 +168,10 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   font-weight: 700;
 }
 
+.dbc-app .container {
+    max-width: 100%;
+}
+
 .aaa {
   position: relative;
 }
@@ -206,3 +207,73 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
     z-index: 1000;
 }
 /*Header end*/
+
+
+/*Body start*/
+
+.dbc-app .dbc-body-wrapper {
+  background-color: lightskyblue;
+  height: calc(100vh - 180px);
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dbc-app .dbc-full-height {
+  background: #f0fdf1;
+  flex: 1 1 auto;
+  border: 1px solid aqua;
+}
+
+.dbc-app .dbc-badge-add-button-wrapper {
+  background-color: #1fc;
+}
+
+.dbc-app  .dbc-badge-list-wrapper {
+  background-color: rgb(15, 130, 159);
+}
+
+.dbc-app .dbc-tile {
+  flex: 1 1 auto;
+  background: green;
+  height: calc(100% - 80px);
+  width: 25%;
+  padding: 16px;
+  margin: 16px;
+  margin-bottom: 64px;
+}
+.dbc-app .dbc-navmenu-item {
+    display: flex;
+    background: cyan;
+    padding: 8px;
+    border: 1px solid gray;
+}
+/*Body end*/
+
+/*footer start*/
+.dbc-app .dbc-footer-wrapper {
+  background-color: lightblue;
+  height: 80px;
+}
+
+.dbc-app .dbc-footer-wrapper .dbc-logo {
+  height: 48px;
+  width: 84px;
+}
+
+.dbc-app .dbc-footer-wrapper .dbc-footer-logo {  
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 8px;
+  padding: 0;
+}
+
+.dbc-app .dbc-footer-wrapper .dbc-copy-text {
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 15px;
+  margin: 0;
+  padding-bottom: 5px;
+}
+/*Footer start*/

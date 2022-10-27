@@ -5,7 +5,7 @@ import TemplateList from "./templates.list";
 
 const ContentArea = () => {
   return (
-    <div className="dbc-content-area-wrapper">
+    <div className="dbc-content-area-wrapper d-flex h-100">
       <Routes>
         <Route path="/cards" exact element={<CardList />}></Route>
         <Route path="/templates" exact element={<TemplateList />}></Route>

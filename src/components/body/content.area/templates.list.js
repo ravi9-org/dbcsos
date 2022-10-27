@@ -8,9 +8,11 @@ const TemplateList = () => {
     //     return data + ":" + name;
     // }, [data]);
     return (
-        <div>
-            This is templates list page
-        </div>
+        <>
+            <div className="dbc-tile">This is templates list page</div>
+            <div className="dbc-tile">This is templates list pageThis is templates list pageThis is templates list pageThis is templates list pageThis is templates list page</div>
+            <div className="dbc-tile">This is templates list pageThis is templates list pageThis is templates list page</div>
+        </>
     )
 }
 
