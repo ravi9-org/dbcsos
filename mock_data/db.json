@@ -22,21 +22,24 @@
       "firstName": "FN_USER_user_1",
       "lastName": "LN_USER_user_1",
       "image": "",
-      "id": 1
+      "id": 1,
+      "isAdmin": false
     },
     {
       "email": "user_2@company.com",
       "firstName": "FN_USER_user_2",
       "lastName": "LN_USER_user_2",
       "image": "",
-      "id": 2
+      "id": 2,
+      "isAdmin": false
     },
     {
       "email": "user_3@company.com",
       "firstName": "FN_USER_user_3",
       "lastName": "LN_USER_user_3",
       "image": "",
-      "id": 3
+      "id": 3,
+      "isAdmin": true
     }
   ]
 }

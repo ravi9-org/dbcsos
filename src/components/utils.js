@@ -13,6 +13,67 @@ const CTX = {
   PORT: ":3004",
 };
 
+const APP_URL_PREFIX = "";
+
+const APP_URLS = {
+  LANDING_PAGE: APP_URL_PREFIX + "/",
+  TEMPLATES_PAGE: APP_URL_PREFIX + "/templates",
+  CARDS_PAGE: APP_URL_PREFIX + "/cards",
+  ADDRESS_PAGE: APP_URL_PREFIX + "/addresses",
+  USERS_PAGE: APP_URL_PREFIX + "/users",
+  EMAIL_SIGNAURE_PAGE: APP_URL_PREFIX + "/emailsignature",
+  CONTACTS_PAGE: APP_URL_PREFIX + "/contacts",
+  SETTINGS_PAGE: APP_URL_PREFIX + "/settings",
+};
+
+const NAV_ITEMS_KEYS = [
+  "templates",
+  "users",
+  "addresses",
+  "cards",
+  "emailsignature",
+  "contacts",
+  "settings",
+];
+
+const NAV_ITEMS_VALUES = {
+  templates: {
+    title: "Templates",
+    url: APP_URLS.TEMPLATES_PAGE,
+    enabled: false,
+  },
+  users: {
+    title: "Users",
+    url: APP_URLS.USERS_PAGE,
+    enabled: false,
+  },
+  addresses: {
+    title: "Addresses",
+    url: APP_URLS.ADDRESS_PAGE,
+    enabled: false,
+  },
+  cards: {
+    title: "Cards",
+    url: APP_URLS.CARDS_PAGE,
+    enabled: true,
+  },
+  emailsignature: {
+    title: "Email signature",
+    url: APP_URLS.EMAIL_SIGNAURE_PAGE,
+    enabled: true,
+  },
+  contacts: {
+    title: "Contacts",
+    url: APP_URLS.CONTACTS_PAGE,
+    enabled: true,
+  },
+  settings: {
+    title: "Settings",
+    url: APP_URLS.SETTINGS_PAGE,
+    enabled: true,
+  },
+};
+
 const REST_API_PREFIX = CTX.PROTOCOL + CTX.HOST + CTX.PORT;
 
 const PARAMS = {
@@ -119,9 +180,15 @@ const getUserProfile = () => {
     if (token) {
       let userId = getUserId(session);
       let getUrl = PARAMS.API.USER_PROFILE + userId;
-      axios.get(getUrl).then((res) => {
-        resolve(res);
-      });
+      axios
+        .get(getUrl, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          resolve(res);
+        });
     } else {
       reject({
         redirect: true,
@@ -177,7 +244,7 @@ const executeLoginRESTAPI = (params) => {
     let success = (res) => {
       if (res.status === STATUS_OK) {
         deleteSession();
-        createSession({...res.data, 'rememberMe': params.rememberMe});
+        createSession({ ...res.data, rememberMe: params.rememberMe });
       }
       resolve({
         redirect: true,
@@ -205,6 +272,9 @@ const Utils = {
   executeLogoutRESTAPI,
   createSession,
   deleteSession,
+  APP_URLS,
+  NAV_ITEMS_KEYS,
+  NAV_ITEMS_VALUES,
 };
 
 export default Utils;

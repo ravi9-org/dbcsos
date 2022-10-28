@@ -7,29 +7,41 @@ import defaultUserImage from "../../assets/img/default-profile.png";
 
 const DBCUserProfileMenu = () => {
   let navigate = useNavigate();
-  let { canRedirectToLogin, setCanRedirectToLogin } =
+  let { canRedirectToLogin, setCanRedirectToLogin, userData, setUserData } =
     useContext(ContextComponent);
   let [userFirstName, setUserFirstName] = useState("");
   let [userDisplayName, setUserDisplayName] = useState("");
   let [userImage, setUserImage] = useState("");
+
+  const success = (res) => {
+    setUserData(res.data || {});
+  };
+  const fail = (err) => {
+    err?.message?.length && console.log(err);
+    if (err?.redirect) {
+      setCanRedirectToLogin(true);
+    }
+  };
+
   useEffect(() => {
-    const success = (res) => {
-      setUserDisplayName(res.data.firstName + " " + res.data.lastName);
-      setUserFirstName(res.data.firstName);
-      if (res.data.image) {
-        setUserImage(res.data.image);
-      } else {
-        setUserImage(defaultUserImage);
-      }
-    };
-    const fail = (err) => {
-      err?.message?.length && console.log(err);
-      if (err?.redirect) {
-        setCanRedirectToLogin(true);
-      }
-    };
     Utils.getUserProfile().then(success, fail);
-  });
+  }, []);
+
+  useEffect(() => {
+    // update user data here...
+
+    //setUserDisplayName(userData.firstName + " " + userData.lastName);
+    //setUserFirstName(userData.firstName);
+    if (userData.image) {
+      setUserImage(userData.image);
+    } else {
+      //setUserImage(defaultUserImage);
+    }
+  }, [userData]);
+
+  //setTimeout(function () {
+  //setUserData({ ...userData, "firstName": "XYz" });
+  //}, 10000);
 
   const doLogout = (e) => {
     e.preventDefault();
