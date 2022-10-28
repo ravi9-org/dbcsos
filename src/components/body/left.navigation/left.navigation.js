@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link , NavLink} from "react-router-dom";
+import { Link , NavLink, useLocation} from "react-router-dom";
 import ContextComponent from "../../app.context";
 import Utils from "../../utils";
 
@@ -11,6 +11,9 @@ const LeftNavigation = () => {
 
   let tempFilteredNavLinkKeys = [];
   let [filteredNavLinkKeys, setFilteredNavLinkKeys] = useState([]);
+
+  const location = useLocation();
+  const isAtRootUrl = location?.pathname === "/";
 
   useEffect(() => {
     if (Object.keys(userData).length) {
@@ -29,7 +32,13 @@ return (
     {filteredNavLinkKeys.map((navKey, index) => (
       <div className="dbc-navmenu-item" key={index}>
         <NavLink
-          className={({ isActive }) => (isActive ? 'dbc-navmenu-active' : 'dbc-navmenu-inactive')}
+          className={({ isActive }) => {
+            if (isAtRootUrl) {
+              isActive = index === 0;
+            }
+            
+            return (isActive ? 'dbc-navmenu-active' : 'dbc-navmenu-inactive')
+          }}
           to={navLinkValues[navKey].url}
         >
           {navLinkValues[navKey].title}
