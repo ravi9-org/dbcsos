@@ -14,7 +14,7 @@ const DBCHeader = () => {
 
     <Container className="dbc-header-wrapper container-fluid d-flex flex-row justify-content-between">
       <div className="dbc-header-left-logo-wrapper">
-        <DBCLogo />
+        <DBCLogo internalLinkProps={{ toWhere:"/"}} />
       </div>
       <div className="dbc-header-right-bg-wrapper d-flex flex-row justify-content-end">
         <DBCBackgroundImage />

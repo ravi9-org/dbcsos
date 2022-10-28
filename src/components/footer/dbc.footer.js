@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 
-
 import DBCLogo from "../controls/dbc.logo";
 
 import vimImage from "../../assets/img/icons_vim-box-fill.png";
@@ -15,69 +14,75 @@ const DBCFooter = () => {
     <div className="dbc-footer-wrapper">
       <nav className="navbar navbar-expand navbar-white p-0 d-flex flex-row justify-content-between">
         <ul className="navbar-nav navbar-nav-left">
-
           <li className="nav-item d-none d-sm-inline-block">
-            <a href="#" className="nav-link pl-0 footer-list">Home</a>
+            <a href="#" className="nav-link pl-0 footer-list">
+              Home
+            </a>
           </li>
           <li className="nav-item d-none d-sm-inline-block">
-            <a href="#" className="nav-link pl-0 footer-list">About internationality SOS</a>
-          </li>          
+            <a href="#" className="nav-link pl-0 footer-list">
+              About internationality SOS
+            </a>
+          </li>
           <li className="nav-item d-none d-sm-inline-block">
-            <a href="#" className="nav-link pl-0 footer-list">Privacy Notice</a>
+            <a href="#" className="nav-link pl-0 footer-list">
+              Privacy Notice
+            </a>
           </li>
         </ul>
 
         <ul className="navbar-nav navbar-nav-right d-flex flex-row align-items-center justify-content-end">
           <li className="nav-item">
-            <a className="nav-link" data-widget="navbar-search" href="#" role="button">
+            <a
+              className="nav-link"
+              data-widget="navbar-search"
+              href="#"
+              role="button"
+            >
               <img className="dbc-w-20" src={vimImage}></img>
             </a>
-
           </li>
 
           <li className="nav-item">
             <a className="nav-link" href="#">
               <img className="dbc-w-20" src={instaImage}></img>
             </a>
-
           </li>
 
           <li className="nav-item">
-            <a className="nav-link" href="#" role="button">              
+            <a className="nav-link" href="#" role="button">
               <img className="dbc-w-20" src={tweeterImage}></img>
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#" role="button">                        
-            <img className="dbc-w-20" src={linkedinImage}></img>
+            <a className="nav-link" href="#" role="button">
+              <img className="dbc-w-20" src={linkedinImage}></img>
             </a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
-                        
-            <img className="dbc-w-20" src={fbImage}></img>
+              <img className="dbc-w-20" src={fbImage}></img>
             </a>
-
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">                        
+            <a className="nav-link" href="#">
               <img className="dbc-w-20" src={youtubeImage}></img>
             </a>
-
           </li>
-          <li className="nav-item">
-            <a className="nav-link dbc-footer-logo" data-widget="navbar-search" href="#" role="button">
-              <DBCLogo />
-              <div className="dbc-footer-logo-text float-right d-none d-sm-block">
-                <b>WORLDWISE REACH HUMAN TOUCH</b>
-              </div>
-            </a>
-
+          <li className="nav-item dbc-footer-logo-wrapper">
+            <DBCLogo
+              externalLinkProps={{
+                classes: "nav-link dbc-footer-logo",
+                toWhere: "http://www.github.com",
+              }}
+            />
+            <div className="dbc-footer-logo-text float-right d-none d-sm-block">
+              <b>WORLDWISE REACH HUMAN TOUCH</b>
+            </div>
           </li>
         </ul>
       </nav>
       <p className="copy-text dbc-copy-text"> © 2022 International SOS</p>
-
     </div>
   );
 };

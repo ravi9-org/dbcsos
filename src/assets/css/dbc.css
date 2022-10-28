@@ -287,11 +287,19 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   width: 84px;
 }
 
-.dbc-app .dbc-footer-wrapper .dbc-footer-logo {
+.dbc-app .dbc-footer-wrapper .dbc-footer-logo-wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
   font-size: 6px;
+}
+
+
+.dbc-app .dbc-footer-wrapper .dbc-footer-logo,
+.dbc-app .dbc-footer-wrapper .dbc-footer-logo-text {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
   padding: 0;
   margin: 0 24px;
 }

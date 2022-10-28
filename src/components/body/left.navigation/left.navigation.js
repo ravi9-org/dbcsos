@@ -12,11 +12,8 @@ const LeftNavigation = () => {
   let tempFilteredNavLinkKeys = [];
   let [filteredNavLinkKeys, setFilteredNavLinkKeys] = useState([]);
 
-  console.log(this);
-
   useEffect(() => {
     if (Object.keys(userData).length) {
-      console.log(this);
       let isAdmin = userData.isAdmin;
       navLinkKeys.forEach((navLinkKey) => {
         if (isAdmin || navLinkValues[navLinkKey].enabled) {
