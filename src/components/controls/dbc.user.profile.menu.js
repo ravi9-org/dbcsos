@@ -54,6 +54,11 @@ const DBCUserProfileMenu = () => {
     Utils.executeLogoutRESTAPI().then(commonFn, commonFn);
   };
 
+  const doEditProfile = (e) => {
+    e.preventDefault();
+    navigate(Utils.APP_URLS.SETTINGS_PAGE);
+  };
+
   return (
     <div className="dbc-user-profile-wrapper">
       <Dropdown align="end">
@@ -71,12 +76,19 @@ const DBCUserProfileMenu = () => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item key="editProfile" href="#/action-1">Edit profile</Dropdown.Item>
-          <Dropdown.Item key="logOut" href="#/action-2">Log out</Dropdown.Item>
+          <Dropdown.Item
+            key="editProfile"
+            href="/settings"
+            onClick={doEditProfile}
+          >
+            Edit profile
+          </Dropdown.Item>
+          <Dropdown.Item key="logOut" href="/logout" onClick={doLogout}>
+            Log out
+          </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 
-     
       <div className="dbs-header-user-profile-firstname d-none">
         {userFirstName}
       </div>
