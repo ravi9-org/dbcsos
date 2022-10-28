@@ -1,4 +1,5 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
+import Dropdown from "react-bootstrap/Dropdown";
 import { useNavigate } from "react-router-dom";
 
 import ContextComponent from "../app.context";
@@ -53,37 +54,31 @@ const DBCUserProfileMenu = () => {
     Utils.executeLogoutRESTAPI().then(commonFn, commonFn);
   };
 
-  const options = ["one", "two", "three"];
-  const defaultOption = options[0];
-
   return (
     <div className="dbc-user-profile-wrapper">
-      <div>
-        <div>
-          <div>
-            <div className="aaa">
-              <div className="bbb">
-                <img
-                  className="dbs-header-profile-image"
-                  src={defaultUserImage}
-                  alt={userDisplayName}
-                  title={userDisplayName}
-                />
-              </div>
-              <div className="ccc">
-                <a href="/editprofile" onClick={doLogout}>
-                  Edit profile
-                </a>
-                <a href="/logout" onClick={doLogout}>
-                  Logout
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="dbs-header-user-profile-firstname">
-            {userFirstName}
-          </div>
-        </div>
+      <Dropdown align="end">
+        <Dropdown.Toggle
+          id="dropdown-basic"
+          type="link"
+          className="dbc-header-userprofile-btn"
+        >
+          <img
+            className="dbs-header-profile-image"
+            src={defaultUserImage}
+            alt={userDisplayName}
+            title={userDisplayName}
+          />
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item key="editProfile" href="#/action-1">Edit profile</Dropdown.Item>
+          <Dropdown.Item key="logOut" href="#/action-2">Log out</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+
+     
+      <div className="dbs-header-user-profile-firstname d-none">
+        {userFirstName}
       </div>
     </div>
   );

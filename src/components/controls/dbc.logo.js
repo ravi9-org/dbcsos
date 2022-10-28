@@ -6,8 +6,8 @@ const DBCLogo = (props = {}) => {
   let externalLinkProps = props.externalLinkProps || {};
   let isInternalLink = internalLinkProps?.toWhere?.length;
   let isExternalLink = externalLinkProps?.toWhere?.length;
-  console.log(internalLinkProps);
-  console.log(externalLinkProps);
+  // console.log(internalLinkProps);
+  // console.log(externalLinkProps);
 
   if (isInternalLink) {
     let toWhere = internalLinkProps.toWhere || "/";
@@ -26,6 +26,7 @@ const DBCLogo = (props = {}) => {
         target="_blank"
         rel={"noreferrer"}
         className={classes}
+        key="dbslogofooterrightside"
       >
         <div className="dbc-logo"></div>
       </a>]

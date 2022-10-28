@@ -14,17 +14,17 @@ const DBCFooter = () => {
     <div className="dbc-footer-wrapper">
       <nav className="navbar navbar-expand navbar-white p-0 d-flex flex-row justify-content-between">
         <ul className="navbar-nav navbar-nav-left">
-          <li className="nav-item d-none d-sm-inline-block">
+          <li key="footerhomeli" className="nav-item d-none d-sm-inline-block">
             <a href="#" className="nav-link pl-0 footer-list">
               Home
             </a>
           </li>
-          <li className="nav-item d-none d-sm-inline-block">
+          <li key="aboutinternationalsos" className="nav-item d-none d-sm-inline-block">
             <a href="#" className="nav-link pl-0 footer-list">
               About internationality SOS
             </a>
           </li>
-          <li className="nav-item d-none d-sm-inline-block">
+          <li key="privacynotice" className="nav-item d-none d-sm-inline-block">
             <a href="#" className="nav-link pl-0 footer-list">
               Privacy Notice
             </a>
@@ -32,7 +32,7 @@ const DBCFooter = () => {
         </ul>
 
         <ul className="navbar-nav navbar-nav-right d-flex flex-row align-items-center justify-content-end">
-          <li className="nav-item">
+          <li key="vimImage" className="nav-item">
             <a
               className="nav-link"
               data-widget="navbar-search"
@@ -43,33 +43,33 @@ const DBCFooter = () => {
             </a>
           </li>
 
-          <li className="nav-item">
+          <li key="instaImage" className="nav-item">
             <a className="nav-link" href="#">
               <img className="dbc-w-20" src={instaImage}></img>
             </a>
           </li>
 
-          <li className="nav-item">
+          <li key="tweeterImage" className="nav-item">
             <a className="nav-link" href="#" role="button">
               <img className="dbc-w-20" src={tweeterImage}></img>
             </a>
           </li>
-          <li className="nav-item">
+          <li key="linkedinImage" className="nav-item">
             <a className="nav-link" href="#" role="button">
               <img className="dbc-w-20" src={linkedinImage}></img>
             </a>
           </li>
-          <li className="nav-item">
+          <li key="fbImage" className="nav-item">
             <a className="nav-link" href="#">
               <img className="dbc-w-20" src={fbImage}></img>
             </a>
           </li>
-          <li className="nav-item">
+          <li key="youtubeImage" className="nav-item">
             <a className="nav-link" href="#">
               <img className="dbc-w-20" src={youtubeImage}></img>
             </a>
           </li>
-          <li className="nav-item dbc-footer-logo-wrapper">
+          <li key="dbc-footer-logo-li" className="nav-item dbc-footer-logo-wrapper">
             <DBCLogo
               externalLinkProps={{
                 classes: "nav-link dbc-footer-logo",

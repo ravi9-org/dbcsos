@@ -12,7 +12,7 @@ $body-color: #0f0;
 @import "bootstrap/scss/variables";
 
 $body-bg: #f4f;
-$body-color: #0f0; 
+$body-color: #0f0;
 
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/maps";
@@ -62,7 +62,31 @@ $body-color: #0f0;
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+
+
+.btn-primary.dbc-header-userprofile-btn {
+  --bs-btn-color: none;
+  --bs-btn-bg: none;
+  --bs-btn-border-color: none;
+  --bs-btn-hover-color: none;
+  --bs-btn-hover-bg: none;
+  --bs-btn-hover-border-color: none;
+  --bs-btn-focus-shadow-rgb: none;
+  --bs-btn-active-color: none;
+  --bs-btn-active-bg: none;
+  --bs-btn-active-border-color: none;
+  --bs-btn-active-shadow: none;
+  --bs-btn-disabled-color: none;
+  --bs-btn-disabled-bg: none;
+  --bs-btn-disabled-border-color: none;
+}
+
+.btn-primary.dbc-header-userprofile-btn.dropdown-toggle::after {
+  display: none;
 }

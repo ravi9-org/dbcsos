@@ -14,12 +14,13 @@ const CardList = () => {
             </div>
             
             <ul className="col col-sm-9 mb-0 dbc-badge-list-wrapper">
-                <li className="d-sm-inline-block next-list-item">
+                <li key="dbc-add-badge-item-wechat" className="d-sm-inline-block next-list-item">
                 <a href="#" className="nav-link addBadge dbc-add-badge-item dbc-add-badge-item-wechat ">
                 Test 1
                 </a>
                 <p className="badge-icon-text">We chat</p>
-                </li><li className="d-sm-inline-block next-list-item">
+                </li>
+                <li key="dbc-add-badge-item-vimeo" className="d-sm-inline-block next-list-item">
                 <a href="#" className="nav-link addBadge dbc-add-badge-item dbc-add-badge-item-vimeo ">
                 Test 2
                 </a>

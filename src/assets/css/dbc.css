@@ -172,41 +172,6 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   max-width: 100%;
 }
 
-.aaa {
-  position: relative;
-}
-
-.bbb {
-  position: relative;
-  overflow: hidden;
-  background-color: white;
-  border-radius: 2px;
-  box-sizing: border-box;
-  color: #333;
-  cursor: default;
-  outline: none;
-  padding: 8px 2px;
-  transition: all 200ms ease;
-  width: auto;
-  text-align: end;
-  width: 100%;
-  right: 0px;
-}
-
-.ccc {
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 1px 0 rgb(0 0 0 / 6%);
-  box-sizing: border-box;
-  margin-top: -1px;
-  max-height: 200px;
-  overflow-y: auto;
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  z-index: 1000;
-}
-
 /*Header end*/
 
 
@@ -222,8 +187,8 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbc-app .dbc-full-height {
   background: #f0f3fc;
-    flex: 1 1 auto;
-    border-right: 1px solid darkgray;
+  flex: 1 1 auto;
+  border-right: 1px solid darkgray;
 }
 
 .dbc-app .dbc-badge-add-button-wrapper {
@@ -307,7 +272,8 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .dbc-app .dbc-footer-wrapper .navbar-nav {
   margin: 0 24px;
 }
-.dbc-app .dbc-footer-wrapper .navbar-nav-left .nav-link{
+
+.dbc-app .dbc-footer-wrapper .navbar-nav-left .nav-link {
   margin: 0 16px;
   color: #2f4694;
   font-size: 12px;
@@ -326,4 +292,5 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   height: 16px;
   margin: 0px;
 }
+
 /*Footer end*/
