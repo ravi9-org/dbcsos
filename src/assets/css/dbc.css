@@ -144,7 +144,12 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background: url("../img/sos-header-right-bg.png") no-repeat;
   height: 100px;
   width: 69px;
+  margin-right: 41px;
   background-size: contain;
+}
+
+.dbc-app .dbc-header-wrapper .btn{
+  padding: 0;
 }
 
 .dbc-app .dbc-notification-icon {
@@ -163,7 +168,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .dbs-header-user-profile-firstname {
-  margin-left: 5px;
+  margin: 0 6px;
   font-size: 12px;
   font-weight: 700;
 }
@@ -186,9 +191,9 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .dbc-app .dbc-full-height {
-  background: #f0f3fc;
+  background: #fff;
   flex: 1 1 auto;
-  border-right: 1px solid darkgray;
+  padding: 8px;
 }
 
 .dbc-app .dbc-badge-add-button-wrapper {
@@ -231,10 +236,29 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .dbc-app .dbc-navmenu-item .dbc-navmenu-active {
   background: #232862;
   color: #fff;
+  font-weight: bold;
 }
 
 .dbc-app .dbc-left-navigation-wrapper {
-  padding-top: 20px;
+  padding-top: 20px;    
+  background: #f0f3fc;
+  border-radius: 6px;
+  height: 100%;
+}
+
+.dbc-app .dbc-content-area-wrapper {
+  background: #f0f3fc;
+  border-radius: 6px;
+}
+
+.dbc-app .dbc-w-32 {
+  width: 32px;
+  height: 32px;
+  margin: 4px 16px;
+}
+
+.dbc-app .dbc-ml-1 {
+  margin-left: 1rem;
 }
 
 /*Body end*/

@@ -3,6 +3,14 @@ import { Link , NavLink, useLocation} from "react-router-dom";
 import ContextComponent from "../../app.context";
 import Utils from "../../utils";
 
+import Templates from "../../../assets/img/templet.png";
+import Users from "../../../assets/img/users.png";
+import Addresses from "../../../assets/img/globe.png";
+import Cards from "../../../assets/img/templet.png";
+import esign from "../../../assets/img/mail.png";
+import contacts from "../../../assets/img/contacts.png";
+import settings from "../../../assets/img/settings.png";
+
 const LeftNavigation = () => {
   let { userData } = useContext(ContextComponent);
 
@@ -41,7 +49,8 @@ return (
           }}
           to={navLinkValues[navKey].url}
         >
-          {navLinkValues[navKey].title}
+          <img className="dbc-w-32" src={navLinkValues[navKey].title}></img>
+          <span  className="dbc-ml-1" >{navLinkValues[navKey].title}</span>
         </NavLink>
       </div>
     ))}

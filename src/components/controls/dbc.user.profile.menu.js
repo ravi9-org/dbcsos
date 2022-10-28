@@ -32,7 +32,7 @@ const DBCUserProfileMenu = () => {
     // update user data here...
 
     //setUserDisplayName(userData.firstName + " " + userData.lastName);
-    //setUserFirstName(userData.firstName);
+    setUserFirstName(userData.firstName);
     if (userData.image) {
       setUserImage(userData.image);
     } else {
@@ -89,7 +89,7 @@ const DBCUserProfileMenu = () => {
         </Dropdown.Menu>
       </Dropdown>
 
-      <div className="dbs-header-user-profile-firstname d-none">
+      <div className="dbs-header-user-profile-firstname">
         {userFirstName}
       </div>
     </div>
