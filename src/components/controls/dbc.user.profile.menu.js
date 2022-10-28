@@ -37,6 +37,7 @@ const DBCUserProfileMenu = () => {
     } else {
       //setUserImage(defaultUserImage);
     }
+    console.log(userData.firstName + " " + userData.lastName);
   }, [userData]);
 
   //setTimeout(function () {
