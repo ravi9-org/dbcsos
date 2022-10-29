@@ -228,6 +228,9 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   width: 100%;
   height: 100%;
   text-decoration: none;
+  display: flex;
+  height: 56px;
+  align-items: center;
 }
 
 .dbc-app .dbc-navmenu-item .dbc-navmenu-inactive:hover {
