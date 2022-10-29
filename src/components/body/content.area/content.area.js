@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import ContextComponent from "../../app.context";
 import CardList from "./cards.list";
 import TemplateList from "./templates.list";
+import Temp from "./temp";
 import Utils from "../../utils";
 import Addresses from "../../pages/Addresses";
 import Users from "../../pages/Users";

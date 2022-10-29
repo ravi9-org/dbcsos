@@ -13,6 +13,18 @@ const CTX = {
   PORT: ":3004",
 };
 
+const REST_API_PREFIX = CTX.PROTOCOL + CTX.HOST + CTX.PORT;
+
+const PARAMS = {
+  API: {
+    LOGIN: REST_API_PREFIX + "/login",
+    LOGOUT: REST_API_PREFIX + "/logout",
+    USER_PROFILE: REST_API_PREFIX + "/users/",
+    CARDS: REST_API_PREFIX + "/cards",
+    TEMPLATES: REST_API_PREFIX + "/templates",
+  },
+};
+
 const APP_URL_PREFIX = "";
 
 const APP_URLS = {
@@ -71,18 +83,6 @@ const NAV_ITEMS_VALUES = {
     title: "Settings",
     url: APP_URLS.SETTINGS_PAGE,
     enabled: true,
-  },
-};
-
-const REST_API_PREFIX = CTX.PROTOCOL + CTX.HOST + CTX.PORT;
-
-const PARAMS = {
-  API: {
-    LOGIN: REST_API_PREFIX + "/login",
-    LOGOUT: REST_API_PREFIX + "/logout",
-    USER_PROFILE: REST_API_PREFIX + "/user/",
-    GET_CARDS: REST_API_PREFIX + "/cards",
-    GET_TEMPLATES: REST_API_PREFIX + "/templates",
   },
 };
 
@@ -222,7 +222,11 @@ const executeLogoutRESTAPI = () => {
     let failure = (err) => {
       alwaysClassback(err.response, reject);
     };
-    axios.post(logoutUrl, formData /*, headersInfo*/).then(success, failure);
+    try {
+      axios.post(logoutUrl, formData /*, headersInfo*/).then(success, failure);
+    } catch (e) {
+      console.log(e);
+    }
   });
 
   return myPromise;

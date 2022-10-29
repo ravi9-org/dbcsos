@@ -148,7 +148,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-size: contain;
 }
 
-.dbc-app .dbc-header-wrapper .btn{
+.dbc-app .dbc-header-wrapper .btn {
   padding: 0;
 }
 
@@ -193,7 +193,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .dbc-app .dbc-full-height {
   background: #fff;
   flex: 1 1 auto;
-  padding: 8px;
+  padding: 0 12px;
 }
 
 .dbc-app .dbc-badge-add-button-wrapper {
@@ -240,14 +240,17 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .dbc-app .dbc-left-navigation-wrapper {
-  padding-top: 20px;    
-  background: #f0f3fc;
+  padding-top: 20px;
   border-radius: 6px;
   height: 100%;
 }
 
+.dbc-app .dbc-left-navigation-wrapper,
 .dbc-app .dbc-content-area-wrapper {
-  background: #f0f3fc;
+  background: #e9edfa;
+}
+
+.dbc-app .dbc-content-area-wrapper {
   border-radius: 6px;
 }
 
@@ -262,8 +265,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   color: #010fb8;
 }
 
-.dbc-app .dbc-navmenu-active img.dbc-w-32 {
-}
+.dbc-app .dbc-navmenu-active img.dbc-w-32 {}
 
 .dbc-app .dbc-ml-1 {
   /* margin-left: 1rem; */

@@ -6,7 +6,6 @@ For Admin:
 ----------
 
 /%WEB_APP_NAME%/                           :       Templates list page
-/%WEB_APP_NAME%/home                       :       Templates list page
 /%WEB_APP_NAME%/templates                  :       Templates list page
 /%WEB_APP_NAME%/users                      :       Users list page
 /%WEB_APP_NAME%/addresses                  :       Address list page
@@ -16,37 +15,51 @@ For User:
 ----------
 
 /%WEB_APP_NAME%/                           :       Card list page
-/%WEB_APP_NAME%/home                       :       Card list page
 /%WEB_APP_NAME%/cards                      :       Card list page
 /%WEB_APP_NAME%/card/:card-id              :       Card details page
-/%WEB_APP_NAME%/card/:card-id/ext          :       Card details page with entire page which can access externally
-/%WEB_APP_NAME%/emailsignature/?           :       Email signature card page
+/%WEB_APP_NAME%/ext/card/:card-id          :       Card details page with entire page which can access externally
+/%WEB_APP_NAME%/emailsignature             :       Email signature card page
 /%WEB_APP_NAME%/contacts                   :       List of contacts page
 /%WEB_APP_NAME%/settings                   :       Settings page
+
 
 Upon login REST API url success, it is REST API responsibility to provide the authenticaion ticket
 along with current user's information which includes...
 
 #1: Login
 ----------
-URL: login (type=POST, data={"username": "john.rambo", "password": "********"})
-Type: post (to hide sensitive data)
+URL: "/login"
+Type: "POST"
+form-data={
+    "email": "john.williams@company.com", 
+    "password": "********"
+}
 Response: 
-        If failed, response would be...
-        {
-            status: "failed",
-            message: "Invalid username/password"
-        }
+1) error code 400 has different situations.
+"Bad request": [
+    "email is required",
+    "password is required",
+    "both email and passwords are required",
+    "email format is wrong"
+]
+2) error code 401: unauthorised: "Either username or password incorrect"
+3) error code 200: Ok: should return "accessToken" along wih user information.
+Example:
 
-        If success, response would be...
-        // success:
-        {
-            status: "success",
-            message: "Successfully logged-in",
-            userLoginId: "john.rambo",
-            isAdmin: true/false,
-            token/ticket: "..." // which generally expires in 30 min in case of idle
-        }
+{
+    "accessToken": "eyJhbGciOiJIUzI......",
+    "user": {
+        "email": "john@company.com",
+        "firstName": "Jhon",
+        "lastName": "Williams",
+        "isAdmin": false,
+        "picture": {
+            "image": "",
+            "hide": false
+        },
+        "id": 2
+    }
+}
 
 
 For all the below REST API's, it is must require to include token/ticket into the request headers
@@ -92,3 +105,20 @@ Response:
         "status": "Failed",
         "message": "Failed to save user profile information, please contact Admin"
     }
+
+
+
+
+
+
+template1:
+[
+	logo:"",
+	bg:"",
+	fields:[{
+	"telephone": {
+        
+    }
+	}
+	]
+]    
