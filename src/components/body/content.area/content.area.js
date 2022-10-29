@@ -28,6 +28,7 @@ const ContentArea = () => {
             path={Utils.APP_URLS.LANDING_PAGE}
             exact
             element={<TemplateList />}
+            // element={<Temp />}
           ></Route>
         )}
         <Route

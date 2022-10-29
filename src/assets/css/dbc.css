@@ -252,6 +252,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbc-app .dbc-content-area-wrapper {
   border-radius: 6px;
+  padding: 20px;
 }
 
 .dbc-app img.dbc-w-32 {
@@ -328,3 +329,79 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 /*Footer end*/
+
+
+.dbc-app .dbc-body2-wrapper {
+  padding: 20px;
+}
+
+.dbc-app .dbc-body-cards-wrapper {
+  flex-flow: column;
+}
+
+.dbc-app .dbc-body-action-bar {
+  display: flex;
+  flex-flow: row;
+  border: 1px dotted #000;
+}
+
+.dbc-app .dbc-body-actions {
+  display: flex;
+  flex-flow: row;
+  justify-content: end;
+}
+
+.dbc-app .dbc-body-action {
+  margin-left: 10px;
+}
+
+.dbc-app .dbc-cards-collection-wrapper {
+  border: 1px dotted #000;
+  height: 100%;
+  padding: 29px 0;
+}
+
+.dbc-app .dbc-placeholder-add-card.dbc-card-item-wrapper {
+  border: 4px dashed#2d326c;
+  border-radius: 10px;
+  flex-flow: column;
+  padding: 10px;
+}
+
+.dbc-app .dbc-card-item-wrapper {
+  width: 300px;
+  border: 1px dotted #000;
+  cursor: pointer;
+}
+
+.dbc-app .dbc-card-item-parent {
+  height: 100%;
+  color: #fff;
+  background-size: cover;
+}
+
+.dbc-app .dbc-card-upload-picture {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+
+.dbc-app .dbc-placeholder-add-card-img {
+  height: 100%;
+  margin: 0 auto;
+  vertical-align: middle;
+}
+
+.dbc-app .dbc-placeholder-add-card:hover {
+  background-color: #dbe2fa;
+}
+
+.dbc-app .dbc-placeholder-add-card-img img {
+  height: 36px;
+  width: 36px;
+}
+
+.dbc-app .dbc-placeholder-add-card-text {
+  text-align: center;
+}

@@ -22,6 +22,7 @@ const PARAMS = {
     USER_PROFILE: REST_API_PREFIX + "/users/",
     CARDS: REST_API_PREFIX + "/cards",
     TEMPLATES: REST_API_PREFIX + "/templates",
+    USER_CARD: REST_API_PREFIX + "/usercards/",
   },
 };
 
@@ -35,7 +36,7 @@ const APP_URLS = {
   USERS_PAGE: APP_URL_PREFIX + "/users",
   EMAIL_SIGNAURE_PAGE: APP_URL_PREFIX + "/emailsignature",
   CONTACTS_PAGE: APP_URL_PREFIX + "/contacts",
-  SETTINGS_PAGE: APP_URL_PREFIX + "/settings",
+  SETTINGS_PAGE: APP_URL_PREFIX + "/settings"
 };
 
 const NAV_ITEMS_KEYS = [
@@ -200,6 +201,39 @@ const getUserProfile = () => {
   return myPromise;
 };
 
+const getCardDetails = (cardId) => {
+  const myPromise = new Promise((resolve, reject) => {
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+    if (token) {
+      let getUrl = PARAMS.API.USER_CARD + cardId;
+      axios
+        .get(getUrl, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          resolve(res);
+        });
+    } else {
+      reject({
+        redirect: true,
+        message: "No token available till now...",
+      });
+    }
+  });
+
+  return myPromise;
+};
+
 const executeLogoutRESTAPI = () => {
   const alwaysClassback = (response, callbackFn) => {
     deleteSession();
@@ -272,6 +306,7 @@ const Utils = {
   PARAMS,
   userSessionExists,
   getUserProfile,
+  getCardDetails,
   executeLoginRESTAPI,
   executeLogoutRESTAPI,
   createSession,

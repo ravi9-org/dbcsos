@@ -44,7 +44,7 @@ const TemplateList = () => {
     
 
     let formData = {
-      "templateName": "sos",
+      "templateName": "aspire",
       "backgroundImage": bg,
       "logoImage": logo,
       "fields": [{
@@ -69,7 +69,22 @@ const TemplateList = () => {
           "required": false,
           "multiple": false,
           "readonly": true
-        }
+        },
+        "twitter": {
+          "type": "text",
+          "required": false,
+          "multiple": false
+        },
+        "wechat": {
+          "type": "text",
+          "required": false,
+          "multiple": false
+        },
+        "linkedin": {
+          "type": "text",
+          "required": false,
+          "multiple": false
+        },
       }]
     };
   
