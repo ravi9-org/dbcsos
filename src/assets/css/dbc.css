@@ -251,14 +251,22 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   border-radius: 6px;
 }
 
-.dbc-app .dbc-w-32 {
-  width: 32px;
-  height: 32px;
+.dbc-app img.dbc-w-32 {
+  width: 20px;
+  /* height: 20px; */
   margin: 4px 16px;
+  color: #010fb8;
+}
+
+.dbc-app a.dbc-navmenu-inactive span {
+  color: #010fb8;
+}
+
+.dbc-app .dbc-navmenu-active img.dbc-w-32 {
 }
 
 .dbc-app .dbc-ml-1 {
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
 }
 
 /*Body end*/
