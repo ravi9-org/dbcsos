@@ -1,6 +1,8 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import ContextComponent from "../../app.context";
-import AddItemImg from "../../../assets/img/add.png";
+import AddItemImg from "../../../assets/img/add-card.png";
+import EditIcon from "../../../assets/img/Edit.png";
+import DeleteIcon from "../../../assets/img/Delete.png";
 //import CardItem from "card.item";
 import CardItem from "./card.item";
 
@@ -23,8 +25,8 @@ const CardList = () => {
           Add Digital Business Card
         </div>
         <div className="w-50 dbc-body-actions">
-          <div className="dbc-body-action">Edit</div>
-          <div className="dbc-body-action">Delete</div>
+          <div className="dbc-body-action"><img className="dbc-w-20"  src={EditIcon} alt="Edit-icon"></img>Edit</div>
+          <div className="dbc-body-action"><img className="dbc-w-20"  src={DeleteIcon} alt="Delete-icon"></img>Delete</div>
         </div>
       </div>
 
