@@ -336,14 +336,44 @@ const executeLoginRESTAPI = (params) => {
   return myPromise;
 };
 
+const executeCardAddEditRESTAPI = (cardData) => {
+  const alwaysClassback = (response, callbackFn) => {
+    if (response.status === STATUS_OK) {
+    }
+    callbackFn({
+      redirect: true,
+      ...{ response },
+    });
+  };
+  const myPromise = new Promise((resolve, reject) => {
+    let formData = cardData;
+    let url = PARAMS.API.USER_CARD;
+    let success = (response) => {
+      alwaysClassback(response, resolve);
+    };
+    let failure = (err) => {
+      alwaysClassback(err.response, reject);
+    };
+    try {
+      axios.post(url, formData /*, headersInfo*/).then(success, failure);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  return myPromise;
+};
+
 const Utils = {
   PARAMS,
   userSessionExists,
   getUserProfile,
+  getUserId,
   getCardDetails,
   getTemplateDetails,
   executeLoginRESTAPI,
   executeLogoutRESTAPI,
+  executeCardAddEditRESTAPI,
   createSession,
   deleteSession,
   APP_URLS,

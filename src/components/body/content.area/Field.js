@@ -7,6 +7,7 @@ const Field = (props = {}) => {
   let fieldSchema = fieldProps.filedSchema;
   let fieldData = fieldProps.fieldData;
   let mode = fieldProps.pageMode;
+  let inputElementClassNames = fieldProps.inputElementClassNames;
   //console.log(filedSchema);
   //debugger;
   return (
@@ -15,12 +16,19 @@ const Field = (props = {}) => {
         className={`dbs-card-field-item-img dbs-card-field-item-${fieldType}`}
       ></div>
 
-      {mode === "readonly" && (
+      {(mode === "readonly" || (mode !== "add" && mode !== "edit")) && (
         <div className="dbs-card-field-item-value"> {fieldData}</div>
       )}
 
       {(mode === "add" || mode === "edit") && (
-        <InputElement props={{fieldSchema, fieldData, fieldName: fieldType}} />
+        <InputElement
+          props={{
+            fieldSchema,
+            fieldData,
+            fieldName: fieldType,
+            inputElementClassNames,
+          }}
+        />
       )}
     </div>
   );

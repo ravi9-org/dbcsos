@@ -6,7 +6,8 @@ import Utils from "../../utils";
 const AddCardItem = ({ props }) => {
   let cardInitialData = props.cardInitialData,
     setNewCardData = props.setNewCardData,
-    pageMode = props.pageMode || "add";
+    pageMode = props.pageMode || "add",
+    inputElementClassNames = props.inputElementClassNames || "";
 
   let [cardData, setCardData] = useState(cardInitialData || {});
   let [fields, setFields] = useState(cardInitialData.fields || []);
@@ -42,6 +43,7 @@ const AddCardItem = ({ props }) => {
               fieldProps={{
                 fieldType: field,
                 pageMode,
+                inputElementClassNames,
                 filedSchema: fieldsSchema[field],
                 fieldData: fieldsData[index],
               }}

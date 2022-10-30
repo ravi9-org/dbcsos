@@ -7,15 +7,16 @@ const InputElement = ({ props = {} }) => {
   let fieldType = schema.type;
   let fieldData = props.fieldData;
   let fieldName = props.fieldName;
-  console.log(fieldType);
-  console.log(schema);
-  console.log(fieldData);
+  let inputElementClassNames = props.inputElementClassNames;
+//   console.log(fieldType);
+//   console.log(schema);
+//   console.log(fieldData);
 
   //debugger;
   if (fieldType === "text") {
-    return <TextInput props={{ schema, fieldData, fieldName }} />;
+    return <TextInput props={{ schema, fieldData, fieldName, inputElementClassNames }} />;
   } else if (fieldType === "textarea") {
-    return <TextAreaInput props={{ schema, fieldData, fieldName }} />;
+    return <TextAreaInput props={{ schema, fieldData, fieldName, inputElementClassNames }} />;
   } else {
     return null;
   }
