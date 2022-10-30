@@ -3,27 +3,20 @@ import React, { useState, useEffect } from "react";
 import Field from "./Field";
 import Utils from "../../utils";
 
-const CardItem = (props) => {
-  let cardId = props.cardId;
+const AddCardItem = ({ props }) => {
+  let cardInitialData = props.cardInitialData,
+    setNewCardData = props.setNewCardData,
+    pageMode = props.pageMode || "add";
 
-  let [cardData, setCardData] = useState({});
-  let [fields, setFields] = useState([]);
-  let [fieldsData, setFieldsData] = useState([]);
-  let [fieldsSchema, setFieldsSchema] = useState({});
-
-  const success = (res) => {
-    setCardData(res.data);
-    setFields(res.data.fields);
-    setFieldsData(res.data.fieldsData);
-    setFieldsSchema(res.data.fieldsSchema);
-  };
-
-  const fail = (err) => {
-    err?.message?.length && console.log(err);
-  };
+  let [cardData, setCardData] = useState(cardInitialData || {});
+  let [fields, setFields] = useState(cardInitialData.fields || []);
+  let [fieldsData, setFieldsData] = useState(cardInitialData.fieldsData || {});
+  let [fieldsSchema, setFieldsSchema] = useState(
+    cardInitialData.fieldsSchema || {}
+  );
 
   useEffect(() => {
-    Utils.getCardDetails(cardId).then(success, fail);
+    //Utils.getCardDetails(cardId).then(success, fail);
   }, []);
 
   return (
@@ -48,6 +41,7 @@ const CardItem = (props) => {
             <Field
               fieldProps={{
                 fieldType: field,
+                pageMode,
                 filedSchema: fieldsSchema[field],
                 fieldData: fieldsData[index],
               }}
@@ -60,4 +54,4 @@ const CardItem = (props) => {
   );
 };
 
-export default CardItem;
+export default AddCardItem;

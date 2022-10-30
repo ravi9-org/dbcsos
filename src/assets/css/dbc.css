@@ -462,9 +462,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   justify-content: end;
 }
 
-.dbs-card-field-item {
-
-}
+.dbs-card-field-item {}
 
 .dbs-card-field-item-img {
   width: 32px;
@@ -518,4 +516,23 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbs-card-field-item-value {
   color: #fff;
+}
+
+.dbs-card-field-item input,
+.dbs-card-field-item input:focus-visible {
+  border: 0;
+  background: transparent;
+  border-bottom: 1px solid darkgrey;
+  color: #fff;
+}
+
+.dbs-card-field-item input:read-only,
+.dbs-card-field-item input:read-only:focus-visible {
+  font-style: italic;
+  color: lightgray;
+}
+
+.dbs-card-field-item input:focus-visible {
+  border-bottom: 1px solid #dedada;
+  outline: none;
 }

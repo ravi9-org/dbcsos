@@ -1,4 +1,5 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ContextComponent from "../../app.context";
 import AddItemImg from "../../../assets/img/add-card.png";
 import EditIcon from "../../../assets/img/Edit.png";
@@ -11,6 +12,7 @@ const CardList = () => {
   let { userData } = useContext(ContextComponent);
 
   let [userCards, setUserCards] = useState([]);
+  let navigate = useNavigate();
 
   useEffect(() => {
     if (userData?.cards) {
@@ -19,6 +21,11 @@ const CardList = () => {
       //debugger;
     }
   }, [userData]);
+
+  const navgiatToAddPage = (e) => {
+    e.preventDefault();
+    navigate("/cards/addcard");
+  }
   return (
     <div className="dbc-body-cards-wrapper d-flex w-100">
       <div className="dbc-body-action-bar w-100">
@@ -32,7 +39,7 @@ const CardList = () => {
       </div>
 
       <div className="dbc-cards-collection-wrapper d-flex">
-        <div className="d-flex dbc-placeholder-add-card dbc-card-item-wrapper">
+        <div className="d-flex dbc-placeholder-add-card dbc-card-item-wrapper" onClick={navgiatToAddPage}>
           <div className="d-flex dbc-placeholder-add-card-img">
             <img src={AddItemImg} alt="Add item" />
           </div>

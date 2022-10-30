@@ -32,6 +32,7 @@ const APP_URLS = {
   LANDING_PAGE: APP_URL_PREFIX + "/",
   TEMPLATES_PAGE: APP_URL_PREFIX + "/templates",
   CARDS_PAGE: APP_URL_PREFIX + "/cards",
+  ADD_CARD_PAGE: APP_URL_PREFIX + "/cards/addcard",
   ADDRESS_PAGE: APP_URL_PREFIX + "/addresses",
   USERS_PAGE: APP_URL_PREFIX + "/users",
   EMAIL_SIGNAURE_PAGE: APP_URL_PREFIX + "/emailsignature",
@@ -201,6 +202,39 @@ const getUserProfile = () => {
   return myPromise;
 };
 
+const getTemplateDetails = (templateId) => {
+  const myPromise = new Promise((resolve, reject) => {
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+    if (token) {
+      let getUrl = PARAMS.API.TEMPLATES + "/"  + templateId;
+      axios
+        .get(getUrl, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          resolve(res);
+        });
+    } else {
+      reject({
+        redirect: true,
+        message: "No token available till now...",
+      });
+    }
+  });
+
+  return myPromise;
+};
+
 const getCardDetails = (cardId) => {
   const myPromise = new Promise((resolve, reject) => {
     let session = getSession();
@@ -307,6 +341,7 @@ const Utils = {
   userSessionExists,
   getUserProfile,
   getCardDetails,
+  getTemplateDetails,
   executeLoginRESTAPI,
   executeLogoutRESTAPI,
   createSession,
