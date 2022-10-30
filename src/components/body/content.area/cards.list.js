@@ -3,6 +3,7 @@ import ContextComponent from "../../app.context";
 import AddItemImg from "../../../assets/img/add-card.png";
 import EditIcon from "../../../assets/img/Edit.png";
 import DeleteIcon from "../../../assets/img/Delete.png";
+import TempUpdate from "./tempUpdate";
 //import CardItem from "card.item";
 import CardItem from "./card.item";
 

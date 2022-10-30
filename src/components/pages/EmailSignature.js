@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import TempUpdate from "./../body/content.area/tempUpdate";
 
 const EmailSignature = () => {
   return (
-    <div>this is EmailSignature page</div>
-  )
-}
+    <div>
+      <TempUpdate />
+    </div>
+  );
+};
 
-export default EmailSignature
+export default EmailSignature;

@@ -16,7 +16,7 @@ const DBCBody = () => {
           </div>
         </div>
       </div>    
-      <div className="dbc-body-row">
+      <div className="dbc-body-row d-none">
       <Badges />
     </div>
     </div>

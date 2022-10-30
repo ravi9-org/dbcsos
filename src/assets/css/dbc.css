@@ -195,6 +195,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background: #fff;
   flex: 1 1 auto;
   padding: 0 12px;
+  height: 100%;
 }
 
 .dbc-app .dbc-badge-add-button-wrapper {
@@ -265,7 +266,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   color: #010fb8;
 }
 
-.dbc-app .dbc-content-area-wrapper  img.dbc-w-20 {
+.dbc-app .dbc-content-area-wrapper img.dbc-w-20 {
   margin: 8px;
   color: #010fb8;
 }
@@ -349,7 +350,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbc-app .dbc-body-action-bar {
   display: flex;
-  flex-flow: row;    
+  flex-flow: row;
   font-weight: bold;
   color: #2f4694;
 }
@@ -366,7 +367,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbc-app .dbc-cards-collection-wrapper {
   border: 1px dotted #000;
-  height: 100%;
+  height: calc(100% - 32px);
   padding: 29px 0;
 }
 
@@ -381,7 +382,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   width: 239px;
   cursor: pointer;
   margin: 16px;
-  
+
 }
 
 .dbc-app .dbc-card-item-parent {
@@ -392,15 +393,18 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .dbc-app .dbc-card-item-parent.card-with-bg {
-  background-image: url("../img/Card.png");
-  padding: 16px;padding: 16px;
+  /* background-image: url("../img/Card.png"); */
+  padding: 16px;
+  padding: 16px;
+  padding-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .dbc-app .dbc-card-upload-picture {
-  width: 100px;
+  width: 72px;
   height: 100px;
   border: 1px solid #fff;
   border-radius: 50%;
@@ -414,10 +418,10 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .dbc-app .dbc-card-title {
-  padding-bottom:16px ;
+  padding-bottom: 16px;
 }
 
-.dbc-app  .dbc-card-field-wrapper > div{
+.dbc-app .dbc-card-field-wrapper>div {
   padding-bottom: 8px;
 }
 
@@ -443,4 +447,75 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   font-size: 20px;
   font-weight: bold;
   line-height: 2.5;
+}
+
+.dbc-app .dbc-card-company-logo-wrapper {
+  position: absolute;
+  /* float: right; */
+  height: 42px;
+  width: calc(100% - 15px);
+  background-size: 50px 50px;
+  background-position: 10px;
+  background-size: cover;
+  display: flex;
+  display: flex;
+  justify-content: end;
+}
+
+.dbs-card-field-item {
+
+}
+
+.dbs-card-field-item-img {
+  width: 32px;
+  height: 32px;
+  background-size: cover;
+}
+
+.dbs-card-field-item-img.dbs-card-field-item-telephone {
+  background-image: url("./../img/fields/telephone.png");
+}
+
+.dbs-card-field-item-img.dbs-card-field-item-wechat {
+  background-image: url("./../img/fields/wechat.png");
+}
+
+.dbs-card-field-item-img.dbs-card-field-item-instagram {
+  background-image: url("./../img/fields/instagram.png");
+}
+
+.dbs-card-field-item-img.dbs-card-field-item-youtube {
+  background-image: url("./../img/fields/youtube.png");
+}
+
+.dbs-card-field-item-img.dbs-card-field-item-mobile {
+  background-image: url("./../img/fields/telephone.png");
+}
+
+.dbs-card-field-item-img.dbs-card-field-item-linkedin {
+  background-image: url("./../img/fields/linkedin.png");
+}
+
+.dbs-card-field-item-img.dbs-card-field-item-wechat {
+  background-image: url("./../img/fields/wechat.png");
+}
+
+.dbs-card-field-item-img.dbs-card-field-item-link {
+  background-image: url("./../img/fields/link.png");
+}
+
+.dbs-card-field-item-img.dbs-card-field-item-website {
+  background-image: url("./../img/fields/website.png");
+}
+
+.dbs-card-field-item-img.dbs-card-field-item-twitter {
+  background-image: url("./../img/fields/twitter.png");
+}
+
+.dbs-card-field-item-img.dbs-card-field-item-email {
+  background-image: url("./../img/fields/email.png");
+}
+
+.dbs-card-field-item-value {
+  color: #fff;
 }
