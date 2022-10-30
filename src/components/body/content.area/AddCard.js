@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Router, useNavigate } from "react-router-dom";
 
 import AddCardContextComponent from "./AddCardContextComponent";
+import ContextComponent from "../../app.context";
 import Utils from "../../utils";
 import AddCardItem from "./AddCardItem";
 
 const AddCard = ({ templateId = 1 }) => {
   const navigate = useNavigate();
+  let { userData, setUserData } = useContext(ContextComponent);
 
   let [templateData, setTemplateData] = useState({});
   let [newCardData, setNewCardData] = useState({});
@@ -32,14 +34,15 @@ const AddCard = ({ templateId = 1 }) => {
   }, [isDataAvailable]);
 
   const goBack = (e) => {
-    navigate(-1);
+    navigate("/cards");
   };
 
   let inputElementClassNames = "dbc-any-input-element";
 
   let [valueChanged, setValueChanged] = useState(false);
   const saveCard = (e) => {
-    console.log("TODO: saving card...");
+    e.preventDefault();
+    // console.log("TODO: saving card...");
     let dataValues = [];
     let inputElements = document.getElementsByClassName(inputElementClassNames);
 
@@ -50,9 +53,40 @@ const AddCard = ({ templateId = 1 }) => {
     setValueChanged(true);
   };
 
+  const updateUserInfo = (newCardId = 2) => {
+    const success = (res) => {
+      goBack();
+    };
+    const fail = (err) => {
+      console.log(err);
+      debugger;
+    };
+    const callback = (response) => {
+      if (response.status === 200) {
+        success(response);
+      } else {
+        fail(response);
+      }
+    };
+
+    try {
+      let userCardsArray = [...userData?.cards];
+      userCardsArray.push(newCardId);
+
+      Utils.addOrRemoveCardFromUser(userCardsArray).then(success, fail);
+    } catch (e) {
+      console.log(e);
+      debugger;
+    }
+  };
+
   const submitForm = (info) => {
-    const loginsuccess = (res) => {
+    const success = (res) => {
       console.log(res);
+      let newId = res.data.id;
+      console.log(newId);
+      debugger;
+      updateUserInfo(res.data.id);
       // execute user profile and update cards array...
       debugger;
     };
@@ -68,20 +102,25 @@ const AddCard = ({ templateId = 1 }) => {
       }
     };
 
-    Utils.executeCardAddEditRESTAPI(info).then(callback);
+    try {
+      Utils.executeCardAddRESTAPI(info).then(success, fail);
+    } catch (e) {
+      console.log(e);
+      debugger;
+    }
   };
 
   useEffect(() => {
     if (valueChanged) {
-      console.log(updatedValues);
+      // console.log(updatedValues);
       // validate and submit the form...
       let templateInfo = templateData;
-      console.log(templateInfo);
-      console.log(updatedFields);
+      // console.log(templateInfo);
+      // console.log(updatedFields);
       templateInfo.fieldsData = updatedValues;
       templateInfo.fields = updatedFields;
       templateInfo.userId = Utils.getUserId();
-      console.log(templateInfo);
+      // console.log(templateInfo);
       submitForm(templateInfo);
     }
   }, [updatedValues]);
@@ -94,24 +133,26 @@ const AddCard = ({ templateId = 1 }) => {
         updatedFields,
       }}
     >
-      <div className="dbs-add-card-wrapper d-flex">
-        <div className="dbc-add-card-title">Add Card</div>
-        {isDataAvailable && (
-          <AddCardItem
-            className="dbc-add-card-wrapper"
-            props={{
-              cardInitialData: templateData,
-              setNewCardData,
-              mode: "add",
-              inputElementClassNames,
-            }}
-          />
-        )}
-        <div className="dbc-add-card-item-footer">
-          <button onClick={goBack}>Back</button>
-          <button onClick={saveCard}>Save</button>
+      <form>
+        <div className="dbs-add-card-wrapper d-flex">
+          <div className="dbc-add-card-title">Add Card</div>
+          {isDataAvailable && (
+            <AddCardItem
+              className="dbc-add-card-wrapper"
+              props={{
+                cardInitialData: templateData,
+                setNewCardData,
+                mode: "add",
+                inputElementClassNames,
+              }}
+            />
+          )}
+          <div className="dbc-add-card-item-footer">
+            <button onClick={goBack}>Back</button>
+            <button onClick={saveCard}>Save</button>
+          </div>
         </div>
-      </div>
+      </form>
     </AddCardContextComponent.Provider>
   );
 };

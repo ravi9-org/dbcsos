@@ -369,6 +369,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   border: 1px dotted #000;
   height: calc(100% - 32px);
   padding: 29px 0;
+  overflow-x: auto;
 }
 
 .dbc-app .dbc-placeholder-add-card.dbc-card-item-wrapper {

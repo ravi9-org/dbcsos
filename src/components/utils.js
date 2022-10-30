@@ -37,7 +37,7 @@ const APP_URLS = {
   USERS_PAGE: APP_URL_PREFIX + "/users",
   EMAIL_SIGNAURE_PAGE: APP_URL_PREFIX + "/emailsignature",
   CONTACTS_PAGE: APP_URL_PREFIX + "/contacts",
-  SETTINGS_PAGE: APP_URL_PREFIX + "/settings"
+  SETTINGS_PAGE: APP_URL_PREFIX + "/settings",
 };
 
 const NAV_ITEMS_KEYS = [
@@ -214,7 +214,7 @@ const getTemplateDetails = (templateId) => {
 
     let token = getToken();
     if (token) {
-      let getUrl = PARAMS.API.TEMPLATES + "/"  + templateId;
+      let getUrl = PARAMS.API.TEMPLATES + "/" + templateId;
       axios
         .get(getUrl, {
           headers: {
@@ -336,32 +336,21 @@ const executeLoginRESTAPI = (params) => {
   return myPromise;
 };
 
-const executeCardAddEditRESTAPI = (cardData) => {
-  const alwaysClassback = (response, callbackFn) => {
-    if (response.status === STATUS_OK) {
-    }
-    callbackFn({
-      redirect: true,
-      ...{ response },
-    });
-  };
-  const myPromise = new Promise((resolve, reject) => {
-    let formData = cardData;
-    let url = PARAMS.API.USER_CARD;
-    let success = (response) => {
-      alwaysClassback(response, resolve);
-    };
-    let failure = (err) => {
-      alwaysClassback(err.response, reject);
-    };
-    try {
-      axios.post(url, formData /*, headersInfo*/).then(success, failure);
-    } catch (e) {
-      console.log(e);
-    }
-  });
+const executeCardAddRESTAPI = (cardData) => {
+  let formData = { ...cardData };
+  delete formData.id;
+  let url = PARAMS.API.USER_CARD;
 
-  return myPromise;
+  return axios.post(url, formData);
+};
+
+const addOrRemoveCardFromUser = (userCardsArray) => {
+  let formData = { cards: userCardsArray };
+  delete formData.id;
+  let url = PARAMS.API.USER_PROFILE + getUserId();
+  console.log(url);
+  debugger;
+  return axios.patch(url, formData);
 };
 
 const Utils = {
@@ -373,7 +362,8 @@ const Utils = {
   getTemplateDetails,
   executeLoginRESTAPI,
   executeLogoutRESTAPI,
-  executeCardAddEditRESTAPI,
+  executeCardAddRESTAPI,
+  addOrRemoveCardFromUser,
   createSession,
   deleteSession,
   APP_URLS,

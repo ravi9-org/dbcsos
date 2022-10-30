@@ -12,6 +12,8 @@ const CardItem = (props) => {
   let [fieldsSchema, setFieldsSchema] = useState({});
 
   const success = (res) => {
+    //console.log(res.data);
+    //debugger;
     setCardData(res.data);
     setFields(res.data.fields);
     setFieldsData(res.data.fieldsData);
