@@ -155,8 +155,8 @@ const AddCard = ({ templateId = 1 }) => {
             />
           )}
           <div className="dbc-add-card-item-footer">
-            <button onClick={goBack}>Back</button>
-            <button onClick={saveCard}>Save</button>
+            <button type="button" class="btn btn-primary" onClick={goBack}>Back</button>
+            <button type="button" class="btn btn-primary" onClick={saveCard}>Save</button>
           </div>
         </div>
       </form>
