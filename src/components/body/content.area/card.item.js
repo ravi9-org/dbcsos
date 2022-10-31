@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import Field from "./Field";
 import Utils from "../../utils";
+import ContextComponent from "../../app.context";
 
 const CardItem = (props) => {
   let cardId = props.cardId;
@@ -11,6 +12,9 @@ const CardItem = (props) => {
   let [fieldsData, setFieldsData] = useState([]);
   let [fieldsSchema, setFieldsSchema] = useState({});
 
+  let { userCards, setUserCards, userData, setUserData } =
+    useContext(ContextComponent);
+
   const success = (res) => {
     //console.log(res.data);
     //debugger;
@@ -18,6 +22,12 @@ const CardItem = (props) => {
     setFields(res.data.fields);
     setFieldsData(res.data.fieldsData);
     setFieldsSchema(res.data.fieldsSchema);
+    userCards.push(res.data);
+    let existingUserData = { ...userData };
+    existingUserData.cards.push(res.data.id);
+    //console.log("res.data.id : " + res.data.id);
+    //setUserData(existingUserData);
+    return false;
   };
 
   const fail = (err) => {

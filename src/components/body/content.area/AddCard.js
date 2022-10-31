@@ -59,7 +59,7 @@ const AddCard = ({ templateId = 1 }) => {
     };
     const fail = (err) => {
       console.log(err);
-      debugger;
+      //debugger;
     };
     const callback = (response) => {
       if (response.status === 200) {
@@ -71,28 +71,35 @@ const AddCard = ({ templateId = 1 }) => {
 
     try {
       let userCardsArray = [...userData?.cards];
+      //console.log(userCardsArray);
+      //debugger;
       userCardsArray.push(newCardId);
+      userCardsArray = [...new Set(userCardsArray)];
+
+      let tempUserData = userData;
+
+      tempUserData.cards = userCardsArray;
 
       Utils.addOrRemoveCardFromUser(userCardsArray).then(success, fail);
     } catch (e) {
       console.log(e);
-      debugger;
+      //debugger;
     }
   };
 
   const submitForm = (info) => {
     const success = (res) => {
-      console.log(res);
+      //console.log(res);
       let newId = res.data.id;
-      console.log(newId);
-      debugger;
+      // console.log(newId);
+      // debugger;
       updateUserInfo(res.data.id);
       // execute user profile and update cards array...
-      debugger;
+      //debugger;
     };
     const fail = (err) => {
       console.log(err);
-      debugger;
+      //debugger;
     };
     const callback = (response) => {
       if (response.status === 200) {
@@ -106,7 +113,7 @@ const AddCard = ({ templateId = 1 }) => {
       Utils.executeCardAddRESTAPI(info).then(success, fail);
     } catch (e) {
       console.log(e);
-      debugger;
+      //debugger;
     }
   };
 

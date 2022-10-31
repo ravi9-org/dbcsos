@@ -11,6 +11,7 @@ function MainPage() {
   let [canRedirectToLogin, setCanRedirectToLogin] = useState(false);
   let [canRedirectToLanding, setCanRedirectToLanding] = useState(false);
   let [userData, setUserData] = useState({});
+  let userCards = [];
 
   let navigate = useNavigate();
 
@@ -39,6 +40,7 @@ function MainPage() {
         setCanRedirectToLanding,
         userData,
         setUserData,
+        userCards
       }}
     >
       <Mask />
