@@ -22,7 +22,7 @@ const CardItem = (props) => {
     setFields(res.data.fields);
     setFieldsData(res.data.fieldsData);
     setFieldsSchema(res.data.fieldsSchema);
-    userCards.push(res.data);
+    //userCards.push(res.data);
     let existingUserData = { ...userData };
     existingUserData.cards.push(res.data.id);
     //console.log("res.data.id : " + res.data.id);

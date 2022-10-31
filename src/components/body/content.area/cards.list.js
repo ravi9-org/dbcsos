@@ -16,9 +16,9 @@ const CardList = () => {
 
   useEffect(() => {
     if (userData?.cards) {
-      setUserCards(userData.cards);
-      //console.log(userCards);
-      //debugger;
+      setUserCards([...new Set(userData.cards)]);//[...new Set(userData.cards)]
+      console.log(userCards);
+      debugger;
     }
   }, [userData]);
 
