@@ -141,7 +141,7 @@ const AddCard = ({ templateId = 1 }) => {
       }}
     >
       <form>
-        <div className="dbs-add-card-wrapper d-flex">
+        <div className="dbs-add-card-wrapper d-flex flex-column">
           <div className="dbc-add-card-title">Add Card</div>
           {isDataAvailable && (
             <AddCardItem

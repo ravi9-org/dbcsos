@@ -258,6 +258,8 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .dbc-app .dbc-content-area-wrapper {
   border-radius: 6px;
   padding: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .dbc-app img.dbc-w-32 {
@@ -380,8 +382,8 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .dbc-app .dbc-card-item-wrapper {
-  width: 239px;
-  min-width: 239px;
+  width: 300px;
+  min-width: 300px;
   cursor: pointer;
   margin: 16px;
 
@@ -418,7 +420,6 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbc-app .dbc-card-fields {
   overflow-y: auto;
-  height: 240px;
   width: inherit;
 }
 
@@ -470,7 +471,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .dbs-card-field-item {}
 
 .dbs-card-field-item-img {
-  width: 26px;
+  min-width: 26px;
   height: 24px;
   margin-right: 8px;
   background-size: contain;  
@@ -523,7 +524,8 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbs-card-field-item-value {
   color: #fff;
-  word-wrap: break-word;
+  word-wrap: break-word;  
+  word-break: break-word;
 }
 
 .dbs-card-field-item input,
@@ -543,4 +545,11 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .dbs-card-field-item input:focus-visible {
   border-bottom: 1px solid #dedada;
   outline: none;
+}
+
+@media screen and (max-width : 1800px){
+  .dbc-app .dbc-card-item-wrapper {
+    width: 239px;
+    min-width: 239px;
+  }
 }
