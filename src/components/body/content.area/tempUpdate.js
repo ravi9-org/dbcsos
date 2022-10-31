@@ -44,10 +44,23 @@ const TemplateList = () => {
     
 
     let formData = {
-      "templateName": "sos",
+      "templateName": "aspire",
       "backgroundImage": bg,
       "logoImage": logo,
-      "fields": [{
+      "picture": "",
+      "fields": [
+        "telephone",
+        "email",
+        "website",
+        "youtube"
+      ],
+      "fieldsData": [
+        "123456789",
+        "lisa.personal@cms.com",
+        "www.lisa.personal.com",
+        "http://www.youtube.com"
+      ],
+      "fieldsSchema": {
         "telephone": {
           "type": "text",
           "required": true,
@@ -65,33 +78,18 @@ const TemplateList = () => {
         },
         "youtube": {
           "type": "text",
-          "value": "http://www.youtube.com",
           "required": false,
           "multiple": false,
           "readonly": true
-        },
-        "twitter": {
-          "type": "text",
-          "required": false,
-          "multiple": false
-        },
-        "wechat": {
-          "type": "text",
-          "required": false,
-          "multiple": false
-        },
-        "linkedin": {
-          "type": "text",
-          "required": false,
-          "multiple": false
-        },
-      }]
+        }
+      },
+      "userId": 1
     };
 
     //formData = {};
   
     //let url = Utils.PARAMS.API.TEMPLATES + "/1";
-    let url = Utils.PARAMS.API.USER_CARD + "/1";
+    let url = Utils.PARAMS.API.USER_CARD + "/7";
 
     let data = JSON.stringify(formData);
 

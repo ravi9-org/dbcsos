@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
+import ContextComponent from "../../app.context";
 import Field from "./Field";
 import Utils from "../../utils";
 
 const AddCardItem = ({ props }) => {
+  let { userData } = useContext(ContextComponent);
   let cardInitialData = props.cardInitialData,
     setNewCardData = props.setNewCardData,
     pageMode = props.pageMode || "add",
@@ -33,8 +35,8 @@ const AddCardItem = ({ props }) => {
 
       <div className="dbc-card-upload-picture"></div>
       <div className="dbc-info-wrapper">
-        <div className="dbc-card-name fw-bold">John Williams</div>
-        <div className="dbc-card-title">Sr. Manager</div>
+        <div className="dbc-card-name fw-bold">{userData.firstName} {userData.lastName}</div>
+        <div className="dbc-card-title">{userData.designation}</div>
       </div>
       <div className="dbc-card-fields">
         <div className="dbc-card-field-wrapper">
