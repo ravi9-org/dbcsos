@@ -48,11 +48,10 @@ const CardItem = (props) => {
       <div className="d-none1 dbc-card-company-logo-wrapper">
         <img src={cardData.logoImage} alt="logoiamge" />
       </div>
-
-      <div className="dbc-card-upload-picture"></div>
-      <div className="dbc-info-wrapper">
-        <div className="dbc-card-name fw-bold">John Williams</div>
-        <div className="dbc-card-title">Sr. Manager</div>
+        <div className="dbc-card-upload-picture"></div>
+        <div className="dbc-info-wrapper">
+        <div className="dbc-card-name fw-bold">{userData.firstName} {userData.lastName}</div>
+        <div className="dbc-card-title">{userData.designation}</div>
       </div>
       <div className="dbc-card-fields">
         <div className="dbc-card-field-wrapper">

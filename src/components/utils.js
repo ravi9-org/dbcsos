@@ -348,8 +348,6 @@ const addOrRemoveCardFromUser = (userCardsArray) => {
   let formData = { cards: userCardsArray };
   delete formData.id;
   let url = PARAMS.API.USER_PROFILE + getUserId();
-  console.log(url);
-  debugger;
   return axios.patch(url, formData);
 };
 

@@ -381,6 +381,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbc-app .dbc-card-item-wrapper {
   width: 239px;
+  min-width: 239px;
   cursor: pointer;
   margin: 16px;
 
@@ -402,11 +403,13 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   flex-direction: column;
   align-items: center;
   position: relative;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
 
 .dbc-app .dbc-card-upload-picture {
-  width: 72px;
-  height: 100px;
+  min-width: 100px;
+  min-height: 100px;
   border: 1px solid #fff;
   border-radius: 50%;
   margin-top: 32px;
@@ -416,6 +419,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .dbc-app .dbc-card-fields {
   overflow-y: auto;
   height: 240px;
+  width: inherit;
 }
 
 .dbc-app .dbc-card-title {
@@ -423,7 +427,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .dbc-app .dbc-card-field-wrapper>div {
-  padding-bottom: 8px;
+  padding-bottom: 16px;
 }
 
 .dbc-app .dbc-placeholder-add-card-img {
@@ -466,9 +470,11 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .dbs-card-field-item {}
 
 .dbs-card-field-item-img {
-  width: 32px;
-  height: 32px;
-  background-size: cover;
+  width: 26px;
+  height: 24px;
+  margin-right: 8px;
+  background-size: contain;  
+  background-repeat: no-repeat;
 }
 
 .dbs-card-field-item-img.dbs-card-field-item-telephone {
@@ -517,6 +523,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbs-card-field-item-value {
   color: #fff;
+  word-wrap: break-word;
 }
 
 .dbs-card-field-item input,
