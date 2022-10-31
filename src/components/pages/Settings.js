@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import TempUpdate from "./../body/content.area/tempUpdate";
 
 const Settings = () => {
   return (
-    <div>this is Settings page</div>
-  )
-}
+    <div>
+      {/* <TempUpdate /> */}
+      This is settings page
+    </div>
+  );
+};
 
-export default Settings
+export default Settings;

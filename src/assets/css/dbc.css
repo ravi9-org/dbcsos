@@ -494,7 +494,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   min-width: 26px;
   height: 24px;
   margin-right: 8px;
-  background-size: contain;  
+  background-size: contain;
   background-repeat: no-repeat;
 }
 
@@ -544,7 +544,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbs-card-field-item-value {
   color: #fff;
-  word-wrap: break-word;  
+  word-wrap: break-word;
   word-break: break-word;
 }
 
@@ -567,9 +567,50 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   outline: none;
 }
 
-@media screen and (max-width : 1800px){
+@media screen and (max-width : 1800px) {
   .dbc-app .dbc-card-item-wrapper {
     width: 239px;
     min-width: 239px;
   }
+}
+
+.dbc-card-mini-item-wrapper {
+  width: 100%;
+}
+
+.dbc-app .dbc-card-mini-item-wrapper .dbc-card-item-parent.card-with-bg {
+  border-radius: 10px;
+}
+
+.dbc-app .dbc-card-mini-item-wrapper .dbc-info-wrapper {
+  border-radius: 10px;
+  width: 100%;
+  text-align: left;
+}
+
+.dbc-app .dbc-card-mini-items-wrapper {
+  flex-direction: column;
+}
+
+.dbc-app .dbc-card-mini-options-wrapper {
+  justify-content: center;
+}
+
+.dbc-app .dbc-card-mini-options-wrapper Button {
+  margin: 5px;
+}
+
+
+.dbc-app .btn-check+.btn.dbc-card-item-wrapper.dbc-card-mini-item-wrapper.btn-outline-primary {
+  background-color: transparent;
+  border-radius: 10px;
+  outline: none;
+  border: 0;
+  box-shadow: none;
+  transition: all 0.3s ease 0s;
+
+}
+
+.dbc-app .btn-check:checked+.btn.dbc-card-item-wrapper.dbc-card-mini-item-wrapper.btn-outline-primary {
+  box-shadow: 0px 8px 15px rgb(0, 0, 0, 0.6);
 }

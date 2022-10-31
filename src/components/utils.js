@@ -351,6 +351,11 @@ const addOrRemoveCardFromUser = (userCardsArray) => {
   return axios.patch(url, formData);
 };
 
+
+const getUniqueSetOfArray = (arr) => {
+  return [...new Set(arr)];
+};
+
 const Utils = {
   PARAMS,
   userSessionExists,
@@ -362,8 +367,10 @@ const Utils = {
   executeLogoutRESTAPI,
   executeCardAddRESTAPI,
   addOrRemoveCardFromUser,
+  getUniqueSetOfArray,
   createSession,
   deleteSession,
+  isObjectEmpty,
   APP_URLS,
   NAV_ITEMS_KEYS,
   NAV_ITEMS_VALUES,
