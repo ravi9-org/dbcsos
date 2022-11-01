@@ -5,13 +5,16 @@ import ContextComponent from "../app.context";
 import CardMiniItem from "./../body/content.area/CardMiniItem";
 import Utils from "../utils";
 import CardList from "../body/content.area/cards.list";
+import QRCode from "./signatures/QRCode";
+import Square from "./signatures/Square";
+import Text from "./signatures/Text";
 
 const EmailSignature = () => {
   const { userData } = useContext(ContextComponent);
   const [userCards, setUserCards] = useState([]);
   const [value, setValue] = useState([1]);
 
-  const optionsArray = ["qrcode", "text", "square"];
+  const optionsArray = ["qrcode", "text"/*, "square"*/];
   const optionsObjects = {
     qrcode: {
       displayLabel: "QR Code",
@@ -32,7 +35,28 @@ const EmailSignature = () => {
 
   const [pageInfo, setPageInfo] = useState(null);
 
+  const [renderPage, setRenderPage] = useState(false);
+
   const [renderPreview, setRenderPreview] = useState(false);
+  const [cardsInfo, setCardsInfo] = useState([]);
+  const [aaa, setAaa] = useState([]);
+
+  const addCardsInfo = (cardsObj) => {
+    //console.log(cardsInfo?.length);
+    //console.log(cardsObj.id);
+    let obj = {};
+    setAaa([...aaa, cardsObj.id]);
+    obj[cardsObj.id] = cardsObj;
+    let temp = [...cardsInfo];
+    temp.push(obj);
+    setCardsInfo(temp);
+    //console.log(cardsInfo);
+  }
+
+  useEffect(() => { 
+    //console.log(aaa);
+    //debugger;
+  }, [aaa]);
 
   useEffect(() => {
     if (!Utils.isObjectEmpty(userData)) {
@@ -42,9 +66,20 @@ const EmailSignature = () => {
         selectedCardId: userCardsArray[0],
         selectedCardOption: "qrcode",
       });
-      setRenderPreview(true);
+      setRenderPage(true);
     }
   }, [userData]);
+
+  useEffect(() => { 
+    if (cardsInfo.length && userCards.length) {
+      //console.log(cardsInfo);
+      //console.log(userCards);
+      if (cardsInfo?.length !== 0 /*&& cardsInfo.length === userCards.length*/) {
+        setRenderPreview(true);
+        //debugger;
+      }
+    }
+  }, [cardsInfo]);
 
   const handleChange = (updatedValue) => {
     // console.log(updatedValue);
@@ -59,13 +94,12 @@ const EmailSignature = () => {
   };
   return (
     <div className="d-flex dbc-card-mini-items-wrapper">
-      {renderPreview && (
+      {renderPage && (
         <div>
           <div className="d-flex">
             <ToggleButtonGroup
               type="radio"
               name="cards"
-              // defaultValue={userCards.length ? userCards[0] : 1}
               defaultValue={userCards[0]}
               onChange={handleCardSelection}
             >
@@ -78,7 +112,7 @@ const EmailSignature = () => {
                   variant="outline-primary"
                   id={`tbg-radio-${id}`}
                 >
-                  <CardMiniItem cardId={id} role="button" />
+                  <CardMiniItem cardId={id} role="button" addCardsInfo={addCardsInfo} />
                 </ToggleButton>
               ))}
             </ToggleButtonGroup>
@@ -87,14 +121,15 @@ const EmailSignature = () => {
             <ToggleButtonGroup
               type="radio"
               name="options"
-              variant="outline-primary"
+              variant="outline-warning"
               defaultValue={optionsArray.length ? optionsArray[0] : 1}
               onChange={handleChange}
             >
               {optionsArray.map((option, index) => (
                 <ToggleButton
                   key={index}
-                  variant="outline-info"
+                  variant="outline-primary"
+                  className="dbc-mini-card-selection-btn"
                   id={`tbg-radio-options-${index + 1}`}
                   value={option}
                 >
@@ -104,8 +139,16 @@ const EmailSignature = () => {
             </ToggleButtonGroup>
           </div>
           {renderPreview && (
-            <div>
-              {pageInfo.selectedCardId}:===:{pageInfo.selectedCardOption}
+            <div className="dbs-email-signature-wrapper">
+              {pageInfo.selectedCardOption === "qrcode" && (
+                <QRCode cardId={pageInfo.selectedCardId} cardsInfo={cardsInfo} />
+              )}
+              {pageInfo.selectedCardOption === "text" && (
+                <Text cardId={pageInfo.selectedCardId} cardsInfo={cardsInfo} />
+              )}
+              {/* {pageInfo.selectedCardOption === "square" && (
+                <Square cardId={pageInfo.selectedCardId} cardsInfo={cardsInfo} />
+              )} */}
             </div>
           )}
         </div>
