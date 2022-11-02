@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import ContextComponent from "../app.context";
 import Login from "./login";
-import CardExternalDetailsPage from "../header/dbc.header";
+import CardExternalDetailsPage from "../pages/cardexternaldetailspage";
 import Mask from "../controls/mask";
 import LandingPage from "./landingpage";
 
@@ -48,7 +48,7 @@ function MainPage() {
         <Route path="/login" exact element={<Login />}></Route>
 
         <Route
-          path="/cardextdetails"
+          path="/cardextdetails/:cardid"
           exact
           element={<CardExternalDetailsPage />}
         ></Route>

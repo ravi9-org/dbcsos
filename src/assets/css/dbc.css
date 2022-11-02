@@ -669,3 +669,19 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .dbc-app .dbc-qrcode-qrcode {
   height: 90px;
 }
+
+.dbc-app .dbc-ext-card-details-page {
+  background-image: url("./../img/ext-bg.png");
+  height: 100vh;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.dbc-ext-card-item-wrapper {
+  justify-content: center;
+  width: 400px;
+  margin: 0 auto;
+  padding: 90px 0;
+  height: 100%;
+}

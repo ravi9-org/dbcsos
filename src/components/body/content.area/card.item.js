@@ -20,7 +20,7 @@ const CardItem = (props) => {
     setFieldsData(res.data.fieldsData);
     setFieldsSchema(res.data.fieldsSchema);
     let existingUserData = { ...userData };
-    existingUserData.cards.push(res.data.id);
+    existingUserData?.cards?.push(res.data.id);
     return false;
   };
 
