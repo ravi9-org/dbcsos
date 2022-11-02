@@ -269,11 +269,11 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   margin: 0 auto;
 }
 
-.dbc-app .dbc-content-area-wrapper .dbs-add-card-wrapper .dbc-add-card-item-footer > button.btn {
- float: right;
- margin: 8px;
- background-color:#010fb8;
- border: 1px solid #010fb8;
+.dbc-app .dbc-content-area-wrapper .dbs-add-card-wrapper .dbc-add-card-item-footer>button.btn {
+  float: right;
+  margin: 8px;
+  background-color: #010fb8;
+  border: 1px solid #010fb8;
 }
 
 .dbc-app .dbc-content-area-wrapper form {
@@ -594,6 +594,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbc-app .dbc-card-mini-options-wrapper {
   justify-content: center;
+  padding: 30px;
 }
 
 .dbc-app .dbc-card-mini-options-wrapper Button {
@@ -603,7 +604,8 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 
 .btn.dbc-mini-card-selection-btn {
-  border-color:  #234c8e;
+  border-color: #234c8e;
+  color: #234c8e;
   font-weight: 600;
   border-width: 2px;
 }
@@ -631,4 +633,39 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .dbc-app .dbc-card-qr-code {
   height: 70px;
   float: right;
+}
+
+.dbc-app .dbs-signature-item-wrapper {
+  justify-content: center;
+  padding: 30px;
+}
+
+.dbc-app .dbs-signature-item-wrapper .dbs-signature-item {
+  border: 1px solid #808080;
+  border-radius: 10px;
+  padding: 20px 10px;
+  min-width: 400px;
+}
+
+
+.dbc-app .dbc-qrcode-bg,
+.dbc-app .dbc-qrcode-logo {
+  border-radius: 10px;
+}
+
+.dbc-app .dbc-qrcode-bg {
+  background-size: cover;
+  width: 160px;
+  height: 120px;
+}
+
+.dbc-app .dbc-qrcode-logo {
+  width: 100px;
+  height: 100px;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+}
+
+.dbc-app .dbc-qrcode-qrcode {
+  height: 90px;
 }

@@ -12,21 +12,15 @@ const CardItem = (props) => {
   let [fieldsData, setFieldsData] = useState([]);
   let [fieldsSchema, setFieldsSchema] = useState({});
 
-  let { userCards, setUserCards, userData, setUserData } =
-    useContext(ContextComponent);
+  let { userData } = useContext(ContextComponent);
 
   const success = (res) => {
-    //console.log(res.data);
-    //debugger;
     setCardData(res.data);
     setFields(res.data.fields);
     setFieldsData(res.data.fieldsData);
     setFieldsSchema(res.data.fieldsSchema);
-    //userCards.push(res.data);
     let existingUserData = { ...userData };
     existingUserData.cards.push(res.data.id);
-    //console.log("res.data.id : " + res.data.id);
-    //setUserData(existingUserData);
     return false;
   };
 

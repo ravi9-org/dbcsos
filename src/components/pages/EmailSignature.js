@@ -4,17 +4,10 @@ import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ContextComponent from "../app.context";
 import CardMiniItem from "./../body/content.area/CardMiniItem";
 import Utils from "../utils";
-import CardList from "../body/content.area/cards.list";
-import QRCode from "./signatures/QRCode";
-import Square from "./signatures/Square";
-import Text from "./signatures/Text";
+import Signature from "./signatures/Signature";
 
 const EmailSignature = () => {
-  const { userData } = useContext(ContextComponent);
-  const [userCards, setUserCards] = useState([]);
-  const [value, setValue] = useState([1]);
-
-  const optionsArray = ["qrcode", "text"/*, "square"*/];
+  const optionsArray = ["qrcode", "text" /*, "square"*/];
   const optionsObjects = {
     qrcode: {
       displayLabel: "QR Code",
@@ -33,30 +26,31 @@ const EmailSignature = () => {
     },
   };
 
+  const { userData } = useContext(ContextComponent);
+
+  const [userCards, setUserCards] = useState([]);
   const [pageInfo, setPageInfo] = useState(null);
-
   const [renderPage, setRenderPage] = useState(false);
-
   const [renderPreview, setRenderPreview] = useState(false);
-  const [cardsInfo, setCardsInfo] = useState([]);
-  const [aaa, setAaa] = useState([]);
+  let [cardsInfo, setCardsInfo] = useState([]);
+
+  let localVar = [];
+
+  setCardsInfo = (newCardsObj) => {
+    let tempObj = {},
+      tempArray = [];
+    tempObj[newCardsObj.id] = newCardsObj;
+    tempArray.push(tempObj);
+    localVar = [...localVar, ...tempArray];
+    if (localVar?.length === userCards?.length) {
+      setRenderPreview(true);
+    }
+    return [...cardsInfo, ...localVar];
+  };
 
   const addCardsInfo = (cardsObj) => {
-    //console.log(cardsInfo?.length);
-    //console.log(cardsObj.id);
-    let obj = {};
-    setAaa([...aaa, cardsObj.id]);
-    obj[cardsObj.id] = cardsObj;
-    let temp = [...cardsInfo];
-    temp.push(obj);
-    setCardsInfo(temp);
-    //console.log(cardsInfo);
-  }
-
-  useEffect(() => { 
-    //console.log(aaa);
-    //debugger;
-  }, [aaa]);
+    setCardsInfo(cardsObj);
+  };
 
   useEffect(() => {
     if (!Utils.isObjectEmpty(userData)) {
@@ -68,30 +62,16 @@ const EmailSignature = () => {
       });
       setRenderPage(true);
     }
-  }, [userData]);
-
-  useEffect(() => { 
-    if (cardsInfo.length && userCards.length) {
-      //console.log(cardsInfo);
-      //console.log(userCards);
-      if (cardsInfo?.length !== 0 /*&& cardsInfo.length === userCards.length*/) {
-        setRenderPreview(true);
-        //debugger;
-      }
-    }
-  }, [cardsInfo]);
+  }, [userData, cardsInfo]);
 
   const handleChange = (updatedValue) => {
-    // console.log(updatedValue);
     setPageInfo({ ...pageInfo, selectedCardOption: updatedValue });
-    //console.log(pageInfo);
   };
 
   const handleCardSelection = (updatedValue) => {
-    //console.log(updatedValue);
     setPageInfo({ ...pageInfo, selectedCardId: updatedValue });
-    //console.log(pageInfo);
   };
+
   return (
     <div className="d-flex dbc-card-mini-items-wrapper">
       {renderPage && (
@@ -112,7 +92,11 @@ const EmailSignature = () => {
                   variant="outline-primary"
                   id={`tbg-radio-${id}`}
                 >
-                  <CardMiniItem cardId={id} role="button" addCardsInfo={addCardsInfo} />
+                  <CardMiniItem
+                    cardId={id}
+                    role="button"
+                    addCardsInfo={addCardsInfo}
+                  />
                 </ToggleButton>
               ))}
             </ToggleButtonGroup>
@@ -139,16 +123,13 @@ const EmailSignature = () => {
             </ToggleButtonGroup>
           </div>
           {renderPreview && (
-            <div className="dbs-email-signature-wrapper">
-              {pageInfo.selectedCardOption === "qrcode" && (
-                <QRCode cardId={pageInfo.selectedCardId} cardsInfo={cardsInfo} />
-              )}
-              {pageInfo.selectedCardOption === "text" && (
-                <Text cardId={pageInfo.selectedCardId} cardsInfo={cardsInfo} />
-              )}
-              {/* {pageInfo.selectedCardOption === "square" && (
-                <Square cardId={pageInfo.selectedCardId} cardsInfo={cardsInfo} />
-              )} */}
+            <div className="dbs-signature-item-wrapper d-flex">
+              <Signature
+                selectedCardOption={pageInfo.selectedCardOption}
+                cardId={pageInfo.selectedCardId}
+                cardsInfo={cardsInfo}
+                userData={userData}
+              />
             </div>
           )}
         </div>
