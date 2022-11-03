@@ -2,8 +2,6 @@ import React, { useState, useRef, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ContextComponent from "../../app.context";
 import AddItemImg from "../../../assets/img/add-card.png";
-import EditIcon from "../../../assets/img/Edit.png";
-import DeleteIcon from "../../../assets/img/Delete.png";
 import TempUpdate from "./tempUpdate";
 //import CardItem from "card.item";
 import CardItem from "./card.item";
@@ -29,11 +27,7 @@ const CardList = () => {
     <div className="dbc-body-cards-wrapper d-flex w-100">
       <div className="dbc-body-action-bar w-100">
         <div className="w-50 dbc-body-action-bar-title">
-          Add Digital Business Card
-        </div>
-        <div className="w-50 dbc-body-actions">
-          <div className="dbc-body-action"><img className="dbc-w-20"  src={EditIcon} alt="Edit-icon"></img>Edit</div>
-          <div className="dbc-body-action"><img className="dbc-w-20"  src={DeleteIcon} alt="Delete-icon"></img>Delete</div>
+          Digital Business Cards
         </div>
       </div>
 

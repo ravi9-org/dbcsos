@@ -26,7 +26,7 @@ const Text = (props) => {
   return (
     <div className="dbc-text-wrapper dbs-signature-item">
 <div className="dbc-qrcode-box row">        
-        <div className="w-100 dbc-signature-title col-sm-12">Ravi Kr Puppala</div>
+        <div className="w-100 dbc-signature-title col-sm-12">{userData.firstName} {userData.lastName}</div>
         <div className=" d-flex flex-row dbc-signature-template">
           <div className="dbc-qrcode-box-info-col">
             <div className="dbc-qrcode-box-logo">
@@ -34,7 +34,7 @@ const Text = (props) => {
               {/* <img src={cardInfo.logoImage} alt={cardInfo.templateName} /> */}
             </div>
             <div className="dbc-qrcode-box-personal-info">
-              <div className="dbc-qrcode-box-personal-name">
+              <div className="dbc-qrcode-box-personal-name d-none">
                 {userData.firstName} {userData.lastName}
               </div>
               <div className="dbc-qrcode-box-personal-desgination">

@@ -8,7 +8,7 @@ import AddCardItem from "./AddCardItem";
 
 const AddCard = ({ templateId = 1 }) => {
   const navigate = useNavigate();
-  let { userData, setUserData } = useContext(ContextComponent);
+  let { userData } = useContext(ContextComponent);
 
   let [templateData, setTemplateData] = useState({});
   let [newCardData, setNewCardData] = useState({});

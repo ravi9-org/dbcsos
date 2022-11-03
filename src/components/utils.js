@@ -269,6 +269,45 @@ const getCardDetails = (cardId) => {
   return myPromise;
 };
 
+const deleteCard = (cardId, cardsArray) => {
+  let dataCardId = parseInt(cardId, 10);
+  let updatedCardsArray = getUniqueSetOfArray(cardsArray);
+  const myPromise = new Promise((resolve, reject) => {
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+    if (token) {
+      let getUrl = PARAMS.API.USER_CARD + dataCardId;
+      axios
+        .delete(getUrl, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          updatedCardsArray.splice(1, updatedCardsArray.indexOf(dataCardId));
+          addOrRemoveCardFromUser(updatedCardsArray).then((res1) => {   
+            res["updatedCardsArray"] = updatedCardsArray;
+            resolve(res);
+          });
+        });
+    } else {
+      reject({
+        redirect: true,
+        message: "No token available till now...",
+      });
+    }
+  });
+
+  return myPromise;
+};
+
 const executeLogoutRESTAPI = () => {
   const alwaysClassback = (response, callbackFn) => {
     deleteSession();
@@ -352,7 +391,6 @@ const addOrRemoveCardFromUser = (userCardsArray) => {
   return axios.patch(url, formData);
 };
 
-
 const getUniqueSetOfArray = (arr) => {
   return [...new Set(arr)];
 };
@@ -363,6 +401,7 @@ const Utils = {
   getUserProfile,
   getUserId,
   getCardDetails,
+  deleteCard,
   getTemplateDetails,
   executeLoginRESTAPI,
   executeLogoutRESTAPI,

@@ -658,7 +658,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
     min-width: 400px;
     background: #fff;
     box-shadow: 0px 1px 6px #000;
-    min-height: 240px;
+    min-height: 192px;
 }
 
 .dbc-app .dbc-signature-title {
@@ -731,4 +731,16 @@ justify-content: space-between;
 
 .dbc-app .dbc-card-item-page2 {
   justify-content: space-between;
+}
+
+.dbc-app .dbc-body-action {
+  cursor: pointer;
+}
+
+.dbc-app .dbc-modal-dialog-alert .modal-body {
+  padding: 0 !important;
+}
+
+.dbc-app .dbc-modal-dialog-alert-body {
+  margin: 0 !important;
 }
