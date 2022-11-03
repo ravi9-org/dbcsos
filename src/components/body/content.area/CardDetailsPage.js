@@ -111,7 +111,7 @@ const CardDetailsPage = (props) => {
       {isReadyForRender && (
         <div className="dbs-add-card-wrapper d-flex flex-column">
           <div className="dbc-add-card-title">
-            Add Card
+            Card View
             <div className="d-none1 w-50 dbc-body-actions">
               <div className="dbc-body-action">
                 <img className="dbc-w-20" src={EditIcon} alt="Edit-icon"></img>
