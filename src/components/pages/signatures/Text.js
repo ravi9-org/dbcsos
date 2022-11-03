@@ -25,25 +25,28 @@ const Text = (props) => {
 
   return (
     <div className="dbc-text-wrapper dbs-signature-item">
-      <div className="dbc-text-box d-flex">
-        <div className="dbc-text-box-row-1">
-          <div className="dbc-text-box-personal-info">
-            <div className="dbc-text-box-personal-name">
-              {userData.firstName} {userData.lastName}
+<div className="dbc-qrcode-box row">        
+        <div className="w-100 dbc-signature-title col-sm-12">Ravi Kr Puppala</div>
+        <div className=" d-flex flex-row dbc-signature-template">
+          <div className="dbc-qrcode-box-info-col">
+            <div className="dbc-qrcode-box-logo">
+              {/* <img src={cardInfo.backgroundImage} alt={cardInfo.templateName} /> */}
+              {/* <img src={cardInfo.logoImage} alt={cardInfo.templateName} /> */}
             </div>
-            <div className="dbc-text-box-personal-desgination">
-              {userData.designation}
+            <div className="dbc-qrcode-box-personal-info">
+              <div className="dbc-qrcode-box-personal-name">
+                {userData.firstName} {userData.lastName}
+              </div>
+              <div className="dbc-qrcode-box-personal-desgination">
+                {userData.designation}
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="dbc-text-box-row-2">
-          <div className="dbc-text-box-contacts">
-            <div className="dbc-text-box-mobile">{mobile}</div>
-            <div className="dbc-text-box-email">{email}</div>
-          </div>
-          <div className="dbc-text-box-codes">
-            <div className="dbc-text-box-save-contact">
-              <Button variant="primary">SAVE CONTACT</Button>
+            <div className="dbc-qrcode-box-contacts">
+              <div className="dbc-qrcode-box-mobile">{mobile}</div>
+              <div className="dbc-qrcode-box-email">{email}</div>
+            </div>
+            <div className="dbc-qrcode-box-save-contact">
+                <Button variant="primary">SAVE CONTACT</Button>
             </div>
           </div>
         </div>

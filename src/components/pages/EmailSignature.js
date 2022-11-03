@@ -76,8 +76,10 @@ const EmailSignature = () => {
     <div className="d-flex dbc-card-mini-items-wrapper">
       {renderPage && (
         <div>
+          <div className="w-100 dbc-signature-title">Business class Email</div>
           <div className="d-flex">
             <ToggleButtonGroup
+              className="dbc-mini-card-list" 
               type="radio"
               name="cards"
               defaultValue={userCards[0]}

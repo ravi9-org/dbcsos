@@ -444,7 +444,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .dbc-app .dbc-card-title {
-  padding-bottom: 16px;
+  padding-bottom: 8px;
 }
 
 .dbc-app .dbc-card-field-wrapper>div {
@@ -590,11 +590,13 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbc-app .dbc-card-mini-items-wrapper {
   flex-direction: column;
+  width: 100%;
+  overflow-y: auto;
 }
 
 .dbc-app .dbc-card-mini-options-wrapper {
   justify-content: center;
-  padding: 30px;
+  padding: 8px;
 }
 
 .dbc-app .dbc-card-mini-options-wrapper Button {
@@ -623,30 +625,46 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   border: 0;
   box-shadow: none;
   transition: all 0.3s ease 0s;
+  margin: 16px;
+  padding: 0;
+  width: 210px;
+  height: 140px;
 }
+
 
 .dbc-app .btn-check+.btn.dbc-card-item-wrapper.dbc-card-mini-item-wrapper.btn-outline-primary:hover,
 .dbc-app .btn-check:checked+.btn.dbc-card-item-wrapper.dbc-card-mini-item-wrapper.btn-outline-primary {
-  box-shadow: 0px 8px 15px rgb(0, 0, 0, 0.6);
+  box-shadow: -2px 6px 14px rgb(0 0 0 / 60%);
 }
 
 .dbc-app .dbc-card-qr-code {
-  height: 70px;
+  height: 60px;
   float: right;
 }
 
 .dbc-app .dbs-signature-item-wrapper {
   justify-content: center;
-  padding: 30px;
+  padding: 16px;
+}
+
+.dbc-app .dbc-mini-card-list {
+  width: 100%;
+  overflow-x: auto;
 }
 
 .dbc-app .dbs-signature-item-wrapper .dbs-signature-item {
-  border: 1px solid #808080;
   border-radius: 10px;
-  padding: 20px 10px;
-  min-width: 400px;
+    padding: 20px 10px;
+    min-width: 400px;
+    background: #fff;
+    box-shadow: 0px 1px 6px #000;
+    min-height: 240px;
 }
 
+.dbc-app .dbc-signature-title {
+  font-weight: bold;
+  color: #2f4694;
+}
 
 .dbc-app .dbc-qrcode-bg,
 .dbc-app .dbc-qrcode-logo {
@@ -666,8 +684,12 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-repeat: no-repeat !important;
 }
 
+.dbc-app .dbc-signature-template {
+justify-content: space-between;
+}
+
 .dbc-app .dbc-qrcode-qrcode {
-  height: 90px;
+  height: 120px;
 }
 
 .dbc-app .dbc-ext-card-details-page {
