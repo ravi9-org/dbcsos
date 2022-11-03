@@ -6,24 +6,26 @@ import Field from "./Field";
 import Utils from "../../utils";
 import ContextComponent from "../../app.context";
 import QRCode from "./QRCode";
+import Email from "./Email";
 
 const CardItemWithActions = (props) => {
   let cardId = props.cardId;
 
-  const optionsArray = ["qrcode", "email"];
+  const [optionsArray, setOptionsArray] = useState(["qrcode", "email"]);
+  const [selectedOption, setSelectedOption] = useState("code");
 
-  const optionsObjects = {
-    "qrcode": {
+  const [optionsObjects, setOptionsObjects] = useState({
+    qrcode: {
       displayLabel: "Code",
       defaultSelection: true,
       value: 1,
     },
-    "email": {
+    email: {
       displayLabel: "Email",
       defaultSelection: false,
       value: 2,
     },
-  };
+  });
 
   let cardObj = props.cardData || {};
 
@@ -59,10 +61,10 @@ const CardItemWithActions = (props) => {
         data: cardObj,
       });
     }
-  }, []);
+  }, [userData, selectedOption]);
 
   const handleChange = (e) => {
-    debugger;
+    setSelectedOption(e);
   };
   return (
     <div
@@ -73,33 +75,37 @@ const CardItemWithActions = (props) => {
     >
       <div className="dbc-card-item-page2-send-card-label">Send Card</div>
 
-      <div className="d-flex dbc-card-mini-options-wrapper">
-        <ToggleButtonGroup
-          type="radio"
-          name="options"
-          variant="outline-warning"
-          defaultValue={optionsArray.length ? optionsArray[0] : 1}
-          onChange={handleChange}
-        >
-          {optionsArray.map((option, index) => (
+      {selectedOption === "code" && <QRCode cardData={cardData} />}
+      {selectedOption === "email" && <Email cardData={cardData} />}
+
+      <div className="dbc-card-item-page2-code-email-options">
+        <div className="d-flex dbc-card-mini-options-wrapper">
+          <ToggleButtonGroup
+            type="radio"
+            name="options"
+            variant="outline-warning"
+            defaultValue="code"
+            onChange={handleChange}
+          >
             <ToggleButton
-              key={index}
               variant="outline-primary"
-              className="dbc-mini-card-selection-btn"
-              id={`tbg-radio-options-${index + 1}`}
-              value={option}
+              className="dbc-mini-card-selection-btn1"
+              id={`tbg-radio-options-code`}
+              value="code"
             >
-              {/* ===:{optionsObjects[option].displayLabel}:--- */}
-              {/* ===:{optionsObjects[option]}:--- */}
-              ===:{option}:---
+              Code
             </ToggleButton>
-          ))}
-        </ToggleButtonGroup>
+            <ToggleButton
+              variant="outline-primary"
+              className="dbc-mini-card-selection-btn1"
+              id={`tbg-radio-options-email`}
+              value="email"
+            >
+              Email
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </div>
       </div>
-
-      <QRCode cardData={cardData} />
-
-      <div className="dbc-card-item-page2-code-email-options">Code | Email</div>
     </div>
   );
 };

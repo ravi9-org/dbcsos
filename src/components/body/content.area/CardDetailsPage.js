@@ -48,33 +48,29 @@ const CardDetailsPage = (props) => {
   return (
     <>
       {isReadyForRender && (
-        <div>
-          <form>
-            <div className="dbs-add-card-wrapper d-flex flex-column">
-              <div className="dbc-add-card-title">Add Card</div>
-              <div className="dbc-card-details-wrapper d-flex d-flex-column">
-                <CardItem
-                  cardId={cardid}
-                  cardData={cardData}
-                  applyActions={false}
-                />
-                <CardItemWithActions
-                  cardId={cardid}
-                  cardData={cardData}
-                  applyActions={false}
-                />
-              </div>
-              <div className="dbc-add-card-item-footer">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={navigateToCardListPage}
-                >
-                  Back
-                </button>
-              </div>
-            </div>
-          </form>
+        <div className="dbs-add-card-wrapper d-flex flex-column">
+          <div className="dbc-add-card-title">Add Card</div>
+          <div className="dbc-card-details-wrapper d-flex d-flex-column">
+            <CardItem
+              cardId={cardid}
+              cardData={cardData}
+              applyActions={false}
+            />
+            <CardItemWithActions
+              cardId={cardid}
+              cardData={cardData}
+              applyActions={false}
+            />
+          </div>
+          <div className="dbc-add-card-item-footer">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={navigateToCardListPage}
+            >
+              Back
+            </button>
+          </div>
         </div>
       )}
     </>
