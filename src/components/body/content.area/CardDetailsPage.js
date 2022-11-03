@@ -131,7 +131,7 @@ const CardDetailsPage = (props) => {
               </div>
             </div>
           </div>
-          <div className="dbc-card-details-wrapper d-flex d-flex-column">
+          <div className="dbc-card-details-wrapper dbc-cards-collection-wrapper d-flex d-flex-column">
             <CardItem
               cardId={cardid}
               cardData={cardData}
