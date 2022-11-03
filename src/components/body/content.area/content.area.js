@@ -11,6 +11,7 @@ import EmailSignature from "../../pages/EmailSignature";
 import Contacts from "../../pages/Contacts";
 import Settings from "../../pages/Settings";
 import AddCard from "./AddCard";
+import CardDetailsPage from "./CardDetailsPage";
 
 const ContentArea = () => {
   let [isAdmin, setIsAdmin] = useState(false);
@@ -49,6 +50,12 @@ const ContentArea = () => {
           path={Utils.APP_URLS.CARDS_PAGE}
           exact
           element={<CardList />}
+        ></Route>
+        
+        <Route
+          path={Utils.APP_URLS.CARD_DETAILS_PAGE}
+          exact
+          element={<CardDetailsPage />}
         ></Route>
         
         <Route

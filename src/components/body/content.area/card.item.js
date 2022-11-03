@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Field from "./Field";
 import Utils from "../../utils";
@@ -7,10 +8,15 @@ import ContextComponent from "../../app.context";
 const CardItem = (props) => {
   let cardId = props.cardId;
 
-  let [cardData, setCardData] = useState({});
-  let [fields, setFields] = useState([]);
-  let [fieldsData, setFieldsData] = useState([]);
-  let [fieldsSchema, setFieldsSchema] = useState({});
+  let cardObj = props.cardData || {};
+
+  let [cardData, setCardData] = useState(props.cardData || {});
+  let [fields, setFields] = useState(cardData?.fields || []);
+  let [fieldsData, setFieldsData] = useState(cardData?.fieldsData || []);
+  let [fieldsSchema, setFieldsSchema] = useState(cardData?.fieldsSchema || {});
+  let [applyActions, setApplyActions] = useState(props.applyActions || false);
+  
+  const navigate = useNavigate();
 
   let { userData } = useContext(ContextComponent);
 
@@ -29,12 +35,26 @@ const CardItem = (props) => {
   };
 
   useEffect(() => {
-    Utils.getCardDetails(cardId).then(success, fail);
+    if (Utils.isObjectEmpty(cardObj)) {
+      Utils.getCardDetails(cardId).then(success, fail);
+    } else {
+      success({
+        "data": cardObj
+      })
+    }
   }, []);
+
+  const navigateToCardDetailsPage = e => {
+    if (applyActions) {
+      e.preventDefault();
+      navigate("/cards/" + cardId, { state: {cardData: cardData} });
+    }
+  }
 
   return (
     <div
-      className="dbc-card-item-parent card-with-bg"
+      onClick={navigateToCardDetailsPage}
+      className={`dbc-card-item-parent card-with-bg ${applyActions ? "dbc-card-with-actions" : ""}`}
       style={{
         background: `url(${cardData.backgroundImage})`,
       }}

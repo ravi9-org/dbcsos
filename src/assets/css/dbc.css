@@ -685,3 +685,28 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   padding: 90px 0;
   height: 100%;
 }
+
+.dbc-app .dbc-card-with-actions {
+  cursor: pointer;
+}
+
+.dbc-app .dbc-card-with-actions.dbc-card-item-parent.card-with-bg:hover {
+  box-shadow: 0px 8px 15px rgb(0 0 0 / 60%) !important;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  box-shadow: none;
+  transition: all 0.3s ease 0s;
+}
+
+.dbc-app .dbc-card-details-wrapper > div {
+  margin-right: 42px !important;
+}
+
+.dbc-app .dbc-card-item-page2-qrcode-image img {
+  height: 100px;
+}
+
+.dbc-app .dbc-card-item-page2 {
+  justify-content: space-between;
+}

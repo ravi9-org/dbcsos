@@ -33,6 +33,7 @@ const APP_URLS = {
   TEMPLATES_PAGE: APP_URL_PREFIX + "/templates",
   CARDS_PAGE: APP_URL_PREFIX + "/cards",
   ADD_CARD_PAGE: APP_URL_PREFIX + "/cards/addcard",
+  CARD_DETAILS_PAGE: APP_URL_PREFIX + "/cards/:cardid",
   ADDRESS_PAGE: APP_URL_PREFIX + "/addresses",
   USERS_PAGE: APP_URL_PREFIX + "/users",
   EMAIL_SIGNAURE_PAGE: APP_URL_PREFIX + "/emailsignature",

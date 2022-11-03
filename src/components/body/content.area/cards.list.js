@@ -46,7 +46,7 @@ const CardList = () => {
         </div>
         {userCards.map((id, index) => (
           <div className="dbc-card-item-wrapper" key={index}>
-            <CardItem cardId={id} />
+            <CardItem cardId={id} applyActions={true} />
           </div>
         ))}
       </div>
