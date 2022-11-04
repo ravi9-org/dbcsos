@@ -49,7 +49,7 @@ const AddCardItem = ({ props }) => {
 
   return (
     <div
-      className="dbc-card-item-parent card-with-bg"
+      className="dbc-card-item-parent dbc-add-card-wrapper card-with-bg"
       style={{
         background: `url(${cardData.backgroundImage})`,
       }}

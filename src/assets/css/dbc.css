@@ -417,6 +417,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   margin-left: 10px;
 }
 
+.dbc-app .dbc-add-card-wrapper,
 .dbc-app .dbc-cards-collection-wrapper {
   border: 1px dotted #000;
   height: calc(100% - 32px);
