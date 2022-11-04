@@ -38,18 +38,30 @@ const AddCard = ({ templateId = 1 }) => {
   };
 
   let inputElementClassNames = "dbc-any-input-element";
+  let imageInputElementClassNames = "dbc-image-input-element";
 
   let [valueChanged, setValueChanged] = useState(false);
   const saveCard = (e) => {
     e.preventDefault();
     // console.log("TODO: saving card...");
     let dataValues = [];
+    let cardImageEle = document.getElementsByClassName(imageInputElementClassNames);
+    let cardImageValue = "";
     let inputElements = document.getElementsByClassName(inputElementClassNames);
 
     for (let ele of inputElements) {
-      dataValues.push(ele?.value || "");
+      let val = ele?.value || "";
+      console.log(val);
+      dataValues.push(val);
     }
-    setUpdatedValues(dataValues);
+    
+    for (let imgEle of cardImageEle) {
+      let imgVal = imgEle?.value || "";
+      console.log(imgVal);
+      cardImageValue = imgVal;
+    }
+    //return false;
+    setUpdatedValues(dataValues, cardImageValue);
     setValueChanged(true);
   };
 
@@ -88,6 +100,9 @@ const AddCard = ({ templateId = 1 }) => {
   };
 
   const submitForm = (info) => {
+    console.log(info);
+    debugger;
+    //return false;
     const success = (res) => {
       //console.log(res);
       let newId = res.data.id;

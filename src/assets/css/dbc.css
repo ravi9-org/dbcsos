@@ -795,3 +795,29 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   display: flex;
   flex-direction: column;
 }
+
+.dbc-app .dbc-card-upload-picture-file-input {
+  border: 1px solid red;
+  height: 100%;
+  width: 100px;
+  border-radius: 50%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.dbc-app .dbc-card-upload-picture.dbc-card-upload-picture-with-no-bg {
+  background-image: url("../img/Upload.png");
+  background-color: rgb(255, 255, 255, 0.5);
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: rotate(180deg);
+}
+
+.dbc-app .dbc-card-upload-picture.dbc-card-upload-picture-with-no-bg:hover {
+  background-color: rgb(255, 255, 255, 1);
+}
+
+.dbc-app .dbc-card-upload-picture-img {
+  height: 100px;
+  border-radius: 50%;
+}
