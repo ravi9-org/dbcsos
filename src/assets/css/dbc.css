@@ -844,6 +844,15 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   height: 100px;
   width: 100px;
   border-radius: 50%;
+  pointer-events: none;
+}
+
+.dbc-app .dbc-card-upload-picture-with-no-bg:hover {
+  cursor: pointer;
+}
+
+.dbc-app .dbc-card-upload-picture-with-no-bg:hover .dbc-card-upload-picture-card-image {
+  opacity: 0.3;
 }
 
 .dbc-app .dbc-card-upload-picture.dbc-card-upload-picture-with-no-bg:hover {
