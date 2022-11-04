@@ -25,7 +25,7 @@ const Logo = (props = {}) => {
         target="_blank"
         rel={"noreferrer"}
         className={classes}
-        key="dbslogofooterrightside"
+        key="logofooterrightside"
       >
         <div className="indi-logo"></div>
       </a>,

@@ -3,7 +3,7 @@ import LeftNavigation from "./left.navigation/LeftNavigation";
 import ContentArea from "./content.area/ContentArea";
 import Badges from "./badges/Badges";
 
-const DBCBody = () => {
+const Body = () => {
   return (
     <div className="indi-body-wrapper container ">
       <div className="indi-body-row h-100">      
@@ -23,4 +23,4 @@ const DBCBody = () => {
   );
 };
 
-export default DBCBody;
+export default Body;

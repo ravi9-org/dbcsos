@@ -3,7 +3,7 @@ import axios from "axios";
 /*
 const CTX = {
   PROTOCOL: "http://",
-  HOST: "dbc.hostname.com",
+  HOST: "app.hostname.com",
   PORT: ":80",
 };
 */
@@ -95,7 +95,7 @@ const STORAGE = LOCAL_STORAGE;
 const TTL = 1800000;
 const LONG_TTL = 180000000;
 
-const SESSION = "dbc_session";
+const SESSION = "indi_session";
 const TOKEN = "accessToken";
 const EMAIL = "email";
 const USERID = "id";
