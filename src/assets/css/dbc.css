@@ -463,7 +463,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   min-height: 100px;
   border: 1px solid #fff;
   border-radius: 50%;
-  margin-top: 32px;
+  margin-top: 40px;
   margin-bottom: 10px;
 }
 
@@ -595,11 +595,18 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .dbs-card-field-item input,
-.dbs-card-field-item input:focus-visible {
+.dbs-card-field-item textarea,
+.dbs-card-field-item input:focus-visible,
+.dbs-card-field-item textarea:focus-visible {
   border: 0;
   background: transparent;
   border-bottom: 1px solid darkgrey;
   color: #fff;
+}
+
+.dbc-email-form-page.dbs-card-field-item input,
+.dbc-email-form-page.dbs-card-field-item textarea {
+  margin-bottom: 8px;
 }
 
 .dbs-card-field-item input:read-only,
@@ -650,7 +657,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 
-
+.dbc-app .btn .btn-primary,
 .btn.dbc-mini-card-selection-btn {
   border-color: #234c8e;
   color: #234c8e;
@@ -658,9 +665,23 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   border-width: 2px;
 }
 
-.btn-check:checked+.btn.dbc-mini-card-selection-btn {
+.dbc-app .btn-check:checked+.btn,
+.dbc-app .btn.active,
+.dbc-app .btn.show,
+.dbc-app .btn:first-child:active,
+.dbc-app :not(.btn-check)+.btn:active,
+.dbc-app .btn-check:checked+.btn.dbc-mini-card-selection-btn {
   background-color: #234c8e;
   border-color: #234c8e;
+  color: #fff
+}
+
+.btn-group>.btn-group:not(:last-child)>.btn,
+.btn-group>.btn.dropdown-toggle-split:first-child,
+.btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+  border-color: #ffffff;
+  background-color: #ffffff;
+  color: #234c8e;
 }
 
 
@@ -820,4 +841,8 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .dbc-app .dbc-card-upload-picture-img {
   height: 100px;
   border-radius: 50%;
+}
+
+.dbc-app .dbc-ext-card-item-wrapper .dbc-card-upload-picture-img {
+  height: 150px;
 }

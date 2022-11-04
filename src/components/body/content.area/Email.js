@@ -6,7 +6,7 @@ const Email = () => {
     e.preventDefault();
   };
   return (
-    <div className="dbc-email-form-page">
+    <div className="dbc-email-form-page dbs-card-field-item input">
       <div>Email your Personal card to:</div>
       <form onSubmit={submitFormHandler}>
         <input
