@@ -27,7 +27,7 @@ const CardDetailsPage = (props) => {
 
   const navigate = useNavigate();
 
-  let { userData, setUserData, userCards, setLoadingState } =
+  let { userData, setUserData, setLoadingState } =
     useContext(ContextComponent);
 
   const success = (res) => {
@@ -58,34 +58,16 @@ const CardDetailsPage = (props) => {
     e.preventDefault();
     setShow(false);
     setLoadingState(true);
-    //Utils.deleteCard(cardid, userData.cards).then(deleteSuccess, deleteFail);
-    dummyDeleteSuccess();
+    Utils.deleteCard(cardid, userData.cards).then(deleteSuccess, deleteFail);
   };
 
   const deleteSuccess = (res) => {
-    console.log(res.updatedCardsArray);
     let tempUserData = { ...userData };
-    let tempUserCards = [...res.updatedCardsArray];
-    console.log(tempUserData);
-    console.log(tempUserCards);
-    tempUserCards = Utils.getUniqueSetOfArray(tempUserCards);
-    console.log(tempUserCards);
-    tempUserData.cards = [];
-    tempUserData.cards = [...tempUserCards];
-    setUserData({ ...tempUserData });
-    //setUserCards({...userData, cards: res.updatedCardsArray});
-
+    tempUserData.cards = res.updatedCardsArray;
+    setUserData(tempUserData);
     setShowAlert(true);
     setLoadingState(false);
     navigate("/cards");
-    return false;
-  };
-
-  const dummyDeleteSuccess = () => {
-    setShowAlert(true);
-    setLoadingState(false);
-    navigate("/cards");
-    return false;
   };
 
   const deleteFail = (err) => {
@@ -171,9 +153,6 @@ const CardDetailsPage = (props) => {
         className="indi-modal-dialog-alert"
         onHide={closeAlertHandler}
       >
-        {/* <Modal.Header closeButton>
-          <Modal.Title>Delete confirmation?</Modal.Title>
-        </Modal.Header> */}
         <Modal.Body>
           <Alert
             key="success"
@@ -185,14 +164,6 @@ const CardDetailsPage = (props) => {
             Successfully deleted!
           </Alert>
         </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            No
-          </Button>
-          <Button variant="primary" onClick={handleDelete}>
-            Yes
-          </Button>
-        </Modal.Footer> */}
       </Modal>
     </>
   );

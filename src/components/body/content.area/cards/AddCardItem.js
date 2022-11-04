@@ -79,11 +79,11 @@ const AddCardItem = ({ props }) => {
             <Field
               fieldProps={{
                 fieldType: field,
-                pageMode,
                 inputElementClassNames,
                 filedSchema: fieldsSchema[field],
                 fieldData: fieldsData[index],
               }}
+              pageMode={pageMode}
               key={index}
             />
           ))}

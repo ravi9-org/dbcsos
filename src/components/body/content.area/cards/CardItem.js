@@ -25,9 +25,6 @@ const CardItem = (props) => {
     setFields(res.data.fields);
     setFieldsData(res.data.fieldsData);
     setFieldsSchema(res.data.fieldsSchema);
-    let existingUserData = { ...userData };
-    existingUserData?.cards?.push(res.data.id);
-    return false;
   };
 
   const fail = (err) => {
@@ -81,16 +78,19 @@ const CardItem = (props) => {
       </div>
       <div className="indi-card-fields">
         <div className="indi-card-field-wrapper">
-          {fields?.map((field, index) => (
-            <Field
-              fieldProps={{
-                fieldType: field,
-                filedSchema: fieldsSchema[field],
-                fieldData: fieldsData[index],
-              }}
-              key={index}
-            />
-          ))}
+          {fields?.map(
+            (field, index) =>
+              (
+                <Field
+                  fieldProps={{
+                    fieldType: field,
+                    filedSchema: fieldsSchema[field],
+                    fieldData: fieldsData[index],
+                  }}
+                  key={index}
+                />
+              )
+          )}
         </div>
       </div>
     </div>

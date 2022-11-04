@@ -6,7 +6,8 @@ const Field = (props = {}) => {
   let fieldType = fieldProps.fieldType;
   let fieldSchema = fieldProps.filedSchema;
   let fieldData = fieldProps.fieldData;
-  let mode = fieldProps.pageMode;
+  let mode = props.pageMode;
+  
   let inputElementClassNames = fieldProps.inputElementClassNames;
 
   return (

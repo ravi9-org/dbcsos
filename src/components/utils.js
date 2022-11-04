@@ -21,7 +21,7 @@ const REST_API = {
   USER_PROFILE: REST_API_PREFIX + "/users/",
   CARDS: REST_API_PREFIX + "/cards",
   TEMPLATES: REST_API_PREFIX + "/templates",
-  USER_CARD: REST_API_PREFIX + "/usercards/",
+  USER_CARD: REST_API_PREFIX + "/usercards",
 };
 
 const APP_URL_PREFIX = "";
@@ -248,7 +248,7 @@ const getCardDetails = (cardId) => {
 
     let token = getToken();
     if (token) {
-      let getUrl = REST_API.USER_CARD + cardId;
+      let getUrl = REST_API.USER_CARD + "/" + cardId;
       axios
         .get(getUrl, {
           headers: {
@@ -269,9 +269,9 @@ const getCardDetails = (cardId) => {
   return myPromise;
 };
 
-const deleteCard = (cardId, cardsArray) => {
+const deleteCard = (cardId, userCardsArray) => {
   let dataCardId = parseInt(cardId, 10);
-  let updatedCardsArray = getUniqueSetOfArray(cardsArray);
+  let cardsArray = getUniqueSetOfArray(userCardsArray);
   const myPromise = new Promise((resolve, reject) => {
     let session = getSession();
     if (isObjectEmpty(session).length === 0) {
@@ -283,17 +283,17 @@ const deleteCard = (cardId, cardsArray) => {
 
     let token = getToken();
     if (token) {
-      let getUrl = REST_API.USER_CARD + dataCardId;
+      let deleteUrl = REST_API.USER_CARD + "/" + dataCardId;
       axios
-        .delete(getUrl, {
+        .delete(deleteUrl, {
           headers: {
             Authorization: `${token}`,
           },
         })
         .then((res) => {
-          updatedCardsArray.splice(1, updatedCardsArray.indexOf(dataCardId));
-          addOrRemoveCardFromUser(updatedCardsArray).then((res1) => {
-            res["updatedCardsArray"] = updatedCardsArray;
+          cardsArray = cardsArray.filter((card) => card !== dataCardId);
+          addOrRemoveCardFromUser(cardsArray).then((res1) => {
+            res["updatedCardsArray"] = cardsArray;
             resolve(res);
           });
         });

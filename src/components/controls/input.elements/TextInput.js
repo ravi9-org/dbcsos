@@ -19,7 +19,8 @@ const TextInput = (props) => {
       ref={inputEle}
       readOnly={isReadOnly}
       defaultValue={value}
-      placeholder={`Enter ${fieldName}`}
+      //placeholder={`Enter ${fieldName}`}
+      placeholder={`${fieldName}`}
       onChange={onChangeInput}
     ></input>
   );

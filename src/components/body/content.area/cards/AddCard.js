@@ -127,7 +127,7 @@ const AddCard = ({ templateId = 2 }) => {
               props={{
                 cardInitialData: templateData,
                 setNewCardData,
-                mode: "add",
+                pageMode: "add",
                 inputElementClassNames,
               }}
             />
