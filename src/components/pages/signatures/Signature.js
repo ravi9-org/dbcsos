@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Text from "./Text";
 import QRCode from "./QRCode";
 
-import Utils from "../../utils";
+import Utils from "../../Utils";
 
 const Signature = (props) => {
   let cardId = props.cardId;
@@ -31,7 +31,6 @@ const Signature = (props) => {
       };
       success(obj);
     }
-    //   }, [cardInfo]);
   }, []);
 
   return (

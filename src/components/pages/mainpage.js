@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import ContextComponent from "../app.context";
-import Login from "./login";
-import CardExternalDetailsPage from "../pages/cardexternaldetailspage";
-import Mask from "../controls/mask";
-import LandingPage from "./landingpage";
+import ContextComponent from "../AppContext";
+import Login from "./Login";
+import CardExternalDetailsPage from "./CardExternalDetailsPage";
+import Mask from "../controls/Mask";
+import LandingPage from "./LandingPage";
+import Utils from "../Utils";
 
 function MainPage() {
   let [loadingState, setLoadingState] = useState(false);
   let [canRedirectToLogin, setCanRedirectToLogin] = useState(false);
   let [canRedirectToLanding, setCanRedirectToLanding] = useState(false);
   let [userData, setUserData] = useState({});
-  let userCards = [];
 
   let navigate = useNavigate();
 
   useEffect(() => {
-    document.body.classList.add("dbc-app");
+    document.body.classList.add("indi-app");
 
     if (canRedirectToLogin) {
       setCanRedirectToLogin(false);
-      navigate("/login");
+      navigate(Utils.APP_URLS.LOGIN_PAGE);
     }
 
     if (canRedirectToLanding) {
       setCanRedirectToLanding(false);
-      navigate("/");
+      navigate(Utils.APP_URLS.LANDING_PAGE);
     }
   });
 
@@ -39,16 +39,19 @@ function MainPage() {
         canRedirectToLanding,
         setCanRedirectToLanding,
         userData,
-        setUserData,
-        userCards
+        setUserData
       }}
     >
       <Mask />
       <Routes>
-        <Route path="/login" exact element={<Login />}></Route>
+        <Route
+          path={Utils.APP_URLS.LOGIN_PAGE}
+          exact
+          element={<Login />}
+        ></Route>
 
         <Route
-          path="/cardextdetails/:cardid"
+          path={Utils.APP_URLS.CARD_EXTERNAL_PAGE}
           exact
           element={<CardExternalDetailsPage />}
         ></Route>

@@ -15,20 +15,19 @@ const CTX = {
 
 const REST_API_PREFIX = CTX.PROTOCOL + CTX.HOST + CTX.PORT;
 
-const PARAMS = {
-  API: {
-    LOGIN: REST_API_PREFIX + "/login",
-    LOGOUT: REST_API_PREFIX + "/logout",
-    USER_PROFILE: REST_API_PREFIX + "/users/",
-    CARDS: REST_API_PREFIX + "/cards",
-    TEMPLATES: REST_API_PREFIX + "/templates",
-    USER_CARD: REST_API_PREFIX + "/usercards/",
-  },
+const REST_API = {
+  LOGIN: REST_API_PREFIX + "/login",
+  LOGOUT: REST_API_PREFIX + "/logout",
+  USER_PROFILE: REST_API_PREFIX + "/users/",
+  CARDS: REST_API_PREFIX + "/cards",
+  TEMPLATES: REST_API_PREFIX + "/templates",
+  USER_CARD: REST_API_PREFIX + "/usercards/",
 };
 
 const APP_URL_PREFIX = "";
 
 const APP_URLS = {
+  LOGIN_PAGE: APP_URL_PREFIX + "login",
   LANDING_PAGE: APP_URL_PREFIX + "/",
   TEMPLATES_PAGE: APP_URL_PREFIX + "/templates",
   CARDS_PAGE: APP_URL_PREFIX + "/cards",
@@ -183,7 +182,7 @@ const getUserProfile = () => {
     let token = getToken();
     if (token) {
       let userId = getUserId(session);
-      let getUrl = PARAMS.API.USER_PROFILE + userId;
+      let getUrl = REST_API.USER_PROFILE + userId;
       axios
         .get(getUrl, {
           headers: {
@@ -216,7 +215,7 @@ const getTemplateDetails = (templateId) => {
 
     let token = getToken();
     if (token) {
-      let getUrl = PARAMS.API.TEMPLATES + "/" + templateId;
+      let getUrl = REST_API.TEMPLATES + "/" + templateId;
       axios
         .get(getUrl, {
           headers: {
@@ -249,7 +248,7 @@ const getCardDetails = (cardId) => {
 
     let token = getToken();
     if (token) {
-      let getUrl = PARAMS.API.USER_CARD + cardId;
+      let getUrl = REST_API.USER_CARD + cardId;
       axios
         .get(getUrl, {
           headers: {
@@ -284,7 +283,7 @@ const deleteCard = (cardId, cardsArray) => {
 
     let token = getToken();
     if (token) {
-      let getUrl = PARAMS.API.USER_CARD + dataCardId;
+      let getUrl = REST_API.USER_CARD + dataCardId;
       axios
         .delete(getUrl, {
           headers: {
@@ -293,7 +292,7 @@ const deleteCard = (cardId, cardsArray) => {
         })
         .then((res) => {
           updatedCardsArray.splice(1, updatedCardsArray.indexOf(dataCardId));
-          addOrRemoveCardFromUser(updatedCardsArray).then((res1) => {   
+          addOrRemoveCardFromUser(updatedCardsArray).then((res1) => {
             res["updatedCardsArray"] = updatedCardsArray;
             resolve(res);
           });
@@ -324,7 +323,7 @@ const executeLogoutRESTAPI = () => {
       email: getUserEmail(),
       password: getUserId(),
     };
-    let logoutUrl = PARAMS.API.LOGOUT;
+    let logoutUrl = REST_API.LOGOUT;
     let success = (response) => {
       alwaysClassback(response, resolve);
     };
@@ -352,7 +351,7 @@ const executeLoginRESTAPI = (params) => {
     //     "Content-type": "application/json",
     //   },
     // };
-    let loginUrl = PARAMS.API.LOGIN;
+    let loginUrl = REST_API.LOGIN;
 
     let success = (res) => {
       if (res.status === STATUS_OK) {
@@ -380,7 +379,7 @@ const executeLoginRESTAPI = (params) => {
 const executeCardAddRESTAPI = (cardData) => {
   let formData = { ...cardData };
   delete formData.id;
-  let url = PARAMS.API.USER_CARD;
+  let url = REST_API.USER_CARD;
 
   return axios.post(url, formData);
 };
@@ -388,7 +387,7 @@ const executeCardAddRESTAPI = (cardData) => {
 const addOrRemoveCardFromUser = (userCardsArray) => {
   let formData = { cards: userCardsArray };
   delete formData.id;
-  let url = PARAMS.API.USER_PROFILE + getUserId();
+  let url = REST_API.USER_PROFILE + getUserId();
   return axios.patch(url, formData);
 };
 
@@ -397,7 +396,10 @@ const getUniqueSetOfArray = (arr) => {
 };
 
 const Utils = {
-  PARAMS,
+  REST_API,
+  APP_URLS,
+  NAV_ITEMS_KEYS,
+  NAV_ITEMS_VALUES,
   userSessionExists,
   getUserProfile,
   getUserId,
@@ -412,9 +414,6 @@ const Utils = {
   createSession,
   deleteSession,
   isObjectEmpty,
-  APP_URLS,
-  NAV_ITEMS_KEYS,
-  NAV_ITEMS_VALUES,
 };
 
 export default Utils;

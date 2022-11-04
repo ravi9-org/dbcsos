@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import Utils from "../../utils";
-import ContextComponent from "../../app.context";
+import Utils from "../../Utils";
+import ContextComponent from "../../AppContext";
 
 const CardMiniItem = (props) => {
   let cardId = props.cardId;
@@ -26,21 +26,21 @@ const CardMiniItem = (props) => {
 
   return (
     <div
-      className="dbc-card-item-parent card-with-bg"
+      className="indi-card-item-parent card-with-bg"
       style={{
         background: `url(${cardData.backgroundImage})`,
       }}
     >
-      <div className="d-none1 dbc-card-company-logo-wrapper">
+      <div className="d-none1 indi-card-company-logo-wrapper">
         <img src={cardData.logoImage} alt="logoiamge" />
       </div>
-      <div className="dbc-card-upload-picture d-none"></div>
-      <div className="dbc-info-wrapper">
-        <div className="dbc-card-name fw-bold">
+      <div className="indi-card-upload-picture d-none"></div>
+      <div className="indi-info-wrapper">
+        <div className="indi-card-name fw-bold">
           {userData.firstName} {userData.lastName}
         </div>
-        <div className="dbc-card-title">{userData.designation}</div>
-        <div className="dbc-card-qr-code d-flex">
+        <div className="indi-card-title">{userData.designation}</div>
+        <div className="indi-card-qr-code d-flex">
           <img src={cardData.qrcode} alt="qrcode" />
         </div>
       </div>

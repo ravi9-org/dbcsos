@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 
-import Utils from "../../utils";
+import Utils from "../../Utils";
 
 const TemplateList = () => {
 
@@ -141,7 +141,7 @@ const TemplateList = () => {
 
   return (
     <>
-      <div className="dbc-tile">
+      <div className="indi-tile">
         <form>
           <input type="file" name="logo" ref={logoRef} onChange={ logoChange }/>
           <input type="file" name="bg" ref={bgRef} onChange={bgChange} />
@@ -160,11 +160,11 @@ const TemplateList = () => {
       <br />
       <br />
       <br />
-      <div className="dbc-tile">
+      <div className="indi-tile">
         This is templates list pageThis is templates list pageThis is templates
         list pageThis is templates list pageThis is templates list page
       </div>
-      <div className="dbc-tile">
+      <div className="indi-tile">
         This is templates list pageThis is templates list pageThis is templates
         list page
       </div>
