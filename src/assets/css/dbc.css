@@ -419,7 +419,7 @@ body.dbc-app:not(.dbc-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .dbc-app .dbc-add-card-wrapper,
 .dbc-app .dbc-cards-collection-wrapper {
-  border: 1px dotted #000;
+  /* border: 1px dotted #000; */
   height: calc(100% - 32px);
   padding: 29px 0;
   overflow-x: auto;
