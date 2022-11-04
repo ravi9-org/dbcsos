@@ -65,6 +65,7 @@ const AddCardItem = ({ props }) => {
           ref={inputCardImage}
           onChange={inputFileHandler}
         />
+        <img src={cardImage} className="dbc-card-upload-picture-card-image" alt="card image" />
         <input type="hidden" className="dbc-image-input-element" value={cardImage} />
       </div>
       <div className="dbc-info-wrapper">

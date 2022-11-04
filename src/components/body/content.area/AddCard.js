@@ -6,7 +6,7 @@ import ContextComponent from "../../app.context";
 import Utils from "../../utils";
 import AddCardItem from "./AddCardItem";
 
-const AddCard = ({ templateId = 1 }) => {
+const AddCard = ({ templateId = 2 }) => {
   const navigate = useNavigate();
   let { userData } = useContext(ContextComponent);
 
@@ -14,6 +14,7 @@ const AddCard = ({ templateId = 1 }) => {
   let [newCardData, setNewCardData] = useState({});
   let [updatedFields, setUpdatedFields] = useState([]);
   let [updatedValues, setUpdatedValues] = useState([]);
+  let [cardImageValue, setCardImageValue] = useState([]);
 
   let [isDataAvailable, setIsDataAvailable] = useState(false);
   const success = (res) => {
@@ -58,7 +59,7 @@ const AddCard = ({ templateId = 1 }) => {
     for (let imgEle of cardImageEle) {
       let imgVal = imgEle?.value || "";
       console.log(imgVal);
-      cardImageValue = imgVal;
+      setCardImageValue(imgVal);
     }
     //return false;
     setUpdatedValues(dataValues, cardImageValue);
@@ -101,6 +102,7 @@ const AddCard = ({ templateId = 1 }) => {
 
   const submitForm = (info) => {
     console.log(info);
+    info.cardImage = cardImageValue;
     debugger;
     //return false;
     const success = (res) => {
@@ -142,6 +144,7 @@ const AddCard = ({ templateId = 1 }) => {
       templateInfo.fieldsData = updatedValues;
       templateInfo.fields = updatedFields;
       templateInfo.userId = Utils.getUserId();
+      templateInfo.cardImage = Utils.getUserId();
       // console.log(templateInfo);
       submitForm(templateInfo);
     }
