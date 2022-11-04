@@ -80,7 +80,7 @@ const CardItem = (props) => {
         <div className="indi-card-field-wrapper">
           {fields?.map(
             (field, index) =>
-              (
+              (!!fieldsData[index] &&
                 <Field
                   fieldProps={{
                     fieldType: field,

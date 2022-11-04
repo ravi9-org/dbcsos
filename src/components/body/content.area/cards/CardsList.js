@@ -14,7 +14,7 @@ const CardsList = () => {
 
   useEffect(() => {
     if (userData?.cards) {
-      setUserCards(userData.cards);
+      setUserCards(Utils.getUniqueSetOfArray(userData.cards));
     }
   }, [userData]);
 

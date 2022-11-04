@@ -11,6 +11,7 @@ import EmailSignature from "../../pages/signatures/EmailSignature";
 import Contacts from "../../pages/Contacts";
 import Settings from "../../pages/Settings";
 import AddCard from "./cards/AddCard";
+import EditCard from "./cards/EditCard";
 import CardDetailsPage from "./cards/CardDetailsPage";
 
 const ContentArea = () => {
@@ -61,6 +62,12 @@ const ContentArea = () => {
           path={Utils.APP_URLS.ADD_CARD_PAGE}
           exact
           element={<AddCard />}
+        ></Route>
+
+        <Route
+          path={Utils.APP_URLS.EDIT_CARD_PAGE}
+          exact
+          element={<EditCard />}
         ></Route>
 
         <Route

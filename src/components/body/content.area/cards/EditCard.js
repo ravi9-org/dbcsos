@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router";
+import { useParams, useNavigate } from "react-router";
 
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
-import AddCardItem from "./AddEditCardItem";
+import EditCardItem from "./AddEditCardItem";
 
-const AddCard = ({ templateId = 2 }) => {
+const EditCard = () => {
+  const { cardid } = useParams();
+
   const navigate = useNavigate();
-  let { userData } = useContext(ContextComponent);
 
   let [templateData, setTemplateData] = useState({});
   let [newCardData, setNewCardData] = useState({});
@@ -18,15 +19,15 @@ const AddCard = ({ templateId = 2 }) => {
   let [isDataAvailable, setIsDataAvailable] = useState(false);
   const success = (res) => {
     setTemplateData(res.data);
-    setIsDataAvailable(true);
     setUpdatedFields(res.data.fields);
     setUpdatedValues(res.data.fieldsData);
+    setIsDataAvailable(true);
   };
   const fail = (err) => {
     err?.message?.length && console.log(err);
   };
   useEffect(() => {
-    Utils.getTemplateDetails(templateId).then(success, fail);
+    Utils.getCardDetails(cardid).then(success, fail);
   }, [isDataAvailable]);
 
   const goBack = (e) => {
@@ -37,7 +38,7 @@ const AddCard = ({ templateId = 2 }) => {
   let imageInputElementClassNames = "indi-image-input-element";
 
   let [valueChanged, setValueChanged] = useState(false);
-  const saveCard = (e) => {
+  const updateCard = (e) => {
     e.preventDefault();
     let dataValues = [];
     let cardImageEle = document.getElementsByClassName(
@@ -59,40 +60,21 @@ const AddCard = ({ templateId = 2 }) => {
     setValueChanged(true);
   };
 
-  const updateUserInfo = (newCardId = 2) => {
-    const success = (res) => {
-      goBack();
-    };
-    const fail = (err) => {
-      console.log(err);
-    };
-
-    try {
-      let userCardsArray = [...userData?.cards];
-      userCardsArray.push(newCardId);
-      userCardsArray = [...new Set(userCardsArray)];
-
-      let tempUserData = userData;
-
-      tempUserData.cards = userCardsArray;
-
-      Utils.addOrRemoveCardFromUser(userCardsArray).then(success, fail);
-    } catch (e) {
-      console.log(e);
-    }
+  const navigateBackToCardsListPage = () => {
+    navigate(Utils.APP_URLS.CARDS_PAGE);
   };
 
   const submitForm = (info) => {
     info.cardImage = cardImageValue;
     const success = (res) => {
-      updateUserInfo(res.data.id);
+      navigateBackToCardsListPage();
     };
     const fail = (err) => {
       console.log(err);
     };
 
     try {
-      Utils.executeCardAddRESTAPI(info).then(success, fail);
+      Utils.executeCardEditRESTAPI(info, cardid).then(success, fail);
     } catch (e) {
       console.log(e);
     }
@@ -103,7 +85,7 @@ const AddCard = ({ templateId = 2 }) => {
       let templateInfo = templateData;
       templateInfo.fieldsData = updatedValues;
       templateInfo.fields = updatedFields;
-      templateInfo.userId = Utils.getUserId();
+      templateInfo.userId = cardid;
       templateInfo.cardImage = Utils.getUserId();
       submitForm(templateInfo);
     }
@@ -113,14 +95,14 @@ const AddCard = ({ templateId = 2 }) => {
     <>
       <form>
         <div className="indi-add-card-wrapper d-flex flex-column">
-          <div className="indi-add-card-title">Add Card</div>
+          <div className="indi-add-card-title">Edit Card</div>
           {isDataAvailable && (
-            <AddCardItem
+            <EditCardItem
               className="indi-add-card-wrapper"
               props={{
                 cardInitialData: templateData,
                 setNewCardData,
-                pageMode: "add",
+                pageMode: "edit",
                 inputElementClassNames,
               }}
             />
@@ -132,9 +114,9 @@ const AddCard = ({ templateId = 2 }) => {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={saveCard}
+              onClick={updateCard}
             >
-              Save
+              Update
             </button>
           </div>
         </div>
@@ -143,4 +125,4 @@ const AddCard = ({ templateId = 2 }) => {
   );
 };
 
-export default AddCard;
+export default EditCard;

@@ -32,6 +32,7 @@ const APP_URLS = {
   TEMPLATES_PAGE: APP_URL_PREFIX + "/templates",
   CARDS_PAGE: APP_URL_PREFIX + "/cards",
   ADD_CARD_PAGE: APP_URL_PREFIX + "/cards/addcard",
+  EDIT_CARD_PAGE: APP_URL_PREFIX + "/cards/editcard/:cardid",
   CARD_DETAILS_PAGE: APP_URL_PREFIX + "/cards/:cardid",
   CARD_EXTERNAL_PAGE: APP_URL_PREFIX + "/cardextdetails/:cardid",
   ADDRESS_PAGE: APP_URL_PREFIX + "/addresses",
@@ -384,6 +385,14 @@ const executeCardAddRESTAPI = (cardData) => {
   return axios.post(url, formData);
 };
 
+const executeCardEditRESTAPI = (cardData, cardId) => {
+  let formData = { ...cardData };
+  delete formData.id;
+  let url = REST_API.USER_CARD + "/" + cardId;
+
+  return axios.patch(url, formData);
+};
+
 const addOrRemoveCardFromUser = (userCardsArray) => {
   let formData = { cards: userCardsArray };
   delete formData.id;
@@ -409,6 +418,7 @@ const Utils = {
   executeLoginRESTAPI,
   executeLogoutRESTAPI,
   executeCardAddRESTAPI,
+  executeCardEditRESTAPI,
   addOrRemoveCardFromUser,
   getUniqueSetOfArray,
   createSession,

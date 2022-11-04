@@ -67,7 +67,12 @@ const CardDetailsPage = (props) => {
     setUserData(tempUserData);
     setShowAlert(true);
     setLoadingState(false);
-    navigate("/cards");
+    navigate(Utils.APP_URLS.CARDS_PAGE);
+  };
+
+  const navigateToEditPage = (e) => { 
+    e.preventDefault();
+    navigate(Utils.APP_URLS.EDIT_CARD_PAGE.replace(":cardid", cardid));
   };
 
   const deleteFail = (err) => {
@@ -89,7 +94,9 @@ const CardDetailsPage = (props) => {
           <div className="indi-add-card-title">
             Card View
             <div className="d-none1 w-50 indi-body-actions">
-              <div className="indi-body-action">
+              <div className="indi-body-action"
+                role="button"
+              onClick={navigateToEditPage}>
                 <img className="indi-w-20" src={EditIcon} alt="Edit-icon"></img>
                 Edit
               </div>
