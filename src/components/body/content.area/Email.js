@@ -9,10 +9,14 @@ const Email = () => {
     <div className="dbc-email-form-page">
       <div>Email your Personal card to:</div>
       <form onSubmit={submitFormHandler}>
-        <input type="text" placeholder="Name" />
+        <input
+          type="text"
+          className="dbc-add-card-input-field"
+          placeholder="Name"
+        />
         <input type="text" placeholder="Email" />
-              <textarea placeholder="Message"></textarea>
-              <Button>SEND</Button>
+        <textarea placeholder="Message"></textarea>
+        <Button>SEND</Button>
       </form>
     </div>
   );

@@ -75,8 +75,8 @@ const CardItemWithActions = (props) => {
     >
       <div className="dbc-card-item-page2-send-card-label">Send Card</div>
 
-      {selectedOption === "code" && <QRCode cardData={cardData} />}
-      {selectedOption === "email" && <Email cardData={cardData} />}
+      {selectedOption === "code" && <QRCode cardData={cardData} cardId={cardId} />}
+      {selectedOption === "email" && <Email cardData={cardData} cardId={cardId} />}
 
       <div className="dbc-card-item-page2-code-email-options">
         <div className="d-flex dbc-card-mini-options-wrapper">
