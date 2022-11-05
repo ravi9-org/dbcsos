@@ -924,9 +924,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-crop-dialog-modal-img-wrapper {
   background-color: #2f4696;
-    padding: 20px;
-    height: 240px;
-    border-radius: 5px;
+  padding: 20px;
+  height: 240px;
+  border-radius: 5px;
 }
 
 .indi-app .indi-crop-card-info-btn {
@@ -960,6 +960,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-add-card-page-badge-ribbon-wrapper {
   width: calc(100% - 150px);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 15px 0;
+  border: 1px dotted grey;
 }
 
 .indi-app .indi-add-card-page-footer-btn-wrapper {
