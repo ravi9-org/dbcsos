@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { Button, Modal, Alert } from "react-bootstrap";
+import { Button, Modal, Alert, OverlayTrigger, Popover } from "react-bootstrap";
+
 import { Cropper } from "react-cropper";
 
 import ContextComponent from "../../../AppContext";
@@ -17,7 +18,8 @@ const AddCardItem = ({ props }) => {
 
   const cropperRef = useRef(null);
 
-  const onCropMove = (e) => { // TODO: remove this
+  const onCropMove = (e) => {
+    // TODO: remove this
     const cropper = cropperRef.current.cropper;
     const { width, height } = cropper.getCroppedCanvas();
   };
@@ -26,7 +28,9 @@ const AddCardItem = ({ props }) => {
   let [fields, setFields] = useState(cardInitialData.fields || []);
   let [fieldsData, setFieldsData] = useState(cardInitialData.fieldsData || {});
   let [cardImage, setCardImage] = useState(cardInitialData?.cardImage || "");
-  let [croppedImage, setCroppedImage] = useState(cardInitialData?.croppedImage || cardImage || "");
+  let [croppedImage, setCroppedImage] = useState(
+    cardInitialData?.croppedImage || cardImage || ""
+  );
 
   const [showModal, setShowModal] = useState(false);
   const [cardImageOnModal, setCardImageOnModal] = useState(cardImage);
@@ -69,6 +73,19 @@ const AddCardItem = ({ props }) => {
     setCroppedImage(dataUrl);
     croppedInputCardImage.current.value = dataUrl;
   };
+
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Body>
+        <div>Please upload image in this format:</div>
+        <div>Type: JPEG, PNG, WebP, GID, AVIF, TIFF and SVG</div>
+        <div>Quality setting: 80</div>
+        <div>Size: 2048 X 2048 pixels</div>
+        <div>Colorspace: RGB</div>
+        <div>Max file size: 4 MB</div>
+      </Popover.Body>
+    </Popover>
+  );
 
   return (
     <div
@@ -135,17 +152,16 @@ const AddCardItem = ({ props }) => {
         <Modal.Body>
           <div>
             <div>
-              <div>
+              <div className="indi-crop-dialog-modal-img-wrapper">
                 <img
                   src={cardImageOnModal}
                   className="d-none indi-card-upload-picture-card-image-on-modal"
                   alt="card pic"
                 />
                 <div
-                  className="box d-none1"
+                  className="box d-none"
                   style={{ width: "50%", float: "right" }}
                 >
-                  <h1>Preview</h1>
                   <div
                     className="img-preview"
                     style={{
@@ -178,22 +194,29 @@ const AddCardItem = ({ props }) => {
                   }}
                   guides={true}
                 />
+                <div>i</div>
 
-                {/* <img style={{ width: "100%" }} src={cardImageOnModal} alt="cropped" /> */}
+                <OverlayTrigger
+                  trigger="hover"
+                  placement="bottom-start"
+                  overlay={popover}
+                >
+                  <div className="indi-crop-card-info-btn" role="button">
+                    i
+                  </div>
+                </OverlayTrigger>
               </div>
-              <div>info</div>
             </div>
-            <div>resize</div>
+          </div>
+          <div className="indi-modal-card-crop-btn-wrapper">
+            <Button variant="primary" onClick={handleDoCrop}>
+              Save
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Cancel
+            </Button>
           </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleDoCrop}>
-            Save
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Cancel
-          </Button>
-        </Modal.Footer>
       </Modal>
     </div>
   );

@@ -274,8 +274,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-content-area-wrapper .indi-add-card-wrapper .indi-add-card-item-footer>button.btn {
   float: right;
   margin: 8px;
-  background-color: #010fb8;
-  border: 1px solid #010fb8;
+  background-color: #232862;
+  border: 1px solid #232862;
 }
 
 .indi-app .indi-content-area-wrapper form {
@@ -878,37 +878,81 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 
 
-.indi-app .cropper-crop-box, .cropper-view-box {
+.indi-app .cropper-crop-box,
+.cropper-view-box {
   border-radius: 50%;
 }
+
 .indi-app .cropper-view-box {
   box-shadow: 0 0 0 1px #39f;
   outline: 0;
 }
+
 .indi-app .cropper-face {
-background-color:inherit !important;
+  background-color: inherit !important;
 }
 
-.indi-app .cropper-dashed, .cropper-line {
-display:none !important;
+.indi-app .cropper-dashed,
+.cropper-line {
+  display: none !important;
 }
+
 .indi-app .cropper-view-box {
-outline:inherit !important;
+  outline: inherit !important;
 }
 
 .indi-app .cropper-point.point-se {
-top: calc(85% + 1px);
-right: 14%;
+  top: calc(85% + 1px);
+  right: 14%;
 }
+
 .indi-app .cropper-point.point-sw {
-top: calc(85% + 1px);
-left: 14%;
+  top: calc(85% + 1px);
+  left: 14%;
 }
+
 .indi-app .cropper-point.point-nw {
-top: calc(15% - 5px);
-left: 14%;
+  top: calc(15% - 5px);
+  left: 14%;
 }
+
 .indi-app .cropper-point.point-ne {
-top: calc(15% - 5px);
-right: 14%;
+  top: calc(15% - 5px);
+  right: 14%;
+}
+
+.indi-app .indi-crop-dialog-modal-img-wrapper {
+  background-color: #2f4696;
+    padding: 20px;
+    height: 240px;
+    border-radius: 5px;
+}
+
+.indi-app .indi-crop-card-info-btn {
+  height: 28px;
+  width: 28px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  font-style: italic;
+  color: #fff;
+  padding: 0px 0 0 10px;
+  font-weight: 700;
+}
+
+.indi-app .popover .popover-arrow {
+  display: none !important;
+}
+
+.indi-app .indi-modal-card-crop-btn-wrapper {
+  padding: 10px 0;
+}
+
+.indi-app .indi-modal-card-crop-btn-wrapper Button {
+  margin-right: 5px;
+  background-color: #232862;
+}
+
+.indi-app .cropper-modal {
+  opacity: 1;
+  background-color: transparent;
 }
