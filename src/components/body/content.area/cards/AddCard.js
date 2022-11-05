@@ -1,55 +1,61 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Router, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
-import AddCardContextComponent from "./AddCardContextComponent";
-import ContextComponent from "../../app.context";
-import Utils from "../../utils";
-import AddCardItem from "./AddCardItem";
+import ContextComponent from "../../../AppContext";
+import Utils from "../../../Utils";
+import AddCardItem from "./AddEditCardItem";
 
-const AddCard = ({ templateId = 1 }) => {
+const AddCard = ({ templateId = 2 }) => {
   const navigate = useNavigate();
-  let { userData, setUserData } = useContext(ContextComponent);
+  let { userData } = useContext(ContextComponent);
 
   let [templateData, setTemplateData] = useState({});
   let [newCardData, setNewCardData] = useState({});
   let [updatedFields, setUpdatedFields] = useState([]);
   let [updatedValues, setUpdatedValues] = useState([]);
+  let [cardImageValue, setCardImageValue] = useState([]);
 
   let [isDataAvailable, setIsDataAvailable] = useState(false);
   const success = (res) => {
-    //console.log(res.data);
     setTemplateData(res.data);
     setIsDataAvailable(true);
     setUpdatedFields(res.data.fields);
     setUpdatedValues(res.data.fieldsData);
-    //debugger;
   };
   const fail = (err) => {
     err?.message?.length && console.log(err);
-    //debugger;
   };
-  //console.log(templateId);
   useEffect(() => {
     Utils.getTemplateDetails(templateId).then(success, fail);
   }, [isDataAvailable]);
 
   const goBack = (e) => {
-    navigate("/cards");
+    navigate(Utils.APP_URLS.CARDS_PAGE);
   };
 
-  let inputElementClassNames = "dbc-any-input-element";
+  let inputElementClassNames = "indi-any-input-element";
+  let imageInputElementClassNames = "indi-image-input-element";
 
   let [valueChanged, setValueChanged] = useState(false);
   const saveCard = (e) => {
     e.preventDefault();
-    // console.log("TODO: saving card...");
     let dataValues = [];
+    let cardImageEle = document.getElementsByClassName(
+      imageInputElementClassNames
+    );
+    let cardImageValue = "";
     let inputElements = document.getElementsByClassName(inputElementClassNames);
 
     for (let ele of inputElements) {
-      dataValues.push(ele?.value || "");
+      let val = ele?.value || "";
+      dataValues.push(val);
     }
-    setUpdatedValues(dataValues);
+
+    for (let imgEle of cardImageEle) {
+      let imgVal = imgEle?.value || "";
+      setCardImageValue(imgVal);
+    }
+    setUpdatedValues(dataValues, cardImageValue);
     setValueChanged(true);
   };
 
@@ -59,20 +65,10 @@ const AddCard = ({ templateId = 1 }) => {
     };
     const fail = (err) => {
       console.log(err);
-      //debugger;
-    };
-    const callback = (response) => {
-      if (response.status === 200) {
-        success(response);
-      } else {
-        fail(response);
-      }
     };
 
     try {
       let userCardsArray = [...userData?.cards];
-      //console.log(userCardsArray);
-      //debugger;
       userCardsArray.push(newCardId);
       userCardsArray = [...new Set(userCardsArray)];
 
@@ -83,84 +79,67 @@ const AddCard = ({ templateId = 1 }) => {
       Utils.addOrRemoveCardFromUser(userCardsArray).then(success, fail);
     } catch (e) {
       console.log(e);
-      //debugger;
     }
   };
 
   const submitForm = (info) => {
+    info.cardImage = cardImageValue;
     const success = (res) => {
-      //console.log(res);
-      let newId = res.data.id;
-      // console.log(newId);
-      // debugger;
       updateUserInfo(res.data.id);
-      // execute user profile and update cards array...
-      //debugger;
     };
     const fail = (err) => {
       console.log(err);
-      //debugger;
-    };
-    const callback = (response) => {
-      if (response.status === 200) {
-        success(response);
-      } else {
-        fail(response);
-      }
     };
 
     try {
       Utils.executeCardAddRESTAPI(info).then(success, fail);
     } catch (e) {
       console.log(e);
-      //debugger;
     }
   };
 
   useEffect(() => {
     if (valueChanged) {
-      // console.log(updatedValues);
-      // validate and submit the form...
       let templateInfo = templateData;
-      // console.log(templateInfo);
-      // console.log(updatedFields);
       templateInfo.fieldsData = updatedValues;
       templateInfo.fields = updatedFields;
       templateInfo.userId = Utils.getUserId();
-      // console.log(templateInfo);
+      templateInfo.cardImage = Utils.getUserId();
       submitForm(templateInfo);
     }
   }, [updatedValues]);
 
   return (
-    <AddCardContextComponent.Provider
-      value={{
-        templateData,
-        updatedValues,
-        updatedFields,
-      }}
-    >
+    <>
       <form>
-        <div className="dbs-add-card-wrapper d-flex flex-column">
-          <div className="dbc-add-card-title">Add Card</div>
+        <div className="indi-add-card-wrapper d-flex flex-column">
+          <div className="indi-add-card-title">Add Card</div>
           {isDataAvailable && (
             <AddCardItem
-              className="dbc-add-card-wrapper"
+              className="indi-add-card-wrapper"
               props={{
                 cardInitialData: templateData,
                 setNewCardData,
-                mode: "add",
+                pageMode: "add",
                 inputElementClassNames,
               }}
             />
           )}
-          <div className="dbc-add-card-item-footer">
-            <button type="button" class="btn btn-primary" onClick={goBack}>Back</button>
-            <button type="button" class="btn btn-primary" onClick={saveCard}>Save</button>
+          <div className="indi-add-card-item-footer">
+            <button type="button" className="btn btn-primary" onClick={goBack}>
+              Back
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={saveCard}
+            >
+              Save
+            </button>
           </div>
         </div>
       </form>
-    </AddCardContextComponent.Provider>
+    </>
   );
 };
 

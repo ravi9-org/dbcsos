@@ -1,14 +1,14 @@
 import React from "react";
-import DBCHeader from "../header/dbc.header";
-import DBCBody from "../body/dbc.body";
-import DBCFooter from "../footer/dbc.footer";
+import Header from "../header/Header";
+import Body from "../body/Body";
+import Footer from "../footer/Footer";
 
 const LandingPage = () => {
   return (
     <>
-      <DBCHeader />
-      <DBCBody />
-      <DBCFooter />
+      <Header />
+      <Body />
+      <Footer />
     </>
   );
 };

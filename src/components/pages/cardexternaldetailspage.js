@@ -1,9 +1,19 @@
-import React from 'react'
+import React from "react";
+import { useParams } from "react-router";
+import Container from "react-bootstrap/Container";
+
+
+import CardItem from "../body/content.area/cards/CardItem";
 
 const CardExternalDetailsPage = () => {
+  const { cardid } = useParams();
   return (
-    <div>this is cards details page</div>
-  )
-}
+    <Container className="indi-app indi-ext-card-details-page">
+      <div className="indi-ext-card-item-wrapper d-flex">
+        <CardItem cardId={cardid} />
+      </div>
+    </Container>
+  );
+};
 
-export default CardExternalDetailsPage
+export default CardExternalDetailsPage;

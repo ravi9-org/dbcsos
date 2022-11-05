@@ -1,57 +1,57 @@
-.dbs-login-page-left-side img {
+.indi-login-page-left-side img {
     object-fit: fill;
     position: absolute;
     /* width: 50% !important; */
 }
 
-.container .card .dbs-login-page-right-side {
+.container .card .indi-login-page-right-side {
     padding: 20px;
 }
 
-.dbs-login-page-right-top-logo {
+.indi-login-page-right-top-logo {
     height: 100px;
     padding-right: 20px;
 }
 
-.dbs-login-page-right-top-logo img {
+.indi-login-page-right-top-logo img {
     height: 75px;
     width: 135px;
     float: right;
     position: relative;
 }
 
-.dbs-login-page-right-top-logo p {
+.indi-login-page-right-top-logo p {
     font-size: 13px;
     font-weight: 600;
 }
 
-.dbs-login-page-right-top-logo p a {
+.indi-login-page-right-top-logo p a {
     margin-left: 3px;
 }
 
-.dbc-login-form-headings {
+.indi-login-form-headings {
     margin-top: 40px;
     color: #2f4694;
     font-weight: 600;
 }
 
-.dbc-login-form-text-login {
+.indi-login-form-text-login {
     font-size: 25px;
 }
 
-.dbc-login-form-text-desc {
+.indi-login-form-text-desc {
     margin-top: 30px;
     font-weight: 600;
 }
 
-.dbc-login-form-wrapper {
+.indi-login-form-wrapper {
     /* background-color: lightgrey; */
     /* padding: 0 110px; */
     margin: 0 110px;
     /* border: 1px dotted lightgrey; */
 }
 
-.dbc-login-form-input {
+.indi-login-form-input {
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     box-shadow: inset 0 0 0 transparent;
@@ -65,20 +65,20 @@
     border-color: #80bdff;
 }
 
-.dbc-login-form-input:focus {
+.indi-login-form-input:focus {
     color: #495057;
     border-color: #86b7fe;
     outline: 0;
     box-shadow: 0 0 0 2px rgb(13, 110, 253, 0.25);
 }
 
-.dbc-login-form-input-wrapper {
+.indi-login-form-input-wrapper {
     position: relative;
     margin-top: 20px;
     height: 60px;
 }
 
-.dbc-login-form-input-wrapper p {
+.indi-login-form-input-wrapper p {
     margin-top: 4px;
     font-size: 12px;
     color: #ff4500;
@@ -86,7 +86,7 @@
     /* display: none; */
 }
 
-.dbs-login-remember-reset {
+.indi-login-remember-reset {
     /* border: 1px dotted green; */
     height: 16px;
     position: relative;
@@ -100,28 +100,28 @@
     flex-direction: row;
 }
 
-.dbs-login-remember-checkbox.form-check-input {
+.indi-login-remember-checkbox.form-check-input {
     height: 16px;
     width: 16px;
     display: flex;
     cursor: pointer;
 }
 
-.dbs-login-remember-label {
+.indi-login-remember-label {
     margin-left: 4px;
     display: flex;
 }
 
-.dbs-login-remember-reset>div {
+.indi-login-remember-reset>div {
     width: 50%;
     height: 100%;
 }
 
-.dbs-login-form-btn-wrapper.m-0 {
+.indi-login-form-btn-wrapper.m-0 {
     margin-top: 31px !important;
 }
 
-.dbs-login-reset-wrapper {
+.indi-login-reset-wrapper {
     text-align: end;
     float: right;
     position: relative;
@@ -129,17 +129,17 @@
     right: 0;
 }
 
-.dbs-login-remember-wrapper {
+.indi-login-remember-wrapper {
     display: flex;
     height: 16px;
 }
 
-.dbc-login-form-input-wrapper p i {
+.indi-login-form-input-wrapper p i {
     margin-right: 2px
 }
 
 
-.dbs-login-footer-wrapper {
+.indi-login-footer-wrapper {
     position: absolute;
     bottom: 18px;
     right: 48px;
@@ -148,31 +148,31 @@
     height: 16px;
 }
 
-.dbs-login-footer {
+.indi-login-footer {
     font-weight: 700;
     font-size: 10px;
     display: flex;
 }
 
-.dbs-login-footer-msg-1 {
+.indi-login-footer-msg-1 {
     color: darkblue;
 }
 
-.dbs-login-footer-msg-2 {
+.indi-login-footer-msg-2 {
     color: #0707d6;
     margin-left: 4px;
 }
 
 
-.dbs-login-form-btn-wrapper {
+.indi-login-form-btn-wrapper {
     margin-top: 15px;
 }
 
-.dbs-login-form-btn-wrapper:active {
+.indi-login-form-btn-wrapper:active {
     border: 0;
 }
 
-.dbs-login-form-btn-wrapper .dbs-login-form-btn {
+.indi-login-form-btn-wrapper .indi-login-form-btn {
     height: 38px;
     width: 100%;
     border: none;
@@ -185,24 +185,24 @@
     color: #fff;
 }
 
-.dbs-login-form-btn-wrapper .dbs-login-form-btn:hover {
+.indi-login-form-btn-wrapper .indi-login-form-btn:hover {
     background-color: #f0650f;
 }
 
-.dbs-login-form-btn-wrapper .dbs-login-form-btn:focus,
-.dbs-login-form-btn-wrapper .dbs-login-form-btn:focus-visible,
-.dbs-login-form-btn-wrapper .dbs-login-form-btn:focus-within,
-.dbs-login-form-btn-wrapper .dbs-login-form-btn:target,
-.dbs-login-form-btn-wrapper .dbs-login-form-btn:visited,
-.dbs-login-form-btn-wrapper .dbs-login-form-btn:active {
+.indi-login-form-btn-wrapper .indi-login-form-btn:focus,
+.indi-login-form-btn-wrapper .indi-login-form-btn:focus-visible,
+.indi-login-form-btn-wrapper .indi-login-form-btn:focus-within,
+.indi-login-form-btn-wrapper .indi-login-form-btn:target,
+.indi-login-form-btn-wrapper .indi-login-form-btn:visited,
+.indi-login-form-btn-wrapper .indi-login-form-btn:active {
     background-color: #f0650fdb;
 }
 
-.dbs-login-form-input-warning {
+.indi-login-form-input-warning {
     border: 1px solid red !important
 }
 
-.dbc-login-logo-text {
+.indi-login-logo-text {
     position: relative;
     color: #fff;
     display: flex;
@@ -213,14 +213,14 @@
     font-weight: 700;
 }
 
-.dbc-login-logo-text-wrapper {
+.indi-login-logo-text-wrapper {
     width: 74%;
     position: relative;
     margin: 0 auto;
 }
 
 
-.dbc-login-global-error {
+.indi-login-global-error {
     border: 1px solid red;
     margin-top: 15px;
     padding-left: 10px;
@@ -237,11 +237,11 @@
 
 @media (max-width:864px) {
     .container .card,
-    .container .card .dbs-login-page-right-side {
+    .container .card .indi-login-page-right-side {
         min-width: 100%;
     }
 
-    .container .card .dbs-login-page-left-side {
+    .container .card .indi-login-page-left-side {
         display: none
     }
 }

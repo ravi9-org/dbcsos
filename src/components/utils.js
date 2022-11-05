@@ -3,7 +3,7 @@ import axios from "axios";
 /*
 const CTX = {
   PROTOCOL: "http://",
-  HOST: "dbc.hostname.com",
+  HOST: "app.hostname.com",
   PORT: ":80",
 };
 */
@@ -15,24 +15,26 @@ const CTX = {
 
 const REST_API_PREFIX = CTX.PROTOCOL + CTX.HOST + CTX.PORT;
 
-const PARAMS = {
-  API: {
-    LOGIN: REST_API_PREFIX + "/login",
-    LOGOUT: REST_API_PREFIX + "/logout",
-    USER_PROFILE: REST_API_PREFIX + "/users/",
-    CARDS: REST_API_PREFIX + "/cards",
-    TEMPLATES: REST_API_PREFIX + "/templates",
-    USER_CARD: REST_API_PREFIX + "/usercards/",
-  },
+const REST_API = {
+  LOGIN: REST_API_PREFIX + "/login",
+  LOGOUT: REST_API_PREFIX + "/logout",
+  USER_PROFILE: REST_API_PREFIX + "/users/",
+  CARDS: REST_API_PREFIX + "/cards",
+  TEMPLATES: REST_API_PREFIX + "/templates",
+  USER_CARD: REST_API_PREFIX + "/usercards",
 };
 
 const APP_URL_PREFIX = "";
 
 const APP_URLS = {
+  LOGIN_PAGE: APP_URL_PREFIX + "login",
   LANDING_PAGE: APP_URL_PREFIX + "/",
   TEMPLATES_PAGE: APP_URL_PREFIX + "/templates",
   CARDS_PAGE: APP_URL_PREFIX + "/cards",
   ADD_CARD_PAGE: APP_URL_PREFIX + "/cards/addcard",
+  EDIT_CARD_PAGE: APP_URL_PREFIX + "/cards/editcard/:cardid",
+  CARD_DETAILS_PAGE: APP_URL_PREFIX + "/cards/:cardid",
+  CARD_EXTERNAL_PAGE: APP_URL_PREFIX + "/cardextdetails/:cardid",
   ADDRESS_PAGE: APP_URL_PREFIX + "/addresses",
   USERS_PAGE: APP_URL_PREFIX + "/users",
   EMAIL_SIGNAURE_PAGE: APP_URL_PREFIX + "/emailsignature",
@@ -94,7 +96,7 @@ const STORAGE = LOCAL_STORAGE;
 const TTL = 1800000;
 const LONG_TTL = 180000000;
 
-const SESSION = "dbc_session";
+const SESSION = "indi_session";
 const TOKEN = "accessToken";
 const EMAIL = "email";
 const USERID = "id";
@@ -168,6 +170,39 @@ const isObjectEmpty = (obj = {}) => {
   return Object.keys(obj).length === 0;
 };
 
+const getAllUsers = () => {
+  const myPromise = new Promise((resolve, reject) => {
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+    if (token) {
+      let getUrl = REST_API.USER_PROFILE;
+      axios
+        .get(getUrl, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          resolve(res);
+        });
+    } else {
+      reject({
+        redirect: true,
+        message: "No token available till now...",
+      });
+    }
+  });
+
+  return myPromise;
+};
+
 const getUserProfile = () => {
   const myPromise = new Promise((resolve, reject) => {
     let session = getSession();
@@ -181,7 +216,7 @@ const getUserProfile = () => {
     let token = getToken();
     if (token) {
       let userId = getUserId(session);
-      let getUrl = PARAMS.API.USER_PROFILE + userId;
+      let getUrl = REST_API.USER_PROFILE + userId;
       axios
         .get(getUrl, {
           headers: {
@@ -214,7 +249,7 @@ const getTemplateDetails = (templateId) => {
 
     let token = getToken();
     if (token) {
-      let getUrl = PARAMS.API.TEMPLATES + "/" + templateId;
+      let getUrl = REST_API.TEMPLATES + "/" + templateId;
       axios
         .get(getUrl, {
           headers: {
@@ -247,7 +282,7 @@ const getCardDetails = (cardId) => {
 
     let token = getToken();
     if (token) {
-      let getUrl = PARAMS.API.USER_CARD + cardId;
+      let getUrl = REST_API.USER_CARD + "/" + cardId;
       axios
         .get(getUrl, {
           headers: {
@@ -256,6 +291,45 @@ const getCardDetails = (cardId) => {
         })
         .then((res) => {
           resolve(res);
+        });
+    } else {
+      reject({
+        redirect: true,
+        message: "No token available till now...",
+      });
+    }
+  });
+
+  return myPromise;
+};
+
+const deleteCard = (cardId, userCardsArray) => {
+  let dataCardId = parseInt(cardId, 10);
+  let cardsArray = getUniqueSetOfArray(userCardsArray);
+  const myPromise = new Promise((resolve, reject) => {
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+    if (token) {
+      let deleteUrl = REST_API.USER_CARD + "/" + dataCardId;
+      axios
+        .delete(deleteUrl, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          cardsArray = cardsArray.filter((card) => card !== dataCardId);
+          addOrRemoveCardFromUser(cardsArray).then((res1) => {
+            res["updatedCardsArray"] = cardsArray;
+            resolve(res);
+          });
         });
     } else {
       reject({
@@ -283,7 +357,7 @@ const executeLogoutRESTAPI = () => {
       email: getUserEmail(),
       password: getUserId(),
     };
-    let logoutUrl = PARAMS.API.LOGOUT;
+    let logoutUrl = REST_API.LOGOUT;
     let success = (response) => {
       alwaysClassback(response, resolve);
     };
@@ -311,7 +385,7 @@ const executeLoginRESTAPI = (params) => {
     //     "Content-type": "application/json",
     //   },
     // };
-    let loginUrl = PARAMS.API.LOGIN;
+    let loginUrl = REST_API.LOGIN;
 
     let success = (res) => {
       if (res.status === STATUS_OK) {
@@ -339,41 +413,51 @@ const executeLoginRESTAPI = (params) => {
 const executeCardAddRESTAPI = (cardData) => {
   let formData = { ...cardData };
   delete formData.id;
-  let url = PARAMS.API.USER_CARD;
+  let url = REST_API.USER_CARD;
 
   return axios.post(url, formData);
+};
+
+const executeCardEditRESTAPI = (cardData, cardId) => {
+  let formData = { ...cardData };
+  delete formData.id;
+  let url = REST_API.USER_CARD + "/" + cardId;
+
+  return axios.patch(url, formData);
 };
 
 const addOrRemoveCardFromUser = (userCardsArray) => {
   let formData = { cards: userCardsArray };
   delete formData.id;
-  let url = PARAMS.API.USER_PROFILE + getUserId();
+  let url = REST_API.USER_PROFILE + getUserId();
   return axios.patch(url, formData);
 };
-
 
 const getUniqueSetOfArray = (arr) => {
   return [...new Set(arr)];
 };
 
 const Utils = {
-  PARAMS,
+  REST_API,
+  APP_URLS,
+  NAV_ITEMS_KEYS,
+  NAV_ITEMS_VALUES,
   userSessionExists,
   getUserProfile,
+  getAllUsers,
   getUserId,
   getCardDetails,
+  deleteCard,
   getTemplateDetails,
   executeLoginRESTAPI,
   executeLogoutRESTAPI,
   executeCardAddRESTAPI,
+  executeCardEditRESTAPI,
   addOrRemoveCardFromUser,
   getUniqueSetOfArray,
   createSession,
   deleteSession,
   isObjectEmpty,
-  APP_URLS,
-  NAV_ITEMS_KEYS,
-  NAV_ITEMS_VALUES,
 };
 
 export default Utils;

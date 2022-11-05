@@ -70,7 +70,7 @@ $body-color: #0f0;
 
 
 
-.btn-primary.dbc-header-userprofile-btn {
+.btn-primary.indi-header-userprofile-btn {
   --bs-btn-color: none;
   --bs-btn-bg: none;
   --bs-btn-border-color: none;
@@ -87,6 +87,6 @@ $body-color: #0f0;
   --bs-btn-disabled-border-color: none;
 }
 
-.btn-primary.dbc-header-userprofile-btn.dropdown-toggle::after {
+.btn-primary.indi-header-userprofile-btn.dropdown-toggle::after {
   display: none;
 }

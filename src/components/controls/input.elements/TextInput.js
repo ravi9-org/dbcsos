@@ -5,15 +5,12 @@ const TextInput = (props) => {
   let fieldData = props.props.fieldData;
   let fieldName = props.props.fieldName;
   let inputElementClassNames = props.props.inputElementClassNames;
-  let fieldClassNames = "dbc-add-card-input-field " + inputElementClassNames;
+  let fieldClassNames = "indi-add-card-input-field " + inputElementClassNames;
   let inputEle = useRef(null);
   let value = fieldData;
   let isRequired = schema?.required || false;
   let isReadOnly = schema?.readonly || false;
-  const onChangeInput = (e) => {
-    //console.log(inputEle);
-    //debugger;
-  };
+  const onChangeInput = (e) => {};
   return (
     <input
       type="text"
@@ -22,8 +19,8 @@ const TextInput = (props) => {
       ref={inputEle}
       readOnly={isReadOnly}
       defaultValue={value}
-      //   value={value}
-      placeholder={`Enter ${fieldName}`}
+      //placeholder={`Enter ${fieldName}`}
+      placeholder={`${fieldName}`}
       onChange={onChangeInput}
     ></input>
   );

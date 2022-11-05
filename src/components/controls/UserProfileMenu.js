@@ -2,17 +2,17 @@ import React, { useState, useRef, useContext, useEffect } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useNavigate } from "react-router-dom";
 
-import ContextComponent from "../app.context";
-import Utils from "../utils";
+import ContextComponent from "../AppContext";
+import Utils from "../Utils";
 import defaultUserImage from "../../assets/img/default-profile.png";
 
-const DBCUserProfileMenu = () => {
+const UserProfileMenu = () => {
   let navigate = useNavigate();
-  let { canRedirectToLogin, setCanRedirectToLogin, userData, setUserData } =
+  let { setCanRedirectToLogin, userData, setUserData } =
     useContext(ContextComponent);
   let [userFirstName, setUserFirstName] = useState("");
   let [userDisplayName, setUserDisplayName] = useState("");
-  let [userImage, setUserImage] = useState("");
+  let [setUserImage] = useState("");
 
   const success = (res) => {
     setUserData(res.data || {});
@@ -29,21 +29,12 @@ const DBCUserProfileMenu = () => {
   }, []);
 
   useEffect(() => {
-    // update user data here...
-
-    //setUserDisplayName(userData.firstName + " " + userData.lastName);
     setUserFirstName(userData.firstName);
     if (userData.image) {
       setUserImage(userData.image);
     } else {
-      //setUserImage(defaultUserImage);
     }
-    //console.log(userData.firstName + " " + userData.lastName);
   }, [userData]);
-
-  //setTimeout(function () {
-  //setUserData({ ...userData, "firstName": "XYz" });
-  //}, 10000);
 
   const doLogout = (e) => {
     e.preventDefault();
@@ -60,15 +51,15 @@ const DBCUserProfileMenu = () => {
   };
 
   return (
-    <div className="dbc-user-profile-wrapper">
+    <div className="indi-user-profile-wrapper">
       <Dropdown align="end">
         <Dropdown.Toggle
           id="dropdown-basic"
           type="link"
-          className="dbc-header-userprofile-btn"
+          className="indi-header-userprofile-btn"
         >
           <img
-            className="dbs-header-profile-image"
+            className="indi-header-profile-image"
             src={defaultUserImage}
             alt={userDisplayName}
             title={userDisplayName}
@@ -89,11 +80,9 @@ const DBCUserProfileMenu = () => {
         </Dropdown.Menu>
       </Dropdown>
 
-      <div className="dbs-header-user-profile-firstname">
-        {userFirstName}
-      </div>
+      <div className="indi-header-user-profile-firstname">{userFirstName}</div>
     </div>
   );
 };
 
-export default DBCUserProfileMenu;
+export default UserProfileMenu;

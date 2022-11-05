@@ -1,35 +1,36 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import ContextComponent from "../../app.context";
-import CardList from "./cards.list";
-import TemplateList from "./templates.list";
-import Temp from "./temp";
-import Utils from "../../utils";
+
+import ContextComponent from "../../AppContext";
+import CardList from "./cards/CardsList";
+import TemplateList from "./templates/TemplatesList";
+import Utils from "../../Utils";
 import Addresses from "../../pages/Addresses";
-import Users from "../../pages/Users";
-import EmailSignature from "../../pages/EmailSignature";
+import Users from "./users/Users";
+import EmailSignature from "../../pages/signatures/EmailSignature";
 import Contacts from "../../pages/Contacts";
 import Settings from "../../pages/Settings";
-import AddCard from "./AddCard";
+import AddCard from "./cards/AddCard";
+import EditCard from "./cards/EditCard";
+import CardDetailsPage from "./cards/CardDetailsPage";
 
 const ContentArea = () => {
   let [isAdmin, setIsAdmin] = useState(false);
 
   let { userData } = useContext(ContextComponent);
 
-  useEffect(() => { 
+  useEffect(() => {
     setIsAdmin(!!userData?.isAdmin);
   }, [isAdmin, userData]);
 
   return (
-    <div className="dbc-content-area-wrapper d-flex h-100">
+    <div className="indi-content-area-wrapper d-flex h-100">
       <Routes>
         {isAdmin && (
           <Route
             path={Utils.APP_URLS.LANDING_PAGE}
             exact
             element={<TemplateList />}
-            // element={<Temp />}
           ></Route>
         )}
         <Route
@@ -50,11 +51,23 @@ const ContentArea = () => {
           exact
           element={<CardList />}
         ></Route>
-        
+
+        <Route
+          path={Utils.APP_URLS.CARD_DETAILS_PAGE}
+          exact
+          element={<CardDetailsPage />}
+        ></Route>
+
         <Route
           path={Utils.APP_URLS.ADD_CARD_PAGE}
           exact
           element={<AddCard />}
+        ></Route>
+
+        <Route
+          path={Utils.APP_URLS.EDIT_CARD_PAGE}
+          exact
+          element={<EditCard />}
         ></Route>
 
         <Route
@@ -82,10 +95,6 @@ const ContentArea = () => {
           exact
           element={<Settings />}
         ></Route>
-
-        {/* {cardsPageMappyingArray.map((path, index) => (
-          <Route path={path} exact key={index} element={<CardList />} />
-        ))} */}
       </Routes>
     </div>
   );

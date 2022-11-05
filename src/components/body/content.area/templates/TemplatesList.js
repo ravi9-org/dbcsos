@@ -1,14 +1,14 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 
-const TemplateList = () => {
+const TemplatesList = () => {
   return (
     <>
-      <div className="dbc-tile">This is templates list page</div>
-      <div className="dbc-tile">
+      <div className="indi-tile">This is templates list page</div>
+      <div className="indi-tile">
         This is templates list pageThis is templates list pageThis is templates
         list pageThis is templates list pageThis is templates list page
       </div>
-      <div className="dbc-tile">
+      <div className="indi-tile">
         This is templates list pageThis is templates list pageThis is templates
         list page
       </div>
@@ -16,4 +16,4 @@ const TemplateList = () => {
   );
 };
 
-export default TemplateList;
+export default TemplatesList;

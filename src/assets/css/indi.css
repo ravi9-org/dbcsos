@@ -1,0 +1,869 @@
+.indi-app {}
+
+/* Begin :  custom style for native browser scroll bar*/
+
+body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar,
+.indi-app:not(.indi-app-on-macintosh) *::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar {
+  background: rgba(255, 255, 255, 1);
+}
+
+.indi-app:not(.indi-app-on-macintosh) *::-webkit-scrollbar:hover {
+  background: rgba(255, 255, 255, 0);
+}
+
+.indi-app:not(.indi-app-on-macintosh) *:hover::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb,
+.indi-app:not(.indi-app-on-macintosh) *::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 6px solid transparent;
+  min-height: 50px;
+  background-color: transparent;
+}
+
+body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 16px 16px 0px rgb(128 130 133);
+}
+
+body.indi-app:not(.indi-app-on-macintosh):hover::-webkit-scrollbar-thumb,
+.indi-app:not(.indi-app-on-macintosh) *:hover::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 16px 16px 0px rgb(128 130 133);
+}
+
+.indi-app:not(.indi-app-on-macintosh) .indi-app-dark-area:hover::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 16px 16px 0px rgba(255, 255, 255, 0.75);
+}
+
+body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
+.indi-app:not(.indi-app-on-macintosh) *::-webkit-scrollbar-thumb:hover {
+  border: 4px solid transparent;
+  -webkit-box-shadow: inset 16px 16px 0px rgb(128 130 133);
+  background-color: transparent;
+}
+
+.indi-app:not(.indi-app-on-macintosh) *.indi-app-dark-scrollable-area:hover::-webkit-scrollbar-thumb,
+.indi-app:not(.indi-app-on-macintosh) *.indi-app-dark-scrollable-area::-webkit-scrollbar-thumb:hover {
+  -webkit-box-shadow: inset 16px 16px 0px #eeeeee;
+}
+
+.indi-app .indi-app-normal-scrolling {
+  overflow-x: auto;
+  overflow-y: auto;
+  overflow: overlay !important;
+}
+
+.indi-app:not(.indi-app-on-macintosh) .indi-app-normal-scrolling {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(128 130 133) transparent;
+}
+
+.indi-app:not(.indi-app-on-macintosh) *.indi-app-dark-scrollable-area:hover {
+  scrollbar-color: #eeeeee transparent;
+}
+
+.indi-app .indi-app-normal-scrolling {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/*TODO: Will be moved to hisos side - End*/
+
+/* End :  custom style for native browser scroll bar*/
+
+.indi-app .indi-company-logo {
+  background: #1fc;
+}
+
+.indi-app .indi-header .indi-company-logo {
+  background: #ffc;
+}
+
+.indi-app .indi-footer .indi-company-logo {
+  background: #ffc;
+}
+
+.indi-app .indi-global-mask {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.indi-app .indi-global-mask .indi-global-mask-loading-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  height: 100%;
+  width: 100%;
+}
+
+.indi-app .indi-hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* TEMP changes */
+/* .indi-app .indi-header-wrapper {
+  background-color: lightseagreen;
+  display: flex;
+}
+ */
+
+/*Header start*/
+.indi-app .indi-header-wrapper {
+  height: 100px;
+}
+
+.indi-app .indi-header-left-logo-wrapper,
+.indi-app .indi-header-right-bg-wrapper>div {
+  display: flex;
+  align-items: center;
+}
+
+.indi-app .indi-logo {
+  background: url("../img/company-logo.png") no-repeat;
+  height: 80px;
+  width: 140px;
+  background-size: contain;
+}
+
+.indi-app .indi-header-right-bg {
+  background: url("../img/sos-header-right-bg.png") no-repeat;
+  height: 100px;
+  width: 69px;
+  margin-right: 41px;
+  background-size: contain;
+}
+
+.indi-app .indi-header-wrapper .btn {
+  padding: 0;
+}
+
+.indi-app .indi-notification-icon {
+  background: url("../img/notification_icon.png") no-repeat;
+  width: 19px;
+  height: 22.5px;
+  background-size: contain;
+  margin: 0.5rem 1rem;
+
+}
+
+.indi-header-profile-image {
+  height: 26px;
+  width: 26px;
+  cursor: pointer;
+}
+
+.indi-header-user-profile-firstname {
+  margin: 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.indi-app .container {
+  max-width: 100%;
+}
+
+/*Header end*/
+
+
+/*Body start*/
+
+.indi-app .indi-body-wrapper {
+  background-color: lightskyblue;
+  height: calc(100vh - 180px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #2f4594;
+}
+
+.indi-app .indi-full-height {
+  background: #fff;
+  flex: 1 1 auto;
+  padding: 0 12px;
+  height: 100%;
+}
+
+.indi-app .indi-badge-add-button-wrapper {
+  background-color: #1fc;
+}
+
+.indi-app .indi-badge-list-wrapper {
+  background-color: rgb(15, 130, 159);
+}
+
+.indi-app .indi-tile {
+  flex: 1 1 auto;
+  background: green;
+  height: calc(100% - 80px);
+  width: 25%;
+  padding: 16px;
+  margin: 16px;
+  margin-bottom: 64px;
+}
+
+.indi-app .indi-navmenu-item {
+  display: flex;
+  /* padding: 8px; */
+  /* border: 1px solid gray; */
+}
+
+.indi-app .indi-navmenu-item .indi-navmenu-active,
+.indi-app .indi-navmenu-item .indi-navmenu-inactive {
+  background: transparent;
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  display: flex;
+  height: 56px;
+  align-items: center;
+}
+
+.indi-app .indi-navmenu-item .indi-navmenu-inactive:hover {
+  background: #23286236;
+}
+
+.indi-app .indi-navmenu-item .indi-navmenu-active {
+  background: #232862;
+  color: #fff;
+  font-weight: bold;
+}
+
+.indi-app .indi-left-navigation-wrapper {
+  padding-top: 20px;
+  border-radius: 6px;
+  height: 100%;
+}
+
+.indi-app .indi-left-navigation-wrapper,
+.indi-app .indi-content-area-wrapper {
+  background: #e9edfa;
+}
+
+.indi-app .indi-content-area-wrapper {
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.indi-app .indi-content-area-wrapper .indi-add-card-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.indi-app .indi-content-area-wrapper .indi-add-card-wrapper .indi-card-item-parent.card-with-bg {
+  max-width: 300px;
+  min-width: 240px;
+  margin: 0 auto;
+}
+
+.indi-app .indi-content-area-wrapper .indi-add-card-wrapper .indi-add-card-item-footer>button.btn {
+  float: right;
+  margin: 8px;
+  background-color: #010fb8;
+  border: 1px solid #010fb8;
+}
+
+.indi-app .indi-content-area-wrapper form {
+  height: 100%;
+  width: 100%;
+}
+
+.indi-app img.indi-w-32 {
+  width: 32px;
+  margin: 4px 16px;
+  color: #010fb8;
+}
+
+.indi-app .indi-content-area-wrapper img.indi-w-20 {
+  margin: 8px;
+  color: #010fb8;
+}
+
+.indi-app a.indi-navmenu-inactive span {
+  color: #010fb8;
+}
+
+.indi-app .indi-navmenu-active img.indi-w-32 {}
+
+.indi-app .indi-ml-1 {
+  /* margin-left: 1rem; */
+}
+
+
+/*utility classes*/
+.indi-place-me-top-right {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
+
+.indi-place-me-top-left {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+}
+
+.indi-place-me-bottom-right {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
+
+.indi-place-me-bottom-left {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+}
+
+/*Body end*/
+
+/*footer start*/
+.indi-app .indi-footer-wrapper {
+  background-color: #ffffff;
+  font-weight: bold;
+  height: 80px;
+  color: #2f4694;
+}
+
+.indi-app .indi-footer-wrapper .indi-logo {
+  height: 48px;
+  width: 84px;
+}
+
+.indi-app .indi-footer-wrapper .indi-footer-logo-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 6px;
+}
+
+
+.indi-app .indi-footer-wrapper .indi-footer-logo,
+.indi-app .indi-footer-wrapper .indi-footer-logo-text {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 0;
+  margin: 0 24px;
+}
+
+.indi-app .indi-footer-wrapper .navbar-nav {
+  margin: 0 24px;
+}
+
+.indi-app .indi-footer-wrapper .navbar-nav-left .nav-link {
+  margin: 0 16px;
+  color: #2f4694;
+  font-size: 12px;
+}
+
+.indi-app .indi-footer-wrapper .indi-copy-text {
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 15px;
+  margin: 0 48px;
+  padding-bottom: 5px;
+}
+
+.indi-app .indi-w-20 {
+  width: 16px;
+  height: 16px;
+  margin: 0px;
+}
+
+/*Footer end*/
+
+
+.indi-app .indi-body2-wrapper {
+  padding: 20px;
+}
+
+.indi-app .indi-body-cards-wrapper {
+  flex-flow: column;
+}
+
+.indi-app .indi-body-action-bar,
+.indi-app .indi-add-card-title {
+  display: flex;
+  flex-flow: row;
+  font-weight: bold;
+  color: #2f4694;
+  height: 32px;
+  justify-content: space-between;
+}
+
+.indi-app .indi-body-actions {
+  display: flex;
+  flex-flow: row;
+  justify-content: end;
+}
+
+.indi-app .indi-body-action {
+  margin-left: 10px;
+}
+
+.indi-app .indi-add-card-wrapper,
+.indi-app .indi-cards-collection-wrapper {
+  /* border: 1px dotted #000; */
+  height: calc(100% - 32px);
+  padding: 29px 0;
+  overflow-x: auto;
+}
+
+.indi-app .indi-placeholder-add-card.indi-card-item-wrapper {
+  border: 2px dashed #2d326c;
+  border-radius: 10px;
+  flex-flow: column;
+  padding: 10px;
+}
+
+.indi-app .indi-card-item-wrapper {
+  width: 300px;
+  min-width: 300px;
+  cursor: pointer;
+  margin: 16px;
+
+}
+
+.indi-app .indi-card-item-parent {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  background-size: cover;
+}
+
+.indi-app .indi-card-item-parent.card-with-bg {
+  /* background-image: url("../img/Card.png"); */
+  padding: 16px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+.indi-app .indi-card-upload-picture {
+  min-width: 100px;
+  min-height: 100px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+.indi-app .indi-card-fields {
+  overflow-y: auto;
+  width: inherit;
+}
+
+.indi-app .indi-card-title {
+  padding-bottom: 8px;
+}
+
+.indi-app .indi-card-field-wrapper>div {
+  padding-bottom: 16px;
+}
+
+.indi-app .indi-placeholder-add-card-img {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.indi-app .indi-placeholder-add-card:hover {
+  background-color: #dbe2fa;
+}
+
+.indi-app .indi-placeholder-add-card-img img {
+  height: 72px;
+  width: 72px;
+}
+
+.indi-app .indi-placeholder-add-card-text {
+  justify-content: center;
+  align-items: center;
+  color: #2f4694;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 2.5;
+}
+
+.indi-app .indi-card-company-logo-wrapper {
+  position: absolute;
+  /* float: right; */
+  height: 40px;
+  width: calc(100% - 15px);
+  background-size: 50px 50px;
+  background-position: 10px;
+  background-size: cover;
+  display: flex;
+  display: flex;
+  justify-content: end;
+}
+
+.indi-app .indi-ext-card-item-wrapper .indi-card-company-logo-wrapper {
+  height: 70px;
+}
+
+.indi-app .indi-ext-card-item-wrapper .indi-card-upload-picture {
+  min-width: 150px;
+  min-height: 150px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  margin-top: 64px;
+  margin-bottom: 10px;
+}
+
+.indi-app .indi-ext-card-item-wrapper .indi-card-item-parent.card-with-bg {
+  padding: 24px;
+}
+
+.indi-card-field-item {}
+
+.indi-card-field-item-img {
+  min-width: 26px;
+  height: 24px;
+  margin-right: 8px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.indi-card-field-item-img.indi-card-field-item-telephone {
+  background-image: url("./../img/fields/telephone.png");
+}
+
+.indi-card-field-item-img.indi-card-field-item-wechat {
+  background-image: url("./../img/fields/wechat.png");
+}
+
+.indi-card-field-item-img.indi-card-field-item-instagram {
+  background-image: url("./../img/fields/instagram.png");
+}
+
+.indi-card-field-item-img.indi-card-field-item-youtube {
+  background-image: url("./../img/fields/youtube.png");
+}
+
+.indi-card-field-item-img.indi-card-field-item-mobile {
+  background-image: url("./../img/fields/telephone.png");
+}
+
+.indi-card-field-item-img.indi-card-field-item-linkedin {
+  background-image: url("./../img/fields/linkedin.png");
+}
+
+.indi-card-field-item-img.indi-card-field-item-wechat {
+  background-image: url("./../img/fields/wechat.png");
+}
+
+.indi-card-field-item-img.indi-card-field-item-link {
+  background-image: url("./../img/fields/link.png");
+}
+
+.indi-card-field-item-img.indi-card-field-item-website {
+  background-image: url("./../img/fields/website.png");
+}
+
+.indi-card-field-item-img.indi-card-field-item-twitter {
+  background-image: url("./../img/fields/twitter.png");
+}
+
+.indi-card-field-item-img.indi-card-field-item-email {
+  background-image: url("./../img/fields/email.png");
+}
+
+.indi-card-field-item-value {
+  color: #fff;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.indi-card-field-item input,
+.indi-card-field-item textarea,
+.indi-card-field-item input:focus-visible,
+.indi-card-field-item textarea:focus-visible {
+  border: 0;
+  background: transparent;
+  border-bottom: 1px solid darkgrey;
+  color: #fff;
+}
+
+.indi-email-form-page.indi-card-field-item input,
+.indi-email-form-page.indi-card-field-item textarea {
+  margin-bottom: 8px;
+}
+
+.indi-card-field-item input:read-only,
+.indi-card-field-item input:read-only:focus-visible {
+  font-style: italic;
+  color: lightgray;
+}
+
+.indi-card-field-item input:focus-visible {
+  border-bottom: 1px solid #dedada;
+  outline: none;
+}
+
+@media screen and (max-width : 1800px) {
+  .indi-app .indi-card-item-wrapper {
+    width: 239px;
+    min-width: 239px;
+  }
+}
+
+.indi-card-mini-item-wrapper {
+  width: 100%;
+}
+
+.indi-app .indi-card-mini-item-wrapper .indi-card-item-parent.card-with-bg {
+  border-radius: 10px;
+}
+
+.indi-app .indi-card-mini-item-wrapper .indi-info-wrapper {
+  border-radius: 10px;
+  width: 100%;
+  text-align: left;
+}
+
+.indi-app .indi-card-mini-items-wrapper {
+  flex-direction: column;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.indi-app .indi-card-mini-options-wrapper {
+  justify-content: center;
+  padding: 8px;
+}
+
+.indi-app .indi-card-mini-options-wrapper Button {
+  margin: 5px;
+}
+
+
+.indi-app .btn .btn-primary,
+.btn.indi-mini-card-selection-btn {
+  border-color: #234c8e;
+  color: #234c8e;
+  font-weight: 600;
+  border-width: 2px;
+}
+
+.indi-app .btn-check:checked+.btn,
+.indi-app .btn.active,
+.indi-app .btn.show,
+.indi-app .btn:first-child:active,
+.indi-app :not(.btn-check)+.btn:active,
+.indi-app .btn-check:checked+.btn.indi-mini-card-selection-btn {
+  background-color: #234c8e;
+  border-color: #234c8e;
+  color: #fff
+}
+
+.btn-group>.btn-group:not(:last-child)>.btn,
+.btn-group>.btn.dropdown-toggle-split:first-child,
+.btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+  border-color: #ffffff;
+  background-color: #ffffff;
+  color: #234c8e;
+}
+
+
+.indi-app .btn-check+.btn.indi-card-item-wrapper.indi-card-mini-item-wrapper.btn-outline-primary {
+  background-color: transparent;
+  border-radius: 10px;
+  outline: none;
+  border: 0;
+  box-shadow: none;
+  transition: all 0.3s ease 0s;
+  margin: 16px;
+  padding: 0;
+  width: 210px;
+  height: 140px;
+}
+
+
+.indi-app .btn-check+.btn.indi-card-item-wrapper.indi-card-mini-item-wrapper.btn-outline-primary:hover,
+.indi-app .btn-check:checked+.btn.indi-card-item-wrapper.indi-card-mini-item-wrapper.btn-outline-primary {
+  box-shadow: -2px 6px 14px rgb(0 0 0 / 60%);
+}
+
+.indi-app .indi-card-qr-code {
+  height: 60px;
+  float: right;
+}
+
+.indi-app .indi-signature-item-wrapper {
+  justify-content: center;
+  padding: 16px;
+}
+
+.indi-app .indi-mini-card-list {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.indi-app .indi-signature-item-wrapper .indi-signature-item {
+  border-radius: 10px;
+  padding: 20px 10px;
+  min-width: 400px;
+  background: #fff;
+  box-shadow: 0px 1px 6px #000;
+  min-height: 192px;
+}
+
+.indi-app .indi-signature-title {
+  font-weight: bold;
+  color: #2f4694;
+}
+
+.indi-app .indi-qrcode-bg,
+.indi-app .indi-qrcode-logo {
+  border-radius: 10px;
+}
+
+.indi-app .indi-qrcode-bg {
+  background-size: cover;
+  width: 160px;
+  height: 120px;
+}
+
+.indi-app .indi-qrcode-logo {
+  width: 100px;
+  height: 100px;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+}
+
+.indi-app .indi-signature-template {
+  justify-content: space-between;
+}
+
+.indi-app .indi-qrcode-qrcode {
+  height: 120px;
+}
+
+.indi-app .indi-ext-card-details-page {
+  background-image: url("./../img/ext-bg.png");
+  height: 100vh;
+  width: 100vw;
+  background-repeat: repeat;
+  background-size: contain;
+}
+
+.indi-ext-card-item-wrapper {
+  justify-content: center;
+  width: 400px;
+  margin: 0 auto;
+  padding: 90px 0;
+  height: 100%;
+}
+
+.indi-app .indi-card-with-actions {
+  cursor: pointer;
+}
+
+.indi-app .indi-card-with-actions.indi-card-item-parent.card-with-bg:hover {
+  box-shadow: 0px 8px 15px rgb(0 0 0 / 60%) !important;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  box-shadow: none;
+  transition: all 0.3s ease 0s;
+}
+
+.indi-app .indi-card-details-wrapper>div {
+  margin-right: 42px !important;
+}
+
+.indi-app .indi-card-item-page2-qrcode-image img {
+  height: 100px;
+}
+
+.indi-app .indi-card-item-page2 {
+  justify-content: space-between;
+}
+
+.indi-app .indi-body-action {
+  cursor: pointer;
+}
+
+.indi-app .indi-modal-dialog-alert .modal-body {
+  padding: 0 !important;
+}
+
+.indi-app .indi-modal-dialog-alert-body {
+  margin: 0 !important;
+}
+
+.indi-app .indi-email-form-page form {
+  display: flex;
+  flex-direction: column;
+}
+
+.indi-app .indi-card-upload-picture-file-input {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  opacity: 0;
+  position: absolute;
+  height: 100px;
+  border: 1px solid red;
+  width: 100px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.indi-app .indi-card-upload-picture.indi-card-upload-picture-with-no-bg:hover {
+  background-image: url("../img/Upload.png");
+  background-color: rgb(255, 255, 255, 0.5);
+  background-repeat: no-repeat;
+  background-size: contain;
+  /* transform: rotate(180deg); */
+}
+
+.indi-app .indi-card-upload-picture-card-image {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.indi-app .indi-card-upload-picture-with-no-bg:hover {
+  cursor: pointer;
+}
+
+.indi-app .indi-card-upload-picture-with-no-bg:hover .indi-card-upload-picture-card-image {
+  opacity: 0.3;
+}
+
+.indi-app .indi-card-upload-picture.indi-card-upload-picture-with-no-bg:hover {
+  background-color: rgb(255, 255, 255, 1);
+}
+
+.indi-app .indi-card-upload-picture-img {
+  height: 100px;
+  border-radius: 50%;
+}
+
+.indi-app .indi-ext-card-item-wrapper .indi-card-upload-picture-img {
+  height: 150px;
+}

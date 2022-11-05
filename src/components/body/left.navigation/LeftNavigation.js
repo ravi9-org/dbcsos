@@ -1,15 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import ContextComponent from "../../app.context";
-import Utils from "../../utils";
-
-import Templates from "../../../assets/img/templet.png";
-import Users from "../../../assets/img/users.png";
-import Addresses from "../../../assets/img/globe.png";
-import Cards from "../../../assets/img/templet.png";
-import esign from "../../../assets/img/mail.png";
-import contacts from "../../../assets/img/contacts.png";
-import settings from "../../../assets/img/settings.png";
+import { NavLink, useLocation } from "react-router-dom";
+import ContextComponent from "../../AppContext";
+import Utils from "../../Utils";
 
 import templatesImg from "../../../assets/img/navitems/dark/templates.png";
 import templatesActiveImg from "../../../assets/img/navitems/light/templates.png";
@@ -62,7 +54,7 @@ const LeftNavigation = () => {
   let [filteredNavLinkKeys, setFilteredNavLinkKeys] = useState([]);
 
   const location = useLocation();
-  const isAtRootUrl = location?.pathname === "/";
+  const isAtRootUrl = location?.pathname === Utils.APP_URLS.LANDING_PAGE;
 
   useEffect(() => {
     if (Object.keys(userData).length) {
@@ -77,16 +69,16 @@ const LeftNavigation = () => {
   }, [userData]);
 
   return (
-    <div className="dbc-left-navigation-wrapper">
+    <div className="indi-left-navigation-wrapper">
       {filteredNavLinkKeys.map((navKey, index, src) => (
-        <div className="dbc-navmenu-item" key={index}>
+        <div className="indi-navmenu-item" key={index}>
           <NavLink
             className={({ isActive }) => {
               if (isAtRootUrl) {
                 isActive = index === 0;
               }
               navLinkValues[navKey]["ding"] = "dingdongbell";
-              return isActive ? "dbc-navmenu-active" : "dbc-navmenu-inactive";
+              return isActive ? "indi-navmenu-active" : "indi-navmenu-inactive";
             }}
             to={navLinkValues[navKey].url}
           >
@@ -95,18 +87,18 @@ const LeftNavigation = () => {
                 {isActive ||
                 (isAtRootUrl && index === 0 && (isActive = true)) ? (
                   <img
-                    className="dbc-w-32 w-20"
+                    className="indi-w-32 w-20"
                     src={activeImages[navKey]}
                     alt={navLinkValues[navKey].title}
                   ></img>
                 ) : (
                   <img
-                    className="dbc-w-32 w-20"
+                    className="indi-w-32 w-20"
                     src={images[navKey]}
                     alt={navLinkValues[navKey].title}
                   ></img>
                 )}
-                <span className="dbc-ml-1">{navLinkValues[navKey].title}</span>
+                <span className="indi-ml-1">{navLinkValues[navKey].title}</span>
               </>
             )}
           </NavLink>
