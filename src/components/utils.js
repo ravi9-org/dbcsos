@@ -170,6 +170,39 @@ const isObjectEmpty = (obj = {}) => {
   return Object.keys(obj).length === 0;
 };
 
+const getAllUsers = () => {
+  const myPromise = new Promise((resolve, reject) => {
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+    if (token) {
+      let getUrl = REST_API.USER_PROFILE;
+      axios
+        .get(getUrl, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          resolve(res);
+        });
+    } else {
+      reject({
+        redirect: true,
+        message: "No token available till now...",
+      });
+    }
+  });
+
+  return myPromise;
+};
+
 const getUserProfile = () => {
   const myPromise = new Promise((resolve, reject) => {
     let session = getSession();
@@ -411,6 +444,7 @@ const Utils = {
   NAV_ITEMS_VALUES,
   userSessionExists,
   getUserProfile,
+  getAllUsers,
   getUserId,
   getCardDetails,
   deleteCard,

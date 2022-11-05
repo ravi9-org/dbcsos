@@ -5,6 +5,8 @@
       "password": "$2a$10$xUz9UXboDu6JTWEoYksWr.cjYs3ti1S5gSJXr760AzF5eW39MDkgm",
       "firstName": "Lisa",
       "lastName": "Simson",
+      "organization": "CMS",
+      "department": "Sales",
       "designation": "Sr. Manager",
       "isAdmin": false,
       "picture": {
@@ -23,6 +25,8 @@
       "password": "$2a$10$Uoairkb2bNJCEDE24EKDY.McPQNn6QKQdUTt1qBMF1Z0NaqYII4jC",
       "firstName": "Jhon",
       "lastName": "Williams",
+      "organization": "Edge",
+      "department": "Engineering",
       "designation": "Director",
       "isAdmin": false,
       "picture": {
@@ -38,6 +42,8 @@
       "firstName": "Admin",
       "lastName": "",
       "designation": "Administrator",
+      "organization": "CMS",
+      "department": "Admin",
       "isAdmin": true,
       "picture": {
         "image": "",
@@ -52,6 +58,8 @@
       "firstName": "Laxman",
       "lastName": "Ponnaganti",
       "designation": "Project lead",
+      "organization": "CMS",
+      "department": "Engineering",
       "isAdmin": true,
       "picture": {
         "image": "",
@@ -67,6 +75,8 @@
       "lastName": "Rama",
       "designation": "CEO",
       "isAdmin": false,
+      "organization": "Edge",
+      "department": "Admin",
       "id": 5,
       "cards": [],
       "picture": {

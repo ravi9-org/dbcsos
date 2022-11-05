@@ -1,8 +1,8 @@
 {
-  "name": "dbcsos",
+  "name": "indi",
   "version": "0.1.0",
   "private": true,
-  "homepage": "dbcsos",
+  "homepage": "indi",
   "engines": {
     "node": ">= 16"
   },
@@ -32,8 +32,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dbcsos-json-server": "json-server-auth --watch mock_data/db.json --port 3004",
-    "dev-start": "concurrently \"npm run dbcsos-json-server\" \"npm run start\""
+    "indi-json-server": "json-server-auth --watch mock_data/db.json --port 3004",
+    "dev-start": "concurrently \"npm run indi-json-server\" \"npm run start\""
   },
   "eslintConfig": {
     "extends": [

@@ -1,4 +1,4 @@
-# dbcsos - Digital Business Cards for International SOS
+# Digital Business Cards for International SOS
 
 ## Available Scripts
 
