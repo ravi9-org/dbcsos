@@ -4,23 +4,26 @@ import { useNavigate } from "react-router-dom";
 
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
-import defaultUserImage from "../../../../assets/img/default-profile.png";
 import DataTable from "../../../controls/table/DataTable";
 
-const Users = () => {
+const Badges = () => {
   let navigate = useNavigate();
 
-  let { setCanRedirectToLogin } = useContext(ContextComponent);
+  let { setCanRedirectToLogin, setLoadingState } = useContext(ContextComponent);
 
   let [tableColumns, setTableColumns] = useState([
     "id",
     "select",
-    "username",
-    "email",
-    "department",
-    "organization",
-    "designation",
-    "isAdmin",
+    "name",
+    "iconImage",
+    "darkIconImage",
+    "type",
+    "readonly",
+    "defaultValue",
+    "constant",
+    "isDefault",
+    "multiple",
+    "required",
   ]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
     id: {
@@ -29,41 +32,67 @@ const Users = () => {
     },
     select: {
       type: "checkbox",
-      title: "-"
+      title: "-",
+      center: true
     },
-    username: {
+    name: {
       type: "text",
       search: true,
-      sort: true,
-      title: "User name"
+      sort: false,
+      title: "Badge name"
     },
-    email: {
+    iconImage: {
+      type: "image",
+      title: "Icon",
+      center: true
+    },
+    darkIconImage: {
+      type: "image",
+      title: "Icon label",
+      center: true
+    },
+    type: {
       type: "text",
-      search: true,
-      title: "Email"
+      title: "Type"
     },
-    department: {
-      type: "text",
-      title: "Department"
-    },
-    organization: {
-      type: "text",
-      title: "Organization"
-    },
-    designation: {
-      type: "text",
-      title: "Designation"
-    },
-    isAdmin: {
+    readonly: {
       type: "boolean",
-      title: "Admin",
-      center:true
+      title: "Readonly",
+      center: true
+    },
+    defaultValue: {
+      type: "text",
+      title: "Default value"
+    },
+    constant: {
+      type: "boolean",
+      title: "Constant",
+      center: true
+    },
+    isDefault: {
+      type: "boolean",
+      title: "Is default?",
+      center: true
+    },
+    multiple: {
+      type: "boolean",
+      title: "Allow multiple",
+      center: true
+    },
+    required: {
+      type: "boolean",
+      title: "Required",
+      center: true
     },
   });
+
   let [tableData, setTableData] = useState([]);
   let [canRender, setCanRender] = useState(false);
 
   const success = (res) => {
+    setLoadingState({
+      applyMask: false
+    });
     let userInfo = res?.data;
     let usersArray = [];
     if (!Utils.isObjectEmpty(userInfo)) {
@@ -91,6 +120,9 @@ const Users = () => {
   };
 
   const fail = (err) => {
+    setLoadingState({
+      applyMask: false
+    });
     err?.message?.length && console.log(err);
     if (err?.redirect) {
       setCanRedirectToLogin(true);
@@ -98,7 +130,11 @@ const Users = () => {
   };
 
   useEffect(() => {
-    Utils.getAllUsers().then(success, fail);
+    setLoadingState({
+      applyMask: false,
+      text: "Loading badges"
+    })
+    Utils.getBadges().then(success, fail);
   }, []);
 
   return (
@@ -112,4 +148,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Badges;

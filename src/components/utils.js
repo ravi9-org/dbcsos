@@ -19,6 +19,7 @@ const REST_API = {
   LOGIN: REST_API_PREFIX + "/login",
   LOGOUT: REST_API_PREFIX + "/logout",
   USER_PROFILE: REST_API_PREFIX + "/users/",
+  BADGES: REST_API_PREFIX + "/badges/",
   CARDS: REST_API_PREFIX + "/cards",
   TEMPLATES: REST_API_PREFIX + "/templates",
   USER_CARD: REST_API_PREFIX + "/usercards",
@@ -36,6 +37,7 @@ const APP_URLS = {
   CARD_DETAILS_PAGE: APP_URL_PREFIX + "/cards/:cardid",
   CARD_EXTERNAL_PAGE: APP_URL_PREFIX + "/cardextdetails/:cardid",
   ADDRESS_PAGE: APP_URL_PREFIX + "/addresses",
+  BADGES_PAGE: APP_URL_PREFIX + "/badges",
   USERS_PAGE: APP_URL_PREFIX + "/users",
   EMAIL_SIGNAURE_PAGE: APP_URL_PREFIX + "/emailsignature",
   CONTACTS_PAGE: APP_URL_PREFIX + "/contacts",
@@ -46,6 +48,7 @@ const NAV_ITEMS_KEYS = [
   "templates",
   "users",
   "addresses",
+  "badges",
   "cards",
   "emailsignature",
   "contacts",
@@ -66,6 +69,11 @@ const NAV_ITEMS_VALUES = {
   addresses: {
     title: "Addresses",
     url: APP_URLS.ADDRESS_PAGE,
+    enabled: false,
+  },
+  badges: {
+    title: "Badges",
+    url: APP_URLS.BADGES_PAGE,
     enabled: false,
   },
   cards: {
@@ -183,6 +191,40 @@ const getAllUsers = () => {
     let token = getToken();
     if (token) {
       let getUrl = REST_API.USER_PROFILE;
+      axios
+        .get(getUrl, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          resolve(res);
+        });
+    } else {
+      reject({
+        redirect: true,
+        message: "No token available till now...",
+      });
+    }
+  });
+
+  return myPromise;
+};
+
+
+const getBadges = () => {
+  const myPromise = new Promise((resolve, reject) => {
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+    if (token) {
+      let getUrl = REST_API.BADGES;
       axios
         .get(getUrl, {
           headers: {
@@ -445,6 +487,7 @@ const Utils = {
   userSessionExists,
   getUserProfile,
   getAllUsers,
+  getBadges,
   getUserId,
   getCardDetails,
   deleteCard,

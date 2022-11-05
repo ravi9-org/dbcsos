@@ -12,6 +12,9 @@ import usersActiveImg from "../../../assets/img/navitems/light/users.png";
 import addressesImg from "../../../assets/img/navitems/dark/addresses.png";
 import addressesActiveImg from "../../../assets/img/navitems/light/addresses.png";
 
+import badgesImg from "../../../assets/img/navitems/dark/settings.png";
+import badgesActiveImg from "../../../assets/img/navitems/light/settings.png";
+
 import cardsImg from "../../../assets/img/navitems/dark/cards.png";
 import cardsActiveImg from "../../../assets/img/navitems/light/cards.png";
 
@@ -28,6 +31,7 @@ const images = {
   templates: templatesImg,
   users: usersImg,
   addresses: addressesImg,
+  badges: badgesImg,
   cards: cardsImg,
   emailsignature: emailsignatureImg,
   contacts: contactsImg,
@@ -38,6 +42,7 @@ const activeImages = {
   templates: templatesActiveImg,
   users: usersActiveImg,
   addresses: addressesActiveImg,
+  badges: badgesActiveImg,
   cards: cardsActiveImg,
   emailsignature: emailsignatureActiveImg,
   contacts: contactsActiveImg,

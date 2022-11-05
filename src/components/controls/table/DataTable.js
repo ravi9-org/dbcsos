@@ -5,6 +5,7 @@ import TextCell from "./cells/TextCell";
 import HiddenCell from "./cells/HiddenCell";
 import CheckBoxCell from "./cells/CheckBoxCell";
 import BooleanCell from "./cells/BooleanCell";
+import ImageCell from "./cells/ImageCell";
 import TableHeader from "./TableHeader";
 
 const DataTable = ({ tableProps }) => {
@@ -32,16 +33,19 @@ const DataTable = ({ tableProps }) => {
               {tableColumns.map((col, colIndex) => (
                 <React.Fragment key={`${colIndex}`}>
                   {tableColumnSchema[col].type === "text" && (
-                    <TextCell props={{ data, colIndex }} />
+                    <TextCell props={{ data, colIndex, schema: tableColumnSchema[col] }} />
                   )}
                   {tableColumnSchema[col].type === "hidden" && (
-                    <HiddenCell props={{ data, colIndex }} />
+                    <HiddenCell props={{ data, colIndex, schema: tableColumnSchema[col] }} />
                   )}
                   {tableColumnSchema[col].type === "checkbox" && (
-                    <CheckBoxCell props={{ data, colIndex }} />
+                    <CheckBoxCell props={{ data, colIndex, schema: tableColumnSchema[col] }} />
+                  )}
+                  {tableColumnSchema[col].type === "image" && (
+                    <ImageCell props={{ data, colIndex, schema: tableColumnSchema[col] }} />
                   )}
                   {tableColumnSchema[col].type === "boolean" && (
-                    <BooleanCell props={{ data, colIndex }} />
+                    <BooleanCell props={{ data, colIndex, schema: tableColumnSchema[col] }} />
                   )}
                 </React.Fragment>
               ))}
