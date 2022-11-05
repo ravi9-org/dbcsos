@@ -14,6 +14,7 @@ const AddCard = ({ templateId = 2 }) => {
   let [updatedFields, setUpdatedFields] = useState([]);
   let [updatedValues, setUpdatedValues] = useState([]);
   let [cardImageValue, setCardImageValue] = useState([]);
+  let [croppedImageValue, setCroppedImageValue] = useState([]);
 
   let [isDataAvailable, setIsDataAvailable] = useState(false);
   const success = (res) => {
@@ -35,6 +36,7 @@ const AddCard = ({ templateId = 2 }) => {
 
   let inputElementClassNames = "indi-any-input-element";
   let imageInputElementClassNames = "indi-image-input-element";
+  let croppedImageInputElementClassNames = "indi-cropped-image-input-element";
 
   let [valueChanged, setValueChanged] = useState(false);
   const saveCard = (e) => {
@@ -43,6 +45,10 @@ const AddCard = ({ templateId = 2 }) => {
     let cardImageEle = document.getElementsByClassName(
       imageInputElementClassNames
     );
+    let croppedCardImageEle = document.getElementsByClassName(
+      croppedImageInputElementClassNames
+    );
+
     let cardImageValue = "";
     let inputElements = document.getElementsByClassName(inputElementClassNames);
 
@@ -55,7 +61,13 @@ const AddCard = ({ templateId = 2 }) => {
       let imgVal = imgEle?.value || "";
       setCardImageValue(imgVal);
     }
-    setUpdatedValues(dataValues, cardImageValue);
+
+    for (let imgEle of croppedCardImageEle) {
+      let imgVal = imgEle?.value || "";
+      setCroppedImageValue(imgVal);
+    }
+
+    setUpdatedValues(dataValues, cardImageValue, croppedImageValue);
     setValueChanged(true);
   };
 
@@ -84,6 +96,7 @@ const AddCard = ({ templateId = 2 }) => {
 
   const submitForm = (info) => {
     info.cardImage = cardImageValue;
+    info.croppedImage = croppedImageValue;
     const success = (res) => {
       updateUserInfo(res.data.id);
     };
