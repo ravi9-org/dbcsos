@@ -15,6 +15,7 @@ const EditCard = () => {
   let [updatedFields, setUpdatedFields] = useState([]);
   let [updatedValues, setUpdatedValues] = useState([]);
   let [cardImageValue, setCardImageValue] = useState([]);
+  let [croppedImageValue, setCroppedImageValue] = useState([]);
 
   let [isDataAvailable, setIsDataAvailable] = useState(false);
   const success = (res) => {
@@ -36,6 +37,7 @@ const EditCard = () => {
 
   let inputElementClassNames = "indi-any-input-element";
   let imageInputElementClassNames = "indi-image-input-element";
+  let croppedImageInputElementClassNames = "indi-cropped-image-input-element";
 
   let [valueChanged, setValueChanged] = useState(false);
   const updateCard = (e) => {
@@ -44,6 +46,10 @@ const EditCard = () => {
     let cardImageEle = document.getElementsByClassName(
       imageInputElementClassNames
     );
+    let croppedCardImageEle = document.getElementsByClassName(
+      croppedImageInputElementClassNames
+    );
+
     let cardImageValue = "";
     let inputElements = document.getElementsByClassName(inputElementClassNames);
 
@@ -56,7 +62,13 @@ const EditCard = () => {
       let imgVal = imgEle?.value || "";
       setCardImageValue(imgVal);
     }
-    setUpdatedValues(dataValues, cardImageValue);
+
+    for (let imgEle of croppedCardImageEle) {
+      let imgVal = imgEle?.value || "";
+      setCroppedImageValue(imgVal);
+    }
+
+    setUpdatedValues(dataValues, cardImageValue, croppedImageValue);
     setValueChanged(true);
   };
 
@@ -66,6 +78,7 @@ const EditCard = () => {
 
   const submitForm = (info) => {
     info.cardImage = cardImageValue;
+    info.croppedImage = croppedImageValue;
     const success = (res) => {
       navigateBackToCardsListPage();
     };

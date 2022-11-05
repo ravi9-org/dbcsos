@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
 import AddCardItem from "./AddEditCardItem";
+import BadgesRibbon from "../badges/BadgesRibbon";
 
 const AddCard = ({ templateId = 2 }) => {
   const navigate = useNavigate();
@@ -138,17 +139,26 @@ const AddCard = ({ templateId = 2 }) => {
               }}
             />
           )}
-          <div className="indi-add-card-item-footer">
-            <button type="button" className="btn btn-primary" onClick={goBack}>
-              Back
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={saveCard}
-            >
-              Save
-            </button>
+          <div className="indi-add-card-item-footer d-flex d-flex-row">
+            <div className="indi-add-card-page-badge-ribbon-wrapper">
+              <BadgesRibbon />
+            </div>
+            <div className="indi-add-card-page-footer-btn-wrapper d-flex d-flex-row">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={goBack}
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={saveCard}
+              >
+                Save
+              </button>
+            </div>
           </div>
         </div>
       </form>

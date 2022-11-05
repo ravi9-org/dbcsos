@@ -271,7 +271,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   margin: 0 auto;
 }
 
-.indi-app .indi-content-area-wrapper .indi-add-card-wrapper .indi-add-card-item-footer>button.btn {
+.indi-app .indi-content-area-wrapper .indi-add-card-wrapper .indi-add-card-item-footer button.btn {
   float: right;
   margin: 8px;
   background-color: #232862;
@@ -421,7 +421,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-cards-collection-wrapper {
   /* border: 1px dotted #000; */
   height: calc(100% - 32px);
-  padding: 29px 0;
+  /* padding: 29px 0; */
+  padding: 0;
   overflow-x: auto;
 }
 
@@ -955,4 +956,12 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .cropper-modal {
   opacity: 1;
   background-color: transparent;
+}
+
+.indi-app .indi-add-card-page-badge-ribbon-wrapper {
+  width: calc(100% - 150px);
+}
+
+.indi-app .indi-add-card-page-footer-btn-wrapper {
+  width: 150px;
 }
