@@ -11,7 +11,7 @@ const Field = (props = {}) => {
   let fieldProps = props.fieldProps;
   let fieldType = fieldProps.fieldType;
   let fieldSchema = badgesCtxData.filter((b) => b.badgeId === fieldType)[0];
-  let isDefault = fieldSchema.isDefault;
+  let isDefault = fieldSchema?.isDefault;
 
   let fieldData = fieldProps.fieldData;
   let mode = props.pageMode;
