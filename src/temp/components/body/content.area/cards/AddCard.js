@@ -6,9 +6,11 @@ import Utils from "../../../Utils";
 import AddCardItem from "./AddEditCardItem";
 import BadgesRibbon from "../badges/BadgesRibbon";
 
+import CardContext from "./CardContext";
+
 const AddCard = ({ templateId = 2 }) => {
   const navigate = useNavigate();
-  let { userData } = useContext(ContextComponent);
+  let { userData, badgesCtxData } = useContext(ContextComponent);
 
   let [templateData, setTemplateData] = useState({});
   let [newCardData, setNewCardData] = useState({});
@@ -16,6 +18,9 @@ const AddCard = ({ templateId = 2 }) => {
   let [updatedValues, setUpdatedValues] = useState([]);
   let [cardImageValue, setCardImageValue] = useState([]);
   let [croppedImageValue, setCroppedImageValue] = useState([]);
+  let [cardCtxInfo, setCardCtxInfo] = useState({ fields: [], data: [] });
+
+  let [canRender, setCanRender] = useState(false);
 
   let [isDataAvailable, setIsDataAvailable] = useState(false);
   const success = (res) => {
@@ -23,6 +28,11 @@ const AddCard = ({ templateId = 2 }) => {
     setIsDataAvailable(true);
     setUpdatedFields(res.data.fields);
     setUpdatedValues(res.data.fieldsData);
+    let tempCardCtxInfo = { ...cardCtxInfo };
+    tempCardCtxInfo.fields = res.data.fields;
+    tempCardCtxInfo.data = res.data.fieldsData;
+    setCardCtxInfo(tempCardCtxInfo);
+    setCanRender(true);
   };
   const fail = (err) => {
     err?.message?.length && console.log(err);
@@ -124,8 +134,13 @@ const AddCard = ({ templateId = 2 }) => {
   }, [updatedValues]);
 
   return (
-    <>
-      <form>
+    <CardContext.Provider
+      value={{
+        cardCtxInfo,
+        setCardCtxInfo,
+      }}
+    >
+      {canRender && <form>
         <div className="indi-add-card-wrapper d-flex flex-column">
           <div className="indi-add-card-title">Add Card</div>
           {isDataAvailable && (
@@ -143,6 +158,7 @@ const AddCard = ({ templateId = 2 }) => {
             <div className="indi-add-card-page-badge-ribbon-wrapper">
               <BadgesRibbon />
             </div>
+
             <div className="indi-add-card-page-footer-btn-wrapper d-flex d-flex-row">
               <button
                 type="button"
@@ -161,8 +177,8 @@ const AddCard = ({ templateId = 2 }) => {
             </div>
           </div>
         </div>
-      </form>
-    </>
+      </form>}
+    </CardContext.Provider>
   );
 };
 

@@ -549,8 +549,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-repeat: no-repeat;
 }
 
-.indi-card-field-item-img.indi-card-field-item-telephone {
-  background-image: url("./../img/fields/telephone.png");
+.indi-card-field-item-img.indi-card-field-item-phone {
+  background-image: url("./../img/fields/phone.png");
 }
 
 .indi-card-field-item-img.indi-card-field-item-wechat {
@@ -566,7 +566,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-card-field-item-img.indi-card-field-item-mobile {
-  background-image: url("./../img/fields/telephone.png");
+  background-image: url("./../img/fields/phone.png");
 }
 
 .indi-card-field-item-img.indi-card-field-item-linkedin {
@@ -969,4 +969,23 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-add-card-page-footer-btn-wrapper {
   width: 150px;
+}
+
+.indi-app .indi-badges-ribbon-wrapper {
+  justify-content: center;
+}
+
+.indi-app .indi-badge-item-wrapper {
+  margin-right: 12px;
+  font-size: 12px;
+}
+
+.indi-app .indi-badge-item-icon-image {
+  width: 24px;
+  height: 24px;
+}
+
+.indi-app .indi-badge-freeze {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

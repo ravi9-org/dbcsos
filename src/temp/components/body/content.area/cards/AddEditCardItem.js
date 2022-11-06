@@ -4,10 +4,12 @@ import { Button, Modal, Alert, OverlayTrigger, Popover } from "react-bootstrap";
 import { Cropper } from "react-cropper";
 
 import ContextComponent from "../../../AppContext";
+import CardContext from "../cards/CardContext";
 import Field from "../../../controls/input.elements/Field";
 
 const AddCardItem = ({ props }) => {
   let { userData } = useContext(ContextComponent);
+  let { cardCtxInfo, setCardCtxInfo } = useContext(CardContext);
   let cardInitialData = props.cardInitialData,
     setNewCardData = props.setNewCardData,
     pageMode = props.pageMode || "add",
@@ -42,7 +44,9 @@ const AddCardItem = ({ props }) => {
     cardInitialData.fieldsSchema || {}
   );
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(" something needs to be add here... ");
+  }, [cardCtxInfo]);
 
   const fileToDataUri = (file) =>
     new Promise((resolve, reject) => {
