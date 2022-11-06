@@ -4,11 +4,15 @@ import { useParams, useNavigate } from "react-router";
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
 import EditCardItem from "./AddEditCardItem";
+import BadgesRibbon from "../badges/BadgesRibbon";
+
+import CardContext from "./CardContext";
 
 const EditCard = () => {
   const { cardid } = useParams();
 
   const navigate = useNavigate();
+  let { badgesCtxData } = useContext(ContextComponent);
 
   let [templateData, setTemplateData] = useState({});
   let [newCardData, setNewCardData] = useState({});
@@ -16,6 +20,9 @@ const EditCard = () => {
   let [updatedValues, setUpdatedValues] = useState([]);
   let [cardImageValue, setCardImageValue] = useState([]);
   let [croppedImageValue, setCroppedImageValue] = useState([]);
+  let [cardCtxInfo, setCardCtxInfo] = useState({ fields: [], data: [] });
+
+  let [canRender, setCanRender] = useState(false);
 
   let [isDataAvailable, setIsDataAvailable] = useState(false);
   const success = (res) => {
@@ -23,6 +30,11 @@ const EditCard = () => {
     setUpdatedFields(res.data.fields);
     setUpdatedValues(res.data.fieldsData);
     setIsDataAvailable(true);
+    let tempCardCtxInfo = { ...cardCtxInfo };
+    tempCardCtxInfo.fields = res.data.fields;
+    tempCardCtxInfo.data = res.data.fieldsData;
+    setCardCtxInfo(tempCardCtxInfo);
+    setCanRender(true);
   };
   const fail = (err) => {
     err?.message?.length && console.log(err);
@@ -105,36 +117,52 @@ const EditCard = () => {
   }, [updatedValues]);
 
   return (
-    <>
-      <form>
-        <div className="indi-add-card-wrapper d-flex flex-column">
-          <div className="indi-add-card-title">Edit Card</div>
-          {isDataAvailable && (
-            <EditCardItem
-              className="indi-add-card-wrapper"
-              props={{
-                cardInitialData: templateData,
-                setNewCardData,
-                pageMode: "edit",
-                inputElementClassNames,
-              }}
-            />
-          )}
-          <div className="indi-add-card-item-footer">
-            <button type="button" className="btn btn-primary" onClick={goBack}>
-              Back
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={updateCard}
-            >
-              Update
-            </button>
+    <CardContext.Provider
+      value={{
+        cardCtxInfo,
+        setCardCtxInfo,
+      }}
+    >
+      {canRender && (
+        <form>
+          <div className="indi-add-card-wrapper d-flex flex-column">
+            <div className="indi-add-card-title">Edit Card</div>
+            {isDataAvailable && (
+              <EditCardItem
+                className="indi-add-card-wrapper"
+                props={{
+                  cardInitialData: templateData,
+                  setNewCardData,
+                  pageMode: "edit",
+                  inputElementClassNames,
+                }}
+              />
+            )}
+            <div className="indi-add-card-item-footer d-flex d-flex-row">
+              <div className="indi-edit-card-page-badge-ribbon-wrapper">
+                <BadgesRibbon />
+              </div>
+              <div className="indi-add-card-page-footer-btn-wrapper d-flex d-flex-row">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={goBack}
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={updateCard}
+                >
+                  Update
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </form>
-    </>
+        </form>
+      )}
+    </CardContext.Provider>
   );
 };
 

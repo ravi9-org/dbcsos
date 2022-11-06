@@ -8,8 +8,9 @@ import CardContext from "../cards/CardContext";
 import Field from "../../../controls/input.elements/Field";
 
 const AddCardItem = ({ props }) => {
-  let { userData } = useContext(ContextComponent);
+  let { userData, badgesCtxData } = useContext(ContextComponent);
   let { cardCtxInfo, setCardCtxInfo } = useContext(CardContext);
+  let [cardItemCtxInfo, setCardItemCtxInfo] = useState(cardCtxInfo);
   let cardInitialData = props.cardInitialData,
     setNewCardData = props.setNewCardData,
     pageMode = props.pageMode || "add",
@@ -40,12 +41,11 @@ const AddCardItem = ({ props }) => {
   const [cropData, setCropData] = useState("#");
   const [cropper, setCropper] = useState();
 
-  let [fieldsSchema, setFieldsSchema] = useState(
-    cardInitialData.fieldsSchema || {}
-  );
-
   useEffect(() => {
     console.log(" something needs to be add here... ");
+    setCardItemCtxInfo(cardCtxInfo);
+    setFields(cardCtxInfo.fields);
+    setFieldsData(cardCtxInfo.data);
   }, [cardCtxInfo]);
 
   const fileToDataUri = (file) =>
@@ -139,7 +139,6 @@ const AddCardItem = ({ props }) => {
               fieldProps={{
                 fieldType: field,
                 inputElementClassNames,
-                filedSchema: fieldsSchema[field],
                 fieldData: fieldsData[index],
               }}
               pageMode={pageMode}

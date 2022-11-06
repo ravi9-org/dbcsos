@@ -84,7 +84,6 @@ const CardItem = (props) => {
                 <Field
                   fieldProps={{
                     fieldType: field,
-                    filedSchema: fieldsSchema[field],
                     fieldData: fieldsData[index],
                   }}
                   key={index}

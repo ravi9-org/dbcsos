@@ -17,11 +17,10 @@ const TextAreaInput = (props) => {
       required={isRequired}
       ref={inputEle}
       readOnly={isReadOnly}
-      placeholder={`Enter ${fieldName}`}
+      defaultValue={value}
+      placeholder={`${fieldName}`}
       onChange={onChangeInput}
-    >
-      {value}
-    </textarea>
+    ></textarea>
   );
 };
 

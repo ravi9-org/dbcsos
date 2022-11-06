@@ -14,7 +14,7 @@ const Badge = (props) => {
   let [isMultiple, setIsMultiple] = useState(badge.multiple);
   let canFreeze = false;
   if (!isMultiple) {
-    if (cardCtxInfo.fields.indexOf(badge.badgeId) > -1) {
+    if (cardCtxInfo?.fields?.indexOf(badge.badgeId) > -1) {
       canFreeze = true;
     }
   }
@@ -38,6 +38,13 @@ const Badge = (props) => {
         setClassNameList("indi-badge-freeze");
       } else {
       }
+      console.log(badge.badgeId);
+      let tempCardCtxInfo = {...cardCtxInfo};
+      let tempFields = tempCardCtxInfo.fields;
+      let tempData = tempCardCtxInfo.data;
+      tempFields.push(badge.badgeId);
+      tempData.push(badge.defaultValue);
+      setCardCtxInfo(tempCardCtxInfo);
       // inform form about new field to be add
     }
   };
