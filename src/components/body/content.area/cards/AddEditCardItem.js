@@ -42,7 +42,6 @@ const AddCardItem = ({ props }) => {
   const [cropper, setCropper] = useState();
 
   useEffect(() => {
-    console.log(" something needs to be add here... ");
     setCardItemCtxInfo(cardCtxInfo);
     setFields(cardCtxInfo.fields);
     setFieldsData(cardCtxInfo.data);

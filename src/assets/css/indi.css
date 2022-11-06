@@ -994,6 +994,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   padding: 16px;
   display: flex;
   overflow-x: auto;
+  overflow-x: overlay;
 }
 
 .indi-app .indi-edit-card-page-badge-ribbon-wrapper {

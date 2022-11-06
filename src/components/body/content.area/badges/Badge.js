@@ -35,15 +35,12 @@ const Badge = (props) => {
     e.preventDefault();
     if (freezeBadge) {
       // do nothing
-      console.log(" do NO-thing ");
     } else {
-      console.log(" do something ");
       if (!isMultiple) {
         setFreezeBadge(true);
         setClassNameList("indi-badge-freeze");
       } else {
       }
-      console.log(badge.badgeId);
       let tempCardCtxInfo = {...cardCtxInfo};
       let tempFields = tempCardCtxInfo.fields;
       let tempData = tempCardCtxInfo.data;
@@ -53,8 +50,6 @@ const Badge = (props) => {
       // inform form about new field to be add
     }
   };
-
-  console.log(" rendering... ");
 
   return (
     <div

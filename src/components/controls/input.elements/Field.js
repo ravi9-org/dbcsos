@@ -22,16 +22,12 @@ const Field = (props = {}) => {
   const removeField = (e) => {
     e.preventDefault();
     let tempCardCtxInfo = { ...cardCtxInfo };
-    console.log(tempCardCtxInfo.fields);
     tempCardCtxInfo.fields = tempCardCtxInfo?.fields?.filter((field, index) => {
       return index !== fieldIndex;
     });
     tempCardCtxInfo.data = tempCardCtxInfo?.data?.filter((field, index) => {
       return index !== fieldIndex;
     });
-    
-    console.log(tempCardCtxInfo);
-    debugger;
     setCardCtxInfo(tempCardCtxInfo);
     //inform form about new field to be add
   };
