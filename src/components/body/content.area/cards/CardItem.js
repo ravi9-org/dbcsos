@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Field from "../../../controls/input.elements/Field";
 import Utils from "../../../Utils";
 import ContextComponent from "../../../AppContext";
+import CardContext from "./CardContext";
 
 const CardItem = (props) => {
   let cardId = props.cardId;
@@ -16,6 +17,8 @@ const CardItem = (props) => {
   let [fieldsSchema, setFieldsSchema] = useState(cardData?.fieldsSchema || {});
   let [applyActions, setApplyActions] = useState(props.applyActions || false);
 
+  let [cardCtxInfo, setCardCtxInfo] = useState({ fields: [], data: [] });
+
   const navigate = useNavigate();
 
   let { userData } = useContext(ContextComponent);
@@ -25,6 +28,11 @@ const CardItem = (props) => {
     setFields(res.data.fields);
     setFieldsData(res.data.fieldsData);
     setFieldsSchema(res.data.fieldsSchema);
+    
+    let tempCardCtxInfo = { ...cardCtxInfo };
+    tempCardCtxInfo.fields = res.data.fields;
+    tempCardCtxInfo.data = res.data.fieldsData;
+    setCardCtxInfo(tempCardCtxInfo);
   };
 
   const fail = (err) => {
@@ -51,6 +59,12 @@ const CardItem = (props) => {
   };
 
   return (
+    <CardContext.Provider
+      value={{
+        cardCtxInfo,
+        setCardCtxInfo,
+      }}
+    >
     <div
       onClick={navigateToCardDetailsPage}
       className={`indi-card-item-parent card-with-bg ${
@@ -92,7 +106,8 @@ const CardItem = (props) => {
           )}
         </div>
       </div>
-    </div>
+      </div>
+      </CardContext.Provider>
   );
 };
 

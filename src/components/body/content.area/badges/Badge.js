@@ -12,33 +12,35 @@ const Badge = (props) => {
   //badgeId,darkIconImage,iconImage,id,isDefault,multiple,name,readonly,required,type
 
   let [isMultiple, setIsMultiple] = useState(badge.multiple);
+  
   let canFreeze = false;
-  if (!isMultiple) {
-    if (cardCtxInfo?.fields?.indexOf(badge.badgeId) > -1) {
-      canFreeze = true;
-    }
-  }
-
   let [freezeBadge, setFreezeBadge] = useState(canFreeze);
-  let [classNameList, setClassNameList] = useState(
-    canFreeze ? FREEZED_STYLE : ""
-  );
+    let [classNameList, setClassNameList] = useState(
+      canFreeze ? FREEZED_STYLE : ""
+    );
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!isMultiple) {
+      if (cardCtxInfo?.fields?.indexOf(badge.badgeId) > -1) {
+        canFreeze = true;
+      }
+    }
+  
+    setFreezeBadge(canFreeze);
+    setClassNameList(canFreeze ? FREEZED_STYLE : "");
+
+  }, [cardCtxInfo]);
 
   const badgeSelected = (e) => {
     e.preventDefault();
     if (freezeBadge) {
       // do nothing
-      console.log(" do NO-thing ");
     } else {
-      console.log(" do something ");
       if (!isMultiple) {
         setFreezeBadge(true);
         setClassNameList("indi-badge-freeze");
       } else {
       }
-      console.log(badge.badgeId);
       let tempCardCtxInfo = {...cardCtxInfo};
       let tempFields = tempCardCtxInfo.fields;
       let tempData = tempCardCtxInfo.data;
@@ -48,8 +50,6 @@ const Badge = (props) => {
       // inform form about new field to be add
     }
   };
-
-  console.log(" rendering... ");
 
   return (
     <div

@@ -109,7 +109,7 @@ const EditCard = () => {
     if (valueChanged) {
       let templateInfo = templateData;
       templateInfo.fieldsData = updatedValues;
-      templateInfo.fields = updatedFields;
+      templateInfo.fields = cardCtxInfo.fields;
       templateInfo.userId = cardid;
       templateInfo.cardImage = Utils.getUserId();
       submitForm(templateInfo);

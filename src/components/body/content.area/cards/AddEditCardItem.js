@@ -42,7 +42,6 @@ const AddCardItem = ({ props }) => {
   const [cropper, setCropper] = useState();
 
   useEffect(() => {
-    console.log(" something needs to be add here... ");
     setCardItemCtxInfo(cardCtxInfo);
     setFields(cardCtxInfo.fields);
     setFieldsData(cardCtxInfo.data);
@@ -81,12 +80,24 @@ const AddCardItem = ({ props }) => {
   const popover = (
     <Popover id="popover-basic">
       <Popover.Body>
-        <div><b>Please upload image in this format:</b></div>
-        <div><b>Type:</b>JPEG, PNG, WebP, GID, AVIF, TIFF and SVG</div>
-        <div><b>Quality setting:</b> 80</div>
-        <div><b>Size:</b> 2048 X 2048 pixels</div>
-        <div><b>Colorspace:</b> RGB</div>
-        <div><b>Max file size:</b> 4 MB</div>
+        <div>
+          <b>Please upload image in this format:</b>
+        </div>
+        <div>
+          <b>Type:</b>JPEG, PNG, WebP, GID, AVIF, TIFF and SVG
+        </div>
+        <div>
+          <b>Quality setting:</b> 80
+        </div>
+        <div>
+          <b>Size:</b> 2048 X 2048 pixels
+        </div>
+        <div>
+          <b>Colorspace:</b> RGB
+        </div>
+        <div>
+          <b>Max file size:</b> 4 MB
+        </div>
       </Popover.Body>
     </Popover>
   );
@@ -136,6 +147,7 @@ const AddCardItem = ({ props }) => {
         <div className="indi-card-field-wrapper">
           {fields?.map((field, index) => (
             <Field
+              fieldIndex={index}
               fieldProps={{
                 fieldType: field,
                 inputElementClassNames,
@@ -203,7 +215,10 @@ const AddCardItem = ({ props }) => {
                   placement="bottom-start"
                   overlay={popover}
                 >
-                  <div className="indi-crop-card-info-btn indi-place-me-top-right" role="button">
+                  <div
+                    className="indi-crop-card-info-btn indi-place-me-top-right"
+                    role="button"
+                  >
                     i
                   </div>
                 </OverlayTrigger>
