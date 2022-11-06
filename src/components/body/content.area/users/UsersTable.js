@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
-import defaultUserImage from "../../../../assets/img/default-profile.png";
+import AddIcon from "../../../../assets/img/add.png";
+import DeleteIcon from "../../../../assets/img/Delete.png";
 import DataTable from "../../../controls/table/DataTable";
 
-const Users = () => {
+const UsersTable = () => {
   let navigate = useNavigate();
 
   let { setCanRedirectToLogin } = useContext(ContextComponent);
@@ -21,43 +22,48 @@ const Users = () => {
     "organization",
     "designation",
     "isAdmin",
+    "search"
   ]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
     id: {
       type: "hidden",
-      title: "id"
+      title: "id",
     },
     select: {
       type: "checkbox",
-      title: "-"
+      title: "-",
     },
     username: {
       type: "text",
       search: true,
       sort: true,
-      title: "User name"
+      title: "User name",
     },
     email: {
       type: "text",
       search: true,
-      title: "Email"
+      title: "Email",
     },
     department: {
       type: "text",
-      title: "Department"
+      title: "Department",
     },
     organization: {
       type: "text",
-      title: "Organization"
+      title: "Organization",
     },
     designation: {
       type: "text",
-      title: "Designation"
+      title: "Designation",
     },
     isAdmin: {
       type: "boolean",
       title: "Admin",
-      center:true
+      center: true,
+    },
+    search: {
+      type: "search",
+      title: "Search"
     },
   });
   let [tableData, setTableData] = useState([]);
@@ -81,6 +87,7 @@ const Users = () => {
             userTableData.push(userInfo[index][col]);
           }
         });
+        userTableData.push("search");
         userTableObj = userTableData;
         return userTableObj;
       });
@@ -101,8 +108,35 @@ const Users = () => {
     Utils.getAllUsers().then(success, fail);
   }, []);
 
+  const navigateToAddUserPage = (e) => {
+    e.preventDefault();
+    return false;
+  };
+
+  const handleShow = (e) => {
+    e.preventDefault();
+    return false;
+  };
+
   return (
-    <div>
+    <div className="indi-body-cards-wrapper d-flex w-100">
+      <div className="indi-add-card-title">
+        Card View
+        <div className="d-none1 w-50 indi-body-actions">
+          <div
+            className="indi-body-action"
+            role="button"
+            onClick={navigateToAddUserPage}
+          >
+            <img className="indi-w-20" src={AddIcon} alt="Edit-icon"></img>
+            Add
+          </div>
+          <div className="indi-body-action" role="button" onClick={handleShow}>
+            <img className="indi-w-20" src={DeleteIcon} alt="Delete-icon"></img>
+            Delete
+          </div>
+        </div>
+      </div>
       {canRender && (
         <DataTable
           tableProps={{ tableColumns, tableColumnSchema, tableData }}
@@ -112,4 +146,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UsersTable;

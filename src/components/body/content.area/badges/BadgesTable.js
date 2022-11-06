@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom";
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
 import DataTable from "../../../controls/table/DataTable";
+import AddIcon from "../../../../assets/img/add.png";
+import DeleteIcon from "../../../../assets/img/Delete.png";
 
-const Badges = () => {
+const BadgesTable = () => {
   let navigate = useNavigate();
 
   let { setCanRedirectToLogin, setLoadingState } = useContext(ContextComponent);
@@ -28,61 +30,61 @@ const Badges = () => {
   let [tableColumnSchema, setTableColumnSchema] = useState({
     id: {
       type: "hidden",
-      title: "id"
+      title: "id",
     },
     select: {
       type: "checkbox",
       title: "-",
-      center: true
+      center: true,
     },
     name: {
       type: "text",
       search: true,
       sort: false,
-      title: "Badge name"
+      title: "Badge name",
     },
     iconImage: {
       type: "image",
       title: "Icon",
-      center: true
+      center: true,
     },
     darkIconImage: {
       type: "image",
       title: "Icon label",
-      center: true
+      center: true,
     },
     type: {
       type: "text",
-      title: "Type"
+      title: "Type",
     },
     readonly: {
       type: "boolean",
       title: "Readonly",
-      center: true
+      center: true,
     },
     defaultValue: {
       type: "text",
-      title: "Default value"
+      title: "Default value",
     },
     constant: {
       type: "boolean",
       title: "Constant",
-      center: true
+      center: true,
     },
     isDefault: {
       type: "boolean",
       title: "Is default?",
-      center: true
+      center: true,
     },
     multiple: {
       type: "boolean",
       title: "Allow multiple",
-      center: true
+      center: true,
     },
     required: {
       type: "boolean",
       title: "Required",
-      center: true
+      center: true,
     },
   });
 
@@ -91,7 +93,7 @@ const Badges = () => {
 
   const success = (res) => {
     setLoadingState({
-      applyMask: false
+      applyMask: false,
     });
     let userInfo = res?.data;
     let usersArray = [];
@@ -121,7 +123,7 @@ const Badges = () => {
 
   const fail = (err) => {
     setLoadingState({
-      applyMask: false
+      applyMask: false,
     });
     err?.message?.length && console.log(err);
     if (err?.redirect) {
@@ -132,15 +134,40 @@ const Badges = () => {
   useEffect(() => {
     setLoadingState({
       applyMask: false,
-      text: "Loading badges"
-    })
+      text: "Loading badges",
+    });
     Utils.getBadges().then(success, fail);
   }, []);
 
-  console.log(" -=-=-=-==-=-=-=-- canRender : " + canRender);
+  const navigateToAddBadgePage = e => {
+    e.preventDefault();
+    return false;
+  }
+
+  const handleShow = (e) => {
+    e.preventDefault();
+    return false;
+  };
 
   return (
-    <div>
+    <div className="indi-body-cards-wrapper d-flex w-100">
+      <div className="indi-add-card-title">
+        Card View
+        <div className="d-none1 w-50 indi-body-actions">
+          <div
+            className="indi-body-action"
+            role="button"
+            onClick={navigateToAddBadgePage}
+          >
+            <img className="indi-w-20" src={AddIcon} alt="Edit-icon"></img>
+            Add
+          </div>
+          <div className="indi-body-action" role="button" onClick={handleShow}>
+            <img className="indi-w-20" src={DeleteIcon} alt="Delete-icon"></img>
+            Delete
+          </div>
+        </div>
+      </div>
       {canRender && (
         <DataTable
           tableProps={{ tableColumns, tableColumnSchema, tableData }}
@@ -150,4 +177,4 @@ const Badges = () => {
   );
 };
 
-export default Badges;
+export default BadgesTable;
