@@ -198,10 +198,9 @@ const AddCardItem = ({ props }) => {
                   }}
                   guides={true}
                 />
-                <div>i</div>
 
                 <OverlayTrigger
-                  trigger="hover"
+                  trigger="click"
                   placement="bottom-start"
                   overlay={popover}
                 >
