@@ -81,12 +81,12 @@ const AddCardItem = ({ props }) => {
   const popover = (
     <Popover id="popover-basic">
       <Popover.Body>
-        <div>Please upload image in this format:</div>
-        <div>Type: JPEG, PNG, WebP, GID, AVIF, TIFF and SVG</div>
-        <div>Quality setting: 80</div>
-        <div>Size: 2048 X 2048 pixels</div>
-        <div>Colorspace: RGB</div>
-        <div>Max file size: 4 MB</div>
+        <div><b>Please upload image in this format:</b></div>
+        <div><b>Type:</b>JPEG, PNG, WebP, GID, AVIF, TIFF and SVG</div>
+        <div><b>Quality setting:</b> 80</div>
+        <div><b>Size:</b> 2048 X 2048 pixels</div>
+        <div><b>Colorspace:</b> RGB</div>
+        <div><b>Max file size:</b> 4 MB</div>
       </Popover.Body>
     </Popover>
   );
@@ -204,7 +204,7 @@ const AddCardItem = ({ props }) => {
                   placement="bottom-start"
                   overlay={popover}
                 >
-                  <div className="indi-crop-card-info-btn" role="button">
+                  <div className="indi-crop-card-info-btn indi-place-me-top-right" role="button">
                     i
                   </div>
                 </OverlayTrigger>
