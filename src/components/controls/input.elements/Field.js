@@ -1,17 +1,40 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import InputElement from "./InputElement";
 import ContextComponent from "../../AppContext";
+import CardContext from "../../body/content.area/cards/CardContext";
 
 const Field = (props = {}) => {
-  let { userData, badgesCtxData } = useContext(ContextComponent);
+  let { badgesCtxData } = useContext(ContextComponent);
+  let { cardCtxInfo, setCardCtxInfo } = useContext(CardContext);
+
+  let fieldIndex = props.fieldIndex;
   let fieldProps = props.fieldProps;
   let fieldType = fieldProps.fieldType;
   let fieldSchema = badgesCtxData.filter((b) => b.badgeId === fieldType)[0];
-  
+  let isDefault = fieldSchema.isDefault;
+
   let fieldData = fieldProps.fieldData;
   let mode = props.pageMode;
-  
+  let canRemoveField = !isDefault && (mode === "add" || mode === "edit");
+
   let inputElementClassNames = fieldProps.inputElementClassNames;
+
+  const removeField = (e) => {
+    e.preventDefault();
+    let tempCardCtxInfo = { ...cardCtxInfo };
+    console.log(tempCardCtxInfo.fields);
+    tempCardCtxInfo.fields = tempCardCtxInfo?.fields?.filter((field, index) => {
+      return index !== fieldIndex;
+    });
+    tempCardCtxInfo.data = tempCardCtxInfo?.data?.filter((field, index) => {
+      return index !== fieldIndex;
+    });
+    
+    console.log(tempCardCtxInfo);
+    debugger;
+    setCardCtxInfo(tempCardCtxInfo);
+    //inform form about new field to be add
+  };
 
   return (
     <div className="indi-card-field-item d-flex">
@@ -32,6 +55,16 @@ const Field = (props = {}) => {
             inputElementClassNames,
           }}
         />
+      )}
+
+      {canRemoveField && (
+        <div
+          className="indi-badge-field-remove"
+          role="button"
+          onClick={removeField}
+        >
+          x
+        </div>
       )}
     </div>
   );

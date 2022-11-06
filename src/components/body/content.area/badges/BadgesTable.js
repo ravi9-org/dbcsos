@@ -137,6 +137,8 @@ const Badges = () => {
     Utils.getBadges().then(success, fail);
   }, []);
 
+  console.log(" -=-=-=-==-=-=-=-- canRender : " + canRender);
+
   return (
     <div>
       {canRender && (

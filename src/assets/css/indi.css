@@ -333,9 +333,10 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 /*Body end*/
 
 /*popover style start*/
-.indi-app .popover-body {  
+.indi-app .popover-body {
   color: #2f4694;
 }
+
 /*popover style end*/
 
 /*footer start*/
@@ -636,8 +637,13 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-card-field-item input:read-only,
 .indi-card-field-item input:read-only:focus-visible {
-  font-style: italic;
-  color: lightgray;
+  /* font-style: italic; */
+  color: lightgray;  
+  -moz-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(160deg, 0deg);
+  -webkit-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(160deg, 0deg);
+  -o-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(160deg, 0deg);
+  -ms-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(160deg, 0deg);
+  transform: scale(1) rotate(0deg) translate(0px, 0px) skew(160deg, 0deg);
 }
 
 .indi-card-field-item input:focus-visible {
@@ -1016,4 +1022,21 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-badge-freeze {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.indi-app .indi-badge-field-remove {
+  font-size: 10px;
+  border: 1px solid grey;
+  border-radius: 50%;
+  height: 18px;
+  width: 18px;
+  text-align: center;
+  color: #abb5d7;
+}
+
+.indi-app .indi-badge-field-remove:hover {
+  border: 1px solid #fff;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
 }
