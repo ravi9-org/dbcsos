@@ -12,19 +12,24 @@ const Badge = (props) => {
   //badgeId,darkIconImage,iconImage,id,isDefault,multiple,name,readonly,required,type
 
   let [isMultiple, setIsMultiple] = useState(badge.multiple);
+  
   let canFreeze = false;
-  if (!isMultiple) {
-    if (cardCtxInfo?.fields?.indexOf(badge.badgeId) > -1) {
-      canFreeze = true;
-    }
-  }
-
   let [freezeBadge, setFreezeBadge] = useState(canFreeze);
-  let [classNameList, setClassNameList] = useState(
-    canFreeze ? FREEZED_STYLE : ""
-  );
+    let [classNameList, setClassNameList] = useState(
+      canFreeze ? FREEZED_STYLE : ""
+    );
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!isMultiple) {
+      if (cardCtxInfo?.fields?.indexOf(badge.badgeId) > -1) {
+        canFreeze = true;
+      }
+    }
+  
+    setFreezeBadge(canFreeze);
+    setClassNameList(canFreeze ? FREEZED_STYLE : "");
+
+  }, [cardCtxInfo]);
 
   const badgeSelected = (e) => {
     e.preventDefault();
