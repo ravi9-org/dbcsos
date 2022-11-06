@@ -6,7 +6,7 @@ import CardList from "./cards/CardsList";
 import TemplateList from "./templates/TemplatesList";
 import Utils from "../../Utils";
 import Addresses from "../../pages/Addresses";
-import Badges from "./badges/Badges";
+import Badges from "./badges/BadgesTable";
 import Users from "./users/Users";
 import EmailSignature from "../../pages/signatures/EmailSignature";
 import Contacts from "../../pages/Contacts";
