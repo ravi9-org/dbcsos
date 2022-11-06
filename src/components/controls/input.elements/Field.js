@@ -10,10 +10,16 @@ const Field = (props = {}) => {
   let fieldIndex = props.fieldIndex;
   let fieldProps = props.fieldProps;
   let fieldType = fieldProps.fieldType;
+  let showEmptyField = fieldProps?.showEmptyField || false;
   let fieldSchema = badgesCtxData.filter((b) => b.badgeId === fieldType)[0];
   let isDefault = fieldSchema?.isDefault;
 
   let fieldData = fieldProps.fieldData;
+  console.log(fieldData);
+  let isEmpty = false;
+  if ((fieldData === undefined || fieldData?.length === 0) && showEmptyField) {
+    isEmpty = true;
+  }
   let mode = props.pageMode;
   let canRemoveField = !isDefault && (mode === "add" || mode === "edit");
 
@@ -40,6 +46,10 @@ const Field = (props = {}) => {
 
       {(mode === "readonly" || (mode !== "add" && mode !== "edit")) && (
         <div className="indi-card-field-item-value"> {fieldData}</div>
+      )}
+
+      {isEmpty && (
+        <div className="indi-tamplte-empty-field-value">No value set</div>
       )}
 
       {(mode === "add" || mode === "edit") && (

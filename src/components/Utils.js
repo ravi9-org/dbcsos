@@ -279,6 +279,39 @@ const getUserProfile = () => {
   return myPromise;
 };
 
+const getTemplates = () => {
+  const myPromise = new Promise((resolve, reject) => {
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+    if (token) {
+      let getUrl = REST_API.TEMPLATES;
+      axios
+        .get(getUrl, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          resolve(res);
+        });
+    } else {
+      reject({
+        redirect: true,
+        message: "No token available till now...",
+      });
+    }
+  });
+
+  return myPromise;
+};
+
 const getTemplateDetails = (templateId) => {
   const myPromise = new Promise((resolve, reject) => {
     let session = getSession();
@@ -491,6 +524,7 @@ const Utils = {
   getUserId,
   getCardDetails,
   deleteCard,
+  getTemplates,
   getTemplateDetails,
   executeLoginRESTAPI,
   executeLogoutRESTAPI,

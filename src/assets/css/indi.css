@@ -1067,3 +1067,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-table-header-searchbox {
   width: 50px;
 }
+
+.indi-app .indi-tamplte-empty-field-value {
+  font-size: 14px;
+  color: darkgrey;
+  font-style: italic;
+}
