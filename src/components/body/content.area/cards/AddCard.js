@@ -4,16 +4,23 @@ import { useNavigate } from "react-router";
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
 import AddCardItem from "./AddEditCardItem";
+import BadgesRibbon from "../badges/BadgesRibbon";
+
+import CardContext from "./CardContext";
 
 const AddCard = ({ templateId = 2 }) => {
   const navigate = useNavigate();
-  let { userData } = useContext(ContextComponent);
+  let { userData, badgesCtxData } = useContext(ContextComponent);
 
   let [templateData, setTemplateData] = useState({});
   let [newCardData, setNewCardData] = useState({});
   let [updatedFields, setUpdatedFields] = useState([]);
   let [updatedValues, setUpdatedValues] = useState([]);
   let [cardImageValue, setCardImageValue] = useState([]);
+  let [croppedImageValue, setCroppedImageValue] = useState([]);
+  let [cardCtxInfo, setCardCtxInfo] = useState({ fields: [], data: [] });
+
+  let [canRender, setCanRender] = useState(false);
 
   let [isDataAvailable, setIsDataAvailable] = useState(false);
   const success = (res) => {
@@ -21,6 +28,11 @@ const AddCard = ({ templateId = 2 }) => {
     setIsDataAvailable(true);
     setUpdatedFields(res.data.fields);
     setUpdatedValues(res.data.fieldsData);
+    let tempCardCtxInfo = { ...cardCtxInfo };
+    tempCardCtxInfo.fields = res.data.fields;
+    tempCardCtxInfo.data = res.data.fieldsData;
+    setCardCtxInfo(tempCardCtxInfo);
+    setCanRender(true);
   };
   const fail = (err) => {
     err?.message?.length && console.log(err);
@@ -35,6 +47,7 @@ const AddCard = ({ templateId = 2 }) => {
 
   let inputElementClassNames = "indi-any-input-element";
   let imageInputElementClassNames = "indi-image-input-element";
+  let croppedImageInputElementClassNames = "indi-cropped-image-input-element";
 
   let [valueChanged, setValueChanged] = useState(false);
   const saveCard = (e) => {
@@ -43,6 +56,10 @@ const AddCard = ({ templateId = 2 }) => {
     let cardImageEle = document.getElementsByClassName(
       imageInputElementClassNames
     );
+    let croppedCardImageEle = document.getElementsByClassName(
+      croppedImageInputElementClassNames
+    );
+
     let cardImageValue = "";
     let inputElements = document.getElementsByClassName(inputElementClassNames);
 
@@ -55,7 +72,13 @@ const AddCard = ({ templateId = 2 }) => {
       let imgVal = imgEle?.value || "";
       setCardImageValue(imgVal);
     }
-    setUpdatedValues(dataValues, cardImageValue);
+
+    for (let imgEle of croppedCardImageEle) {
+      let imgVal = imgEle?.value || "";
+      setCroppedImageValue(imgVal);
+    }
+
+    setUpdatedValues(dataValues, cardImageValue, croppedImageValue);
     setValueChanged(true);
   };
 
@@ -84,6 +107,7 @@ const AddCard = ({ templateId = 2 }) => {
 
   const submitForm = (info) => {
     info.cardImage = cardImageValue;
+    info.croppedImage = croppedImageValue;
     const success = (res) => {
       updateUserInfo(res.data.id);
     };
@@ -110,8 +134,13 @@ const AddCard = ({ templateId = 2 }) => {
   }, [updatedValues]);
 
   return (
-    <>
-      <form>
+    <CardContext.Provider
+      value={{
+        cardCtxInfo,
+        setCardCtxInfo,
+      }}
+    >
+      {canRender && <form>
         <div className="indi-add-card-wrapper d-flex flex-column">
           <div className="indi-add-card-title">Add Card</div>
           {isDataAvailable && (
@@ -125,21 +154,31 @@ const AddCard = ({ templateId = 2 }) => {
               }}
             />
           )}
-          <div className="indi-add-card-item-footer">
-            <button type="button" className="btn btn-primary" onClick={goBack}>
-              Back
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={saveCard}
-            >
-              Save
-            </button>
+          <div className="indi-add-card-item-footer d-flex d-flex-row">
+            <div className="indi-add-card-page-badge-ribbon-wrapper">
+              <BadgesRibbon />
+            </div>
+
+            <div className="indi-add-card-page-footer-btn-wrapper d-flex d-flex-row">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={goBack}
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={saveCard}
+              >
+                Save
+              </button>
+            </div>
           </div>
         </div>
-      </form>
-    </>
+      </form>}
+    </CardContext.Provider>
   );
 };
 

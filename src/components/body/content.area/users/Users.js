@@ -56,7 +56,8 @@ const Users = () => {
     },
     isAdmin: {
       type: "boolean",
-      title: "Admin"
+      title: "Admin",
+      center:true
     },
   });
   let [tableData, setTableData] = useState([]);

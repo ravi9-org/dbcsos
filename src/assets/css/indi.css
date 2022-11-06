@@ -271,11 +271,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   margin: 0 auto;
 }
 
-.indi-app .indi-content-area-wrapper .indi-add-card-wrapper .indi-add-card-item-footer>button.btn {
+.indi-app .indi-content-area-wrapper .indi-add-card-wrapper .indi-add-card-item-footer button.btn {
   float: right;
   margin: 8px;
-  background-color: #010fb8;
-  border: 1px solid #010fb8;
+  background-color: #232862;
+  border: 1px solid #232862;
 }
 
 .indi-app .indi-content-area-wrapper form {
@@ -308,7 +308,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 /*utility classes*/
 .indi-place-me-top-right {
   position: absolute;
-  bottom: 16px;
+  top: 16px;
   right: 16px;
 }
 
@@ -332,7 +332,18 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 /*Body end*/
 
+/*popover style start*/
+.indi-app .popover-body {  
+  color: #2f4694;
+}
+/*popover style end*/
+
 /*footer start*/
+.indi-app .indi-add-card-item-footer {
+  box-shadow: 0px 0px 4px 0px #46516f;
+  margin-top: 10px;
+}
+
 .indi-app .indi-footer-wrapper {
   background-color: #ffffff;
   font-weight: bold;
@@ -418,10 +429,12 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-add-card-wrapper,
+.indi-app .indi-content-area-wrapper,
 .indi-app .indi-cards-collection-wrapper {
   /* border: 1px dotted #000; */
   height: calc(100% - 32px);
-  padding: 29px 0;
+  /* padding: 29px 0; */
+  padding: 0;
   overflow-x: auto;
 }
 
@@ -466,6 +479,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   border-radius: 50%;
   margin-top: 40px;
   margin-bottom: 10px;
+  max-width: 100px;
+  max-height: 100px;
+  overflow: hidden;
 }
 
 .indi-app .indi-card-fields {
@@ -545,8 +561,16 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-repeat: no-repeat;
 }
 
-.indi-card-field-item-img.indi-card-field-item-telephone {
-  background-image: url("./../img/fields/telephone.png");
+.indi-card-field-item-img.indi-card-field-item-phone {
+  background-image: url("./../img/fields/phone.png");
+}
+
+.indi-card-field-item-img.indi-card-field-item-address {
+  background-image: url("./../img/fields/addresses.png");
+}
+
+.indi-card-field-item-img.indi-card-field-item-vimeo {
+  background-image: url("./../img/fields/vimeo.png");
 }
 
 .indi-card-field-item-img.indi-card-field-item-wechat {
@@ -562,7 +586,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-card-field-item-img.indi-card-field-item-mobile {
-  background-image: url("./../img/fields/telephone.png");
+  background-image: url("./../img/fields/phone.png");
 }
 
 .indi-card-field-item-img.indi-card-field-item-linkedin {
@@ -866,4 +890,130 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-ext-card-item-wrapper .indi-card-upload-picture-img {
   height: 150px;
+}
+
+.indi-app .indi-table-img-cell {
+  width: 32px;
+  height: 32px;
+}
+
+
+
+.indi-app .cropper-crop-box,
+.cropper-view-box {
+  border-radius: 50%;
+}
+
+.indi-app .cropper-view-box {
+  box-shadow: 0 0 0 1px #39f;
+  outline: 0;
+}
+
+.indi-app .cropper-face {
+  background-color: inherit !important;
+}
+
+.indi-app .cropper-dashed,
+.cropper-line {
+  display: none !important;
+}
+
+.indi-app .cropper-view-box {
+  outline: inherit !important;
+}
+
+.indi-app .cropper-point.point-se {
+  top: calc(85% + 1px);
+  right: 14%;
+}
+
+.indi-app .cropper-point.point-sw {
+  top: calc(85% + 1px);
+  left: 14%;
+}
+
+.indi-app .cropper-point.point-nw {
+  top: calc(15% - 5px);
+  left: 14%;
+}
+
+.indi-app .cropper-point.point-ne {
+  top: calc(15% - 5px);
+  right: 14%;
+}
+
+.indi-app .indi-crop-dialog-modal-img-wrapper {
+  background-color: #2f4696;
+  padding: 20px;
+  height: 240px;
+  border-radius: 5px;
+}
+
+.indi-app .indi-crop-card-info-btn {
+  height: 28px;
+  width: 28px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  font-style: italic;
+  color: #fff;
+  text-align: center;
+  margin: 10px;
+  font-weight: 700;
+}
+
+.indi-app .popover .popover-arrow {
+  display: none !important;
+}
+
+.indi-app .indi-modal-card-crop-btn-wrapper {
+  padding: 10px 0;
+}
+
+.indi-app .indi-modal-card-crop-btn-wrapper Button {
+  margin-right: 5px;
+  background-color: #232862;
+}
+
+.indi-app .cropper-modal {
+  opacity: 1;
+  background-color: transparent;
+}
+
+.indi-app .indi-add-card-page-badge-ribbon-wrapper,
+.indi-app .indi-edit-card-page-badge-ribbon-wrapper {
+  width: calc(100% - 150px);
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: center;
+  padding: 16px;
+  display: flex;
+  overflow-x: auto;
+}
+
+.indi-app .indi-edit-card-page-badge-ribbon-wrapper {
+  width: calc(100% - 170px);
+}
+
+.indi-app .indi-add-card-page-footer-btn-wrapper {
+  width: 150px;
+  margin: auto 0;
+}
+
+.indi-app .indi-badges-ribbon-wrapper {
+  justify-content: center;
+}
+
+.indi-app .indi-badge-item-wrapper {
+  margin-right: 12px;
+  font-size: 12px;
+}
+
+.indi-app .indi-badge-item-icon-image {
+  width: 24px;
+  height: 24px;
+}
+
+.indi-app .indi-badge-freeze {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

@@ -66,7 +66,7 @@ const CardItem = (props) => {
       <div className="indi-card-upload-picture">
         <img
           className="indi-card-upload-picture-img"
-          src={cardData.cardImage}
+          src={cardData.croppedImage}
           alt="upload img"
         />
       </div>
@@ -84,7 +84,6 @@ const CardItem = (props) => {
                 <Field
                   fieldProps={{
                     fieldType: field,
-                    filedSchema: fieldsSchema[field],
                     fieldData: fieldsData[index],
                   }}
                   key={index}

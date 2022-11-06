@@ -1,7 +1,7 @@
 import React from "react";
 import LeftNavigation from "./left.navigation/LeftNavigation";
 import ContentArea from "./content.area/ContentArea";
-import Badges from "./badges/Badges";
+import Badges from "./content.area/badges/BadgesList";
 
 const Body = () => {
   return (

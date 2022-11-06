@@ -4,17 +4,25 @@ import { useParams, useNavigate } from "react-router";
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
 import EditCardItem from "./AddEditCardItem";
+import BadgesRibbon from "../badges/BadgesRibbon";
+
+import CardContext from "./CardContext";
 
 const EditCard = () => {
   const { cardid } = useParams();
 
   const navigate = useNavigate();
+  let { badgesCtxData } = useContext(ContextComponent);
 
   let [templateData, setTemplateData] = useState({});
   let [newCardData, setNewCardData] = useState({});
   let [updatedFields, setUpdatedFields] = useState([]);
   let [updatedValues, setUpdatedValues] = useState([]);
   let [cardImageValue, setCardImageValue] = useState([]);
+  let [croppedImageValue, setCroppedImageValue] = useState([]);
+  let [cardCtxInfo, setCardCtxInfo] = useState({ fields: [], data: [] });
+
+  let [canRender, setCanRender] = useState(false);
 
   let [isDataAvailable, setIsDataAvailable] = useState(false);
   const success = (res) => {
@@ -22,6 +30,11 @@ const EditCard = () => {
     setUpdatedFields(res.data.fields);
     setUpdatedValues(res.data.fieldsData);
     setIsDataAvailable(true);
+    let tempCardCtxInfo = { ...cardCtxInfo };
+    tempCardCtxInfo.fields = res.data.fields;
+    tempCardCtxInfo.data = res.data.fieldsData;
+    setCardCtxInfo(tempCardCtxInfo);
+    setCanRender(true);
   };
   const fail = (err) => {
     err?.message?.length && console.log(err);
@@ -36,6 +49,7 @@ const EditCard = () => {
 
   let inputElementClassNames = "indi-any-input-element";
   let imageInputElementClassNames = "indi-image-input-element";
+  let croppedImageInputElementClassNames = "indi-cropped-image-input-element";
 
   let [valueChanged, setValueChanged] = useState(false);
   const updateCard = (e) => {
@@ -44,6 +58,10 @@ const EditCard = () => {
     let cardImageEle = document.getElementsByClassName(
       imageInputElementClassNames
     );
+    let croppedCardImageEle = document.getElementsByClassName(
+      croppedImageInputElementClassNames
+    );
+
     let cardImageValue = "";
     let inputElements = document.getElementsByClassName(inputElementClassNames);
 
@@ -56,7 +74,13 @@ const EditCard = () => {
       let imgVal = imgEle?.value || "";
       setCardImageValue(imgVal);
     }
-    setUpdatedValues(dataValues, cardImageValue);
+
+    for (let imgEle of croppedCardImageEle) {
+      let imgVal = imgEle?.value || "";
+      setCroppedImageValue(imgVal);
+    }
+
+    setUpdatedValues(dataValues, cardImageValue, croppedImageValue);
     setValueChanged(true);
   };
 
@@ -66,6 +90,7 @@ const EditCard = () => {
 
   const submitForm = (info) => {
     info.cardImage = cardImageValue;
+    info.croppedImage = croppedImageValue;
     const success = (res) => {
       navigateBackToCardsListPage();
     };
@@ -92,36 +117,52 @@ const EditCard = () => {
   }, [updatedValues]);
 
   return (
-    <>
-      <form>
-        <div className="indi-add-card-wrapper d-flex flex-column">
-          <div className="indi-add-card-title">Edit Card</div>
-          {isDataAvailable && (
-            <EditCardItem
-              className="indi-add-card-wrapper"
-              props={{
-                cardInitialData: templateData,
-                setNewCardData,
-                pageMode: "edit",
-                inputElementClassNames,
-              }}
-            />
-          )}
-          <div className="indi-add-card-item-footer">
-            <button type="button" className="btn btn-primary" onClick={goBack}>
-              Back
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={updateCard}
-            >
-              Update
-            </button>
+    <CardContext.Provider
+      value={{
+        cardCtxInfo,
+        setCardCtxInfo,
+      }}
+    >
+      {canRender && (
+        <form>
+          <div className="indi-add-card-wrapper d-flex flex-column">
+            <div className="indi-add-card-title">Edit Card</div>
+            {isDataAvailable && (
+              <EditCardItem
+                className="indi-add-card-wrapper"
+                props={{
+                  cardInitialData: templateData,
+                  setNewCardData,
+                  pageMode: "edit",
+                  inputElementClassNames,
+                }}
+              />
+            )}
+            <div className="indi-add-card-item-footer d-flex d-flex-row">
+              <div className="indi-edit-card-page-badge-ribbon-wrapper">
+                <BadgesRibbon />
+              </div>
+              <div className="indi-add-card-page-footer-btn-wrapper d-flex d-flex-row">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={goBack}
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={updateCard}
+                >
+                  Update
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </form>
-    </>
+        </form>
+      )}
+    </CardContext.Provider>
   );
 };
 

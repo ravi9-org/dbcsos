@@ -27,8 +27,7 @@ const CardDetailsPage = (props) => {
 
   const navigate = useNavigate();
 
-  let { userData, setUserData, setLoadingState } =
-    useContext(ContextComponent);
+  let { userData, setUserData, setLoadingState } = useContext(ContextComponent);
 
   const success = (res) => {
     setCardData(res.data);
@@ -57,7 +56,10 @@ const CardDetailsPage = (props) => {
   const handleDelete = (e) => {
     e.preventDefault();
     setShow(false);
-    setLoadingState(true);
+    setLoadingState({
+      applyMask: true,
+      text: "Loading cards",
+    });
     Utils.deleteCard(cardid, userData.cards).then(deleteSuccess, deleteFail);
   };
 
@@ -66,17 +68,21 @@ const CardDetailsPage = (props) => {
     tempUserData.cards = res.updatedCardsArray;
     setUserData(tempUserData);
     setShowAlert(true);
-    setLoadingState(false);
+    setLoadingState({
+      applyMask: false,
+    });
     navigate(Utils.APP_URLS.CARDS_PAGE);
   };
 
-  const navigateToEditPage = (e) => { 
+  const navigateToEditPage = (e) => {
     e.preventDefault();
     navigate(Utils.APP_URLS.EDIT_CARD_PAGE.replace(":cardid", cardid));
   };
 
   const deleteFail = (err) => {
-    setLoadingState(false);
+    setLoadingState({
+      applyMask: false,
+    });
     setShowAlert(true);
     err?.message?.length && console.log(err);
   };
@@ -94,9 +100,11 @@ const CardDetailsPage = (props) => {
           <div className="indi-add-card-title">
             Card View
             <div className="d-none1 w-50 indi-body-actions">
-              <div className="indi-body-action"
+              <div
+                className="indi-body-action"
                 role="button"
-              onClick={navigateToEditPage}>
+                onClick={navigateToEditPage}
+              >
                 <img className="indi-w-20" src={EditIcon} alt="Edit-icon"></img>
                 Edit
               </div>
@@ -136,9 +144,9 @@ const CardDetailsPage = (props) => {
             </button>
           </div>
         </div>
-      )}
+      )}      
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal centered show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Delete confirmation?</Modal.Title>
         </Modal.Header>
