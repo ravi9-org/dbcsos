@@ -15,7 +15,6 @@ const Field = (props = {}) => {
   let isDefault = fieldSchema?.isDefault;
 
   let fieldData = fieldProps.fieldData;
-  console.log(fieldData);
   let isEmpty = false;
   if ((fieldData === undefined || fieldData?.length === 0) && showEmptyField) {
     isEmpty = true;

@@ -7,6 +7,8 @@ import TemplateList from "./templates/TemplatesList";
 import Utils from "../../Utils";
 import Addresses from "../../pages/Addresses";
 import BadgesTable from "./badges/BadgesTable";
+import NewBadgesTable from "./badges/NewBadgesTable";
+import AddBadgePage from "./badges/AddBadgePage";
 import AddressesTable from "./addresses/AddressesTable";
 import UsersTable from "./users/UsersTable";
 import EmailSignature from "../../pages/signatures/EmailSignature";
@@ -82,6 +84,18 @@ const ContentArea = () => {
           path={Utils.APP_URLS.BADGES_PAGE}
           exact
           element={<BadgesTable />}
+        ></Route>
+        
+        <Route
+          path={Utils.APP_URLS.NEW_BADGES_PAGE}
+          exact
+          element={<NewBadgesTable />}
+        ></Route>
+        
+        <Route
+          path={Utils.APP_URLS.ADD_BADGE_PAGE}
+          exact
+          element={<AddBadgePage />}
         ></Route>
 
 
