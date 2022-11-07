@@ -42,8 +42,11 @@ const QRCode = (props) => {
               </div>
             </div>
             <div className="indi-qrcode-box-contacts">
-              <div className="indi-qrcode-box-mobile">{mobile}</div>
-              <div className="indi-qrcode-box-email">{email}</div>
+              <div className="indi-qrcode-box-mobile">
+                <span className="indi-card-field-item-img indi-card-field-item-mobile"></span><span>{mobile}</span>
+              </div>
+              <div className="indi-qrcode-box-email">
+                <span className="indi-card-field-item-img indi-card-field-item-email"></span><span>{email}</span></div>
             </div>
             <div className="indi-qrcode-box-save-contact">
               <Button variant="primary">SAVE CONTACT</Button>

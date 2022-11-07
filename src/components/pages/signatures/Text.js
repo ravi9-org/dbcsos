@@ -42,13 +42,28 @@ const Text = (props) => {
               </div>
             </div>
             <div className="indi-qrcode-box-contacts">
-              <div className="indi-qrcode-box-mobile">{mobile}</div>
-              <div className="indi-qrcode-box-email">{email}</div>
+              <div className="indi-qrcode-box-mobile">
+                <span className="indi-card-field-item-img indi-card-field-item-mobile"></span><span>{mobile}</span>
+              </div>
+              <div className="indi-qrcode-box-email">
+                <span className="indi-card-field-item-img indi-card-field-item-email"></span><span>{email}</span></div>
             </div>
             <div className="indi-qrcode-box-save-contact">
               <Button variant="primary">SAVE CONTACT</Button>
             </div>
           </div>
+
+          <div className="indi-qrcode-box-img-col">
+            <div
+              className="indi-qrcode-bg"
+              style={{
+                background: `url(${cardInfo.cardImage})`,
+              }}
+            >
+              <div className="indi-place-me-bottom-right "><img src={cardInfo.logoImage} alt="card"></img></div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
