@@ -239,7 +239,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-navmenu-item .indi-navmenu-active {
-  background: #232862;
+  background: #304697;
+  /* background: #3a52a7; */
   color: #fff;
   font-weight: bold;
 }
@@ -252,7 +253,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-left-navigation-wrapper,
 .indi-app .indi-content-area-wrapper {
-  background: #e9edfa;
+  background: #f0f3f9;
 }
 
 .indi-app .indi-content-area-wrapper {
@@ -415,8 +416,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   flex-flow: row;
   font-weight: bold;
   color: #2f4694;
-  height: 32px;
+  height: 48px;
   justify-content: space-between;
+  padding: 15px;
 }
 
 .indi-app .indi-body-actions {
@@ -638,7 +640,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-card-field-item input:read-only,
 .indi-card-field-item input:read-only:focus-visible {
   /* font-style: italic; */
-  color: lightgray;  
+  color: lightgray;
   -moz-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(160deg, 0deg);
   -webkit-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(160deg, 0deg);
   -o-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(160deg, 0deg);
@@ -899,11 +901,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-table-img-cell {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
 }
-
-
 
 .indi-app .cropper-crop-box,
 .cropper-view-box {
@@ -1040,4 +1040,36 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   color: #fff;
   cursor: pointer;
   font-weight: 600;
+}
+
+
+.indi-app .indi-data-table-header {
+  background-color: #304697 !important;
+  color: #fff !important;
+}
+
+.indi-app .indi-data-table-wrapper {
+  padding: 15px;
+}
+
+.indi-app tr.indi-data-table-tr {
+  background-color: #f5f8fc;
+  border-top: 5px solid #f0f3f9;
+  color: #304697;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.indi-app .indi-data-table-checkbox-all {
+  opacity: 0;
+}
+
+.indi-app .indi-table-header-searchbox {
+  width: 50px;
+}
+
+.indi-app .indi-tamplte-empty-field-value {
+  font-size: 14px;
+  color: darkgrey;
+  font-style: italic;
 }

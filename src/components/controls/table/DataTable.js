@@ -18,9 +18,9 @@ const DataTable = ({ tableProps }) => {
   useEffect(() => {}, []);
 
   return (
-    <div>
+    <div className="indi-data-table-wrapper">
       <Table responsive="sm">
-        <thead>
+        <thead className="indi-data-table-header">
           <tr>
             {tableColumns.map((col, index) => (
               <TableHeader key={index} props={{ tableColumnSchema, col }} />
@@ -29,7 +29,7 @@ const DataTable = ({ tableProps }) => {
         </thead>
         <tbody>
           {tableData.map((data, index) => (
-            <tr key={index}>
+            <tr key={index} className="indi-data-table-tr">
               {tableColumns.map((col, colIndex) => (
                 <React.Fragment key={`${colIndex}`}>
                   {tableColumnSchema[col].type === "text" && (
@@ -46,6 +46,9 @@ const DataTable = ({ tableProps }) => {
                   )}
                   {tableColumnSchema[col].type === "boolean" && (
                     <BooleanCell props={{ data, colIndex, schema: tableColumnSchema[col] }} />
+                  )}
+                  {tableColumnSchema[col].type === "search" && (
+                    <TextCell props={{ data, colIndex, schema: tableColumnSchema[col] }} />
                   )}
                 </React.Fragment>
               ))}
