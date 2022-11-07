@@ -7,6 +7,7 @@ import TemplateList from "./templates/TemplatesList";
 import Utils from "../../Utils";
 import Addresses from "../../pages/Addresses";
 import BadgesTable from "./badges/BadgesTable";
+import AddressesTable from "./addresses/AddressesTable";
 import UsersTable from "./users/UsersTable";
 import EmailSignature from "../../pages/signatures/EmailSignature";
 import Contacts from "../../pages/Contacts";
@@ -74,7 +75,7 @@ const ContentArea = () => {
         <Route
           path={Utils.APP_URLS.ADDRESS_PAGE}
           exact
-          element={<Addresses />}
+          element={<AddressesTable />}
         ></Route>
         
         <Route

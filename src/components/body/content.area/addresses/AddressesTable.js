@@ -4,28 +4,23 @@ import { useNavigate } from "react-router-dom";
 
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
-import DataTable from "../../../controls/table/DataTable";
 import AddIcon from "../../../../assets/img/add.png";
 import DeleteIcon from "../../../../assets/img/Delete.png";
+import DataTable from "../../../controls/table/DataTable";
 
-const BadgesTable = () => {
+const AdressesTable = () => {
   let navigate = useNavigate();
 
-  let { setCanRedirectToLogin, setLoadingState } = useContext(ContextComponent);
+  let { setCanRedirectToLogin } = useContext(ContextComponent);
 
   let [tableColumns, setTableColumns] = useState([
     "id",
     "select",
     "name",
-    "iconImage",
-    "darkIconImage",
-    "type",
-    "readonly",
-    "defaultValue",
-    "constant",
-    "isDefault",
-    "multiple",
-    "required",
+    "organization",
+    "latitude",
+    "longitude",
+    "fulladdress"
   ]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
     id: {
@@ -35,66 +30,35 @@ const BadgesTable = () => {
     select: {
       type: "checkbox",
       title: "-",
-      center: true,
     },
     name: {
       type: "text",
       search: true,
-      sort: false,
-      title: "Badge name",
+      sort: true,
+      title: "Name",
     },
-    iconImage: {
-      type: "image",
-      title: "Icon",
-      center: true,
-    },
-    darkIconImage: {
-      type: "image",
-      title: "Icon label",
-      center: true,
-    },
-    type: {
+    organization: {
       type: "text",
-      title: "Type",
+      search: true,
+      title: "Organization",
     },
-    readonly: {
-      type: "boolean",
-      title: "Readonly",
-      center: true,
-    },
-    defaultValue: {
+    latitude: {
       type: "text",
-      title: "Default value",
+      title: "Latitude",
     },
-    constant: {
-      type: "boolean",
-      title: "Constant",
-      center: true,
+    longitude: {
+      type: "text",
+      title: "Longitude",
     },
-    isDefault: {
-      type: "boolean",
-      title: "Is default?",
-      center: true,
-    },
-    multiple: {
-      type: "boolean",
-      title: "Allow multiple",
-      center: true,
-    },
-    required: {
-      type: "boolean",
-      title: "Required",
-      center: true,
+    fulladdress: {
+      type: "text",
+      title: "Full address",
     },
   });
-
   let [tableData, setTableData] = useState([]);
   let [canRender, setCanRender] = useState(false);
 
   const success = (res) => {
-    setLoadingState({
-      applyMask: false,
-    });
     let userInfo = res?.data;
     let usersArray = [];
     if (!Utils.isObjectEmpty(userInfo)) {
@@ -112,19 +76,16 @@ const BadgesTable = () => {
             userTableData.push(userInfo[index][col]);
           }
         });
+        userTableData.push("search");
         userTableObj = userTableData;
         return userTableObj;
       });
-
       setTableData(usersArray);
       setCanRender(true);
     }
   };
 
   const fail = (err) => {
-    setLoadingState({
-      applyMask: false,
-    });
     err?.message?.length && console.log(err);
     if (err?.redirect) {
       setCanRedirectToLogin(true);
@@ -132,17 +93,13 @@ const BadgesTable = () => {
   };
 
   useEffect(() => {
-    setLoadingState({
-      applyMask: false,
-      text: "Loading badges",
-    });
-    Utils.getBadges().then(success, fail);
+    Utils.getAllAddresses().then(success, fail);
   }, []);
 
-  const navigateToAddBadgePage = e => {
+  const navigateToAddUserPage = (e) => {
     e.preventDefault();
     return false;
-  }
+  };
 
   const handleShow = (e) => {
     e.preventDefault();
@@ -152,12 +109,12 @@ const BadgesTable = () => {
   return (
     <div className="indi-body-cards-wrapper d-flex w-100">
       <div className="indi-add-card-title">
-        Badges
+        Addresses
         <div className="d-none1 w-50 indi-body-actions">
           <div
             className="indi-body-action"
             role="button"
-            onClick={navigateToAddBadgePage}
+            onClick={navigateToAddUserPage}
           >
             <img className="indi-w-20" src={AddIcon} alt="Edit-icon"></img>
             Add
@@ -177,4 +134,4 @@ const BadgesTable = () => {
   );
 };
 
-export default BadgesTable;
+export default AdressesTable;
