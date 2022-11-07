@@ -6,7 +6,7 @@ import Badges from "./content.area/badges/BadgesList";
 const Body = () => {
   return (
     <div className="indi-body-wrapper container ">
-      <div className="indi-body-row h-100">      
+      <div className="indi-body-row h-100">
         <div className="row h-100">
           <div className="col col-sm-3 indi-full-height">
             <LeftNavigation />
@@ -15,10 +15,7 @@ const Body = () => {
             <ContentArea />
           </div>
         </div>
-      </div>    
-      <div className="indi-body-row d-none">
-      <Badges />
-    </div>
+      </div>
     </div>
   );
 };

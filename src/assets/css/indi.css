@@ -728,6 +728,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   margin: 16px;
   padding: 0;
   width: 210px;
+  max-width: 280px;
   height: 140px;
 }
 
