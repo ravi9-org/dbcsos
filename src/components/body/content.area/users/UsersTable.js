@@ -121,7 +121,7 @@ const UsersTable = () => {
   return (
     <div className="indi-body-cards-wrapper d-flex w-100">
       <div className="indi-add-card-title">
-        Card View
+        Users
         <div className="d-none1 w-50 indi-body-actions">
           <div
             className="indi-body-action"
