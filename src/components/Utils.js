@@ -20,6 +20,7 @@ const REST_API = {
   LOGOUT: REST_API_PREFIX + "/logout",
   USER_PROFILE: REST_API_PREFIX + "/users/",
   BADGES: REST_API_PREFIX + "/badges/",
+  NEW_BADGES: REST_API_PREFIX + "/newbadges/",
   CARDS: REST_API_PREFIX + "/cards",
   TEMPLATES: REST_API_PREFIX + "/templates",
   USER_CARD: REST_API_PREFIX + "/usercards",
@@ -39,6 +40,8 @@ const APP_URLS = {
   CARD_EXTERNAL_PAGE: APP_URL_PREFIX + "/cardextdetails/:cardid",
   ADDRESS_PAGE: APP_URL_PREFIX + "/addresses",
   BADGES_PAGE: APP_URL_PREFIX + "/badges",
+  NEW_BADGES_PAGE: APP_URL_PREFIX + "/newbadges",
+  ADD_BADGE_PAGE: APP_URL_PREFIX + "/addbadgepage",
   USERS_PAGE: APP_URL_PREFIX + "/users",
   EMAIL_SIGNAURE_PAGE: APP_URL_PREFIX + "/emailsignature",
   CONTACTS_PAGE: APP_URL_PREFIX + "/contacts",
@@ -50,6 +53,7 @@ const NAV_ITEMS_KEYS = [
   "users",
   "addresses",
   "badges",
+  "newbadges",
   "cards",
   "emailsignature",
   "contacts",
@@ -75,6 +79,11 @@ const NAV_ITEMS_VALUES = {
   badges: {
     title: "Badges",
     url: APP_URLS.BADGES_PAGE,
+    enabled: false,
+  },
+  newbadges: {
+    title: "New Badges",
+    url: APP_URLS.NEW_BADGES_PAGE,
     enabled: false,
   },
   cards: {
@@ -259,6 +268,48 @@ const getBadges = () => {
     let token = getToken();
     if (token) {
       let getUrl = REST_API.BADGES;
+      axios
+        .get(getUrl, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          resolve(res);
+        });
+    } else {
+      reject({
+        redirect: true,
+        message: "No token available till now...",
+      });
+    }
+  });
+
+  return myPromise;
+};
+
+const addNewBadge = (badgeData) => {
+  let formData = { ...badgeData };
+  delete formData.id;
+  let url = REST_API.NEW_BADGES;
+
+  return axios.post(url, formData);
+};
+
+
+const getNewBadges = () => {
+  const myPromise = new Promise((resolve, reject) => {
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+    if (token) {
+      let getUrl = REST_API.NEW_BADGES;
       axios
         .get(getUrl, {
           headers: {
@@ -556,6 +607,8 @@ const Utils = {
   getAllUsers,
   getAllAddresses,
   getBadges,
+  getNewBadges,
+  addNewBadge,
   getUserId,
   getCardDetails,
   deleteCard,

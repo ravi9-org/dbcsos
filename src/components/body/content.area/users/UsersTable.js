@@ -37,7 +37,7 @@ const UsersTable = () => {
       type: "text",
       search: true,
       sort: true,
-      title: "User name",
+      title: "Name",
     },
     email: {
       type: "text",

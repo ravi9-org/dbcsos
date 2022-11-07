@@ -628,8 +628,10 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-card-field-item input,
 .indi-card-field-item textarea,
+.indi-card-field-item select,
 .indi-card-field-item input:focus-visible,
-.indi-card-field-item textarea:focus-visible {
+.indi-card-field-item textarea:focus-visible,
+.indi-card-field-item select:focus-visible {
   border: 0;
   background: transparent;
   border-bottom: 1px solid darkgrey;
@@ -754,7 +756,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-mini-card-list {
   width: 100%;
-  overflow-x: overlay;
+  overflow-x: auto;
   justify-content: center;
 }
 
@@ -1090,4 +1092,70 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   font-size: 14px;
   color: darkgrey;
   font-style: italic;
+}
+
+.indi-app .indi-email-signature-footer {
+  justify-content: right;
+  display: flex;
+  margin: 0 10px 10px 0;
+}
+
+.indi-app .indi-email-signature-footer Button {
+  background-color: #2f4696;
+  border-color: #2f4696;
+
+}
+
+
+.indi-app .indi-badge-add-form-div {
+  background-color: #323c5b;
+}
+
+
+
+.indi-app .indi-badge-img-upload-field {
+  cursor: pointer;
+}
+
+.indi-app .indi-badge-upload-picture-file-input {
+  border: 1px solid red;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.indi-app .indi-badge-img-upload-label {
+  border: 1px solid #fff;
+  text-align: center;
+}
+
+.indi-app .indi-badge-img-upload-label,
+.indi-app .indi-badge-upload-picture-file-input {
+  width: 125px;
+  height: 80px;
+}
+
+.indi-app .indi-add-badge-items-wrapper {
+  flex-direction: column;
+}
+
+.indi-app .indi-badge-input-field {
+  margin: 10px 0;
+}
+
+.indi-app .indi-add-badge-page-footer-btn-wrapper {
+  width: 100%;
+  flex-direction: row-reverse;
+}
+
+
+.indi-card-field-item select.indi-badge-input-select-field,
+.indi-card-field-item select.indi-badge-input-select-field:focus-visible {  
+  border: 1px solid darkgrey;
+}
+
+.indi-card-field-item select.indi-badge-input-select-field option {  
+  background-color: #323c5b;
+  color: #fff;
+  padding: 10px;
 }
