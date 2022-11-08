@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { useNavigate } from "react-router";
 import { Button, Modal, Alert } from "react-bootstrap";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 import Form from "react-bootstrap/Form";
 
@@ -98,40 +99,50 @@ const AddBadgePage = ({ props }) => {
     <>
       {
         <Modal centered show={props.addModalCanOpen} onHide={handleClose}>
+          <Modal.Body>
           <form>
             <div className="indi-add-badge-form-wrapper d-flex flex-column">
               <div className="indi-add-badge-form-item d-flex flex-column">
-                <div className="indi-add-badge-form-item-label">Badge name</div>
-                <div className="indi-add-badge-form-item-input">
-                  <input
-                    type="text"
-                    className="indi-badge-input-field"
-                    id="name"
-                    onChange={nameHandler}
-                    placeholder="Enter badge name"
-                  ></input>
+                <div className="indi-add-badge-form-item-input row">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Badge name"
+                  >
+                    <Form.Control
+                      type="text"
+                      className="indi-badge-input-field"
+                      id="name"
+                      placeholder="Enter badge name"
+                      autoComplete="off"
+                      onChange={nameHandler}
+                    />
+                  </FloatingLabel>
                 </div>
               </div>
 
               <div className="indi-add-badge-form-item d-flex flex-column">
-                <div className="indi-add-badge-form-item-label">Badge type</div>
-                <div className="indi-add-badge-form-item-input">
-                  <Form.Select
+              <div className="indi-add-badge-form-item-input row">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Badge type"
+                  >
+                   <Form.Select
                     defaultValue="text"
                     id="type"
                     onChange={selectHandler}
                     size="sm"
                     className="indi-badge-input-field indi-badge-input-select-field"
-                  >
+                    > 
                     <option value="text">Text</option>
                     <option value="textarea">Textarea</option>
                     <option value="select">Select</option>
                     <option value="boolean">Boolean</option>
                   </Form.Select>
+                  </FloatingLabel>
                 </div>
               </div>
 
-              <div className="indi-add-badge-form-item d-flex flex-row">
+              <div className="indi-add-badge-form-item d-flex flex-row align-items-center">
                 <div className="indi-add-badge-form-item-label">
                   Upload image for ribbon
                 </div>
@@ -150,7 +161,7 @@ const AddBadgePage = ({ props }) => {
                 ></div>
               </div>
 
-              <div className="indi-add-badge-form-item d-flex flex-row">
+              <div className="indi-add-badge-form-item d-flex flex-row align-items-center">
                 <div className="indi-add-badge-form-item-label">
                   Upload image for form
                 </div>
@@ -170,8 +181,8 @@ const AddBadgePage = ({ props }) => {
               </div>
             </div>
 
-            <div className="indi-add-badge-footer d-flex d-flex-row">
-              <div className="indi-add-badge-page-footer-btn-wrapper d-flex d-flex-row">
+            <div className="indi-add-badge-footer">
+              <div className="indi-add-badge-page-footer-btn-wrapper">
                 <button
                   type="button"
                   className="btn btn-primary"
@@ -189,6 +200,7 @@ const AddBadgePage = ({ props }) => {
               </div>
             </div>
           </form>
+          </Modal.Body>
         </Modal>
       }
     </>

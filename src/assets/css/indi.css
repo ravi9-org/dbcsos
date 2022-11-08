@@ -273,7 +273,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   margin: 0 auto;
 }
 
-.indi-app .indi-content-area-wrapper button.btn.btn-primary {
+.indi-app .indi-content-area-wrapper button.btn.btn-primary,
+.indi-app .modal-dialog  button.btn.btn-primary {
   float: right;
   margin: 8px;
   background-color: #232862;
@@ -1108,8 +1109,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 /* indi-add-badge-form-item-input */
 .indi-app .indi-badge-img-preview {
-  width: 32px;
-  height: 32px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background-size: contain !important;
 }
@@ -1139,4 +1140,54 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   height: 58px;
   border: 1px solid transparent;
   border-radius: 10px;
+  margin: 0 20px;
+}
+
+.indi-app .form-floating > .form-control-plaintext~label,
+.indi-app .form-floating > .form-control:focus~label, 
+.indi-app .form-floating > .form-control:not(:placeholder-shown)~label,
+.indi-app .form-floating > .form-select~label {
+  opacity: 1;
+  background: #fff;
+  width: auto;
+  -webkit-transform: scale(.85) translateY(-0.5rem) translateX(0.15rem);
+  transform: scale(.85) translateY(-0.8rem) translateX(0.5rem);
+  height: auto;
+  color: #2f4696;
+  padding: 0 4px;
+  margin: 0 12px;
+}
+
+.indi-app .form-floating>.form-control,
+.indi-app .form-floating>.form-control-plaintext,
+.indi-app .form-floating>.form-select {
+  height: calc(2rem + 2px);
+  line-height: 1.25;  
+  border-color: #2f4696;
+}
+
+
+.indi-app .form-floating>.form-control-plaintext:focus,
+.indi-app .form-floating>.form-control-plaintext:not(:placeholder-shown),
+.indi-app .form-floating>.form-control:focus,
+.indi-app .form-floating>.form-control:not(:placeholder-shown),
+.indi-app .form-floating >.form-select {
+  padding-top: 0;
+  padding-bottom: 0;
+  border-color: #2f4696;
+}
+
+.indi-app .form-floating>label {
+  padding: 0.25rem 1.25rem;
+  color: #2f4696;
+}
+
+.indi-app .form-control:focus,
+.indi-app .form-select:focus {
+  box-shadow: 0 0 0 2px rgb(13 110 253 / 20%);
+}
+
+.indi-app .indi-add-badge-form-item-label {
+  color: #2f4696;
+  font-weight: bold;
 }
