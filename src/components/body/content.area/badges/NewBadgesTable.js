@@ -8,6 +8,7 @@ import DataTable from "../../../controls/table/DataTable";
 import AddIcon from "../../../../assets/img/add.png";
 import EditIcon from "../../../../assets/img/Edit.png";
 import DeleteIcon from "../../../../assets/img/Delete.png";
+import AddBadgePage from "./AddBadgePage";
 
 const BadgesTable = () => {
   let navigate = useNavigate();
@@ -104,20 +105,18 @@ const BadgesTable = () => {
     }
   };
 
+  const loadFreshBadges = () => {
+
+    Utils.getNewBadges().then(success, fail);
+  };
+
   useEffect(() => {
     setLoadingState({
       applyMask: false,
       text: "Loading badges",
     });
-    Utils.getNewBadges().then(success, fail);
-  }, [tableData]);
-
-  useEffect(() => {}, [tableData]);
-
-  const navigateToAddBadgePage = (e) => {
-    e.preventDefault();
-    navigate(Utils.APP_URLS.ADD_BADGE_PAGE);
-  };
+    loadFreshBadges();
+  }, []);
 
   const handleShow = async (e) => {
     if (tableSelectedItems?.length > 0) {
@@ -131,7 +130,7 @@ const BadgesTable = () => {
 
   const handleClose = async (e) => {
     //e.preventDefault();
-    console.log(tableSelectedItems);
+    //console.log(tableSelectedItems);
     await setSelectedItemCount(tableSelectedItems?.length);
     setShowDeleteModal(false);
     //return false;
@@ -158,7 +157,7 @@ const BadgesTable = () => {
 
   const handleDelete = async (e) => {
     //e.preventDefault();
-    console.log("deleting selected " + tableSelectedItems?.length + "items...");
+    //console.log("deleting selected " + tableSelectedItems?.length + "items...");
     setShowDeleteModal(false);
     // setLoadingState({
     //   applyMask: true,
@@ -171,6 +170,27 @@ const BadgesTable = () => {
     //Utils.deleteBadges(tableSelectedItems).then(deleteSuccess, deleteFail);
   };
 
+  let [addModalCanOpen, setAddModalCanOpen] = useState(false);
+  //console.log(" 11111111111111111111 ");
+  useEffect(() => {
+    //console.log(" ------------------ ");
+  }, [addModalCanOpen]);
+
+  const openAddModal = (e) => {
+    e.preventDefault();
+    setAddModalCanOpen(true);
+    return false;
+  };
+
+  const closeAddModal = (e) => {
+    setAddModalCanOpen(false);
+  };
+
+  const saveAction = (data) => {
+    //console.log(data);
+    debugger;
+  };
+
   return (
     <div className="indi-body-cards-wrapper d-flex w-100">
       <div className="indi-add-card-title">
@@ -179,7 +199,7 @@ const BadgesTable = () => {
           <div
             className="indi-body-action indi-badges-table-edit-icon"
             role="button"
-            onClick={navigateToAddBadgePage}
+            onClick={openAddModal}
           >
             <img className="indi-w-20" src={AddIcon} alt="Edit-icon"></img>
             Add
@@ -219,6 +239,8 @@ const BadgesTable = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      {addModalCanOpen && <AddBadgePage />}
     </div>
   );
 };

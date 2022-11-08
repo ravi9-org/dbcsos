@@ -1,38 +1,43 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { useNavigate } from "react-router";
+import { Button, Modal, Alert } from "react-bootstrap";
+
 import Form from "react-bootstrap/Form";
 
 import Utils from "../../../Utils";
 
 const AddBadgePage = () => {
-  const navigate = useNavigate();
 
-  const goBack = (e) => {
-    navigate(Utils.APP_URLS.NEW_BADGES_PAGE);
+  let [badgeName, setBadgeName] = useState("");
+  let [badgeType, setBadgeType] = useState("text");
+  let [badgeIconImage, setBadgeIconImage] = useState("");
+  let [badgeDarkIconImage, setBadgeDarkIconImage] = useState("");
+  let [badgeId, setBadgeId] = useState("");
+
+  let [showModal, setShowModal] = useState(false);
+
+  const hideModal = (e) => {
+    setShowModal(false);
   };
-
-  let inputElementClassNames = "indi-any-input-element";
-  let imageInputElementClassNames = "indi-image-input-element";
-  let croppedImageInputElementClassNames = "indi-cropped-image-input-element";
-
-  let [badgeData, setBadgeData] = useState({
-    iconImage: "",
-    darkIconImage: "",
-    name: "",
-    badgeId: "",
-    type: "",
-  });
 
   const saveBadge = (e) => {
     const success = (res) => {
-      goBack();
+      hideModal();
     };
     const fail = (err) => {
       console.log(err);
     };
 
+    let formData = {
+      iconImage: badgeIconImage,
+      darkIconImage: badgeDarkIconImage,
+      name: badgeName,
+      badgeId: badgeId,
+      type: badgeType,
+    };
+
     try {
-      Utils.addNewBadge(badgeData).then(success, fail);
+      Utils.addNewBadge(formData).then(success, fail);
     } catch (e) {
       console.log(e);
     }
@@ -41,16 +46,13 @@ const AddBadgePage = () => {
   const nameHandler = (e) => {
     let value = e?.currentTarget?.value || "";
     let badgeId = value.trim().replaceAll(" ", "").toLowerCase();
-    console.log("selected value : " + value);
-    let obj = { name: value, badgeId: badgeId };
-    setBadgeData({ ...badgeData, ...obj });
+    setBadgeName(value);
+    setBadgeId(badgeId);
   };
 
   const selectHandler = (e) => {
     let value = e.currentTarget.value;
-    console.log("selected value : " + value);
-    let obj = { type: value };
-    setBadgeData({ ...badgeData, ...obj });
+    setBadgeType(value);
   };
 
   const fileToDataUri = (file) => {
@@ -63,94 +65,124 @@ const AddBadgePage = () => {
     });
   };
 
-  let [latestBGImg, setLatestBGImg] = useState({
-    iconImage: "",
-    darkIconImage: "",
-  });
+  let [iconImagePreview, setIconImagePreview] = useState("");
+  let [iconDarkImagePreview, setDarkIconImagePreview] = useState("");
+
+  const updateGeneralImageInfo = async (file, callback, setFun) => {
+    await fileToDataUri(file).then((dataUri) => {
+      callback(dataUri);
+      setFun(dataUri);
+    });
+  };
 
   const updateImageInfo = async (e) => {
     e.preventDefault();
     let file = e.currentTarget.files[0];
-    let key = e.currentTarget.id;
-    await fileToDataUri(file).then((dataUri) => {
-      let obj = {};
-      obj[key] = dataUri;
-      setBadgeData({ ...badgeData, ...obj });
-      setLatestBGImg({ ...latestBGImg, ...obj });
-    });
+    await updateGeneralImageInfo(file, setBadgeIconImage, setIconImagePreview);
+  };
+
+  const updateDarkImageInfo = async (e) => {
+    e.preventDefault();
+    let file = e.currentTarget.files[0];
+    await updateGeneralImageInfo(
+      file,
+      setBadgeDarkIconImage,
+      setDarkIconImagePreview
+    );
+  };
+
+  useEffect(() => {
+    setShowModal(true);
+  }, []);
+
+  const handleClose = (e) => {
+    debugger;
   };
 
   return (
     <>
       {
-        <form>
-          <div className="indi-add-card-wrapper d-flex flex-column">
-            <div className="indi-add-card-title">Add badge</div>
+        <Modal centered show={showModal} onHide={handleClose}>
+          <form>
+            <div className="indi-add-badge-form-wrapper d-flex flex-column">
+              <div className="indi-add-badge-form-item d-flex flex-column">
+                <div className="indi-add-badge-form-item-label">Badge name</div>
+                <div className="indi-add-badge-form-item-input">
+                  <input
+                    type="text"
+                    className="indi-badge-input-field"
+                    id="name"
+                    onChange={nameHandler}
+                    placeholder="Enter badge name"
+                  ></input>
+                </div>
+              </div>
 
-            <div className=" indi-card-field-item indi-add-badge-items-wrapper indi-card-item-parent indi-add-card-wrapper card-with-bg indi-badge-add-form-div">
-              <input
-                type="text"
-                className="indi-badge-input-field"
-                id="name"
-                onChange={nameHandler}
-                placeholder="Enter badge name"
-              ></input>
+              <div className="indi-add-badge-form-item d-flex flex-column">
+                <div className="indi-add-badge-form-item-label">Badge type</div>
+                <div className="indi-add-badge-form-item-input">
+                  <Form.Select
+                    defaultValue="text"
+                    id="type"
+                    onChange={selectHandler}
+                    size="sm"
+                    className="indi-badge-input-field indi-badge-input-select-field"
+                  >
+                    <option value="text">Text</option>
+                    <option value="textarea">Textarea</option>
+                    <option value="select">Select</option>
+                    <option value="boolean">Boolean</option>
+                  </Form.Select>
+                </div>
+              </div>
 
-              <Form.Select
-                defaultValue="text"
-                id="type"
-                onChange={selectHandler}
-                size="sm"
-                className="indi-badge-input-field indi-badge-input-select-field"
-              >
-                <option value="text">Text</option>
-                <option value="textarea">Textarea</option>
-                <option value="select">Select</option>
-                <option value="boolean">Boolean</option>
-              </Form.Select>
-
-              <div className="indi-badge-img-upload-field d-flex d-flex-row">
-                <input
-                  type="file"
-                  id="iconImage"
-                  className="indi-badge-upload-picture-file-input"
-                  onChange={updateImageInfo}
-                />
-                <div className="indi-badge-img-upload-label">
-                  Upload icon image
+              <div className="indi-add-badge-form-item d-flex flex-row">
+                <div className="indi-add-badge-form-item-label">
+                  Upload image for ribbon
+                </div>
+                <div className="indi-add-badge-form-item-input">
+                  <input
+                    type="file"
+                    id="iconImage"
+                    className="indi-badge-upload-picture-file-input"
+                    onChange={updateImageInfo}
+                  />
+                  <div className="indi-add-badge-img-wrapper"></div>
                 </div>
                 <div
                   className="indi-badge-img-preview"
-                  style={{ background: `url(${latestBGImg.iconImage})` }}
+                  style={{ background: `url(${iconImagePreview})` }}
                 ></div>
               </div>
 
-              <div className="indi-badge-img-upload-field d-flex d-flex-row">
-                <input
-                  type="file"
-                  id="darkIconImage"
-                  className="indi-badge-upload-picture-file-input"
-                  onChange={updateImageInfo}
-                />
-                <div className="indi-badge-img-upload-label">
-                  Upload icon image for dark theme
+              <div className="indi-add-badge-form-item d-flex flex-row">
+                <div className="indi-add-badge-form-item-label">
+                  Upload image for form
+                </div>
+                <div className="indi-add-badge-form-item-input">
+                  <input
+                    type="file"
+                    id="darkIconImage"
+                    className="indi-badge-upload-picture-file-input"
+                    onChange={updateDarkImageInfo}
+                  />
+                  <div className="indi-add-badge-img-wrapper"></div>
                 </div>
                 <div
                   className="indi-badge-img-preview"
-                  style={{ background: `url(${latestBGImg.darkIconImage})` }}
-                >
-                </div>
+                  style={{ background: `url(${iconDarkImagePreview})` }}
+                ></div>
               </div>
             </div>
 
-            <div className="indi-add-card-item-footer d-flex d-flex-row">
+            <div className="indi-add-badge-footer d-flex d-flex-row">
               <div className="indi-add-badge-page-footer-btn-wrapper d-flex d-flex-row">
                 <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={goBack}
+                  onClick={hideModal}
                 >
-                  Back
+                  Cancel
                 </button>
                 <button
                   type="button"
@@ -161,8 +193,8 @@ const AddBadgePage = () => {
                 </button>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </Modal>
       }
     </>
   );
