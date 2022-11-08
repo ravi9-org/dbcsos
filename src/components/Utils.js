@@ -254,7 +254,6 @@ const getAllAddresses = () => {
   return myPromise;
 };
 
-
 const getBadges = () => {
   const myPromise = new Promise((resolve, reject) => {
     let session = getSession();
@@ -296,6 +295,19 @@ const addNewBadge = (badgeData) => {
   return axios.post(url, formData);
 };
 
+const deleteBadge = (badgeUID) => {
+  let url = REST_API.NEW_BADGES;
+  return axios.delete(url + badgeUID);
+};
+
+const deleteBadges = (badgesArray) => {
+  let promises = [];
+  badgesArray.forEach((badge) => {
+    promises.push(deleteBadge(badge));
+  });
+
+  return Promise.all(badgesArray);
+};
 
 const getNewBadges = () => {
   const myPromise = new Promise((resolve, reject) => {
@@ -609,6 +621,7 @@ const Utils = {
   getBadges,
   getNewBadges,
   addNewBadge,
+  deleteBadges,
   getUserId,
   getCardDetails,
   deleteCard,

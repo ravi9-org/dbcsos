@@ -6,18 +6,15 @@ import Form from "react-bootstrap/Form";
 
 import Utils from "../../../Utils";
 
-const AddBadgePage = () => {
-
+const AddBadgePage = ({ props }) => {
   let [badgeName, setBadgeName] = useState("");
   let [badgeType, setBadgeType] = useState("text");
   let [badgeIconImage, setBadgeIconImage] = useState("");
   let [badgeDarkIconImage, setBadgeDarkIconImage] = useState("");
-  let [badgeId, setBadgeId] = useState("");
-
-  let [showModal, setShowModal] = useState(false);
+  let [badgeUID, setBadgeUID] = useState("");
 
   const hideModal = (e) => {
-    setShowModal(false);
+    props.setAddModalCanOpen(false);
   };
 
   const saveBadge = (e) => {
@@ -32,7 +29,7 @@ const AddBadgePage = () => {
       iconImage: badgeIconImage,
       darkIconImage: badgeDarkIconImage,
       name: badgeName,
-      badgeId: badgeId,
+      badgeUID: badgeUID,
       type: badgeType,
     };
 
@@ -45,9 +42,9 @@ const AddBadgePage = () => {
 
   const nameHandler = (e) => {
     let value = e?.currentTarget?.value || "";
-    let badgeId = value.trim().replaceAll(" ", "").toLowerCase();
+    let badgeUID = value.trim().replaceAll(" ", "").toLowerCase();
     setBadgeName(value);
-    setBadgeId(badgeId);
+    setBadgeUID(badgeUID);
   };
 
   const selectHandler = (e) => {
@@ -91,18 +88,16 @@ const AddBadgePage = () => {
     );
   };
 
-  useEffect(() => {
-    setShowModal(true);
-  }, []);
+  useEffect(() => {}, [props.addModalCanOpen]);
 
   const handleClose = (e) => {
-    debugger;
+    props.setAddModalCanOpen(false);
   };
 
   return (
     <>
       {
-        <Modal centered show={showModal} onHide={handleClose}>
+        <Modal centered show={props.addModalCanOpen} onHide={handleClose}>
           <form>
             <div className="indi-add-badge-form-wrapper d-flex flex-column">
               <div className="indi-add-badge-form-item d-flex flex-column">

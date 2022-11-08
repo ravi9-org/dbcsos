@@ -64,6 +64,7 @@ const BadgesTable = () => {
 
   let [tableData, setTableData] = useState([]);
   let [canRender, setCanRender] = useState(false);
+  let [updateTable, setUpdateTable] = useState(false);
 
   const success = (res) => {
     setLoadingState({
@@ -106,7 +107,6 @@ const BadgesTable = () => {
   };
 
   const loadFreshBadges = () => {
-
     Utils.getNewBadges().then(success, fail);
   };
 
@@ -116,27 +116,28 @@ const BadgesTable = () => {
       text: "Loading badges",
     });
     loadFreshBadges();
-  }, []);
+  }, [updateTable]);
+  //console.log(" 11111111111111111111111 ");
+
+  //useEffect(() => {
+    //console.log(" ============================ ");
+    //loadFreshBadges();
+  //}, [updateTable]);
 
   const handleShow = async (e) => {
     if (tableSelectedItems?.length > 0) {
-      //e.preventDefault();
-      //console.log(tableSelectedItems);
       await setSelectedItemCount(tableSelectedItems?.length);
       setShowDeleteModal(true);
-      //return false;
     }
   };
 
   const handleClose = async (e) => {
-    //e.preventDefault();
-    //console.log(tableSelectedItems);
     await setSelectedItemCount(tableSelectedItems?.length);
     setShowDeleteModal(false);
-    //return false;
   };
 
   const deleteSuccess = (res) => {
+    setUpdateTable(!updateTable);
     // let tempUserData = { ...userData };
     // tempUserData.cards = res.updatedCardsArray;
     // setUserData(tempUserData);
@@ -144,7 +145,6 @@ const BadgesTable = () => {
     // setLoadingState({
     //   applyMask: false,
     // });
-    // navigate(Utils.APP_URLS.CARDS_PAGE);
   };
 
   const deleteFail = (err) => {
@@ -167,19 +167,15 @@ const BadgesTable = () => {
       return tableSelectedItems.indexOf(d[0]) === -1;
     });
     setTableData(tempTableData);
-    //Utils.deleteBadges(tableSelectedItems).then(deleteSuccess, deleteFail);
+    //console.log(" ================= : " + tableSelectedItems);
+    Utils.deleteBadges(tableSelectedItems).then(deleteSuccess, deleteFail);
   };
 
   let [addModalCanOpen, setAddModalCanOpen] = useState(false);
-  //console.log(" 11111111111111111111 ");
-  useEffect(() => {
-    //console.log(" ------------------ ");
-  }, [addModalCanOpen]);
 
   const openAddModal = (e) => {
     e.preventDefault();
     setAddModalCanOpen(true);
-    return false;
   };
 
   const closeAddModal = (e) => {
@@ -240,7 +236,9 @@ const BadgesTable = () => {
         </Modal.Footer>
       </Modal>
 
-      {addModalCanOpen && <AddBadgePage />}
+      {addModalCanOpen && (
+        <AddBadgePage props={{ addModalCanOpen, setAddModalCanOpen }} />
+      )}
     </div>
   );
 };

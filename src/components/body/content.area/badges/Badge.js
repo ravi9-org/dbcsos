@@ -9,7 +9,7 @@ const Badge = (props) => {
   let badgeEle = useRef(null);
 
   let badge = props.badge || {};
-  //badgeId,darkIconImage,iconImage,id,isDefault,multiple,name,readonly,required,type
+  //badgeUID,darkIconImage,iconImage,id,isDefault,multiple,name,readonly,required,type
 
   let [isMultiple, setIsMultiple] = useState(badge.multiple);
   
@@ -21,7 +21,7 @@ const Badge = (props) => {
 
   useEffect(() => {
     if (!isMultiple) {
-      if (cardCtxInfo?.fields?.indexOf(badge.badgeId) > -1) {
+      if (cardCtxInfo?.fields?.indexOf(badge.badgeUID) > -1) {
         canFreeze = true;
       }
     }
@@ -44,7 +44,7 @@ const Badge = (props) => {
       let tempCardCtxInfo = {...cardCtxInfo};
       let tempFields = tempCardCtxInfo.fields;
       let tempData = tempCardCtxInfo.data;
-      tempFields.push(badge.badgeId);
+      tempFields.push(badge.badgeUID);
       tempData.push(badge.defaultValue);
       setCardCtxInfo(tempCardCtxInfo);
       // inform form about new field to be add
