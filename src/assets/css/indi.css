@@ -1137,6 +1137,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-add-badge-items-wrapper {
   flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .indi-app .indi-badge-input-field {
@@ -1158,4 +1159,13 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-color: #323c5b;
   color: #fff;
   padding: 10px;
+}
+
+
+.indi-app .indi-badge-img-preview {  
+  width: 32px;
+  height: 32px;
+  /* border: 1px solid grey; */
+  border-radius: 50%;
+  background-size: contain !important;
 }
