@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { useNavigate } from "react-router";
 import { Button, Modal, Alert } from "react-bootstrap";
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import Form from "react-bootstrap/Form";
 
 import Utils from "../../../Utils";
 
 const AddBadgePage = ({ props }) => {
+  let tableData = props?.tableData || [];
+  let setTableData = props?.setTableData || (() => {});
   let [badgeName, setBadgeName] = useState("");
   let [badgeType, setBadgeType] = useState("text");
   let [badgeIconImage, setBadgeIconImage] = useState("");
@@ -21,6 +23,17 @@ const AddBadgePage = ({ props }) => {
   const saveBadge = (e) => {
     const success = (res) => {
       hideModal();
+      let newRecord = [
+        res.data.id,
+        false,
+        res.data.name,
+        res.data.iconImage,
+        res.data.darkIconImage,
+        res.data.type,
+      ];
+      let tempTableData = [...tableData];
+      tempTableData.push(newRecord);
+      setTableData(tempTableData);
     };
     const fail = (err) => {
       console.log(err);
@@ -100,106 +113,100 @@ const AddBadgePage = ({ props }) => {
       {
         <Modal centered show={props.addModalCanOpen} onHide={handleClose}>
           <Modal.Body>
-          <form>
-            <div className="indi-add-badge-form-wrapper d-flex flex-column">
-              <div className="indi-add-badge-form-item d-flex flex-column">
-                <div className="indi-add-badge-form-item-input row">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="Badge name"
-                  >
-                    <Form.Control
-                      type="text"
-                      className="indi-badge-input-field"
-                      id="name"
-                      placeholder="Enter badge name"
-                      autoComplete="off"
-                      onChange={nameHandler}
+            <form>
+              <div className="indi-add-badge-form-wrapper d-flex flex-column">
+                <div className="indi-add-badge-form-item d-flex flex-column">
+                  <div className="indi-add-badge-form-item-input row">
+                    <FloatingLabel label="Badge name">
+                      <Form.Control
+                        type="text"
+                        className="indi-badge-input-field"
+                        id="name"
+                        placeholder="Enter badge name"
+                        autoComplete="off"
+                        onChange={nameHandler}
+                      />
+                    </FloatingLabel>
+                  </div>
+                </div>
+
+                <div className="indi-add-badge-form-item d-flex flex-column">
+                  <div className="indi-add-badge-form-item-input row">
+                    <FloatingLabel label="Badge type">
+                      <Form.Select
+                        defaultValue="text"
+                        id="type"
+                        onChange={selectHandler}
+                        size="sm"
+                        className="indi-badge-input-field indi-badge-input-select-field"
+                      >
+                        <option value="text">Text</option>
+                        <option value="textarea">Textarea</option>
+                        <option value="select">Select</option>
+                        <option value="boolean">Boolean</option>
+                      </Form.Select>
+                    </FloatingLabel>
+                  </div>
+                </div>
+
+                <div className="indi-add-badge-form-item d-flex flex-row align-items-center">
+                  <div className="indi-add-badge-form-item-label">
+                    Upload image for ribbon
+                  </div>
+                  <div className="indi-add-badge-form-item-input">
+                    <input
+                      type="file"
+                      id="iconImage"
+                      className="indi-badge-upload-picture-file-input"
+                      onChange={updateImageInfo}
                     />
-                  </FloatingLabel>
+                    <div className="indi-add-badge-img-wrapper"></div>
+                  </div>
+                  <div
+                    className="indi-badge-img-preview"
+                    style={{ background: `url(${iconImagePreview})` }}
+                  ></div>
+                </div>
+
+                <div className="indi-add-badge-form-item d-flex flex-row align-items-center">
+                  <div className="indi-add-badge-form-item-label">
+                    Upload image for form
+                  </div>
+                  <div className="indi-add-badge-form-item-input">
+                    <input
+                      type="file"
+                      id="darkIconImage"
+                      className="indi-badge-upload-picture-file-input"
+                      onChange={updateDarkImageInfo}
+                    />
+                    <div className="indi-add-badge-img-wrapper"></div>
+                  </div>
+                  <div
+                    className="indi-badge-img-preview"
+                    style={{ background: `url(${iconDarkImagePreview})` }}
+                  ></div>
                 </div>
               </div>
 
-              <div className="indi-add-badge-form-item d-flex flex-column">
-              <div className="indi-add-badge-form-item-input row">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="Badge type"
+              <div className="indi-add-badge-footer">
+                <div className="indi-add-badge-page-footer-btn-wrapper">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={hideModal}
                   >
-                   <Form.Select
-                    defaultValue="text"
-                    id="type"
-                    onChange={selectHandler}
-                    size="sm"
-                    className="indi-badge-input-field indi-badge-input-select-field"
-                    > 
-                    <option value="text">Text</option>
-                    <option value="textarea">Textarea</option>
-                    <option value="select">Select</option>
-                    <option value="boolean">Boolean</option>
-                  </Form.Select>
-                  </FloatingLabel>
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={saveBadge}
+                  >
+                    Save
+                  </button>
                 </div>
               </div>
-
-              <div className="indi-add-badge-form-item d-flex flex-row align-items-center">
-                <div className="indi-add-badge-form-item-label">
-                  Upload image for ribbon
-                </div>
-                <div className="indi-add-badge-form-item-input">
-                  <input
-                    type="file"
-                    id="iconImage"
-                    className="indi-badge-upload-picture-file-input"
-                    onChange={updateImageInfo}
-                  />
-                  <div className="indi-add-badge-img-wrapper"></div>
-                </div>
-                <div
-                  className="indi-badge-img-preview"
-                  style={{ background: `url(${iconImagePreview})` }}
-                ></div>
-              </div>
-
-              <div className="indi-add-badge-form-item d-flex flex-row align-items-center">
-                <div className="indi-add-badge-form-item-label">
-                  Upload image for form
-                </div>
-                <div className="indi-add-badge-form-item-input">
-                  <input
-                    type="file"
-                    id="darkIconImage"
-                    className="indi-badge-upload-picture-file-input"
-                    onChange={updateDarkImageInfo}
-                  />
-                  <div className="indi-add-badge-img-wrapper"></div>
-                </div>
-                <div
-                  className="indi-badge-img-preview"
-                  style={{ background: `url(${iconDarkImagePreview})` }}
-                ></div>
-              </div>
-            </div>
-
-            <div className="indi-add-badge-footer">
-              <div className="indi-add-badge-page-footer-btn-wrapper">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={hideModal}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={saveBadge}
-                >
-                  Save
-                </button>
-              </div>
-            </div>
-          </form>
+            </form>
           </Modal.Body>
         </Modal>
       }

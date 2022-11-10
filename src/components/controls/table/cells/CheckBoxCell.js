@@ -12,8 +12,8 @@ const CheckBoxCell = ({ props }) => {
     let id = data[0];
     let setObjValu = {
       id: id,
-      selected: e.currentTarget.checked
-    }
+      selected: e.currentTarget.checked,
+    };
     setSelectedItem(setObjValu);
   };
   return (

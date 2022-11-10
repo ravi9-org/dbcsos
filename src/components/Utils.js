@@ -19,7 +19,6 @@ const REST_API = {
   LOGIN: REST_API_PREFIX + "/login",
   LOGOUT: REST_API_PREFIX + "/logout",
   USER_PROFILE: REST_API_PREFIX + "/users/",
-  BADGES: REST_API_PREFIX + "/badges/",
   NEW_BADGES: REST_API_PREFIX + "/newbadges/",
   CARDS: REST_API_PREFIX + "/cards",
   TEMPLATES: REST_API_PREFIX + "/templates",
@@ -39,7 +38,7 @@ const APP_URLS = {
   CARD_DETAILS_PAGE: APP_URL_PREFIX + "/cards/:cardid",
   CARD_EXTERNAL_PAGE: APP_URL_PREFIX + "/cardextdetails/:cardid",
   ADDRESS_PAGE: APP_URL_PREFIX + "/addresses",
-  BADGES_PAGE: APP_URL_PREFIX + "/badges",
+  // BADGES_PAGE: APP_URL_PREFIX + "/badges",
   NEW_BADGES_PAGE: APP_URL_PREFIX + "/newbadges",
   ADD_BADGE_PAGE: APP_URL_PREFIX + "/addbadgepage",
   USERS_PAGE: APP_URL_PREFIX + "/users",
@@ -52,7 +51,7 @@ const NAV_ITEMS_KEYS = [
   "templates",
   "users",
   "addresses",
-  "badges",
+  // "badges",
   "newbadges",
   "cards",
   "emailsignature",
@@ -76,11 +75,11 @@ const NAV_ITEMS_VALUES = {
     url: APP_URLS.ADDRESS_PAGE,
     enabled: false,
   },
-  badges: {
-    title: "Badges",
-    url: APP_URLS.BADGES_PAGE,
-    enabled: false,
-  },
+  // badges: {
+  //   title: "Badges",
+  //   url: APP_URLS.BADGES_PAGE,
+  //   enabled: false,
+  // },
   newbadges: {
     title: "New Badges",
     url: APP_URLS.NEW_BADGES_PAGE,
@@ -254,38 +253,38 @@ const getAllAddresses = () => {
   return myPromise;
 };
 
-const getBadges = () => {
-  const myPromise = new Promise((resolve, reject) => {
-    let session = getSession();
-    if (isObjectEmpty(session).length === 0) {
-      reject({
-        redirect: true,
-        message: "No session establised till now...",
-      });
-    }
+// const getBadges = () => {
+//   const myPromise = new Promise((resolve, reject) => {
+//     let session = getSession();
+//     if (isObjectEmpty(session).length === 0) {
+//       reject({
+//         redirect: true,
+//         message: "No session establised till now...",
+//       });
+//     }
 
-    let token = getToken();
-    if (token) {
-      let getUrl = REST_API.BADGES;
-      axios
-        .get(getUrl, {
-          headers: {
-            Authorization: `${token}`,
-          },
-        })
-        .then((res) => {
-          resolve(res);
-        });
-    } else {
-      reject({
-        redirect: true,
-        message: "No token available till now...",
-      });
-    }
-  });
+//     let token = getToken();
+//     if (token) {
+//       let getUrl = REST_API.BADGES;
+//       axios
+//         .get(getUrl, {
+//           headers: {
+//             Authorization: `${token}`,
+//           },
+//         })
+//         .then((res) => {
+//           resolve(res);
+//         });
+//     } else {
+//       reject({
+//         redirect: true,
+//         message: "No token available till now...",
+//       });
+//     }
+//   });
 
-  return myPromise;
-};
+//   return myPromise;
+// };
 
 const addNewBadge = (badgeData) => {
   let formData = { ...badgeData };
@@ -618,7 +617,7 @@ const Utils = {
   getUserProfile,
   getAllUsers,
   getAllAddresses,
-  getBadges,
+  //getBadges,
   getNewBadges,
   addNewBadge,
   deleteBadges,

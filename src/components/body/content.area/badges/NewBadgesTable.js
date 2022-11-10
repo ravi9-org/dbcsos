@@ -1,20 +1,14 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, Modal, Alert } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
 import DataTable from "../../../controls/table/DataTable";
 import AddIcon from "../../../../assets/img/add.png";
-import EditIcon from "../../../../assets/img/Edit.png";
 import DeleteIcon from "../../../../assets/img/Delete.png";
 import AddBadgePage from "./AddBadgePage";
 
 const BadgesTable = () => {
-  let navigate = useNavigate();
-
-  let editAction = useRef(null);
-
   let [showDeleteModal, setShowDeleteModal] = useState(false);
   let [selectedItemCount, setSelectedItemCount] = useState(0);
 
@@ -116,13 +110,7 @@ const BadgesTable = () => {
       text: "Loading badges",
     });
     loadFreshBadges();
-  }, [updateTable]);
-  //console.log(" 11111111111111111111111 ");
-
-  //useEffect(() => {
-    //console.log(" ============================ ");
-    //loadFreshBadges();
-  //}, [updateTable]);
+  }, []);
 
   const handleShow = async (e) => {
     if (tableSelectedItems?.length > 0) {
@@ -237,7 +225,14 @@ const BadgesTable = () => {
       </Modal>
 
       {addModalCanOpen && (
-        <AddBadgePage props={{ addModalCanOpen, setAddModalCanOpen }} />
+        <AddBadgePage
+          props={{
+            addModalCanOpen,
+            setAddModalCanOpen,
+            tableData,
+            setTableData,
+          }}
+        />
       )}
     </div>
   );

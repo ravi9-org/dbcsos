@@ -1141,6 +1141,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   border: 1px solid transparent;
   border-radius: 10px;
   margin: 0 20px;
+  cursor: pointer;
 }
 
 .indi-app .form-floating > .form-control-plaintext~label,
