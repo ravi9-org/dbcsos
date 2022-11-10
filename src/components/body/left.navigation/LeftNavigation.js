@@ -15,9 +15,6 @@ import addressesActiveImg from "../../../assets/img/navitems/light/addresses.png
 import badgesImg from "../../../assets/img/navitems/dark/settings.png";
 import badgesActiveImg from "../../../assets/img/navitems/light/settings.png";
 
-import newBadgesImg from "../../../assets/img/navitems/dark/settings.png";
-import newBadgesActiveImg from "../../../assets/img/navitems/light/settings.png";
-
 import cardsImg from "../../../assets/img/navitems/dark/cards.png";
 import cardsActiveImg from "../../../assets/img/navitems/light/cards.png";
 
@@ -35,7 +32,6 @@ const images = {
   users: usersImg,
   addresses: addressesImg,
   badges: badgesImg,
-  newbadges: newBadgesImg,
   cards: cardsImg,
   emailsignature: emailsignatureImg,
   contacts: contactsImg,
@@ -47,7 +43,6 @@ const activeImages = {
   users: usersActiveImg,
   addresses: addressesActiveImg,
   badges: badgesActiveImg,
-  newbadges: newBadgesActiveImg,
   cards: cardsActiveImg,
   emailsignature: emailsignatureActiveImg,
   contacts: contactsActiveImg,

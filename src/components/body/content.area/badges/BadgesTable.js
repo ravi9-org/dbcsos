@@ -101,7 +101,7 @@ const BadgesTable = () => {
   };
 
   const loadFreshBadges = () => {
-    Utils.getNewBadges().then(success, fail);
+    Utils.getBadges().then(success, fail);
   };
 
   useEffect(() => {

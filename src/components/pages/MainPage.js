@@ -37,7 +37,7 @@ function MainPage() {
     err?.message?.length && console.log(err);
   };
   useEffect(() => {
-    Utils.getNewBadges().then(badgeSuccess, badgeFail);
+    Utils.getBadges().then(badgeSuccess, badgeFail);
   }, []);
 
   return (

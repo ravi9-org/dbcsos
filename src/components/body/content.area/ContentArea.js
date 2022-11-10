@@ -6,7 +6,7 @@ import CardList from "./cards/CardsList";
 import TemplateList from "./templates/TemplatesList";
 import Utils from "../../Utils";
 import Addresses from "../../pages/Addresses";
-import NewBadgesTable from "./badges/NewBadgesTable";
+import BadgesTable from "./badges/BadgesTable";
 import AddBadgePage from "./badges/AddBadgePage";
 import AddressesTable from "./addresses/AddressesTable";
 import UsersTable from "./users/UsersTable";
@@ -80,9 +80,9 @@ const ContentArea = () => {
         ></Route>
         
         <Route
-          path={Utils.APP_URLS.NEW_BADGES_PAGE}
+          path={Utils.APP_URLS.BADGES_PAGE}
           exact
-          element={<NewBadgesTable />}
+          element={<BadgesTable />}
         ></Route>
         
         <Route

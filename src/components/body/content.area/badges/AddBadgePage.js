@@ -48,7 +48,7 @@ const AddBadgePage = ({ props }) => {
     };
 
     try {
-      Utils.addNewBadge(formData).then(success, fail);
+      Utils.addBadge(formData).then(success, fail);
     } catch (e) {
       console.log(e);
     }
