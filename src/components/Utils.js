@@ -23,7 +23,7 @@ const REST_API = {
   CARDS: REST_API_PREFIX + "/cards",
   TEMPLATES: REST_API_PREFIX + "/templates",
   USER_CARD: REST_API_PREFIX + "/usercards",
-  ADDRESSES: REST_API_PREFIX + "/addresses",
+  ADDRESSES: REST_API_PREFIX + "/addresses/",
 };
 
 const APP_URL_PREFIX = "";
