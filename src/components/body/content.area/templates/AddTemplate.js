@@ -32,8 +32,8 @@ const AddTemplate = () => {
       {canRender && (
         <form className="indi-add-template-form">
           <div>
-            <div>Add template</div>
-            <div className="">
+            <div className="indi-body-title">Add template</div>
+            <div className="indi-data-table-wrapper d-flex indi-text-btn-row">
               <FloatingLabel label="Badge name">
                 <Form.Control
                   type="text"
@@ -43,14 +43,14 @@ const AddTemplate = () => {
                   autoComplete="off"
                   onChange={templateNameHandler}
                 />
-              </FloatingLabel>
-            </div>
-            <div className="">
-              <Button>Save</Button>
-              <Button>Cancel</Button>
+              </FloatingLabel>              
+              <div className="indi-right-button-wrapper">
+                <Button>Save</Button>
+                <Button>Cancel</Button>
+              </div>
             </div>
           </div>
-          <Accordion defaultActiveKey="0">
+          <Accordion className="indi-data-table-wrapper" defaultActiveKey="0">
             <Accordion.Item eventKey="0">
               <Accordion.Header>Badges selection</Accordion.Header>
               <Accordion.Body>

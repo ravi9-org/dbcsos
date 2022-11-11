@@ -419,10 +419,16 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-add-card-title {
   display: flex;
   flex-flow: row;
+  justify-content: space-between;
+}
+
+.indi-app .indi-body-title,
+.indi-app .indi-body-action-bar,
+.indi-app .indi-add-card-title,
+.indi-app .indi-signature-title {
   font-weight: bold;
   color: #2f4694;
   line-height: 40px;
-  justify-content: space-between;
   padding: 0 16px;
 }
 
@@ -499,6 +505,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-card-title {
   padding-bottom: 8px;
+  line-height: 19px;
+  min-height: 24px;
+  max-height: 40px;
 }
 
 .indi-app .indi-card-field-wrapper>div {
@@ -768,13 +777,6 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background: #fff;
   box-shadow: 0px 1px 6px #000;
   min-height: 192px;
-}
-
-.indi-app .indi-signature-title {
-  font-weight: bold;
-  color: #2f4694;
-  line-height: 40px;
-  padding: 0 12px;
 }
 
 .indi-app .indi-qrcode-bg,
@@ -1070,7 +1072,49 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-data-table-wrapper {
-  padding: 15px;
+  padding: 16px;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper.indi-text-btn-row {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .form-floating {
+  flex: 1 1 0;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .indi-data-table-tr td {
+  vertical-align: middle;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .indi-data-table-tr td input[type=checkbox] {  
+  border-color: #2f4696;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .indi-data-table-tr td input[type=text] {
+  height: calc(2rem + 2px);
+  line-height: 1.25;
+  border-color: #2f4696;
+  min-width: 200px;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .accordion-body {
+  overflow: auto;
+  padding: 0;
+  margin: 16px;
+  font-weight: bold;  
+  color: #304697;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .accordion-item .accordion-button {
+  color:#2f4594;
+  font-weight: bold;  
+}
+.indi-app .indi-add-template-form .indi-data-table-wrapper .accordion-item .accordion-button:not(.collapsed) {  
+  background-color:#2b5daf40;
+  font-weight: bold;  
+  color:#232862;
 }
 
 .indi-app tr.indi-data-table-tr {
