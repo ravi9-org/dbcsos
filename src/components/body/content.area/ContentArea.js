@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import ContextComponent from "../../AppContext";
 import CardList from "./cards/CardsList";
 import TemplateList from "./templates/TemplatesList";
+import AddTemplate from "./templates/AddTemplate";
 import Utils from "../../Utils";
 import Addresses from "../../pages/Addresses";
 import BadgesTable from "./badges/BadgesTable";
@@ -40,6 +41,12 @@ const ContentArea = () => {
           path={Utils.APP_URLS.TEMPLATES_PAGE}
           exact
           element={<TemplateList />}
+        ></Route>
+
+        <Route
+          path={Utils.APP_URLS.ADD_TEMPLATE_PAGE}
+          exact
+          element={<AddTemplate />}
         ></Route>
 
         {!isAdmin && (

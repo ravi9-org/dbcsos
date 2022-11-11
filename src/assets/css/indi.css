@@ -1196,3 +1196,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   color: #2f4696;
   font-weight: bold;
 }
+
+
+.indi-app .indi-add-template-badge-icon-image {
+  width: 24px;
+  height: 24px;
+}

@@ -32,6 +32,7 @@ const APP_URLS = {
   LOGIN_PAGE: APP_URL_PREFIX + "login",
   LANDING_PAGE: APP_URL_PREFIX + "/",
   TEMPLATES_PAGE: APP_URL_PREFIX + "/templates",
+  ADD_TEMPLATE_PAGE: APP_URL_PREFIX + "/addtemplate",
   CARDS_PAGE: APP_URL_PREFIX + "/cards",
   ADD_CARD_PAGE: APP_URL_PREFIX + "/cards/addcard",
   EDIT_CARD_PAGE: APP_URL_PREFIX + "/cards/editcard/:cardid",

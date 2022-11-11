@@ -20,8 +20,7 @@ const TemplatesList = () => {
 
   const navgiatToAddPage = (e) => {
     e.preventDefault();
-    //navigate(Utils.APP_URLS.ADD_CARD_PAGE);
-    return false;
+    navigate(Utils.APP_URLS.ADD_TEMPLATE_PAGE);
   };
 
   const success = (res) => {
