@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 
 import ContextComponent from "../../../AppContext";
@@ -126,26 +126,13 @@ const BadgesTable = () => {
 
   const deleteSuccess = (res) => {
     setUpdateTable(!updateTable);
-    // let tempUserData = { ...userData };
-    // tempUserData.cards = res.updatedCardsArray;
-    // setUserData(tempUserData);
-    // setShowAlert(true);
-    // setLoadingState({
-    //   applyMask: false,
-    // });
   };
 
   const deleteFail = (err) => {
-    // setLoadingState({
-    //   applyMask: false,
-    // });
-    // setShowAlert(true);
-    // err?.message?.length && console.log(err);
+    err?.message?.length && console.log(err);
   };
 
   const handleDelete = async (e) => {
-    //e.preventDefault();
-    //console.log("deleting selected " + tableSelectedItems?.length + "items...");
     setShowDeleteModal(false);
     // setLoadingState({
     //   applyMask: true,
@@ -155,7 +142,6 @@ const BadgesTable = () => {
       return tableSelectedItems.indexOf(d[0]) === -1;
     });
     setTableData(tempTableData);
-    //console.log(" ================= : " + tableSelectedItems);
     Utils.deleteBadges(tableSelectedItems).then(deleteSuccess, deleteFail);
   };
 
@@ -181,7 +167,7 @@ const BadgesTable = () => {
         Badges
         <div className="d-none1 w-50 indi-body-actions">
           <div
-            className="indi-body-action indi-badges-table-edit-icon"
+            className="indi-body-action"
             role="button"
             onClick={openAddModal}
           >

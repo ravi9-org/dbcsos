@@ -274,7 +274,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-content-area-wrapper button.btn.btn-primary,
-.indi-app .modal-dialog  button.btn.btn-primary {
+.indi-app .modal-dialog button.btn.btn-primary {
   float: right;
   margin: 8px;
   background-color: #232862;
@@ -1107,35 +1107,35 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 }
 
-/* indi-add-badge-form-item-input */
-.indi-app .indi-badge-img-preview {
+/* indi-add-form-item-input */
+.indi-app .indi-img-preview {
   width: 64px;
   height: 64px;
   border-radius: 50%;
   background-size: contain !important;
 }
 
-.indi-app .indi-add-badge-form-wrapper {
+.indi-app .indi-add-form-wrapper {
   justify-content: space-evenly;
   min-height: 400px;
 }
 
 
-.indi-app .indi-badge-upload-picture-file-input {
+.indi-app .indi-upload-picture-file-input {
   opacity: 0;
   position: absolute;
 }
 
 
-.indi-app .indi-add-badge-img-wrapper {
+.indi-app .indi-add-img-wrapper {
   background-image: url("../img/Upload1.png");
   background-color: rgb(255, 255, 255, 0.5);
   background-repeat: no-repeat;
   background-size: contain;
 }
 
-.indi-app .indi-badge-upload-picture-file-input,
-.indi-app .indi-add-badge-img-wrapper {
+.indi-app .indi-upload-picture-file-input,
+.indi-app .indi-add-img-wrapper {
   width: 72px;
   height: 58px;
   border: 1px solid transparent;
@@ -1144,10 +1144,10 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   cursor: pointer;
 }
 
-.indi-app .form-floating > .form-control-plaintext~label,
-.indi-app .form-floating > .form-control:focus~label, 
-.indi-app .form-floating > .form-control:not(:placeholder-shown)~label,
-.indi-app .form-floating > .form-select~label {
+.indi-app .form-floating>.form-control-plaintext~label,
+.indi-app .form-floating>.form-control:focus~label,
+.indi-app .form-floating>.form-control:not(:placeholder-shown)~label,
+.indi-app .form-floating>.form-select~label {
   opacity: 1;
   background: #fff;
   width: auto;
@@ -1163,8 +1163,12 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .form-floating>.form-control-plaintext,
 .indi-app .form-floating>.form-select {
   height: calc(2rem + 2px);
-  line-height: 1.25;  
+  line-height: 1.25;
   border-color: #2f4696;
+}
+
+.indi-app .form-floating>.form-control.indi-input-textarea-field {
+  height: 90px;
 }
 
 
@@ -1172,7 +1176,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .form-floating>.form-control-plaintext:not(:placeholder-shown),
 .indi-app .form-floating>.form-control:focus,
 .indi-app .form-floating>.form-control:not(:placeholder-shown),
-.indi-app .form-floating >.form-select {
+.indi-app .form-floating>.form-select {
   padding-top: 0;
   padding-bottom: 0;
   border-color: #2f4696;
@@ -1188,7 +1192,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   box-shadow: 0 0 0 2px rgb(13 110 253 / 20%);
 }
 
-.indi-app .indi-add-badge-form-item-label {
+.indi-app .indi-add-form-item-label {
   color: #2f4696;
   font-weight: bold;
 }

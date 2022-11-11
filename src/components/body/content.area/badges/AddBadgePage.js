@@ -114,13 +114,13 @@ const AddBadgePage = ({ props }) => {
         <Modal centered show={props.addModalCanOpen} onHide={handleClose}>
           <Modal.Body>
             <form>
-              <div className="indi-add-badge-form-wrapper d-flex flex-column">
-                <div className="indi-add-badge-form-item d-flex flex-column">
-                  <div className="indi-add-badge-form-item-input row">
+              <div className="indi-add-form-wrapper d-flex flex-column">
+                <div className="indi-add-form-item d-flex flex-column">
+                  <div className="indi-add-form-item-input row">
                     <FloatingLabel label="Badge name">
                       <Form.Control
                         type="text"
-                        className="indi-badge-input-field"
+                        className="indi-input-field"
                         id="name"
                         placeholder="Enter badge name"
                         autoComplete="off"
@@ -130,15 +130,15 @@ const AddBadgePage = ({ props }) => {
                   </div>
                 </div>
 
-                <div className="indi-add-badge-form-item d-flex flex-column">
-                  <div className="indi-add-badge-form-item-input row">
+                <div className="indi-add-form-item d-flex flex-column">
+                  <div className="indi-add-form-item-input row">
                     <FloatingLabel label="Badge type">
                       <Form.Select
                         defaultValue="text"
                         id="type"
                         onChange={selectHandler}
                         size="sm"
-                        className="indi-badge-input-field indi-badge-input-select-field"
+                        className="indi-input-field indi-input-select-field"
                       >
                         <option value="text">Text</option>
                         <option value="textarea">Textarea</option>
@@ -149,47 +149,47 @@ const AddBadgePage = ({ props }) => {
                   </div>
                 </div>
 
-                <div className="indi-add-badge-form-item d-flex flex-row align-items-center">
-                  <div className="indi-add-badge-form-item-label">
+                <div className="indi-add-form-item d-flex flex-row align-items-center">
+                  <div className="indi-add-form-item-label">
                     Upload image for ribbon
                   </div>
-                  <div className="indi-add-badge-form-item-input">
+                  <div className="indi-add-form-item-input">
                     <input
                       type="file"
                       id="iconImage"
-                      className="indi-badge-upload-picture-file-input"
+                      className="indi-upload-picture-file-input"
                       onChange={updateImageInfo}
                     />
-                    <div className="indi-add-badge-img-wrapper"></div>
+                    <div className="indi-add-img-wrapper"></div>
                   </div>
                   <div
-                    className="indi-badge-img-preview"
+                    className="indi-img-preview"
                     style={{ background: `url(${iconImagePreview})` }}
                   ></div>
                 </div>
 
-                <div className="indi-add-badge-form-item d-flex flex-row align-items-center">
-                  <div className="indi-add-badge-form-item-label">
+                <div className="indi-add-form-item d-flex flex-row align-items-center">
+                  <div className="indi-add-form-item-label">
                     Upload image for form
                   </div>
-                  <div className="indi-add-badge-form-item-input">
+                  <div className="indi-add-form-item-input">
                     <input
                       type="file"
                       id="darkIconImage"
-                      className="indi-badge-upload-picture-file-input"
+                      className="indi-upload-picture-file-input"
                       onChange={updateDarkImageInfo}
                     />
-                    <div className="indi-add-badge-img-wrapper"></div>
+                    <div className="indi-add-img-wrapper"></div>
                   </div>
                   <div
-                    className="indi-badge-img-preview"
+                    className="indi-img-preview"
                     style={{ background: `url(${iconDarkImagePreview})` }}
                   ></div>
                 </div>
               </div>
 
-              <div className="indi-add-badge-footer">
-                <div className="indi-add-badge-page-footer-btn-wrapper">
+              <div className="indi-add-footer">
+                <div className="indi-add-page-footer-btn-wrapper">
                   <button
                     type="button"
                     className="btn btn-primary"

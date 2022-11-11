@@ -213,7 +213,7 @@ const getAllUsers = () => {
   return myPromise;
 };
 
-const getAllAddresses = () => {
+const getAddresses = () => {
   const myPromise = new Promise((resolve, reject) => {
     let session = getSession();
     if (isObjectEmpty(session).length === 0) {
@@ -244,6 +244,28 @@ const getAllAddresses = () => {
   });
 
   return myPromise;
+};
+
+const deleteAddress = (addressUID) => {
+  let url = REST_API.ADDRESSES;
+  return axios.delete(url + addressUID);
+};
+
+const deleteAddresses = (addressesArray) => {
+  let promises = [];
+  addressesArray.forEach((address) => {
+    promises.push(deleteAddress(address));
+  });
+
+  return Promise.all(addressesArray);
+};
+
+const addAddress = (addressData) => {
+  let formData = { ...addressData };
+  delete formData.id;
+  let url = REST_API.ADDRESSES;
+
+  return axios.post(url, formData);
 };
 
 const addBadge = (badgeData) => {
@@ -576,7 +598,9 @@ const Utils = {
   userSessionExists,
   getUserProfile,
   getAllUsers,
-  getAllAddresses,
+  deleteAddresses,
+  getAddresses,
+  addAddress,
   getBadges,
   addBadge,
   deleteBadges,

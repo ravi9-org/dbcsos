@@ -73,7 +73,7 @@ const DataTable = ({ tableProps }) => {
                 <tr key={index} className="indi-data-table-tr">
                   {tableColumns.map((col, colIndex) => (
                     <React.Fragment key={`${colIndex}`}>
-                      {tableColumnSchema[col].type === "text" && (
+                      {tableColumnSchema[col]?.type === "text" && (
                         <TextCell
                           props={{
                             data,
@@ -82,7 +82,7 @@ const DataTable = ({ tableProps }) => {
                           }}
                         />
                       )}
-                      {tableColumnSchema[col].type === "hidden" && (
+                      {tableColumnSchema[col]?.type === "hidden" && (
                         <HiddenCell
                           props={{
                             data,
@@ -91,7 +91,7 @@ const DataTable = ({ tableProps }) => {
                           }}
                         />
                       )}
-                      {tableColumnSchema[col].type === "checkbox" && (
+                      {tableColumnSchema[col]?.type === "checkbox" && (
                         <CheckBoxCell
                           props={{
                             data,
@@ -100,7 +100,7 @@ const DataTable = ({ tableProps }) => {
                           }}
                         />
                       )}
-                      {tableColumnSchema[col].type === "image" && (
+                      {tableColumnSchema[col]?.type === "image" && (
                         <ImageCell
                           props={{
                             data,
@@ -109,7 +109,7 @@ const DataTable = ({ tableProps }) => {
                           }}
                         />
                       )}
-                      {tableColumnSchema[col].type === "boolean" && (
+                      {tableColumnSchema[col]?.type === "boolean" && (
                         <BooleanCell
                           props={{
                             data,
@@ -118,7 +118,7 @@ const DataTable = ({ tableProps }) => {
                           }}
                         />
                       )}
-                      {tableColumnSchema[col].type === "search" && (
+                      {tableColumnSchema[col]?.type === "search" && (
                         <TextCell
                           props={{
                             data,
