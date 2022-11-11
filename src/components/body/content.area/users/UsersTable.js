@@ -14,17 +14,19 @@ const UsersTable = () => {
 
   let [tableSelectedItems, setTableSelectedItems] = useState([]);
 
-  let { setCanRedirectToLogin, setLoadingState } = useContext(ContextComponent);
+  let { setCanRedirectToLogin, setLoadingState, userData } =
+    useContext(ContextComponent);
 
   let [tableColumns, setTableColumns] = useState([
     "id",
     "select",
-    "username",
+    "firstName",
+    "lastName",
     "email",
     "department",
     "organization",
     "title",
-    "isAdmin"
+    "isAdmin",
   ]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
     id: {
@@ -35,11 +37,17 @@ const UsersTable = () => {
       type: "checkbox",
       title: "-",
     },
-    username: {
+    firstName: {
       type: "text",
       search: true,
       sort: true,
-      title: "Name",
+      title: "First name",
+    },
+    lastName: {
+      type: "text",
+      search: true,
+      sort: true,
+      title: "Last name",
     },
     email: {
       type: "text",
@@ -59,8 +67,8 @@ const UsersTable = () => {
       title: "Title",
     },
     isAdmin: {
-      type: "checkbox",
-      title: "Admin",
+      type: "boolean",
+      title: "isAdmin",
       disabled: true,
       center: true,
     },
