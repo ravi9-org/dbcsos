@@ -8,6 +8,8 @@ const CheckBoxCell = ({ props }) => {
   let colIndex = props.colIndex;
   let textValue = data[colIndex];
   let checkedText = !!textValue;
+  let isDisabled = props?.schema?.disabled || false;
+
   const updateCheckboxValue = (e) => {
     let id = data[0];
     let setObjValu = {
@@ -20,7 +22,8 @@ const CheckBoxCell = ({ props }) => {
     <td>
       <Form.Check
         type="checkbox"
-        //dataId={data[0]}
+        //dataId={data[0]}        
+        disabled={isDisabled ? true : false}
         onChange={updateCheckboxValue}
         defaultChecked={checkedText}
         id={`indi-table-item-${data[0]}`}

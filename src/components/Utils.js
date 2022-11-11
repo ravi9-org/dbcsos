@@ -213,6 +213,28 @@ const getAllUsers = () => {
   return myPromise;
 };
 
+const addUser = (userData) => {
+  let formData = { ...userData };
+  delete formData.id;
+  let url = REST_API.USER_PROFILE;
+
+  return axios.post(url, formData);
+};
+
+const deleteUser = (userId) => {
+  let url = REST_API.USER_PROFILE;
+  return axios.delete(url + userId);
+};
+
+const deleteUsers = (usersArray) => {
+  let promises = [];
+  usersArray.forEach((badge) => {
+    promises.push(deleteUser(badge));
+  });
+
+  return Promise.all(usersArray);
+};
+
 const getAddresses = () => {
   const myPromise = new Promise((resolve, reject) => {
     let session = getSession();
@@ -598,6 +620,8 @@ const Utils = {
   userSessionExists,
   getUserProfile,
   getAllUsers,
+  addUser,
+  deleteUsers,
   deleteAddresses,
   getAddresses,
   addAddress,

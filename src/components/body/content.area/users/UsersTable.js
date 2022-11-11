@@ -1,17 +1,20 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
-
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { Button, Modal } from "react-bootstrap";
 
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
+import DataTable from "../../../controls/table/DataTable";
 import AddIcon from "../../../../assets/img/add.png";
 import DeleteIcon from "../../../../assets/img/Delete.png";
-import DataTable from "../../../controls/table/DataTable";
+import AddUserPage from "./AddUserPage";
 
 const UsersTable = () => {
-  let navigate = useNavigate();
+  let [showDeleteModal, setShowDeleteModal] = useState(false);
+  let [selectedItemCount, setSelectedItemCount] = useState(0);
 
-  let { setCanRedirectToLogin } = useContext(ContextComponent);
+  let [tableSelectedItems, setTableSelectedItems] = useState([]);
+
+  let { setCanRedirectToLogin, setLoadingState } = useContext(ContextComponent);
 
   let [tableColumns, setTableColumns] = useState([
     "id",
@@ -20,9 +23,8 @@ const UsersTable = () => {
     "email",
     "department",
     "organization",
-    "designation",
-    "isAdmin",
-    "search"
+    "title",
+    "isAdmin"
   ]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
     id: {
@@ -52,24 +54,26 @@ const UsersTable = () => {
       type: "text",
       title: "Organization",
     },
-    designation: {
+    title: {
       type: "text",
-      title: "Designation",
+      title: "Title",
     },
     isAdmin: {
-      type: "boolean",
+      type: "checkbox",
       title: "Admin",
+      disabled: true,
       center: true,
     },
-    search: {
-      type: "search",
-      title: "Search"
-    },
   });
+
   let [tableData, setTableData] = useState([]);
   let [canRender, setCanRender] = useState(false);
+  let [updateTable, setUpdateTable] = useState(false);
 
   const success = (res) => {
+    setLoadingState({
+      applyMask: false,
+    });
     let userInfo = res?.data;
     let usersArray = [];
     if (!Utils.isObjectEmpty(userInfo)) {
@@ -87,7 +91,6 @@ const UsersTable = () => {
             userTableData.push(userInfo[index][col]);
           }
         });
-        userTableData.push("search");
         userTableObj = userTableData;
         return userTableObj;
       });
@@ -98,24 +101,74 @@ const UsersTable = () => {
   };
 
   const fail = (err) => {
+    setLoadingState({
+      applyMask: false,
+    });
     err?.message?.length && console.log(err);
     if (err?.redirect) {
       setCanRedirectToLogin(true);
     }
   };
 
-  useEffect(() => {
+  const loadAllUsers = () => {
     Utils.getAllUsers().then(success, fail);
-  }, []);
-
-  const navigateToAddUserPage = (e) => {
-    e.preventDefault();
-    return false;
   };
 
-  const handleShow = (e) => {
+  useEffect(() => {
+    setLoadingState({
+      applyMask: false,
+      text: "Loading users",
+    });
+    loadAllUsers();
+  }, []);
+
+  const handleShow = async (e) => {
+    if (tableSelectedItems?.length > 0) {
+      await setSelectedItemCount(tableSelectedItems?.length);
+      setShowDeleteModal(true);
+    }
+  };
+
+  const handleClose = async (e) => {
+    await setSelectedItemCount(tableSelectedItems?.length);
+    setShowDeleteModal(false);
+  };
+
+  const deleteSuccess = (res) => {
+    setUpdateTable(!updateTable);
+  };
+
+  const deleteFail = (err) => {
+    err?.message?.length && console.log(err);
+  };
+
+  const handleDelete = async (e) => {
+    setShowDeleteModal(false);
+    // setLoadingState({
+    //   applyMask: true,
+    //   text: "Deleting selected " + tableSelectedItems.length + " items",
+    // });
+    let tempTableData = tableData.filter((d) => {
+      return tableSelectedItems.indexOf(d[0]) === -1;
+    });
+    setTableData(tempTableData);
+    Utils.deleteUsers(tableSelectedItems).then(deleteSuccess, deleteFail);
+  };
+
+  let [addModalCanOpen, setAddModalCanOpen] = useState(false);
+
+  const openAddModal = (e) => {
     e.preventDefault();
-    return false;
+    setAddModalCanOpen(true);
+  };
+
+  const closeAddModal = (e) => {
+    setAddModalCanOpen(false);
+  };
+
+  const saveAction = (data) => {
+    //console.log(data);
+    debugger;
   };
 
   return (
@@ -126,11 +179,12 @@ const UsersTable = () => {
           <div
             className="indi-body-action"
             role="button"
-            onClick={navigateToAddUserPage}
+            onClick={openAddModal}
           >
             <img className="indi-w-20" src={AddIcon} alt="Edit-icon"></img>
             Add
           </div>
+
           <div className="indi-body-action" role="button" onClick={handleShow}>
             <img className="indi-w-20" src={DeleteIcon} alt="Delete-icon"></img>
             Delete
@@ -139,7 +193,41 @@ const UsersTable = () => {
       </div>
       {canRender && (
         <DataTable
-          tableProps={{ tableColumns, tableColumnSchema, tableData }}
+          tableProps={{
+            tableColumns,
+            tableColumnSchema,
+            tableData,
+            tableSelectedItems,
+            setTableSelectedItems,
+          }}
+        />
+      )}
+
+      <Modal centered show={showDeleteModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete confirmation?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure to delete select {selectedItemCount} user(s)?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            No
+          </Button>
+          <Button variant="primary" onClick={handleDelete}>
+            Yes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {addModalCanOpen && (
+        <AddUserPage
+          props={{
+            addModalCanOpen,
+            setAddModalCanOpen,
+            tableData,
+            setTableData,
+          }}
         />
       )}
     </div>
