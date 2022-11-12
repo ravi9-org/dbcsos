@@ -33,7 +33,7 @@ const AddCardItem = ({ props }) => {
   let [fieldsData, setFieldsData] = useState(cardInitialData.fieldsData || {});
   let [cardImage, setCardImage] = useState(cardInitialData?.cardImage || "");
   let [croppedImage, setCroppedImage] = useState(
-    cardInitialData?.croppedImage || cardImage || ""
+    cardInitialData?.profilePicture || cardImage || ""
   );
 
   const [showModal, setShowModal] = useState(false);

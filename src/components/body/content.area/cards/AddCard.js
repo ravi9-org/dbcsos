@@ -1,184 +1,149 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router";
+import { Table, Form, Accordion, Button, Modal } from "react-bootstrap";
 
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
 import AddCardItem from "./AddEditCardItem";
 import BadgesRibbon from "../badges/BadgesRibbon";
+import TemplateItem from "../templates/TemplateItem";
+import AddCardPage from "./AddCardPage";
 
 import CardContext from "./CardContext";
 
-const AddCard = ({ templateId = 2 }) => {
-  const navigate = useNavigate();
-  let { userData, badgesCtxData } = useContext(ContextComponent);
-
-  let [templateData, setTemplateData] = useState({});
-  let [newCardData, setNewCardData] = useState({});
-  let [updatedFields, setUpdatedFields] = useState([]);
-  let [updatedValues, setUpdatedValues] = useState([]);
-  let [cardImageValue, setCardImageValue] = useState([]);
-  let [croppedImageValue, setCroppedImageValue] = useState([]);
-  let [cardCtxInfo, setCardCtxInfo] = useState({ fields: [], data: [] });
-
+const AddCard = () => {
   let [canRender, setCanRender] = useState(false);
+  let [templates, setTemplates] = useState([]);
 
-  let [isDataAvailable, setIsDataAvailable] = useState(false);
+  const navigate = useNavigate();
+
   const success = (res) => {
-    setTemplateData(res.data);
-    setIsDataAvailable(true);
-    setUpdatedFields(res.data.fields);
-    setUpdatedValues(res.data.fieldsData);
-    let tempCardCtxInfo = { ...cardCtxInfo };
-    tempCardCtxInfo.fields = res.data.fields;
-    tempCardCtxInfo.data = res.data.fieldsData;
-    setCardCtxInfo(tempCardCtxInfo);
+    setTemplates([...res.data]);
     setCanRender(true);
   };
-  const fail = (err) => {
-    err?.message?.length && console.log(err);
-  };
+
+  const fail = (res) => {};
+
   useEffect(() => {
-    Utils.getTemplateDetails(templateId).then(success, fail);
-  }, [isDataAvailable]);
+    Utils.getTemplates().then(success, fail);
+  }, []);
+
+  let [selectedTemplate, setSelectedTemplate] = useState(templates[0]);
+
 
   const goBack = (e) => {
     navigate(Utils.APP_URLS.CARDS_PAGE);
   };
 
-  let inputElementClassNames = "indi-any-input-element";
-  let imageInputElementClassNames = "indi-image-input-element";
-  let croppedImageInputElementClassNames = "indi-cropped-image-input-element";
+  let [openModal, setOpenModal] = useState(false);
 
-  let [valueChanged, setValueChanged] = useState(false);
-  const saveCard = (e) => {
-    e.preventDefault();
-    let dataValues = [];
-    let cardImageEle = document.getElementsByClassName(
-      imageInputElementClassNames
-    );
-    let croppedCardImageEle = document.getElementsByClassName(
-      croppedImageInputElementClassNames
-    );
-
-    let cardImageValue = "";
-    let inputElements = document.getElementsByClassName(inputElementClassNames);
-
-    for (let ele of inputElements) {
-      let val = ele?.value || "";
-      dataValues.push(val);
-    }
-
-    for (let imgEle of cardImageEle) {
-      let imgVal = imgEle?.value || "";
-      setCardImageValue(imgVal);
-    }
-
-    for (let imgEle of croppedCardImageEle) {
-      let imgVal = imgEle?.value || "";
-      setCroppedImageValue(imgVal);
-    }
-
-    setUpdatedValues(dataValues, cardImageValue, croppedImageValue);
-    setValueChanged(true);
+  const hideModal = (e) => {
+    setOpenModal(false);
   };
 
-  const updateUserInfo = (newCardId = 2) => {
-    const success = (res) => {
-      goBack();
-    };
-    const fail = (err) => {
-      console.log(err);
-    };
+  let [previewTemplate, setPreviewTemplate] = useState({});
 
-    try {
-      let userCardsArray = [...userData?.cards];
-      userCardsArray.push(newCardId);
-      userCardsArray = [...new Set(userCardsArray)];
-
-      let tempUserData = userData;
-
-      tempUserData.cards = userCardsArray;
-
-      Utils.addOrRemoveCardFromUser(userCardsArray).then(success, fail);
-    } catch (e) {
-      console.log(e);
-    }
+  const openTemplateModalDialog = (e) => {
+    setPreviewTemplate(templates[parseInt(e.currentTarget.id, 10)]);
+    setOpenModal(true);
   };
 
-  const submitForm = (info) => {
-    info.cardImage = cardImageValue;
-    info.croppedImage = croppedImageValue;
-    const success = (res) => {
-      updateUserInfo(res.data.id);
-    };
-    const fail = (err) => {
-      console.log(err);
-    };
+  let [canShowAddCardPage, setCanShowAddCardPage] = useState(false);
 
-    try {
-      Utils.executeCardAddRESTAPI(info).then(success, fail);
-    } catch (e) {
-      console.log(e);
-    }
+  const showAddCardPage = (e) => {
+    setCanShowAddCardPage(true);
   };
 
-  useEffect(() => {
-    if (valueChanged) {
-      let templateInfo = templateData;
-      templateInfo.fieldsData = updatedValues;
-      templateInfo.fields = cardCtxInfo.fields;
-      templateInfo.userId = Utils.getUserId();
-      templateInfo.cardImage = Utils.getUserId();
-      submitForm(templateInfo);
+  const changeSelectedTemplate = e => {
+    let radioEle = e.currentTarget;
+    console.log(radioEle);
+    if (radioEle.checked) {
+      setSelectedTemplate(radioEle.selected);
     }
-  }, [updatedValues]);
+  }
 
   return (
-    <CardContext.Provider
-      value={{
-        cardCtxInfo,
-        setCardCtxInfo,
-      }}
-    >
-      {canRender && <form>
-        <div className="indi-add-card-wrapper d-flex flex-column">
-          <div className="indi-add-card-title">Add Card</div>
-          {isDataAvailable && (
-            <AddCardItem
-              className="indi-add-card-wrapper"
-              props={{
-                cardInitialData: templateData,
-                setNewCardData,
-                pageMode: "add",
-                inputElementClassNames,
-              }}
-            />
-          )}
-          <div className="indi-add-card-item-footer d-flex d-flex-row">
-            <div className="indi-add-card-page-badge-ribbon-wrapper">
-              <BadgesRibbon />
-            </div>
+    <>
+      {canRender && (
+        <>
+          {canShowAddCardPage && <AddCardPage template={{selectedTemplate} }/>}
+          {!canShowAddCardPage &&
+            <form className="indi-add-template-form">
+              <div className="d-flex d-flex-column">
+                <div className="indi-body-title">Choose template</div>
+                <div className="indi-right-button-wrapper">
+                  <Button onClick={showAddCardPage}>Next</Button>
+                </div>
+              </div>
 
-            <div className="indi-add-card-page-footer-btn-wrapper d-flex d-flex-row">
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={goBack}
-              >
-                Back
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={saveCard}
-              >
-                Save
-              </button>
-            </div>
-          </div>
-        </div>
-      </form>}
-    </CardContext.Provider>
+              <Table responsive="sm">
+                <thead className="indi-data-table-header">
+                  <tr>
+                    <th className="text-center">Choose template</th>
+                    <th>Template name </th>
+                    <th className="text-center">Template preview </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {templates?.map((template, index) => (
+                    <tr key={index} className="indi-data-table-tr">
+                      <td className="indi-data-table-td-badge-id indi-add-card-template-cell indi-add-card-template-preview-wrapper">
+                        <Form.Check
+                          type="radio"
+                          name="templateSelection"
+                          className={`text-center indi-template-badge-select-${template.id}`}
+                          templateid={template?.id}
+                          id={template?.id}
+                          selected={template}
+                          onChange={changeSelectedTemplate}
+                        />
+                      </td>
+
+                      <td className="indi-data-table-td-badge-name indi-add-card-template-name-cell indi-add-card-template-cell">
+                        <div className="d-flex1">{template?.templateName}</div>
+                      </td>
+
+                      <td className="indi-data-table-td-badge-logo text-center indi-add-card-template-cell indi-add-card-template-preview-wrapper d-flex">
+                        <div
+                          role="button"
+                          id={index}
+                          onClick={openTemplateModalDialog}
+                          className="indi-add-card-template-preview"
+                        ></div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+
+              {openModal && (
+                <Modal centered show={openModal} onHide={hideModal}>
+                  <Modal.Body>
+                    <div className="indi-card-template-preview-wrapper">
+                      <TemplateItem
+                        template={previewTemplate}
+                        applyActions={true}
+                      />
+                    </div>
+                    <div className="indi-add-footer">
+                      <div className="indi-add-page-footer-btn-wrapper">
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={hideModal}
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </Modal.Body>
+                </Modal>
+              )}
+            </form>
+          }
+        </>
+      )}
+    </>
   );
 };
 

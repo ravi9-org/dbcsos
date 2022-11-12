@@ -1281,3 +1281,24 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-repeat: no-repeat !important;
   background-size: contain !important;
 }
+
+.indi-app .indi-add-card-template-preview {
+  background-image: url("../img/eye.png");
+  width: 32px;
+  height: 32px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.indi-app .indi-add-card-template-preview-wrapper {
+  justify-content: center;
+}
+
+.indi-app .indi-add-card-template-cell {
+  vertical-align: middle;
+}
+
+.indi-app .indi-card-template-preview-wrapper {
+  max-height: 500px;
+  overflow: auto;
+}
