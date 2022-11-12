@@ -82,7 +82,6 @@ const LeftNavigation = () => {
               if (isAtRootUrl) {
                 isActive = index === 0;
               }
-              navLinkValues[navKey]["ding"] = "dingdongbell";
               return isActive ? "indi-navmenu-active" : "indi-navmenu-inactive";
             }}
             to={navLinkValues[navKey].url}

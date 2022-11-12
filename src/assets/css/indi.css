@@ -1088,7 +1088,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   vertical-align: middle;
 }
 
-.indi-app .indi-add-template-form .indi-data-table-wrapper .indi-data-table-tr td input[type=checkbox] {  
+.indi-app .indi-add-template-form .indi-data-table-wrapper .indi-data-table-tr td input[type=checkbox] {
   border-color: #2f4696;
 }
 
@@ -1103,18 +1103,19 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   overflow: auto;
   padding: 0;
   margin: 16px;
-  font-weight: bold;  
+  font-weight: bold;
   color: #304697;
 }
 
 .indi-app .indi-add-template-form .indi-data-table-wrapper .accordion-item .accordion-button {
-  color:#2f4594;
-  font-weight: bold;  
+  color: #2f4594;
+  font-weight: bold;
 }
-.indi-app .indi-add-template-form .indi-data-table-wrapper .accordion-item .accordion-button:not(.collapsed) {  
-  background-color:#2b5daf40;
-  font-weight: bold;  
-  color:#232862;
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .accordion-item .accordion-button:not(.collapsed) {
+  background-color: #2b5daf40;
+  font-weight: bold;
+  color: #232862;
 }
 
 .indi-app tr.indi-data-table-tr {
@@ -1170,6 +1171,10 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   position: absolute;
 }
 
+.indi-app .indi-data-table-td-template-image .indi-upload-picture-file-input {
+  left: 0;
+}
+
 
 .indi-app .indi-add-img-wrapper {
   background-image: url("../img/Upload1.png");
@@ -1186,6 +1191,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   border-radius: 10px;
   margin: 0 20px;
   cursor: pointer;
+}
+
+.indi-app .indi-data-table-tr .indi-upload-picture-file-input,
+.indi-app .indi-data-table-tr .indi-add-img-wrapper {
+  margin: 0;
 }
 
 .indi-app .form-floating>.form-control-plaintext~label,
@@ -1245,4 +1255,21 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-add-template-badge-icon-image {
   width: 24px;
   height: 24px;
+}
+
+.indi-app .indi-add-img-wrapper-preview {
+  width: 32px;
+}
+
+.indi-app .indi-data-table-td-template-image {
+  display: flex;
+  justify-content: center;
+}
+
+.indi-app .indi-data-table-td-template-img-prevew {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.indi-app .indi-upload-picture-file-input-wrapper {
+  position: relative;
 }

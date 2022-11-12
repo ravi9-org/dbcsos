@@ -6,6 +6,7 @@ import { Cropper } from "react-cropper";
 import ContextComponent from "../../../AppContext";
 import CardContext from "../cards/CardContext";
 import Field from "../../../controls/input.elements/Field";
+import Utils from "../../../Utils";
 
 const AddCardItem = ({ props }) => {
   let { userData, badgesCtxData } = useContext(ContextComponent);
@@ -47,18 +48,9 @@ const AddCardItem = ({ props }) => {
     setFieldsData(cardCtxInfo.data);
   }, [cardCtxInfo]);
 
-  const fileToDataUri = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        resolve(event.target.result);
-      };
-      reader.readAsDataURL(file);
-    });
-
   const inputFileHandler = async (e) => {
     let file = inputCardImage.current.files[0];
-    await fileToDataUri(file).then((dataUri) => {
+    await Utils.fileToDataUri(file).then((dataUri) => {
       setCardImage(dataUri);
       setCardImageOnModal(dataUri);
       setShowModal(true);

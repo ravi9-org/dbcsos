@@ -32,7 +32,7 @@ const APP_URLS = {
   LOGIN_PAGE: APP_URL_PREFIX + "login",
   LANDING_PAGE: APP_URL_PREFIX + "/",
   TEMPLATES_PAGE: APP_URL_PREFIX + "/templates",
-  ADD_TEMPLATE_PAGE: APP_URL_PREFIX + "/addtemplate",
+  ADD_TEMPLATE_PAGE: APP_URL_PREFIX + "/templates/addtemplate",
   CARDS_PAGE: APP_URL_PREFIX + "/cards",
   ADD_CARD_PAGE: APP_URL_PREFIX + "/cards/addcard",
   EDIT_CARD_PAGE: APP_URL_PREFIX + "/cards/editcard/:cardid",
@@ -613,6 +613,16 @@ const getUniqueSetOfArray = (arr) => {
   return [...new Set(arr)];
 };
 
+const fileToDataUri = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      resolve(event.target.result);
+    };
+    reader.readAsDataURL(file);
+  });
+};
+
 const Utils = {
   REST_API,
   APP_URLS,
@@ -643,6 +653,7 @@ const Utils = {
   createSession,
   deleteSession,
   isObjectEmpty,
+  fileToDataUri,
 };
 
 export default Utils;
