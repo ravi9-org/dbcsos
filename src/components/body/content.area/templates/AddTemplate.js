@@ -111,7 +111,7 @@ const AddTemplate = () => {
 
   const submitTemplateForm = (info) => {
     const success = (res) => {
-      // navigate back to templates page
+      navigate(Utils.APP_URLS.TEMPLATES_PAGE);
     };
     const fail = (err) => {
       console.log(err);
@@ -124,6 +124,10 @@ const AddTemplate = () => {
     }
   };
 
+  const navigateToTemplatesListPage = e => {
+    navigate(Utils.APP_URLS.TEMPLATES_PAGE);
+  }
+
   return (
     <>
       {canRender && (
@@ -131,23 +135,23 @@ const AddTemplate = () => {
           <div>
             <div className="indi-body-title">Add template</div>
             <div className="indi-data-table-wrapper d-flex indi-text-btn-row">
-              <FloatingLabel label="Badge name">
+              <FloatingLabel label="Template name">
                 <Form.Control
                   type="text"
                   className="indi-input-field"
                   id="name"
-                  placeholder="Enter badge name"
+                  placeholder="Enter template name"
                   autoComplete="off"
                   onChange={templateNameHandler}
                 />
               </FloatingLabel>
               <div className="indi-right-button-wrapper">
                 <Button onClick={onSaveTemplate}>Save</Button>
-                <Button>Cancel</Button>
+                <Button onClick={navigateToTemplatesListPage}>Cancel</Button>
               </div>
             </div>
           </div>
-          <Accordion className="indi-data-table-wrapper" defaultActiveKey="2">
+          <Accordion className="indi-data-table-wrapper" defaultActiveKey="0">
             <Accordion.Item eventKey="0">
               <Accordion.Header>Image uploads</Accordion.Header>
               <Accordion.Body>
