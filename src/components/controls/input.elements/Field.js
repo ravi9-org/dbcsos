@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import InputElement from "./InputElement";
 import ContextComponent from "../../AppContext";
 import CardContext from "../../body/content.area/cards/CardContext";
+import Utils from "../../Utils";
 
 const Field = (props = {}) => {
+  let [canRender, setCanRender] = useState(false);
+  let templateBadges = props?.fieldProps?.templateBadges || [];
   let { badgesCtxData } = useContext(ContextComponent);
   let { cardCtxInfo, setCardCtxInfo } = useContext(CardContext);
 
@@ -12,6 +15,13 @@ const Field = (props = {}) => {
   let fieldType = fieldProps.fieldType;
   let showEmptyField = fieldProps?.showEmptyField || false;
   let fieldSchema = badgesCtxData.filter((b) => b.badgeUID === fieldType)[0];
+  templateBadges?.map((field) => {
+    let schemaObj = field[fieldSchema.badgeUID];
+    if (!Utils.isObjectEmpty(schemaObj)) {
+      fieldSchema = { ...fieldSchema, ...schemaObj }
+    }
+  });
+
   let isDefault = fieldSchema?.isDefault;
 
   let fieldData = fieldProps.fieldData;
@@ -27,14 +37,13 @@ const Field = (props = {}) => {
   const removeField = (e) => {
     e.preventDefault();
     let tempCardCtxInfo = { ...cardCtxInfo };
-    tempCardCtxInfo.fields = tempCardCtxInfo?.fields?.filter((field, index) => {
+    tempCardCtxInfo.userLinkedBadges = tempCardCtxInfo?.userLinkedBadges?.filter((field, index) => {
       return index !== fieldIndex;
     });
-    tempCardCtxInfo.data = tempCardCtxInfo?.data?.filter((field, index) => {
+    tempCardCtxInfo.fieldsData = tempCardCtxInfo?.fieldsData?.filter((field, index) => {
       return index !== fieldIndex;
     });
     setCardCtxInfo(tempCardCtxInfo);
-    //inform form about new field to be add
   };
 
   return (
@@ -72,7 +81,7 @@ const Field = (props = {}) => {
         </div>
       )}
     </div>
-  );
+  )
 };
 
 export default Field;

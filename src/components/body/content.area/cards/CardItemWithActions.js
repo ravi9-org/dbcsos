@@ -20,8 +20,24 @@ const CardItemWithActions = (props) => {
 
   let { userData } = useContext(ContextComponent);
 
+  let [templateBackgroundImage, setTemplateBackgroundImage] = useState("");
+  let [templateLogoImage, setTemplateLogoImage] = useState("");
+
+  const templateSuccess = (res) => {
+    setTemplateBackgroundImage(res.data.backgroundImage);
+    setTemplateLogoImage(res.data.logoImage);
+  };
+  const templateFail = (err) => {
+    err?.message?.length && console.log(err);
+  };
+
+  const getTemplate = (templateId) => {
+    Utils.getTemplateDetails(cardId).then(templateSuccess, templateFail);
+  };
+
   const success = (res) => {
     setCardData(res.data);
+    getTemplate(res.data.templateId);
     setFields(res.data.fields);
     setFieldsData(res.data.fieldsData);
     setFieldsSchema(res.data.fieldsSchema);
@@ -51,7 +67,7 @@ const CardItemWithActions = (props) => {
     <div
       className={`indi-card-item-parent indi-card-item-page2 card-with-bg d-flex d-flex-row`}
       style={{
-        background: `url(${cardData.backgroundImage})`,
+        background: `url(${templateBackgroundImage})`,
       }}
     >
       <div className="indi-card-item-page2-send-card-label">Send Card</div>

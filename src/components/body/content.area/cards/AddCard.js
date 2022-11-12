@@ -56,7 +56,6 @@ const AddCard = () => {
 
   const changeSelectedTemplate = e => {
     let radioEle = e.currentTarget;
-    console.log(radioEle);
     if (radioEle.checked) {
       setSelectedTemplate(radioEle.selected);
     }

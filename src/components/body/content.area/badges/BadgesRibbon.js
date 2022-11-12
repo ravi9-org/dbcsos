@@ -3,16 +3,32 @@ import React, { useContext, useState, useEffect } from "react";
 import ContextComponent from "../../../AppContext";
 import Badge from "./Badge";
 
-const BadgesRibbon = () => {
-  let { userData, badgesCtxData } = useContext(ContextComponent);
+const BadgesRibbon = (props) => {
+  let tempBadges = [];
 
-  useEffect(() => {
-    //console.log(" =================== badgesCtxData : " + badgesCtxData);
-  }, [badgesCtxData]);
+  let templateBadges = props.templateBadges;
+
+  let { badgesCtxData } = useContext(ContextComponent);
+
+  templateBadges.map((badge) => {
+    let ctxBadge = badgesCtxData.filter((ctxBadge) => {
+      return ctxBadge.badgeUID === Object.keys(badge)[0];
+    });
+    tempBadges.push(ctxBadge[0]);
+  });
+
+  let tempBadgesCtx = [];
+
+  templateBadges.map((badge, index) => {
+    tempBadgesCtx = [
+      ...tempBadgesCtx,
+      { ...tempBadges[index], ...badge[tempBadges[index].badgeUID] },
+    ];
+  });
 
   return (
     <div className="d-flex d-flex-row indi-badges-ribbon-wrapper">
-      {badgesCtxData?.map((badge, index) => (
+      {tempBadgesCtx?.map((badge, index) => (
         <Badge badge={badge} key={index} />
       ))}
     </div>

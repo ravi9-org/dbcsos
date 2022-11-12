@@ -9,42 +9,46 @@ import BadgesRibbon from "../badges/BadgesRibbon";
 import CardContext from "./CardContext";
 
 const AddCard = (props) => {
-  //console.log(props);
-  let [template, setTemplate] = useState(
-    props?.template?.selectedTemplate || {}
-  );
   const navigate = useNavigate();
-  let { userData, badgesCtxData } = useContext(ContextComponent);
+  let { userData } = useContext(ContextComponent);
 
   let [templateData, setTemplateData] = useState(
     props?.template?.selectedTemplate || {}
   );
-  let [newCardData, setNewCardData] = useState({});
-  let [updatedFields, setUpdatedFields] = useState([]);
-  let [updatedValues, setUpdatedValues] = useState([]);
-  let [cardImageValue, setCardImageValue] = useState([]);
-  let [croppedImageValue, setCroppedImageValue] = useState([]);
-  let [cardCtxInfo, setCardCtxInfo] = useState({ fields: [], data: [] });
+
+  let detailsForAddCardPage = {
+    template: templateData,
+    card: {
+      templateId: templateData.id,
+      userLinkedBadges: [],
+      userId: Utils.getUserId(),
+      fieldsData: [],
+      cardImage: templateData.profilePicture,
+      croppedImage: templateData.profilePicture,
+    },
+  };
+
+  templateData?.linkedBadges?.map((badge, index) => {
+    if (Object.values(badge)[0].isDefault) {
+      detailsForAddCardPage.card.userLinkedBadges.push(Object.keys(badge)[0]);
+      detailsForAddCardPage.card.fieldsData.push(
+        Object.values(badge)[0].defaultValue
+      );
+    }
+  });
+
+  let [cardImageValue, setCardImageValue] = useState(
+    detailsForAddCardPage.template.profilePicture
+  );
+  let [croppedImageValue, setCroppedImageValue] = useState(
+    detailsForAddCardPage.template.profilePicture
+  );
+
+  let [cardCtxInfo, setCardCtxInfo] = useState(detailsForAddCardPage.card);
 
   let [canRender, setCanRender] = useState(false);
 
   useEffect(() => {
-    setTemplateData(props?.template?.selectedTemplate || {});
-    let values = [];
-    let fields = [];
-    props.template.selectedTemplate.linkedBadges.map((badge) => {
-      let badgeId = Object.keys(badge)[0];
-      fields.push(badgeId);
-      let value = badge[badgeId].defaultValue;
-      values.push(value);
-    });
-    //console.log(values);
-    setUpdatedFields(props.template.selectedTemplate.linkedBadges);
-    setUpdatedValues(values);
-    let tempCardCtxInfo = { ...cardCtxInfo };
-    tempCardCtxInfo.fields = fields;
-    tempCardCtxInfo.data = values;
-    setCardCtxInfo(tempCardCtxInfo);
     setCanRender(true);
   }, []);
 
@@ -56,7 +60,6 @@ const AddCard = (props) => {
   let imageInputElementClassNames = "indi-image-input-element";
   let croppedImageInputElementClassNames = "indi-cropped-image-input-element";
 
-  let [valueChanged, setValueChanged] = useState(false);
   const saveCard = (e) => {
     e.preventDefault();
     let dataValues = [];
@@ -67,8 +70,8 @@ const AddCard = (props) => {
       croppedImageInputElementClassNames
     );
 
-    let cardImageValue = "";
     let inputElements = document.getElementsByClassName(inputElementClassNames);
+    let imageValues = [];
 
     for (let ele of inputElements) {
       let val = ele?.value || "";
@@ -78,18 +81,19 @@ const AddCard = (props) => {
     for (let imgEle of cardImageEle) {
       let imgVal = imgEle?.value || "";
       setCardImageValue(imgVal);
+      imageValues.push(imgVal);
     }
 
     for (let imgEle of croppedCardImageEle) {
       let imgVal = imgEle?.value || "";
       setCroppedImageValue(imgVal);
+      imageValues.push(imgVal);
     }
 
-    setUpdatedValues(dataValues, cardImageValue, croppedImageValue);
-    setValueChanged(true);
+    submitForm(dataValues, imageValues);
   };
 
-  const updateUserInfo = (newCardId = 2) => {
+  const updateUserInfo = (newCardId) => {
     const success = (res) => {
       goBack();
     };
@@ -112,12 +116,17 @@ const AddCard = (props) => {
     }
   };
 
-  const submitForm = (info) => {
-    info.cardImage = cardImageValue;
-    info.croppedImage = croppedImageValue;
+  const submitForm = (dataValues = {}, imageValues = []) => {
+    let info = { ...cardCtxInfo };
+
+    info.fieldsData = dataValues;
+    info.cardImage = imageValues[0];
+    info.croppedImage = imageValues[1];
+
     const success = (res) => {
       updateUserInfo(res.data.id);
     };
+
     const fail = (err) => {
       console.log(err);
     };
@@ -129,16 +138,7 @@ const AddCard = (props) => {
     }
   };
 
-  useEffect(() => {
-    if (valueChanged) {
-      let templateInfo = templateData;
-      templateInfo.fieldsData = updatedValues;
-      templateInfo.fields = cardCtxInfo.fields;
-      templateInfo.userId = Utils.getUserId();
-      templateInfo.cardImage = Utils.getUserId();
-      submitForm(templateInfo);
-    }
-  }, [updatedValues]);
+  let templateBadges = props.template.selectedTemplate.linkedBadges;
 
   return (
     <CardContext.Provider
@@ -155,8 +155,7 @@ const AddCard = (props) => {
               <AddCardItem
                 className="indi-add-card-wrapper"
                 props={{
-                  cardInitialData: templateData,
-                  setNewCardData,
+                  pageInfo: detailsForAddCardPage,
                   pageMode: "add",
                   inputElementClassNames,
                 }}
@@ -164,7 +163,7 @@ const AddCard = (props) => {
             }
             <div className="indi-add-card-item-footer d-flex d-flex-row">
               <div className="indi-add-card-page-badge-ribbon-wrapper">
-                <BadgesRibbon />
+                <BadgesRibbon templateBadges={templateBadges} />
               </div>
 
               <div className="indi-add-card-page-footer-btn-wrapper d-flex d-flex-row">

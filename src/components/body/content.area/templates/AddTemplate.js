@@ -33,7 +33,7 @@ const AddTemplate = () => {
     let id = e.currentTarget.id;
     let tempUserFields = { ...userFields };
     tempUserFields[id] = e.currentTarget.checked;
-    setUserFields({ ...userFields, ...tempUserFields});
+    setUserFields({ ...userFields, ...tempUserFields });
   };
   const templateNameHandler = (e) => {
     setTempalteName(e.currentTarget.value);
@@ -63,8 +63,8 @@ const AddTemplate = () => {
 
   const onSaveTemplate = (e) => {
     let linkedBadges = [];
+    let linkedUserFields = [];
 
-    //indi-template-badge-select-
     badgesCtxData.map((badge) => {
       let selectItem = document.querySelector(
         ".indi-template-badge-select-" + badge.badgeUID + " input"
@@ -94,16 +94,21 @@ const AddTemplate = () => {
       }
     });
 
+    let selectedUserFields = [];
+
+    Object.keys(userFields).map((userField) => {
+      let userFieldCheckboxEle = document.querySelector("#" + userField);
+      userFieldCheckboxEle.checked && selectedUserFields.push(userField);
+    });
+
     let templateInfo = {
       templateName,
       backgroundImage: imgDataArray[0],
       logoImage: imgDataArray[1],
       profilePicture: imgDataArray[2],
       linkedBadges: linkedBadges,
-      linkedUserFields: userFields,
+      linkedUserFields: selectedUserFields,
     };
-    console.log(templateInfo);
-
     submitTemplateForm(templateInfo);
 
     return false;
@@ -124,9 +129,9 @@ const AddTemplate = () => {
     }
   };
 
-  const navigateToTemplatesListPage = e => {
+  const navigateToTemplatesListPage = (e) => {
     navigate(Utils.APP_URLS.TEMPLATES_PAGE);
-  }
+  };
 
   return (
     <>

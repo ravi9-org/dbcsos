@@ -12,8 +12,8 @@ const TemplateItem = (props) => {
   let template = props?.template;
   let templateFieldsInfo = [];
   let templateFieldsData = [];
-  badgesCtxData.map((badge) => {
-    props?.template?.linkedBadges.map((linkedBadge) => {
+  badgesCtxData?.map((badge) => {
+    props?.template?.linkedBadges?.map((linkedBadge) => {
       if (!Utils.isObjectEmpty(linkedBadge[badge.badgeUID])) {
         templateFieldsInfo.push({ [badge.badgeUID]: badge });
         templateFieldsData.push(linkedBadge[badge.badgeUID].defaultValue);

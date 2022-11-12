@@ -917,6 +917,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-card-upload-picture-img {
   height: 100px;
+  width: 100px;
   border-radius: 50%;
 }
 

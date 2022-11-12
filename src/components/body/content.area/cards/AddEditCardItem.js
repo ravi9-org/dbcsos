@@ -9,16 +9,22 @@ import Field from "../../../controls/input.elements/Field";
 import Utils from "../../../Utils";
 
 const AddCardItem = ({ props }) => {
-  let { userData, badgesCtxData } = useContext(ContextComponent);
-  let { cardCtxInfo, setCardCtxInfo } = useContext(CardContext);
-  let [cardItemCtxInfo, setCardItemCtxInfo] = useState(cardCtxInfo);
-  let cardInitialData = props.cardInitialData,
-    setNewCardData = props.setNewCardData,
-    pageMode = props.pageMode || "add",
-    inputElementClassNames = props.inputElementClassNames || "";
+  let pageInfo = props?.pageInfo || {};
+  let templateInfo = pageInfo?.template || {};
+  let cardInfo = pageInfo?.card || {};
 
-  let inputCardImage = useRef();
-  let croppedInputCardImage = useRef();
+  let { userData, badgesCtxData } = useContext(ContextComponent);
+  let { cardCtxInfo } = useContext(CardContext);
+
+  let pageMode = props.pageMode || "add";
+
+  let inputElementClassNames = props.inputElementClassNames || "";
+
+  let templateBadges = templateInfo.linkedBadges;
+
+  let inputCardImage = useRef(null);
+
+  let croppedInputCardImage = useRef(null);
 
   const cropperRef = useRef(null);
 
@@ -28,25 +34,23 @@ const AddCardItem = ({ props }) => {
     const { width, height } = cropper.getCroppedCanvas();
   };
 
-  let [cardData, setCardData] = useState(cardInitialData || {});
-  let [fields, setFields] = useState(cardInitialData.fields || []);
-  let [fieldsData, setFieldsData] = useState(cardInitialData.fieldsData || {});
-  let [cardImage, setCardImage] = useState(cardInitialData?.cardImage || "");
+  let [fields, setFields] = useState(cardInfo.userLinkedBadges || []);
+  let [fieldsData, setFieldsData] = useState(cardInfo.fieldsData || {});
+  let [cardImage, setCardImage] = useState(cardInfo?.cardImage || "");
   let [croppedImage, setCroppedImage] = useState(
-    cardInitialData?.profilePicture || cardImage || ""
+    cardInfo?.croppedImage || cardImage || ""
   );
+
+  useEffect(() => {
+    setFields(cardCtxInfo.userLinkedBadges);
+    setFieldsData(cardCtxInfo.fieldsData);
+  }, [cardCtxInfo.userLinkedBadges]);
 
   const [showModal, setShowModal] = useState(false);
   const [cardImageOnModal, setCardImageOnModal] = useState(cardImage);
 
   const [cropData, setCropData] = useState("#");
   const [cropper, setCropper] = useState();
-
-  useEffect(() => {
-    setCardItemCtxInfo(cardCtxInfo);
-    setFields(cardCtxInfo.fields);
-    setFieldsData(cardCtxInfo.data);
-  }, [cardCtxInfo]);
 
   const inputFileHandler = async (e) => {
     let file = inputCardImage.current.files[0];
@@ -98,11 +102,11 @@ const AddCardItem = ({ props }) => {
     <div
       className="indi-card-item-parent indi-add-card-wrapper card-with-bg"
       style={{
-        background: `url(${cardData.backgroundImage})`,
+        background: `url(${templateInfo.backgroundImage})`,
       }}
     >
       <div className="d-none1 indi-card-company-logo-wrapper">
-        <img src={cardData.logoImage} alt="logoiamge" />
+        <img src={templateInfo.logoImage} alt="logoiamge" />
       </div>
 
       <div className="indi-card-upload-picture indi-card-upload-picture-with-no-bg">
@@ -144,6 +148,7 @@ const AddCardItem = ({ props }) => {
                 fieldType: field,
                 inputElementClassNames,
                 fieldData: fieldsData[index],
+                templateBadges,
               }}
               pageMode={pageMode}
               key={index}

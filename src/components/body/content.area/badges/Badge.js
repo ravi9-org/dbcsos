@@ -21,7 +21,7 @@ const Badge = (props) => {
 
   useEffect(() => {
     if (!isMultiple) {
-      if (cardCtxInfo?.fields?.indexOf(badge.badgeUID) > -1) {
+      if (cardCtxInfo?.userLinkedBadges?.indexOf(badge.badgeUID) > -1) {
         canFreeze = true;
       }
     }
@@ -41,9 +41,9 @@ const Badge = (props) => {
         setClassNameList("indi-badge-freeze");
       } else {
       }
-      let tempCardCtxInfo = {...cardCtxInfo};
-      let tempFields = tempCardCtxInfo.fields;
-      let tempData = tempCardCtxInfo.data;
+      let tempCardCtxInfo = { ...cardCtxInfo };
+      let tempFields = tempCardCtxInfo.userLinkedBadges;
+      let tempData = tempCardCtxInfo.fieldsData;
       tempFields.push(badge.badgeUID);
       tempData.push(badge.defaultValue);
       setCardCtxInfo(tempCardCtxInfo);
