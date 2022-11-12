@@ -1,76 +1,48 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Field from "../../../controls/input.elements/Field";
+import TemplateField from "../../../controls/input.elements/TemplateField";
 import Utils from "../../../Utils";
 import ContextComponent from "../../../AppContext";
 import CardContext from "./../cards/CardContext";
 
 const TemplateItem = (props) => {
+  let { userData, badgesCtxData } = useContext(ContextComponent);
+
   let template = props?.template;
-  let templateId = template?.id;
+  let templateFieldsInfo = [];
+  let templateFieldsData = [];
+  badgesCtxData.map((badge) => {
+    props?.template?.linkedBadges.map((linkedBadge) => {
+      if (!Utils.isObjectEmpty(linkedBadge[badge.badgeUID])) {
+        templateFieldsInfo.push({ [badge.badgeUID]: badge });
+        templateFieldsData.push(linkedBadge[badge.badgeUID].defaultValue);
+      }
+    });
+  });
 
-  
+  let [templateFields, setTemplateFields] = useState(templateFieldsInfo || []);
 
-  let [templateFields, setTemplateFields] = useState(template?.fields || []);
-  let [templateFieldsData, setTemplateFieldsData] = useState(
-    template?.fieldsData || []
-  );
   let [templateName, setTemplateName] = useState(template?.templateName || "");
-  let [templateDisplayName, setTemplateDisplayName] = useState(template?.templateDisplayName || "");
+  let [templateDisplayName, setTemplateDisplayName] = useState(
+    template?.templateDisplayName || ""
+  );
   let [backgroundImage, setBackgroundImage] = useState(
     template?.backgroundImage || ""
   );
-  let [croppedImage, setCroppedImage] = useState(
-    template?.croppedImage || ""
+  let [profilePicture, setProfilePicture] = useState(
+    template?.profilePicture || ""
   );
   let [logoImage, setLogoImage] = useState(template?.logoImage || "");
 
   const navigate = useNavigate();
 
-  let { userData } = useContext(ContextComponent);
-
   let tempCardCtxInfo = {};
   tempCardCtxInfo.fields = templateFields;
   tempCardCtxInfo.data = templateFieldsData;
-    //setCardCtxInfo(tempCardCtxInfo);
-    
-    let [cardCtxInfo, setCardCtxInfo] = useState(tempCardCtxInfo);
+  //setCardCtxInfo(tempCardCtxInfo);
 
-  //   const success = (res) => {
-  //     setCardData(res.data);
-  //     setFields(res.data.fields);
-  //     setFieldsData(res.data.fieldsData);
-  //     setFieldsSchema(res.data.fieldsSchema);
-
-  //     let tempCardCtxInfo = { ...cardCtxInfo };
-  //     tempCardCtxInfo.fields = res.data.fields;
-  //     tempCardCtxInfo.data = res.data.fieldsData;
-  //     setCardCtxInfo(tempCardCtxInfo);
-  //   };
-
-  //   const fail = (err) => {
-  //     err?.message?.length && console.log(err);
-  //   };
-
-  //   useEffect(() => {
-  //     if (Utils.isObjectEmpty(cardObj)) {
-  //       Utils.getTemplateDetails(cardId).then(success, fail);
-  //     } else {
-  //       success({
-  //         data: cardObj,
-  //       });
-  //     }
-  //   }, []);
-
-  //   const navigateToCardDetailsPage = (e) => {
-  //     if (applyActions) {
-  //       e.preventDefault();
-  //       navigate(Utils.APP_URLS.CARDS_PAGE + "/" + cardId, {
-  //         state: { cardData: cardData },
-  //       });
-  //     }
-  //   };
+  let [cardCtxInfo, setCardCtxInfo] = useState(tempCardCtxInfo);
 
   const navigateToTemplateDetailsPage = (e) => {
     e.preventDefault();
@@ -98,31 +70,26 @@ const TemplateItem = (props) => {
         <div className="indi-card-upload-picture">
           <img
             className="indi-card-upload-picture-img"
-            src={croppedImage}
+            src={profilePicture}
             alt="upload img"
           />
         </div>
         <div className="indi-info-wrapper">
-          <div className="indi-card-name fw-bold">
-            {templateDisplayName}
-          </div>
+          <div className="indi-card-name fw-bold">{templateDisplayName}</div>
           <div className="indi-card-title">{templateName}</div>
         </div>
         <div className="indi-card-fields">
           <div className="indi-card-field-wrapper">
-            {templateFields?.map(
-              (field, index) =>
-                (
-                  <Field
-                    fieldProps={{
-                      fieldType: field,
-                                fieldData: templateFieldsData[index],
-                      showEmptyField: true
-                    }}
-                    key={index}
-                  />
-                )
-            )}
+            {templateFields?.map((field, index) => (
+              <TemplateField
+                fieldProps={{
+                  fieldType: field,
+                  fieldData: templateFieldsData[index],
+                  showEmptyField: true,
+                }}
+                key={index}
+              />
+            ))}
           </div>
         </div>
       </div>

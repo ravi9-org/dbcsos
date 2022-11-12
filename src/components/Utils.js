@@ -380,6 +380,14 @@ const getUserProfile = () => {
   return myPromise;
 };
 
+const addNewTemplate = (templateData) => {
+  let formData = { ...templateData };
+  delete formData.id;
+  let url = REST_API.TEMPLATES;
+
+  return axios.post(url, formData);
+};
+
 const getTemplates = () => {
   const myPromise = new Promise((resolve, reject) => {
     let session = getSession();
@@ -642,6 +650,7 @@ const Utils = {
   getUserId,
   getCardDetails,
   deleteCard,
+  addNewTemplate,
   getTemplates,
   getTemplateDetails,
   executeLoginRESTAPI,

@@ -17,17 +17,27 @@ const AddTemplate = () => {
     }
   }, [userData, badgesCtxData]);
 
-  let [imgDataArray, setImgDataArray] = useState([]);
+  let [imgDataArray, setImgDataArray] = useState(["", "", ""]);
 
   const updateSelectedBadgeInfo = (e) => {};
   const updateSelectedUserInfo = (e) => {};
-  const updateUserFirstName = (e) => {};
-  const updateUserLastName = (e) => {};
-  const updateUserEmail = (e) => {};
-  const updateUserOrganization = (e) => {};
-  const updateUserDepartment = (e) => {};
-  const updateUserTitle = (e) => {};
-  const templateNameHandler = (e) => {};
+  let [userFields, setUserFields] = useState({
+    firstName: false,
+    lastName: false,
+    email: false,
+    department: false,
+    organization: false,
+    title: false,
+  });
+  const updateUserField = (e) => {
+    let id = e.currentTarget.id;
+    let tempUserFields = { ...userFields };
+    tempUserFields[id] = e.currentTarget.checked;
+    setUserFields({ ...userFields, ...tempUserFields});
+  };
+  const templateNameHandler = (e) => {
+    setTempalteName(e.currentTarget.value);
+  };
   const onChangeImage = async (e) => {
     let file = e.currentTarget.files[0];
     let targetIndex = parseInt(
@@ -48,6 +58,72 @@ const AddTemplate = () => {
     });
   };
 
+  let [templateName, setTempalteName] = useState("");
+  let [backgroundImage, setBackgroundImage] = useState("");
+
+  const onSaveTemplate = (e) => {
+    let linkedBadges = [];
+
+    //indi-template-badge-select-
+    badgesCtxData.map((badge) => {
+      let selectItem = document.querySelector(
+        ".indi-template-badge-select-" + badge.badgeUID + " input"
+      );
+      if (selectItem.checked) {
+        let isConstant = document.querySelector(
+          ".indi-template-badge-constant-" + badge.badgeUID + " input"
+        ).checked;
+        let isDefault = document.querySelector(
+          ".indi-template-badge-isdefault-" + badge.badgeUID + " input"
+        ).checked;
+        let isMultiple = document.querySelector(
+          ".indi-template-badge-multiple-" + badge.badgeUID + " input"
+        ).checked;
+        let defaulValue =
+          document.querySelector(
+            ".indi-template-badge-defaultvalue-" + badge.badgeUID
+          ).value || "";
+        linkedBadges.push({
+          [badge.badgeUID]: {
+            constant: isConstant,
+            isDefault: isDefault,
+            multiple: isMultiple,
+            defaultValue: defaulValue,
+          },
+        });
+      }
+    });
+
+    let templateInfo = {
+      templateName,
+      backgroundImage: imgDataArray[0],
+      logoImage: imgDataArray[1],
+      profilePicture: imgDataArray[2],
+      linkedBadges: linkedBadges,
+      linkedUserFields: userFields,
+    };
+    console.log(templateInfo);
+
+    submitTemplateForm(templateInfo);
+
+    return false;
+  };
+
+  const submitTemplateForm = (info) => {
+    const success = (res) => {
+      // navigate back to templates page
+    };
+    const fail = (err) => {
+      console.log(err);
+    };
+
+    try {
+      Utils.addNewTemplate(info).then(success, fail);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <>
       {canRender && (
@@ -66,12 +142,12 @@ const AddTemplate = () => {
                 />
               </FloatingLabel>
               <div className="indi-right-button-wrapper">
-                <Button>Save</Button>
+                <Button onClick={onSaveTemplate}>Save</Button>
                 <Button>Cancel</Button>
               </div>
             </div>
           </div>
-          <Accordion className="indi-data-table-wrapper" defaultActiveKey="0">
+          <Accordion className="indi-data-table-wrapper" defaultActiveKey="2">
             <Accordion.Item eventKey="0">
               <Accordion.Header>Image uploads</Accordion.Header>
               <Accordion.Body>
@@ -193,6 +269,8 @@ const AddTemplate = () => {
                         <td className="indi-data-table-td-badge-id">
                           <Form.Check
                             type="checkbox"
+                            className={`indi-template-badge-select-${badge.badgeUID}`}
+                            badgeuid={badge?.badgeUID}
                             onChange={updateSelectedBadgeInfo}
                             id={badge?.id}
                           />
@@ -213,6 +291,7 @@ const AddTemplate = () => {
                         <td className="indi-data-table-td-badge-constant text-center">
                           <Form.Check
                             type="checkbox"
+                            className={`indi-template-badge-constant-${badge.badgeUID}`}
                             id={`badge-constant-${badge?.id}`}
                           />
                         </td>
@@ -220,6 +299,7 @@ const AddTemplate = () => {
                         <td className="indi-data-table-td-badge-isdefault text-center">
                           <Form.Check
                             type="checkbox"
+                            className={`indi-template-badge-isdefault-${badge.badgeUID}`}
                             id={`badge-isdefault-${badge?.id}`}
                           />
                         </td>
@@ -227,6 +307,7 @@ const AddTemplate = () => {
                         <td className="indi-data-table-td-badge-multiple text-center">
                           <Form.Check
                             type="checkbox"
+                            className={`indi-template-badge-multiple-${badge.badgeUID}`}
                             id={`badge-multiple-${badge?.id}`}
                           />
                         </td>
@@ -241,6 +322,7 @@ const AddTemplate = () => {
                         <td className="indi-data-table-td-badge-defaultvalue">
                           <Form.Control
                             type="text"
+                            className={`indi-template-badge-defaultvalue-${badge.badgeUID}`}
                             id={`badge-defaultvalue-${badge?.id}`}
                           />
                         </td>
@@ -251,7 +333,7 @@ const AddTemplate = () => {
               </Accordion.Body>
             </Accordion.Item>
 
-            <Accordion.Item eventKey="3">
+            <Accordion.Item eventKey="2">
               <Accordion.Header>User fields selection</Accordion.Header>
               <Accordion.Body>
                 <Table responsive="sm">
@@ -259,7 +341,7 @@ const AddTemplate = () => {
                     <tr>
                       <th>Select </th>
                       <th>Field name </th>
-                      <th>Shuffle</th>
+                      {/* <th>Shuffle</th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -267,7 +349,7 @@ const AddTemplate = () => {
                       <td className="indi-data-table-td-badge-first-name">
                         <Form.Check
                           type="checkbox"
-                          onChange={updateUserFirstName}
+                          onChange={updateUserField}
                           id="firstName"
                         />
                       </td>
@@ -276,14 +358,14 @@ const AddTemplate = () => {
                         First name
                       </td>
 
-                      <td className="indi-data-table-td-badge-logo">Shuffle</td>
+                      {/* <td className="indi-data-table-td-badge-logo">Shuffle</td> */}
                     </tr>
 
                     <tr className="indi-data-table-tr">
                       <td className="indi-data-table-td-badge-last-name">
                         <Form.Check
                           type="checkbox"
-                          onChange={updateUserLastName}
+                          onChange={updateUserField}
                           id="lastName"
                         />
                       </td>
@@ -292,28 +374,28 @@ const AddTemplate = () => {
                         Last name
                       </td>
 
-                      <td className="indi-data-table-td-badge-logo">Shuffle</td>
+                      {/* <td className="indi-data-table-td-badge-logo">Shuffle</td> */}
                     </tr>
 
                     <tr className="indi-data-table-tr">
                       <td className="indi-data-table-td-user-email">
                         <Form.Check
                           type="checkbox"
-                          onChange={updateUserEmail}
+                          onChange={updateUserField}
                           id="email"
                         />
                       </td>
 
                       <td className="indi-data-table-td-badge-name">Email</td>
 
-                      <td className="indi-data-table-td-badge-logo">Shuffle</td>
+                      {/* <td className="indi-data-table-td-badge-logo">Shuffle</td> */}
                     </tr>
 
                     <tr className="indi-data-table-tr">
                       <td className="indi-data-table-td-badge-department">
                         <Form.Check
                           type="checkbox"
-                          onChange={updateUserDepartment}
+                          onChange={updateUserField}
                           id="department"
                         />
                       </td>
@@ -322,14 +404,14 @@ const AddTemplate = () => {
                         Department
                       </td>
 
-                      <td className="indi-data-table-td-badge-logo">Shuffle</td>
+                      {/* <td className="indi-data-table-td-badge-logo">Shuffle</td> */}
                     </tr>
 
                     <tr className="indi-data-table-tr">
                       <td className="indi-data-table-td-badge-organization">
                         <Form.Check
                           type="checkbox"
-                          onChange={updateUserOrganization}
+                          onChange={updateUserField}
                           id="organization"
                         />
                       </td>
@@ -338,21 +420,21 @@ const AddTemplate = () => {
                         Organization
                       </td>
 
-                      <td className="indi-data-table-td-badge-logo">Shuffle</td>
+                      {/* <td className="indi-data-table-td-badge-logo">Shuffle</td> */}
                     </tr>
 
                     <tr className="indi-data-table-tr">
                       <td className="indi-data-table-td-badge-title">
                         <Form.Check
                           type="checkbox"
-                          onChange={updateUserTitle}
+                          onChange={updateUserField}
                           id="title"
                         />
                       </td>
 
                       <td className="indi-data-table-td-badge-name">Title</td>
 
-                      <td className="indi-data-table-td-badge-logo">Shuffle</td>
+                      {/* <td className="indi-data-table-td-badge-logo">Shuffle</td> */}
                     </tr>
                   </tbody>
                 </Table>

@@ -1273,3 +1273,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-upload-picture-file-input-wrapper {
   position: relative;
 }
+
+.indi-app .indi-template-field-item-img {
+  min-width: 26px;
+  height: 24px;
+  margin-right: 8px;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
