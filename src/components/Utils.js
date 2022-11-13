@@ -222,9 +222,17 @@ const addUser = (userData) => {
   return axios.post(url, formData);
 };
 
+const editUser = (userData, userId) => {
+  let formData = { ...userData };
+  delete formData.id;
+  let url = REST_API.USER_PROFILE + userId;
+
+  return axios.patch(url, formData);
+};
+
 const deleteUser = (userId) => {
-  let url = REST_API.USER_PROFILE;
-  return axios.delete(url + userId);
+  let url = REST_API.USER_PROFILE + userId;
+  return axios.delete(url);
 };
 
 const deleteUsers = (usersArray) => {
@@ -640,6 +648,7 @@ const Utils = {
   getUserProfile,
   getAllUsers,
   addUser,
+  editUser,
   deleteUsers,
   deleteAddresses,
   getAddresses,

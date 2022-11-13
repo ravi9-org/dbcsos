@@ -133,6 +133,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   align-items: center;
 }
 
+.indi-app .btn.indi-header-userprofile-btn:first-child:active {
+  background-color: #fff;
+  border-radius: 50%;
+}
+
 .indi-app .indi-logo {
   background: url("../img/company-logo.png") no-repeat;
   height: 80px;
@@ -161,10 +166,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 }
 
-.indi-header-profile-image {
+.indi-app .indi-header-profile-image {
   height: 26px;
   width: 26px;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 .indi-header-user-profile-firstname {
@@ -425,6 +431,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-body-title,
 .indi-app .indi-body-action-bar,
 .indi-app .indi-add-card-title,
+.indi-app .indi-user-settings-page-header,
 .indi-app .indi-signature-title {
   font-weight: bold;
   color: #2f4694;
@@ -886,6 +893,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   width: 100px;
   border-radius: 50%;
   cursor: pointer;
+  z-index: 2;
 }
 
 .indi-app .indi-card-upload-picture.indi-card-upload-picture-with-no-bg:hover {
@@ -1302,4 +1310,150 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-card-template-preview-wrapper {
   max-height: 500px;
   overflow: auto;
+}
+
+
+.indi-app .indi-user-settings-page-wrapper {
+  flex-direction: column;
+  width: 100%;
+  overflow-y: overlay;
+}
+
+.indi-app .indi-user-settings-page-card {
+  width: 220px;
+  min-width: 220px;
+  margin: 16px;
+  /* border-radius: 10px; */
+  padding: 0;
+  background: #fff;
+  /* box-shadow: 0px 1px 6px #000; */
+  min-height: 192px;
+}
+
+.indi-app .indi-user-settings-page-card-inner {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  width: 100%;
+  /* height: 100%; */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.indi-app .indi-user-settings-page-profile .indi-user-settings-page-card-inner {
+  flex-direction: row;
+  background-color: #5e6aae69;
+  padding: 5px 10px;
+}
+
+.indi-app .indi-user-settings-page-card-header {
+  padding: 12px 8px 20px 8px;
+}
+
+.indi-app .indi-user-settings-page-card-header-img {
+  width: 16px;
+  height: 16px;
+}
+
+.indi-app .indi-user-settings-page-image {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.indi-app .indi-user-settings-page-change-email {
+  flex-direction: column;
+}
+
+.indi-app .indi-user-settings-page-card-header-label {
+  font-weight: bold;
+  color: #2f4694;
+  line-height: 18px;
+  padding-left: 5px;
+  font-size: 12px;
+}
+
+.indi-app .indi-user-settings-page-card-inner-item {
+  background-color: #f0f3f9;
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.indi-app .indi-user-settings-page-card-inner-item.indi-user-settings-page-reset-password {
+  background-color: transparent;
+}
+
+.indi-app .indi-user-settings-page-change-email-label {
+  font-weight: 500;
+}
+
+.indi-app .indi-user-settings-page-change-email-value {
+  font-size: 12px;
+}
+
+.indi-app .indi-user-settings-page-display-name {
+  margin-left: 7px;
+}
+
+.indi-modal-edit-user-profile-resetpassword-section:not(.indi-modal-edit-user-profile-resetpassword),
+.indi-modal-edit-user-profile-profile-section:not(.indi-modal-edit-user-profile-profile),
+.indi-modal-edit-user-profile-email-section:not(.indi-modal-edit-user-profile-email) {
+  display: none;
+}
+
+.indi-app .indi-modal-edit-user-profile-floating-inputs {
+  margin-bottom: 20px;
+}
+
+.indi-app .indi-modal-edit-user-profile-header-title {
+  color: #2f4694;
+}
+
+.indi-app .indi-user-profile-settings-error-msg {
+  left: 12px;
+  position: absolute;
+  bottom: 20px;
+  max-width: 270px;
+  color: red;
+}
+
+.indi-app .indi-card-upload-picture-file-input-wrapper {
+  min-width: 100px;
+  min-height: 100px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  max-width: 100px;
+  max-height: 100px;
+  overflow: hidden;
+}
+
+.indi-app .indi-card-upload-picture-file-input-wrapper:hover {
+  background-image: url("../img/Upload.png");
+  background-color: rgb(255, 255, 255, 0.5);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.indi-app .indi-card-upload-picture-img-input {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  opacity: 1;
+  position: absolute;
+  height: 100px;
+  border: 1px solid #232862;
+  width: 100px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.indi-app .indi-card-upload-picture-file-input-wrapper:hover .indi-card-upload-picture-img-input {
+  opacity: 0.5;
 }

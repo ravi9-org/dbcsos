@@ -13,7 +13,7 @@ import AddressesTable from "./addresses/AddressesTable";
 import UsersTable from "./users/UsersTable";
 import EmailSignature from "../../pages/signatures/EmailSignature";
 import Contacts from "../../pages/Contacts";
-import Settings from "../../pages/Settings";
+import Settings from "./users/Settings";
 import AddCard from "./cards/AddCard";
 import EditCard from "./cards/EditCardPage";
 import CardDetailsPage from "./cards/CardDetailsPage";
