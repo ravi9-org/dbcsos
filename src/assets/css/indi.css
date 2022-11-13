@@ -311,10 +311,18 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-qrcode-box-img-col {
   position: relative;
+  top: -12px;
 }
 
 .indi-app .indi-qrcode-box-img-col img {
   background-color: #2f45947a;
+  width: 40px;
+  height: 29px;
+}
+
+.indi-app .indi-qrcode-box-img-col img.indi-qrcode-qrcode {
+  width: 100px;
+  height: 100px;
 }
 
 /*utility classes*/
@@ -332,7 +340,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-place-me-bottom-right {
   position: absolute;
-  bottom: 16px;
+  bottom: 0px;
   right: 16px;
 }
 

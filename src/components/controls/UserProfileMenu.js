@@ -32,7 +32,6 @@ const UserProfileMenu = () => {
   useEffect(() => {
     if (!Utils.isObjectEmpty(userData)) {
       setUserFirstName(userData.firstName);
-      debugger;
       if (userData?.picture) {
         setUserImage(userData?.picture);
       }
