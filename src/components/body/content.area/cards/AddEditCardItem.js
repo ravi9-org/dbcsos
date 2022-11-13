@@ -40,7 +40,6 @@ const AddCardItem = ({ props }) => {
   let [croppedImage, setCroppedImage] = useState(
     cardInfo?.croppedImage || cardImage || ""
   );
-  debugger;
 
   useEffect(() => {
     setFields(cardCtxInfo.userLinkedBadges);

@@ -10,7 +10,7 @@ import CardContext from "./CardContext";
 
 const EditCardPage = (props) => {
   const { cardid } = useParams();
-  console.log("cardid : " + cardid);
+  //console.log("cardid : " + cardid);
   const navigate = useNavigate();
   let { userData } = useContext(ContextComponent);
 
