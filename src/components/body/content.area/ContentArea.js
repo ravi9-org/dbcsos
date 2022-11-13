@@ -15,7 +15,7 @@ import EmailSignature from "../../pages/signatures/EmailSignature";
 import Contacts from "../../pages/Contacts";
 import Settings from "../../pages/Settings";
 import AddCard from "./cards/AddCard";
-import EditCard from "./cards/EditCard";
+import EditCard from "./cards/EditCardPage";
 import CardDetailsPage from "./cards/CardDetailsPage";
 
 const ContentArea = () => {
