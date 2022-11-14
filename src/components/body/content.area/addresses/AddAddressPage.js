@@ -61,6 +61,9 @@ const AddAddressPage = ({ props }) => {
     <>
       {
         <Modal centered show={props.addModalCanOpen} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add new address</Modal.Title>
+          </Modal.Header>
           <Modal.Body>
             <form>
               <div className="indi-add-form-wrapper d-flex flex-column">
@@ -96,7 +99,7 @@ const AddAddressPage = ({ props }) => {
               </div>
 
               <div className="indi-add-footer">
-                <div className="indi-add-page-footer-btn-wrapper">
+                <div className="indi-add-page-footer-btn-wrapper float-right">
                   <button
                     type="button"
                     className="btn btn-primary"

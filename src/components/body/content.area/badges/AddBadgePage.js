@@ -112,6 +112,9 @@ const AddBadgePage = ({ props }) => {
     <>
       {
         <Modal centered show={props.addModalCanOpen} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add new badge</Modal.Title>
+          </Modal.Header>
           <Modal.Body>
             <form>
               <div className="indi-add-form-wrapper d-flex flex-column">
@@ -189,7 +192,7 @@ const AddBadgePage = ({ props }) => {
               </div>
 
               <div className="indi-add-footer">
-                <div className="indi-add-page-footer-btn-wrapper">
+                <div className="indi-add-page-footer-btn-wrapper float-right">
                   <button
                     type="button"
                     className="btn btn-primary"

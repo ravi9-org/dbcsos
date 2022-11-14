@@ -445,6 +445,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   color: #2f4694;
   line-height: 40px;
   padding: 0 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .indi-app .indi-body-actions {
@@ -1137,6 +1139,14 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   color: #232862;
 }
 
+.indi-app .indi-add-template-form .indi-add-card-title{
+  height: 40px;
+}
+
+.indi-app .indi-add-page-footer-btn-wrapper.float-right {
+ float: right;
+}
+
 .indi-app tr.indi-data-table-tr {
   background-color: #f5f8fc;
   border-top: 5px solid #f0f3f9;
@@ -1180,8 +1190,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-add-form-wrapper {
-  justify-content: space-evenly;
-  min-height: 400px;
+  justify-content: start;
+  min-height: 300px;
 }
 
 
@@ -1207,7 +1217,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   width: 72px;
   height: 58px;
   border: 1px solid transparent;
-  border-radius: 10px;
+  border-radius: 6px;
   margin: 0 20px;
   cursor: pointer;
 }
@@ -1229,7 +1239,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   height: auto;
   color: #2f4696;
   padding: 0 4px;
-  margin: 0 12px;
+  margin: 0 8px;
 }
 
 .indi-app .form-floating>.form-control,
@@ -1238,6 +1248,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   height: calc(2rem + 2px);
   line-height: 1.25;
   border-color: #2f4696;
+  padding: 1rem;
 }
 
 .indi-app .form-floating>.form-control.indi-input-textarea-field {
@@ -1256,7 +1267,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .form-floating>label {
-  padding: 0.25rem 1.25rem;
+  padding: 0.25rem 1rem;
   color: #2f4696;
 }
 
@@ -1265,9 +1276,14 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   box-shadow: 0 0 0 2px rgb(13 110 253 / 20%);
 }
 
+.indi-app .indi-add-form-item {
+  margin: 12px 0;
+}
+
 .indi-app .indi-add-form-item-label {
   color: #2f4696;
   font-weight: bold;
+  flex: 1 0 0;
 }
 
 
@@ -1319,7 +1335,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-card-template-preview-wrapper {
   max-height: 500px;
-  overflow: auto;
+  overflow: overlay;
 }
 
 
@@ -1406,7 +1422,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-user-settings-page-profile .indi-user-settings-page-card-inner:hover,
 .indi-app .indi-user-settings-page-card-inner-item.indi-user-settings-page-reset-password:hover,
 .indi-app .indi-user-settings-page-card-inner-item:hover {
-  background-color: #f0f3f9;
+  background-color: #23286236;
 }
 
 .indi-app .indi-user-settings-page-change-email-label {
@@ -1480,3 +1496,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   opacity: 0.5;
 }
 
+.indi-app .modal-header .modal-title.h4 {
+  color: #2f4694;
+  font-size: 18px;
+}

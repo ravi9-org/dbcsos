@@ -85,7 +85,7 @@ const Text = (props) => {
                     background: `url(${cardInfo.cardImage})`,
                   }}
                 >
-                  <div className="indi-place-me-bottom-right ">
+                  <div className="indi-place-me-top-right ">
                     <img src={templateInfo.logoImage} alt="card"></img>
                   </div>
                 </div>

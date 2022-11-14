@@ -65,58 +65,65 @@ const AddCard = () => {
     <>
       {canRender && (
         <>
-          {canShowAddCardPage && <AddCardPage template={{selectedTemplate} }/>}
-          {!canShowAddCardPage &&
+          {canShowAddCardPage && (
+            <AddCardPage template={{ selectedTemplate }} />
+          )}
+          {!canShowAddCardPage && (
             <form className="indi-add-template-form">
-              <div className="d-flex d-flex-column">
-                <div className="indi-body-title">Choose template</div>
+              <div className="d-flex d-flex-column indi-add-card-title indi-body-title">
+                <div>Choose template</div>
                 <div className="indi-right-button-wrapper">
                   <Button onClick={showAddCardPage}>Next</Button>
                 </div>
               </div>
-
-              <Table responsive="sm">
-                <thead className="indi-data-table-header">
-                  <tr>
-                    <th className="text-center">Choose template</th>
-                    <th>Template name </th>
-                    <th className="text-center">Template preview </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {templates?.map((template, index) => (
-                    <tr key={index} className="indi-data-table-tr">
-                      <td className="indi-data-table-td-badge-id indi-add-card-template-cell indi-add-card-template-preview-wrapper">
-                        <Form.Check
-                          type="radio"
-                          name="templateSelection"
-                          className={`text-center indi-template-badge-select-${template.id}`}
-                          templateid={template?.id}
-                          id={template?.id}
-                          selected={template}
-                          onChange={changeSelectedTemplate}
-                        />
-                      </td>
-
-                      <td className="indi-data-table-td-badge-name indi-add-card-template-name-cell indi-add-card-template-cell">
-                        <div className="d-flex1">{template?.templateName}</div>
-                      </td>
-
-                      <td className="indi-data-table-td-badge-logo text-center indi-add-card-template-cell indi-add-card-template-preview-wrapper d-flex">
-                        <div
-                          role="button"
-                          id={index}
-                          onClick={openTemplateModalDialog}
-                          className="indi-add-card-template-preview"
-                        ></div>
-                      </td>
+              <div className="indi-data-table-wrapper">
+                <Table responsive="sm">
+                  <thead className="indi-data-table-header">
+                    <tr>
+                      <th className="text-center">Choose template</th>
+                      <th>Template name </th>
+                      <th className="text-center">Template preview </th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {templates?.map((template, index) => (
+                      <tr key={index} className="indi-data-table-tr">
+                        <td className="indi-data-table-td-badge-id indi-add-card-template-cell indi-add-card-template-preview-wrapper">
+                          <Form.Check
+                            type="radio"
+                            name="templateSelection"
+                            className={`text-center indi-template-badge-select-${template.id}`}
+                            templateid={template?.id}
+                            id={template?.id}
+                            selected={template}
+                            onChange={changeSelectedTemplate}
+                          />
+                        </td>
 
+                        <td className="indi-data-table-td-badge-name indi-add-card-template-name-cell indi-add-card-template-cell">
+                          <div className="d-flex1">
+                            {template?.templateName}
+                          </div>
+                        </td>
+
+                        <td className="indi-data-table-td-badge-logo text-center indi-add-card-template-cell indi-add-card-template-preview-wrapper d-flex">
+                          <div
+                            role="button"
+                            id={index}
+                            onClick={openTemplateModalDialog}
+                            className="indi-add-card-template-preview"
+                          ></div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </div>
               {openModal && (
                 <Modal centered show={openModal} onHide={hideModal}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Card template preview</Modal.Title>
+                  </Modal.Header>
                   <Modal.Body>
                     <div className="indi-card-template-preview-wrapper">
                       <TemplateItem
@@ -125,7 +132,7 @@ const AddCard = () => {
                       />
                     </div>
                     <div className="indi-add-footer">
-                      <div className="indi-add-page-footer-btn-wrapper">
+                      <div className="indi-add-page-footer-btn-wrapper float-right">
                         <button
                           type="button"
                           className="btn btn-primary"
@@ -139,7 +146,7 @@ const AddCard = () => {
                 </Modal>
               )}
             </form>
-          }
+          )}
         </>
       )}
     </>
