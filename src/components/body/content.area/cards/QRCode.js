@@ -34,7 +34,7 @@ const QRCode = (props) => {
       {canRender && (
         <>
           <div className="indi-card-item-page2-qrcode-image">
-            =:::<img src={qrCode} alt="qrcode" />
+            <img src={qrCode} alt="qrcode" />
           </div>
 
           <div className="indi-card-item-page2-scan-or-click">
