@@ -83,8 +83,6 @@ const Settings = () => {
   // );
 
   const fileChangeHandler = async (e) => {
-    console.log(e.currentTarget);
-    debugger;
     let file = e.currentTarget.files[0];
     await Utils.fileToDataUri(file).then((dataUri) => {
       setProfilePicture(dataUri);
@@ -121,12 +119,9 @@ const Settings = () => {
         ).value;
       });
     }
-    console.log(userObjToBeSubmit);
     const success = (response) => {
       setErrorMessage("");
-      console.log(response);
       setUserData(response.data);
-      debugger;
       handleClose();
     };
 

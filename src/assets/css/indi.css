@@ -281,7 +281,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-content-area-wrapper button.btn.btn-primary,
 .indi-app .modal-dialog button.btn.btn-primary {
-  float: right;
+  /* float: right; */
   margin: 8px;
   background-color: #232862;
   border: 1px solid #232862;
@@ -789,6 +789,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   border-radius: 10px;
   padding: 20px 10px;
   min-width: 400px;
+  max-width: 400px;
   background: #fff;
   box-shadow: 0px 1px 6px #000;
   min-height: 192px;
@@ -1386,13 +1387,25 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-user-settings-page-card-inner-item {
-  background-color: #f0f3f9;
+  /* background-color: #f0f3f9; */
   width: 100%;
   padding: 5px 10px;
 }
 
 .indi-app .indi-user-settings-page-card-inner-item.indi-user-settings-page-reset-password {
+  /* background-color: transparent; */
+  line-height: 34px;
+}
+
+.indi-app .indi-user-settings-page-card-inner-item.indi-user-settings-page-reset-password,
+.indi-app .indi-user-settings-page-card-inner-item {
   background-color: transparent;
+}
+
+.indi-app .indi-user-settings-page-profile .indi-user-settings-page-card-inner:hover,
+.indi-app .indi-user-settings-page-card-inner-item.indi-user-settings-page-reset-password:hover,
+.indi-app .indi-user-settings-page-card-inner-item:hover {
+  background-color: #f0f3f9;
 }
 
 .indi-app .indi-user-settings-page-change-email-label {
@@ -1465,3 +1478,4 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-card-upload-picture-file-input-wrapper:hover .indi-card-upload-picture-img-input {
   opacity: 0.5;
 }
+

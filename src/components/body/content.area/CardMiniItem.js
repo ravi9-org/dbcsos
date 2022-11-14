@@ -35,7 +35,6 @@ const CardMiniItem = (props) => {
 
   useEffect(() => {
     if (!Utils.isObjectEmpty(cardData)) {
-      console.log(cardData);
       setQrcode(cardData.qrcode || qrcode);
       Utils.getTemplateDetails(cardData.templateId).then(templateSuccess, fail);
     }
