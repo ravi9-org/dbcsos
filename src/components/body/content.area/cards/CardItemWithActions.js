@@ -32,7 +32,7 @@ const CardItemWithActions = (props) => {
   };
 
   const getTemplate = (templateId) => {
-    Utils.getTemplateDetails(cardId).then(templateSuccess, templateFail);
+    Utils.getTemplateDetails(templateId).then(templateSuccess, templateFail);
   };
 
   const success = (res) => {

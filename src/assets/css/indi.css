@@ -940,6 +940,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-ext-card-item-wrapper .indi-card-upload-picture-img {
   height: 150px;
+  width: 150px;
 }
 
 .indi-app .indi-table-img-cell {
