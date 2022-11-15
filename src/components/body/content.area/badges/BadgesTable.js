@@ -1,15 +1,18 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
-
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { Button, Modal } from "react-bootstrap";
 
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
 import DataTable from "../../../controls/table/DataTable";
 import AddIcon from "../../../../assets/img/add.png";
 import DeleteIcon from "../../../../assets/img/Delete.png";
+import AddBadgePage from "./AddBadgePage";
 
 const BadgesTable = () => {
-  let navigate = useNavigate();
+  let [showDeleteModal, setShowDeleteModal] = useState(false);
+  let [selectedItemCount, setSelectedItemCount] = useState(0);
+
+  let [tableSelectedItems, setTableSelectedItems] = useState([]);
 
   let { setCanRedirectToLogin, setLoadingState } = useContext(ContextComponent);
 
@@ -20,12 +23,6 @@ const BadgesTable = () => {
     "iconImage",
     "darkIconImage",
     "type",
-    "readonly",
-    "defaultValue",
-    "constant",
-    "isDefault",
-    "multiple",
-    "required",
   ]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
     id: {
@@ -57,39 +54,11 @@ const BadgesTable = () => {
       type: "text",
       title: "Type",
     },
-    readonly: {
-      type: "boolean",
-      title: "Readonly",
-      center: true,
-    },
-    defaultValue: {
-      type: "text",
-      title: "Default value",
-    },
-    constant: {
-      type: "boolean",
-      title: "Constant",
-      center: true,
-    },
-    isDefault: {
-      type: "boolean",
-      title: "Is default?",
-      center: true,
-    },
-    multiple: {
-      type: "boolean",
-      title: "Allow multiple",
-      center: true,
-    },
-    required: {
-      type: "boolean",
-      title: "Required",
-      center: true,
-    },
   });
 
   let [tableData, setTableData] = useState([]);
   let [canRender, setCanRender] = useState(false);
+  let [updateTable, setUpdateTable] = useState(false);
 
   const success = (res) => {
     setLoadingState({
@@ -131,22 +100,65 @@ const BadgesTable = () => {
     }
   };
 
+  const loadFreshBadges = () => {
+    Utils.getBadges().then(success, fail);
+  };
+
   useEffect(() => {
     setLoadingState({
       applyMask: false,
       text: "Loading badges",
     });
-    Utils.getBadges().then(success, fail);
+    loadFreshBadges();
   }, []);
 
-  const navigateToAddBadgePage = e => {
-    e.preventDefault();
-    return false;
-  }
+  const handleShow = async (e) => {
+    if (tableSelectedItems?.length > 0) {
+      await setSelectedItemCount(tableSelectedItems?.length);
+      setShowDeleteModal(true);
+    }
+  };
 
-  const handleShow = (e) => {
+  const handleClose = async (e) => {
+    await setSelectedItemCount(tableSelectedItems?.length);
+    setShowDeleteModal(false);
+  };
+
+  const deleteSuccess = (res) => {
+    setUpdateTable(!updateTable);
+  };
+
+  const deleteFail = (err) => {
+    err?.message?.length && console.log(err);
+  };
+
+  const handleDelete = async (e) => {
+    setShowDeleteModal(false);
+    // setLoadingState({
+    //   applyMask: true,
+    //   text: "Deleting selected " + tableSelectedItems.length + " items",
+    // });
+    let tempTableData = tableData.filter((d) => {
+      return tableSelectedItems.indexOf(d[0]) === -1;
+    });
+    setTableData(tempTableData);
+    Utils.deleteBadges(tableSelectedItems).then(deleteSuccess, deleteFail);
+  };
+
+  let [addModalCanOpen, setAddModalCanOpen] = useState(false);
+
+  const openAddModal = (e) => {
     e.preventDefault();
-    return false;
+    setAddModalCanOpen(true);
+  };
+
+  const closeAddModal = (e) => {
+    setAddModalCanOpen(false);
+  };
+
+  const saveAction = (data) => {
+    //console.log(data);
+    debugger;
   };
 
   return (
@@ -157,11 +169,12 @@ const BadgesTable = () => {
           <div
             className="indi-body-action"
             role="button"
-            onClick={navigateToAddBadgePage}
+            onClick={openAddModal}
           >
             <img className="indi-w-20" src={AddIcon} alt="Edit-icon"></img>
             Add
           </div>
+
           <div className="indi-body-action" role="button" onClick={handleShow}>
             <img className="indi-w-20" src={DeleteIcon} alt="Delete-icon"></img>
             Delete
@@ -170,7 +183,41 @@ const BadgesTable = () => {
       </div>
       {canRender && (
         <DataTable
-          tableProps={{ tableColumns, tableColumnSchema, tableData }}
+          tableProps={{
+            tableColumns,
+            tableColumnSchema,
+            tableData,
+            tableSelectedItems,
+            setTableSelectedItems,
+          }}
+        />
+      )}
+
+      <Modal centered show={showDeleteModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete confirmation?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure to delete select {selectedItemCount} item(s)?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            No
+          </Button>
+          <Button variant="primary" onClick={handleDelete}>
+            Yes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {addModalCanOpen && (
+        <AddBadgePage
+          props={{
+            addModalCanOpen,
+            setAddModalCanOpen,
+            tableData,
+            setTableData,
+          }}
         />
       )}
     </div>

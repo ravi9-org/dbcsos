@@ -1,12 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import InputElement from "./InputElement";
 import ContextComponent from "../../AppContext";
 import CardContext from "../../body/content.area/cards/CardContext";
-import Utils from "../../Utils";
 
 const Field = (props = {}) => {
-  let [canRender, setCanRender] = useState(false);
-  let templateBadges = props?.fieldProps?.templateBadges || [];
   let { badgesCtxData } = useContext(ContextComponent);
   let { cardCtxInfo, setCardCtxInfo } = useContext(CardContext);
 
@@ -15,13 +12,6 @@ const Field = (props = {}) => {
   let fieldType = fieldProps.fieldType;
   let showEmptyField = fieldProps?.showEmptyField || false;
   let fieldSchema = badgesCtxData.filter((b) => b.badgeUID === fieldType)[0];
-  templateBadges?.map((field) => {
-    let schemaObj = field[fieldSchema.badgeUID];
-    if (!Utils.isObjectEmpty(schemaObj)) {
-      fieldSchema = { ...fieldSchema, ...schemaObj }
-    }
-  });
-
   let isDefault = fieldSchema?.isDefault;
 
   let fieldData = fieldProps.fieldData;
@@ -33,23 +23,36 @@ const Field = (props = {}) => {
   let canRemoveField = !isDefault && (mode === "add" || mode === "edit");
 
   let inputElementClassNames = fieldProps.inputElementClassNames;
+  //console.log(fieldSchema);
+  //debugger;
 
   const removeField = (e) => {
     e.preventDefault();
     let tempCardCtxInfo = { ...cardCtxInfo };
-    tempCardCtxInfo.userLinkedBadges = tempCardCtxInfo?.userLinkedBadges?.filter((field, index) => {
+    tempCardCtxInfo.fields = tempCardCtxInfo?.fields?.filter((field, index) => {
       return index !== fieldIndex;
     });
-    tempCardCtxInfo.fieldsData = tempCardCtxInfo?.fieldsData?.filter((field, index) => {
+    tempCardCtxInfo.data = tempCardCtxInfo?.data?.filter((field, index) => {
       return index !== fieldIndex;
     });
     setCardCtxInfo(tempCardCtxInfo);
+    //inform form about new field to be add
   };
+
+  let bgImg = "";
+  badgesCtxData.map((badge) => {
+    if (Object.keys(props.fieldProps.fieldType)[0] === badge.badgeUID) {
+      bgImg = badge.darkIconImage;
+    }
+   });
 
   return (
     <div className="indi-card-field-item d-flex">
       <div
-        className={`indi-card-field-item-img indi-card-field-item-${fieldType}`}
+        className={`indi-template-field-item-img`}
+        style={{
+          background: `url(${bgImg})`,
+        }}
       ></div>
 
       {(mode === "readonly" || (mode !== "add" && mode !== "edit")) && (
@@ -81,7 +84,7 @@ const Field = (props = {}) => {
         </div>
       )}
     </div>
-  )
+  );
 };
 
 export default Field;

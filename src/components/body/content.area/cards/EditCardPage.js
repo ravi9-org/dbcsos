@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
@@ -8,40 +8,76 @@ import BadgesRibbon from "../badges/BadgesRibbon";
 
 import CardContext from "./CardContext";
 
-const EditCard = () => {
+const EditCardPage = (props) => {
   const { cardid } = useParams();
-
+  //console.log("cardid : " + cardid);
   const navigate = useNavigate();
-  let { badgesCtxData } = useContext(ContextComponent);
+  let { userData } = useContext(ContextComponent);
 
+  let [cardCtxInfo, setCardCtxInfo] = useState({});
   let [templateData, setTemplateData] = useState({});
-  let [newCardData, setNewCardData] = useState({});
-  let [updatedFields, setUpdatedFields] = useState([]);
-  let [updatedValues, setUpdatedValues] = useState([]);
-  let [cardImageValue, setCardImageValue] = useState([]);
-  let [croppedImageValue, setCroppedImageValue] = useState([]);
-  let [cardCtxInfo, setCardCtxInfo] = useState({ fields: [], data: [] });
+
+  let [cardImageValue, setCardImageValue] = useState("");
+  let [croppedImageValue, setCroppedImageValue] = useState("");
+
+  let [templateBadges, setTemplateBadges] = useState([]);
 
   let [canRender, setCanRender] = useState(false);
 
-  let [isDataAvailable, setIsDataAvailable] = useState(false);
+  let [hasCardDetails, setHasCardDetails] = useState(false);
+  let [hasTemplateDetails, setHasTemplateDetails] = useState(false);
+
+  let [detailsForEditCardPage, setDetailsForEditCardPage] = useState({
+    template: {},
+    card: {},
+  });
+
+  useEffect(() => {
+    if (hasCardDetails) {
+        const templateSuccess = (res) => {
+        setTemplateData(res.data);
+        setHasTemplateDetails(true);
+      };
+      const templateFail = (err) => {
+        err?.message?.length && console.log(err);
+      };
+
+      let templateId = cardCtxInfo.templateId;
+
+      Utils.getTemplateDetails(templateId).then(templateSuccess, templateFail);
+    }
+  }, [hasCardDetails]);
+
+  useEffect(() => {
+    if (hasTemplateDetails) {
+      setTemplateBadges(templateData.linkedBadges);
+    }
+  }, [hasTemplateDetails]);
+
+  useEffect(() => {
+    if (hasCardDetails && hasTemplateDetails) {
+      setDetailsForEditCardPage({
+        template: templateData,
+        card: cardCtxInfo,
+      });
+      setCanRender(true);
+    }
+  }, [hasCardDetails, hasTemplateDetails]);
+
   const success = (res) => {
-    setTemplateData(res.data);
-    setUpdatedFields(res.data.fields);
-    setUpdatedValues(res.data.fieldsData);
-    setIsDataAvailable(true);
-    let tempCardCtxInfo = { ...cardCtxInfo };
-    tempCardCtxInfo.fields = res.data.fields;
-    tempCardCtxInfo.data = res.data.fieldsData;
-    setCardCtxInfo(tempCardCtxInfo);
-    setCanRender(true);
+    setCardCtxInfo(res.data);
+    setCardImageValue(res.data.cardImage);
+    setCroppedImageValue(res.data.croppedImage);
+    setHasCardDetails(true);
   };
+
   const fail = (err) => {
     err?.message?.length && console.log(err);
   };
+
   useEffect(() => {
     Utils.getCardDetails(cardid).then(success, fail);
-  }, [isDataAvailable]);
+  }, []);
 
   const goBack = (e) => {
     navigate(Utils.APP_URLS.CARDS_PAGE);
@@ -51,8 +87,7 @@ const EditCard = () => {
   let imageInputElementClassNames = "indi-image-input-element";
   let croppedImageInputElementClassNames = "indi-cropped-image-input-element";
 
-  let [valueChanged, setValueChanged] = useState(false);
-  const updateCard = (e) => {
+  const saveCard = (e) => {
     e.preventDefault();
     let dataValues = [];
     let cardImageEle = document.getElementsByClassName(
@@ -62,8 +97,8 @@ const EditCard = () => {
       croppedImageInputElementClassNames
     );
 
-    let cardImageValue = "";
     let inputElements = document.getElementsByClassName(inputElementClassNames);
+    let imageValues = [];
 
     for (let ele of inputElements) {
       let val = ele?.value || "";
@@ -73,27 +108,29 @@ const EditCard = () => {
     for (let imgEle of cardImageEle) {
       let imgVal = imgEle?.value || "";
       setCardImageValue(imgVal);
+      imageValues.push(imgVal);
     }
 
     for (let imgEle of croppedCardImageEle) {
       let imgVal = imgEle?.value || "";
       setCroppedImageValue(imgVal);
+      imageValues.push(imgVal);
     }
 
-    setUpdatedValues(dataValues, cardImageValue, croppedImageValue);
-    setValueChanged(true);
+    submitForm(dataValues, imageValues);
   };
 
-  const navigateBackToCardsListPage = () => {
-    navigate(Utils.APP_URLS.CARDS_PAGE);
-  };
+  const submitForm = (dataValues = {}, imageValues = []) => {
+    let info = { ...cardCtxInfo };
 
-  const submitForm = (info) => {
-    info.cardImage = cardImageValue;
-    info.croppedImage = croppedImageValue;
+    info.fieldsData = dataValues;
+    info.cardImage = imageValues[0];
+    info.croppedImage = imageValues[1];
+
     const success = (res) => {
-      navigateBackToCardsListPage();
+      goBack();
     };
+
     const fail = (err) => {
       console.log(err);
     };
@@ -105,17 +142,6 @@ const EditCard = () => {
     }
   };
 
-  useEffect(() => {
-    if (valueChanged) {
-      let templateInfo = templateData;
-      templateInfo.fieldsData = updatedValues;
-      templateInfo.fields = cardCtxInfo.fields;
-      templateInfo.userId = cardid;
-      templateInfo.cardImage = Utils.getUserId();
-      submitForm(templateInfo);
-    }
-  }, [updatedValues]);
-
   return (
     <CardContext.Provider
       value={{
@@ -126,22 +152,22 @@ const EditCard = () => {
       {canRender && (
         <form>
           <div className="indi-add-card-wrapper d-flex flex-column">
-            <div className="indi-add-card-title">Edit Card</div>
-            {isDataAvailable && (
+            <div className="indi-add-card-title">Add Card</div>
+            {
               <EditCardItem
                 className="indi-add-card-wrapper"
                 props={{
-                  cardInitialData: templateData,
-                  setNewCardData,
+                  pageInfo: detailsForEditCardPage,
                   pageMode: "edit",
                   inputElementClassNames,
                 }}
               />
-            )}
+            }
             <div className="indi-add-card-item-footer d-flex d-flex-row">
-              <div className="indi-edit-card-page-badge-ribbon-wrapper">
-                <BadgesRibbon />
+              <div className="indi-add-card-page-badge-ribbon-wrapper">
+                <BadgesRibbon templateBadges={templateBadges} />
               </div>
+
               <div className="indi-add-card-page-footer-btn-wrapper d-flex d-flex-row">
                 <button
                   type="button"
@@ -153,9 +179,9 @@ const EditCard = () => {
                 <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={updateCard}
+                  onClick={saveCard}
                 >
-                  Update
+                  Save
                 </button>
               </div>
             </div>
@@ -166,4 +192,4 @@ const EditCard = () => {
   );
 };
 
-export default EditCard;
+export default EditCardPage;

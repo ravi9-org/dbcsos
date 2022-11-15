@@ -133,6 +133,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   align-items: center;
 }
 
+.indi-app .btn.indi-header-userprofile-btn:first-child:active {
+  background-color: #fff;
+  border-radius: 50%;
+}
+
 .indi-app .indi-logo {
   background: url("../img/company-logo.png") no-repeat;
   height: 80px;
@@ -161,10 +166,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 }
 
-.indi-header-profile-image {
+.indi-app .indi-header-profile-image {
   height: 26px;
   width: 26px;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 .indi-header-user-profile-firstname {
@@ -273,8 +279,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   margin: 0 auto;
 }
 
-.indi-app .indi-content-area-wrapper  button.btn.btn-primary {
-  float: right;
+.indi-app .indi-content-area-wrapper button.btn.btn-primary,
+.indi-app .modal-dialog button.btn.btn-primary {
+  /* float: right; */
   margin: 8px;
   background-color: #232862;
   border: 1px solid #232862;
@@ -304,10 +311,18 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-qrcode-box-img-col {
   position: relative;
+  top: -12px;
 }
 
 .indi-app .indi-qrcode-box-img-col img {
   background-color: #2f45947a;
+  width: 40px;
+  height: 29px;
+}
+
+.indi-app .indi-qrcode-box-img-col img.indi-qrcode-qrcode {
+  width: 100px;
+  height: 100px;
 }
 
 /*utility classes*/
@@ -325,7 +340,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-place-me-bottom-right {
   position: absolute;
-  bottom: 16px;
+  bottom: 0px;
   right: 16px;
 }
 
@@ -418,11 +433,20 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-add-card-title {
   display: flex;
   flex-flow: row;
+  justify-content: space-between;
+}
+
+.indi-app .indi-body-title,
+.indi-app .indi-body-action-bar,
+.indi-app .indi-add-card-title,
+.indi-app .indi-user-settings-page-header,
+.indi-app .indi-signature-title {
   font-weight: bold;
   color: #2f4694;
   line-height: 40px;
-  justify-content: space-between;
   padding: 0 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .indi-app .indi-body-actions {
@@ -438,9 +462,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-add-card-wrapper,
 .indi-app .indi-content-area-wrapper,
 .indi-app .indi-cards-collection-wrapper {
-  /* border: 1px dotted #000; */
   height: calc(100% - 32px);
-  /* padding: 29px 0; */
   padding: 0;
   overflow-x: overlay;
 }
@@ -498,6 +520,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-card-title {
   padding-bottom: 8px;
+  line-height: 19px;
+  min-height: 24px;
+  max-height: 40px;
 }
 
 .indi-app .indi-card-field-wrapper>div {
@@ -764,16 +789,10 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   border-radius: 10px;
   padding: 20px 10px;
   min-width: 400px;
+  max-width: 400px;
   background: #fff;
   box-shadow: 0px 1px 6px #000;
   min-height: 192px;
-}
-
-.indi-app .indi-signature-title {
-  font-weight: bold;
-  color: #2f4694;
-  line-height: 40px;
-  padding: 0 12px;
 }
 
 .indi-app .indi-qrcode-bg,
@@ -883,6 +902,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   width: 100px;
   border-radius: 50%;
   cursor: pointer;
+  z-index: 2;
 }
 
 .indi-app .indi-card-upload-picture.indi-card-upload-picture-with-no-bg:hover {
@@ -914,11 +934,13 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-card-upload-picture-img {
   height: 100px;
+  width: 100px;
   border-radius: 50%;
 }
 
 .indi-app .indi-ext-card-item-wrapper .indi-card-upload-picture-img {
   height: 150px;
+  width: 150px;
 }
 
 .indi-app .indi-table-img-cell {
@@ -1069,7 +1091,60 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-data-table-wrapper {
-  padding: 15px;
+  padding: 16px;
+  overflow: overlay;
+  height:  calc(100% - 32px);
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper.indi-text-btn-row {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .form-floating {
+  flex: 1 1 0;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .indi-data-table-tr td {
+  vertical-align: middle;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .indi-data-table-tr td input[type=checkbox] {
+  border-color: #2f4696;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .indi-data-table-tr td input[type=text] {
+  height: calc(2rem + 2px);
+  line-height: 1.25;
+  border-color: #2f4696;
+  min-width: 200px;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .accordion-body {
+  overflow: auto;
+  padding: 0;
+  margin: 16px;
+  font-weight: bold;
+  color: #304697;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .accordion-item .accordion-button {
+  color: #2f4594;
+  font-weight: bold;
+}
+
+.indi-app .indi-add-template-form .indi-data-table-wrapper .accordion-item .accordion-button:not(.collapsed) {
+  background-color: #2b5daf40;
+  font-weight: bold;
+  color: #232862;
+}
+
+.indi-app .indi-add-template-form .indi-add-card-title {
+  height: 46px;
+}
+
+.indi-app .indi-add-page-footer-btn-wrapper.float-right {
+ float: right;
 }
 
 .indi-app tr.indi-data-table-tr {
@@ -1106,56 +1181,322 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 }
 
+/* indi-add-form-item-input */
+.indi-app .indi-img-preview {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-size: contain !important;
+}
 
-.indi-app .indi-badge-add-form-div {
-  background-color: #323c5b;
+.indi-app .indi-add-form-wrapper {
+  justify-content: start;
+  min-height: 300px;
 }
 
 
-
-.indi-app .indi-badge-img-upload-field {
-  cursor: pointer;
-}
-
-.indi-app .indi-badge-upload-picture-file-input {
-  border: 1px solid red;
-  position: absolute;
+.indi-app .indi-upload-picture-file-input {
   opacity: 0;
+  position: absolute;
+}
+
+.indi-app .indi-data-table-td-template-image .indi-upload-picture-file-input {
+  left: 0;
+}
+
+
+.indi-app .indi-add-img-wrapper {
+  background-image: url("../img/Upload1.png");
+  background-color: rgb(255, 255, 255, 0.5);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.indi-app .indi-upload-picture-file-input,
+.indi-app .indi-add-img-wrapper {
+  width: 72px;
+  height: 58px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  margin: 0 20px;
   cursor: pointer;
 }
 
-.indi-app .indi-badge-img-upload-label {
-  border: 1px solid #fff;
-  text-align: center;
+.indi-app .indi-data-table-tr .indi-upload-picture-file-input,
+.indi-app .indi-data-table-tr .indi-add-img-wrapper {
+  margin: 0;
 }
 
-.indi-app .indi-badge-img-upload-label,
-.indi-app .indi-badge-upload-picture-file-input {
-  width: 125px;
-  height: 80px;
+.indi-app .form-floating>.form-control-plaintext~label,
+.indi-app .form-floating>.form-control:focus~label,
+.indi-app .form-floating>.form-control:not(:placeholder-shown)~label,
+.indi-app .form-floating>.form-select~label {
+  opacity: 1;
+  background: #fff;
+  width: auto;
+  -webkit-transform: scale(.85) translateY(-0.5rem) translateX(0.15rem);
+  transform: scale(.85) translateY(-0.8rem) translateX(0.5rem);
+  height: auto;
+  color: #2f4696;
+  padding: 0 4px;
+  margin: 0 8px;
 }
 
-.indi-app .indi-add-badge-items-wrapper {
+.indi-app .form-floating>.form-control,
+.indi-app .form-floating>.form-control-plaintext,
+.indi-app .form-floating>.form-select {
+  height: calc(2rem + 2px);
+  line-height: 1.25;
+  border-color: #2f4696;
+  padding: 1rem;
+}
+
+.indi-app .form-floating>.form-control.indi-input-textarea-field {
+  height: 90px;
+}
+
+
+.indi-app .form-floating>.form-control-plaintext:focus,
+.indi-app .form-floating>.form-control-plaintext:not(:placeholder-shown),
+.indi-app .form-floating>.form-control:focus,
+.indi-app .form-floating>.form-control:not(:placeholder-shown),
+.indi-app .form-floating>.form-select {
+  padding-top: 0;
+  padding-bottom: 0;
+  border-color: #2f4696;
+}
+
+.indi-app .form-floating>label {
+  padding: 0.25rem 1rem;
+  color: #2f4696;
+}
+
+.indi-app .form-control:focus,
+.indi-app .form-select:focus {
+  box-shadow: 0 0 0 2px rgb(13 110 253 / 20%);
+}
+
+.indi-app .indi-add-form-item {
+  margin: 12px 0;
+}
+
+.indi-app .indi-add-form-item-label {
+  color: #2f4696;
+  font-weight: bold;
+  flex: 1 0 0;
+}
+
+
+.indi-app .indi-add-template-badge-icon-image {
+  width: 24px;
+  height: 24px;
+}
+
+.indi-app .indi-add-img-wrapper-preview {
+  width: 32px;
+}
+
+.indi-app .indi-data-table-td-template-image {
+  display: flex;
+  justify-content: center;
+}
+
+.indi-app .indi-data-table-td-template-img-prevew {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.indi-app .indi-upload-picture-file-input-wrapper {
+  position: relative;
+}
+
+.indi-app .indi-template-field-item-img {
+  min-width: 26px;
+  height: 24px;
+  margin-right: 8px;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+.indi-app .indi-add-card-template-preview {
+  background-image: url("../img/eye.png");
+  width: 32px;
+  height: 32px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.indi-app .indi-add-card-template-preview-wrapper {
+  justify-content: center;
+}
+
+.indi-app .indi-add-card-template-cell {
+  vertical-align: middle;
+}
+
+.indi-app .indi-card-template-preview-wrapper {
+  max-height: 500px;
+  overflow: overlay;
+}
+
+
+.indi-app .indi-user-settings-page-wrapper {
+  flex-direction: column;
+  width: 100%;
+  overflow-y: overlay;
+}
+
+.indi-app .indi-user-settings-page-card {
+  width: 220px;
+  min-width: 220px;
+  margin: 16px;
+  /* border-radius: 10px; */
+  padding: 0;
+  background: #fff;
+  /* box-shadow: 0px 1px 6px #000; */
+  min-height: 192px;
+}
+
+.indi-app .indi-user-settings-page-card-inner {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  width: 100%;
+  /* height: 100%; */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.indi-app .indi-user-settings-page-profile .indi-user-settings-page-card-inner {
+  flex-direction: row;
+  background-color: #5e6aae69;
+  padding: 5px 10px;
+}
+
+.indi-app .indi-user-settings-page-card-header {
+  padding: 12px 8px 20px 8px;
+}
+
+.indi-app .indi-user-settings-page-card-header-img {
+  width: 16px;
+  height: 16px;
+}
+
+.indi-app .indi-user-settings-page-image {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.indi-app .indi-user-settings-page-change-email {
   flex-direction: column;
 }
 
-.indi-app .indi-badge-input-field {
-  margin: 10px 0;
+.indi-app .indi-user-settings-page-card-header-label {
+  font-weight: bold;
+  color: #2f4694;
+  line-height: 18px;
+  padding-left: 5px;
+  font-size: 12px;
 }
 
-.indi-app .indi-add-badge-page-footer-btn-wrapper {
+.indi-app .indi-user-settings-page-card-inner-item {
+  /* background-color: #f0f3f9; */
   width: 100%;
-  flex-direction: row-reverse;
+  padding: 5px 10px;
 }
 
-
-.indi-card-field-item select.indi-badge-input-select-field,
-.indi-card-field-item select.indi-badge-input-select-field:focus-visible {  
-  border: 1px solid darkgrey;
+.indi-app .indi-user-settings-page-card-inner-item.indi-user-settings-page-reset-password {
+  /* background-color: transparent; */
+  line-height: 34px;
 }
 
-.indi-card-field-item select.indi-badge-input-select-field option {  
-  background-color: #323c5b;
-  color: #fff;
-  padding: 10px;
+.indi-app .indi-user-settings-page-card-inner-item.indi-user-settings-page-reset-password,
+.indi-app .indi-user-settings-page-card-inner-item {
+  background-color: transparent;
+}
+
+.indi-app .indi-user-settings-page-profile .indi-user-settings-page-card-inner:hover,
+.indi-app .indi-user-settings-page-card-inner-item.indi-user-settings-page-reset-password:hover,
+.indi-app .indi-user-settings-page-card-inner-item:hover {
+  background-color: #23286236;
+}
+
+.indi-app .indi-user-settings-page-change-email-label {
+  font-weight: 500;
+}
+
+.indi-app .indi-user-settings-page-change-email-value {
+  font-size: 12px;
+}
+
+.indi-app .indi-user-settings-page-display-name {
+  margin-left: 7px;
+}
+
+.indi-modal-edit-user-profile-resetpassword-section:not(.indi-modal-edit-user-profile-resetpassword),
+.indi-modal-edit-user-profile-profile-section:not(.indi-modal-edit-user-profile-profile),
+.indi-modal-edit-user-profile-email-section:not(.indi-modal-edit-user-profile-email) {
+  display: none;
+}
+
+.indi-app .indi-modal-edit-user-profile-floating-inputs {
+  margin-bottom: 20px;
+}
+
+.indi-app .indi-modal-edit-user-profile-header-title {
+  color: #2f4694;
+}
+
+.indi-app .indi-user-profile-settings-error-msg {
+  left: 12px;
+  position: absolute;
+  bottom: 20px;
+  max-width: 270px;
+  color: red;
+}
+
+.indi-app .indi-card-upload-picture-file-input-wrapper {
+  min-width: 100px;
+  min-height: 100px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  max-width: 100px;
+  max-height: 100px;
+  overflow: hidden;
+}
+
+.indi-app .indi-card-upload-picture-file-input-wrapper:hover {
+  background-image: url("../img/Upload.png");
+  background-color: rgb(255, 255, 255, 0.5);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.indi-app .indi-card-upload-picture-img-input {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  opacity: 1;
+  position: absolute;
+  height: 100px;
+  border: 1px solid #232862;
+  width: 100px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.indi-app .indi-card-upload-picture-file-input-wrapper:hover .indi-card-upload-picture-img-input {
+  opacity: 0.5;
+}
+
+.indi-app .modal-header .modal-title.h4 {
+  color: #2f4694;
+  font-size: 18px;
 }

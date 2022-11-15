@@ -20,11 +20,10 @@ const REST_API = {
   LOGOUT: REST_API_PREFIX + "/logout",
   USER_PROFILE: REST_API_PREFIX + "/users/",
   BADGES: REST_API_PREFIX + "/badges/",
-  NEW_BADGES: REST_API_PREFIX + "/newbadges/",
   CARDS: REST_API_PREFIX + "/cards",
   TEMPLATES: REST_API_PREFIX + "/templates",
   USER_CARD: REST_API_PREFIX + "/usercards",
-  ADDRESSES: REST_API_PREFIX + "/addresses",
+  ADDRESSES: REST_API_PREFIX + "/addresses/",
 };
 
 const APP_URL_PREFIX = "";
@@ -33,6 +32,7 @@ const APP_URLS = {
   LOGIN_PAGE: APP_URL_PREFIX + "login",
   LANDING_PAGE: APP_URL_PREFIX + "/",
   TEMPLATES_PAGE: APP_URL_PREFIX + "/templates",
+  ADD_TEMPLATE_PAGE: APP_URL_PREFIX + "/templates/addtemplate",
   CARDS_PAGE: APP_URL_PREFIX + "/cards",
   ADD_CARD_PAGE: APP_URL_PREFIX + "/cards/addcard",
   EDIT_CARD_PAGE: APP_URL_PREFIX + "/cards/editcard/:cardid",
@@ -40,7 +40,6 @@ const APP_URLS = {
   CARD_EXTERNAL_PAGE: APP_URL_PREFIX + "/cardextdetails/:cardid",
   ADDRESS_PAGE: APP_URL_PREFIX + "/addresses",
   BADGES_PAGE: APP_URL_PREFIX + "/badges",
-  NEW_BADGES_PAGE: APP_URL_PREFIX + "/newbadges",
   ADD_BADGE_PAGE: APP_URL_PREFIX + "/addbadgepage",
   USERS_PAGE: APP_URL_PREFIX + "/users",
   EMAIL_SIGNAURE_PAGE: APP_URL_PREFIX + "/emailsignature",
@@ -53,7 +52,6 @@ const NAV_ITEMS_KEYS = [
   "users",
   "addresses",
   "badges",
-  "newbadges",
   "cards",
   "emailsignature",
   "contacts",
@@ -79,11 +77,6 @@ const NAV_ITEMS_VALUES = {
   badges: {
     title: "Badges",
     url: APP_URLS.BADGES_PAGE,
-    enabled: false,
-  },
-  newbadges: {
-    title: "New Badges",
-    url: APP_URLS.NEW_BADGES_PAGE,
     enabled: false,
   },
   cards: {
@@ -221,7 +214,37 @@ const getAllUsers = () => {
   return myPromise;
 };
 
-const getAllAddresses = () => {
+const addUser = (userData) => {
+  let formData = { ...userData };
+  delete formData.id;
+  let url = REST_API.USER_PROFILE;
+
+  return axios.post(url, formData);
+};
+
+const editUser = (userData, userId) => {
+  let formData = { ...userData };
+  delete formData.id;
+  let url = REST_API.USER_PROFILE + userId;
+
+  return axios.patch(url, formData);
+};
+
+const deleteUser = (userId) => {
+  let url = REST_API.USER_PROFILE + userId;
+  return axios.delete(url);
+};
+
+const deleteUsers = (usersArray) => {
+  let promises = [];
+  usersArray.forEach((badge) => {
+    promises.push(deleteUser(badge));
+  });
+
+  return Promise.all(usersArray);
+};
+
+const getAddresses = () => {
   const myPromise = new Promise((resolve, reject) => {
     let session = getSession();
     if (isObjectEmpty(session).length === 0) {
@@ -254,6 +277,49 @@ const getAllAddresses = () => {
   return myPromise;
 };
 
+const deleteAddress = (addressUID) => {
+  let url = REST_API.ADDRESSES;
+  return axios.delete(url + addressUID);
+};
+
+const deleteAddresses = (addressesArray) => {
+  let promises = [];
+  addressesArray.forEach((address) => {
+    promises.push(deleteAddress(address));
+  });
+
+  return Promise.all(addressesArray);
+};
+
+const addAddress = (addressData) => {
+  let formData = { ...addressData };
+  delete formData.id;
+  let url = REST_API.ADDRESSES;
+
+  return axios.post(url, formData);
+};
+
+const addBadge = (badgeData) => {
+  let formData = { ...badgeData };
+  delete formData.id;
+  let url = REST_API.BADGES;
+
+  return axios.post(url, formData);
+};
+
+const deleteBadge = (badgeUID) => {
+  let url = REST_API.BADGES;
+  return axios.delete(url + badgeUID);
+};
+
+const deleteBadges = (badgesArray) => {
+  let promises = [];
+  badgesArray.forEach((badge) => {
+    promises.push(deleteBadge(badge));
+  });
+
+  return Promise.all(badgesArray);
+};
 
 const getBadges = () => {
   const myPromise = new Promise((resolve, reject) => {
@@ -268,48 +334,6 @@ const getBadges = () => {
     let token = getToken();
     if (token) {
       let getUrl = REST_API.BADGES;
-      axios
-        .get(getUrl, {
-          headers: {
-            Authorization: `${token}`,
-          },
-        })
-        .then((res) => {
-          resolve(res);
-        });
-    } else {
-      reject({
-        redirect: true,
-        message: "No token available till now...",
-      });
-    }
-  });
-
-  return myPromise;
-};
-
-const addNewBadge = (badgeData) => {
-  let formData = { ...badgeData };
-  delete formData.id;
-  let url = REST_API.NEW_BADGES;
-
-  return axios.post(url, formData);
-};
-
-
-const getNewBadges = () => {
-  const myPromise = new Promise((resolve, reject) => {
-    let session = getSession();
-    if (isObjectEmpty(session).length === 0) {
-      reject({
-        redirect: true,
-        message: "No session establised till now...",
-      });
-    }
-
-    let token = getToken();
-    if (token) {
-      let getUrl = REST_API.NEW_BADGES;
       axios
         .get(getUrl, {
           headers: {
@@ -362,6 +386,14 @@ const getUserProfile = () => {
   });
 
   return myPromise;
+};
+
+const addNewTemplate = (templateData) => {
+  let formData = { ...templateData };
+  delete formData.id;
+  let url = REST_API.TEMPLATES;
+
+  return axios.post(url, formData);
 };
 
 const getTemplates = () => {
@@ -597,6 +629,16 @@ const getUniqueSetOfArray = (arr) => {
   return [...new Set(arr)];
 };
 
+const fileToDataUri = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      resolve(event.target.result);
+    };
+    reader.readAsDataURL(file);
+  });
+};
+
 const Utils = {
   REST_API,
   APP_URLS,
@@ -605,13 +647,19 @@ const Utils = {
   userSessionExists,
   getUserProfile,
   getAllUsers,
-  getAllAddresses,
+  addUser,
+  editUser,
+  deleteUsers,
+  deleteAddresses,
+  getAddresses,
+  addAddress,
   getBadges,
-  getNewBadges,
-  addNewBadge,
+  addBadge,
+  deleteBadges,
   getUserId,
   getCardDetails,
   deleteCard,
+  addNewTemplate,
   getTemplates,
   getTemplateDetails,
   executeLoginRESTAPI,
@@ -623,6 +671,7 @@ const Utils = {
   createSession,
   deleteSession,
   isObjectEmpty,
+  fileToDataUri,
 };
 
 export default Utils;

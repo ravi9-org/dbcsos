@@ -9,7 +9,7 @@ const TextInput = (props) => {
   let inputEle = useRef(null);
   let value = fieldData;
   let isRequired = schema?.required || false;
-  let isReadOnly = schema?.readonly || false;
+  let isReadOnly = schema?.constant || schema?.readonly || false;
   const onChangeInput = (e) => {};
   return (
     <input

@@ -12,7 +12,8 @@ const UserProfileMenu = () => {
     useContext(ContextComponent);
   let [userFirstName, setUserFirstName] = useState("");
   let [userDisplayName, setUserDisplayName] = useState("");
-  let [setUserImage] = useState("");
+  let [userImage, setUserImage] = useState(defaultUserImage);
+  let [canRender, setCanRender] = useState(false);
 
   const success = (res) => {
     setUserData(res.data || {});
@@ -29,10 +30,12 @@ const UserProfileMenu = () => {
   }, []);
 
   useEffect(() => {
-    setUserFirstName(userData.firstName);
-    if (userData.image) {
-      setUserImage(userData.image);
-    } else {
+    if (!Utils.isObjectEmpty(userData)) {
+      setUserFirstName(userData.firstName);
+      if (userData?.picture) {
+        setUserImage(userData?.picture);
+      }
+      setCanRender(true);
     }
   }, [userData]);
 
@@ -51,37 +54,43 @@ const UserProfileMenu = () => {
   };
 
   return (
-    <div className="indi-user-profile-wrapper">
-      <Dropdown align="end">
-        <Dropdown.Toggle
-          id="dropdown-basic"
-          type="link"
-          className="indi-header-userprofile-btn"
-        >
-          <img
-            className="indi-header-profile-image"
-            src={defaultUserImage}
-            alt={userDisplayName}
-            title={userDisplayName}
-          />
-        </Dropdown.Toggle>
+    <>
+      {canRender && (
+        <div className="indi-user-profile-wrapper">
+          <Dropdown align="end">
+            <Dropdown.Toggle
+              id="dropdown-basic"
+              type="link"
+              className="indi-header-userprofile-btn"
+            >
+              <img
+                className="indi-header-profile-image"
+                src={userImage}
+                alt={userDisplayName}
+                title={userDisplayName}
+              />
+            </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-          <Dropdown.Item
-            key="editProfile"
-            href="/settings"
-            onClick={doEditProfile}
-          >
-            Edit profile
-          </Dropdown.Item>
-          <Dropdown.Item key="logOut" href="/logout" onClick={doLogout}>
-            Log out
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+            <Dropdown.Menu>
+              <Dropdown.Item
+                key="editProfile"
+                href="/settings"
+                onClick={doEditProfile}
+              >
+                Edit profile
+              </Dropdown.Item>
+              <Dropdown.Item key="logOut" href="/logout" onClick={doLogout}>
+                Log out
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
 
-      <div className="indi-header-user-profile-firstname">{userFirstName}</div>
-    </div>
+          <div className="indi-header-user-profile-firstname">
+            {userFirstName}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -4,18 +4,18 @@ import { Routes, Route } from "react-router-dom";
 import ContextComponent from "../../AppContext";
 import CardList from "./cards/CardsList";
 import TemplateList from "./templates/TemplatesList";
+import AddTemplate from "./templates/AddTemplate";
 import Utils from "../../Utils";
 import Addresses from "../../pages/Addresses";
 import BadgesTable from "./badges/BadgesTable";
-import NewBadgesTable from "./badges/NewBadgesTable";
 import AddBadgePage from "./badges/AddBadgePage";
 import AddressesTable from "./addresses/AddressesTable";
 import UsersTable from "./users/UsersTable";
 import EmailSignature from "../../pages/signatures/EmailSignature";
 import Contacts from "../../pages/Contacts";
-import Settings from "../../pages/Settings";
+import Settings from "./users/Settings";
 import AddCard from "./cards/AddCard";
-import EditCard from "./cards/EditCard";
+import EditCard from "./cards/EditCardPage";
 import CardDetailsPage from "./cards/CardDetailsPage";
 
 const ContentArea = () => {
@@ -41,6 +41,12 @@ const ContentArea = () => {
           path={Utils.APP_URLS.TEMPLATES_PAGE}
           exact
           element={<TemplateList />}
+        ></Route>
+
+        <Route
+          path={Utils.APP_URLS.ADD_TEMPLATE_PAGE}
+          exact
+          element={<AddTemplate />}
         ></Route>
 
         {!isAdmin && (
@@ -84,12 +90,6 @@ const ContentArea = () => {
           path={Utils.APP_URLS.BADGES_PAGE}
           exact
           element={<BadgesTable />}
-        ></Route>
-        
-        <Route
-          path={Utils.APP_URLS.NEW_BADGES_PAGE}
-          exact
-          element={<NewBadgesTable />}
         ></Route>
         
         <Route
