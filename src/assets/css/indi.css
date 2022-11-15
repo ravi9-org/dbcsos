@@ -462,9 +462,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-add-card-wrapper,
 .indi-app .indi-content-area-wrapper,
 .indi-app .indi-cards-collection-wrapper {
-  /* border: 1px dotted #000; */
   height: calc(100% - 32px);
-  /* padding: 29px 0; */
   padding: 0;
   overflow-x: overlay;
 }
@@ -1094,6 +1092,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-data-table-wrapper {
   padding: 16px;
+  overflow: overlay;
+  height:  calc(100% - 32px);
 }
 
 .indi-app .indi-add-template-form .indi-data-table-wrapper.indi-text-btn-row {
@@ -1139,8 +1139,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   color: #232862;
 }
 
-.indi-app .indi-add-template-form .indi-add-card-title{
-  height: 40px;
+.indi-app .indi-add-template-form .indi-add-card-title {
+  height: 46px;
 }
 
 .indi-app .indi-add-page-footer-btn-wrapper.float-right {
