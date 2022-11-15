@@ -95,6 +95,7 @@ const AddCard = () => {
                             className={`text-center indi-template-badge-select-${template.id}`}
                             templateid={template?.id}
                             id={template?.id}
+                            checked={index === 0}
                             selected={template}
                             onChange={changeSelectedTemplate}
                           />
