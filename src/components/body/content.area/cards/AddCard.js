@@ -19,6 +19,7 @@ const AddCard = () => {
 
   const success = (res) => {
     setTemplates([...res.data]);
+    setSelectedTemplate(res.data[0]);
     setCanRender(true);
   };
 
@@ -95,7 +96,7 @@ const AddCard = () => {
                             className={`text-center indi-template-badge-select-${template.id}`}
                             templateid={template?.id}
                             id={template?.id}
-                            checked={index === 0}
+                            defaultChecked={ index === 0}
                             selected={template}
                             onChange={changeSelectedTemplate}
                           />
