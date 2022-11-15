@@ -15,7 +15,7 @@ const AddUserPage = ({ props }) => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [department, setDepartment] = useState("");
-  let [organization, setOrganization] = useState("");
+  let [brand, setBrand] = useState("");
   let [title, setTitle] = useState("");
   let [isAdmin, setIsAdmin] = useState(false);
   let [picture, setPicture] = useState("");
@@ -34,7 +34,7 @@ const AddUserPage = ({ props }) => {
         res.data.user.lastName,
         res.data.user.email,
         res.data.user.department,
-        res.data.user.organization,
+        res.data.user.brand,
         res.data.user.title,
         res.data.user.isAdmin/*,
         res.data.user.picture,*/
@@ -53,7 +53,7 @@ const AddUserPage = ({ props }) => {
       email,
       password,
       department,
-      organization,
+      brand,
       title,
       isAdmin,
       picture,
@@ -91,9 +91,9 @@ const AddUserPage = ({ props }) => {
     setDepartment(value);
   };
 
-  const organizationHandler = (e) => {
+  const brandHandler = (e) => {
     let value = e?.currentTarget?.value || "";
-    setOrganization(value);
+    setBrand(value);
   };
 
   const titleHandler = (e) => {
@@ -199,14 +199,14 @@ const AddUserPage = ({ props }) => {
 
                 <div className="indi-add-form-item d-flex flex-column">
                   <div className="indi-add-form-item-input row">
-                    <FloatingLabel label="Organization">
+                    <FloatingLabel label="Brand">
                       <Form.Control
                         type="text"
                         className="indi-input-field"
-                        id="organization"
-                        placeholder="Enter organization"
+                        id="brand"
+                        placeholder="Enter brand"
                         autoComplete="off"
-                        onChange={organizationHandler}
+                        onChange={brandHandler}
                       />
                     </FloatingLabel>
                   </div>

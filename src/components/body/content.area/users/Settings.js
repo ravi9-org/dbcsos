@@ -73,7 +73,7 @@ const Settings = () => {
   let obj = {
     email: ["email"],
     resetpassword: ["password", "confirmPassword"],
-    profile: ["firstName", "lastName", "title", "department", "organization", "picture"],
+    profile: ["firstName", "lastName", "title", "department", "brand", "picture"],
   };
 
   let [errorMessage, setErrorMessage] = useState("");
@@ -265,16 +265,16 @@ const Settings = () => {
               />
             </FloatingLabel>
             <FloatingLabel
-              label="Organization"
+              label="Brand"
               className="indi-modal-edit-user-profile-floating-inputs"
             >
               <Form.Control
                 type="text"
                 className="indi-input-field"
-                id="organization"
-                placeholder="Enter organization"
+                id="brand"
+                placeholder="Enter brand"
                 autoComplete="off"
-                defaultValue={userData.organization}
+                defaultValue={userData.brand}
                 onChange={profileFieldChangeHandler}
               />
             </FloatingLabel>

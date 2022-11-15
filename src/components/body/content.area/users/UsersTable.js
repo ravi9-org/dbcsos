@@ -24,7 +24,7 @@ const UsersTable = () => {
     "lastName",
     "email",
     "department",
-    "organization",
+    "brand",
     "title",
     "isAdmin",
   ]);
@@ -58,9 +58,9 @@ const UsersTable = () => {
       type: "text",
       title: "Department",
     },
-    organization: {
+    brand: {
       type: "text",
-      title: "Organization",
+      title: "Brand",
     },
     title: {
       type: "text",
