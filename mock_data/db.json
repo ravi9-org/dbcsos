@@ -5,6 +5,7 @@
       "password": "$2a$10$xUz9UXboDu6JTWEoYksWr.cjYs3ti1S5gSJXr760AzF5eW39MDkgm",
       "firstName": "Lisa",
       "lastName": "Simson",
+      "gender": "Female",
       "brand": "CMS",
       "department": "Sales",
       "title": "Sr. Manager",
@@ -21,6 +22,7 @@
       "password": "$2a$10$Uoairkb2bNJCEDE24EKDY.McPQNn6QKQdUTt1qBMF1Z0NaqYII4jC",
       "firstName": "Jhon",
       "lastName": "Williams",
+      "gender": "Male",
       "brand": "Edge",
       "department": "Engineering",
       "title": "Director",
@@ -36,6 +38,7 @@
       "password": "$2a$10$45zZziEkGsA8CEIuqRxX7OTwbfQweAXgqcGw3oco/WRDY2DI4LLTq",
       "firstName": "Admin",
       "lastName": "",
+      "gender": "Male",
       "title": "Administrator",
       "brand": "CMS",
       "department": "Admin",
@@ -52,6 +55,7 @@
       "password": "$2a$10$kL.V2HizoLHnDWc7OX5peunspveoDhDCsuS.e8rLMqFxQHLVmYeBm",
       "firstName": "Laxman",
       "lastName": "Ponnaganti",
+      "gender": "Male",
       "title": "Project lead",
       "brand": "CMS",
       "department": "Engineering",
@@ -67,6 +71,7 @@
       "password": "$2a$10$Z6Kh2dP0rwAgb1EjYs7Av.ToiD0RB6LVWhWrR6mMHG8wnu71fad7e",
       "firstName": "Sri",
       "lastName": "Rama",
+      "gender": "Male",
       "title": "CEO",
       "isAdmin": false,
       "brand": "Edge",
@@ -76,6 +81,19 @@
         7
       ],
       "picture": "data:image/jpeg;base64,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"
+    },
+    {
+      "email": "skaty.billy@edo.com",
+      "password": "$2a$10$CZs8Fn4luZKgXSwT.LkXROZStDFjxzjd3zHxzBeXmsTH8IesRtxYm",
+      "firstName": "Skaty",
+      "lastName": "Billy",
+      "gender": "Them",
+      "department": "Social",
+      "brand": "Edo",
+      "title": "Social activist",
+      "isAdmin": false,
+      "picture": "",
+      "id": 6
     }
   ],
   "templates": [

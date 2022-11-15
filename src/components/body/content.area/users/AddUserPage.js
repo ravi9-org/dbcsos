@@ -12,6 +12,7 @@ const AddUserPage = ({ props }) => {
   let setTableData = props?.setTableData || (() => {});
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
+  let [gender, setGender] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [department, setDepartment] = useState("");
@@ -32,12 +33,13 @@ const AddUserPage = ({ props }) => {
         false,
         res.data.user.firstName,
         res.data.user.lastName,
+        res.data.user.gender,
         res.data.user.email,
         res.data.user.department,
         res.data.user.brand,
         res.data.user.title,
-        res.data.user.isAdmin/*,
-        res.data.user.picture,*/
+        res.data.user.isAdmin /*,
+        res.data.user.picture,*/,
       ];
       let tempTableData = [...tableData];
       tempTableData.push(newRecord);
@@ -50,6 +52,7 @@ const AddUserPage = ({ props }) => {
     let formData = {
       firstName,
       lastName,
+      gender,
       email,
       password,
       department,
@@ -74,6 +77,11 @@ const AddUserPage = ({ props }) => {
   const lastNameHandler = (e) => {
     let value = e?.currentTarget?.value || "";
     setLastName(value);
+  };
+
+  const genderHandler = (e) => {
+    let value = e?.currentTarget?.value || "";
+    setGender(value);
   };
 
   const emailHandler = (e) => {
@@ -148,6 +156,24 @@ const AddUserPage = ({ props }) => {
                         autoComplete="off"
                         onChange={lastNameHandler}
                       />
+                    </FloatingLabel>
+                  </div>
+                </div>
+
+                <div className="indi-add-form-item d-flex flex-column">
+                  <div className="indi-add-form-item-input row">
+                    <FloatingLabel label="Gender">
+                      <Form.Select
+                        defaultValue="Male"
+                        id="gender"
+                        onChange={genderHandler}
+                        size="sm"
+                        className="indi-input-field indi-input-select-field"
+                      >
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Them">Them</option>
+                      </Form.Select>
                     </FloatingLabel>
                   </div>
                 </div>
