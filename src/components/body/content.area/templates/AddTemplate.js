@@ -26,7 +26,7 @@ const AddTemplate = () => {
     lastName: false,
     email: false,
     department: false,
-    organization: false,
+    brand: false,
     title: false,
   });
   const updateUserField = (e) => {
@@ -417,16 +417,16 @@ const AddTemplate = () => {
                     </tr>
 
                     <tr className="indi-data-table-tr">
-                      <td className="indi-data-table-td-badge-organization">
+                      <td className="indi-data-table-td-badge-brand">
                         <Form.Check
                           type="checkbox"
                           onChange={updateUserField}
-                          id="organization"
+                          id="brand"
                         />
                       </td>
 
                       <td className="indi-data-table-td-badge-name">
-                        Organization
+                        Brand
                       </td>
 
                       {/* <td className="indi-data-table-td-badge-logo">Shuffle</td> */}

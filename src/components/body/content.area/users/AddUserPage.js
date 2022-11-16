@@ -12,10 +12,11 @@ const AddUserPage = ({ props }) => {
   let setTableData = props?.setTableData || (() => {});
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
+  let [gender, setGender] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [department, setDepartment] = useState("");
-  let [organization, setOrganization] = useState("");
+  let [brand, setBrand] = useState("");
   let [title, setTitle] = useState("");
   let [isAdmin, setIsAdmin] = useState(false);
   let [picture, setPicture] = useState("");
@@ -32,12 +33,13 @@ const AddUserPage = ({ props }) => {
         false,
         res.data.user.firstName,
         res.data.user.lastName,
+        res.data.user.gender,
         res.data.user.email,
         res.data.user.department,
-        res.data.user.organization,
+        res.data.user.brand,
         res.data.user.title,
-        res.data.user.isAdmin/*,
-        res.data.user.picture,*/
+        res.data.user.isAdmin /*,
+        res.data.user.picture,*/,
       ];
       let tempTableData = [...tableData];
       tempTableData.push(newRecord);
@@ -50,10 +52,11 @@ const AddUserPage = ({ props }) => {
     let formData = {
       firstName,
       lastName,
+      gender,
       email,
       password,
       department,
-      organization,
+      brand,
       title,
       isAdmin,
       picture,
@@ -76,6 +79,11 @@ const AddUserPage = ({ props }) => {
     setLastName(value);
   };
 
+  const genderHandler = (e) => {
+    let value = e?.currentTarget?.value || "";
+    setGender(value);
+  };
+
   const emailHandler = (e) => {
     let value = e?.currentTarget?.value || "";
     setEmail(value);
@@ -91,9 +99,9 @@ const AddUserPage = ({ props }) => {
     setDepartment(value);
   };
 
-  const organizationHandler = (e) => {
+  const brandHandler = (e) => {
     let value = e?.currentTarget?.value || "";
-    setOrganization(value);
+    setBrand(value);
   };
 
   const titleHandler = (e) => {
@@ -154,6 +162,24 @@ const AddUserPage = ({ props }) => {
 
                 <div className="indi-add-form-item d-flex flex-column">
                   <div className="indi-add-form-item-input row">
+                    <FloatingLabel label="Gender">
+                      <Form.Select
+                        defaultValue="Male"
+                        id="gender"
+                        onChange={genderHandler}
+                        size="sm"
+                        className="indi-input-field indi-input-select-field"
+                      >
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Them">Them</option>
+                      </Form.Select>
+                    </FloatingLabel>
+                  </div>
+                </div>
+
+                <div className="indi-add-form-item d-flex flex-column">
+                  <div className="indi-add-form-item-input row">
                     <FloatingLabel label="E-mail">
                       <Form.Control
                         type="text"
@@ -199,14 +225,14 @@ const AddUserPage = ({ props }) => {
 
                 <div className="indi-add-form-item d-flex flex-column">
                   <div className="indi-add-form-item-input row">
-                    <FloatingLabel label="Organization">
+                    <FloatingLabel label="Brand">
                       <Form.Control
                         type="text"
                         className="indi-input-field"
-                        id="organization"
-                        placeholder="Enter organization"
+                        id="brand"
+                        placeholder="Enter brand"
                         autoComplete="off"
-                        onChange={organizationHandler}
+                        onChange={brandHandler}
                       />
                     </FloatingLabel>
                   </div>

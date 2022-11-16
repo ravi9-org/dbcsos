@@ -22,9 +22,10 @@ const UsersTable = () => {
     "select",
     "firstName",
     "lastName",
+    "gender",
     "email",
     "department",
-    "organization",
+    "brand",
     "title",
     "isAdmin",
   ]);
@@ -49,6 +50,10 @@ const UsersTable = () => {
       sort: true,
       title: "Last name",
     },
+    gender: {
+      type: "text",
+      title: "Gender",
+    },
     email: {
       type: "text",
       search: true,
@@ -58,9 +63,9 @@ const UsersTable = () => {
       type: "text",
       title: "Department",
     },
-    organization: {
+    brand: {
       type: "text",
-      title: "Organization",
+      title: "Brand",
     },
     title: {
       type: "text",
