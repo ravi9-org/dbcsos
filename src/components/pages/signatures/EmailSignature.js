@@ -2,6 +2,10 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import {Button} from "react-bootstrap";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import Col from 'react-bootstrap/Col';
+import Nav from 'react-bootstrap/Nav';
+import Row from 'react-bootstrap/Row';
+import Tab from 'react-bootstrap/Tab';
 
 import ContextComponent from "../../AppContext";
 import CardMiniItem from "../../body/content.area/CardMiniItem";
@@ -131,6 +135,53 @@ const EmailSignature = () => {
               />
             </div>
           )}
+          <div className="indi-copy-signature-wrapper d-flex">
+            <Tab.Container id="left-tabs-example" defaultActiveKey="gmail">
+              <Row>
+                <Col sm={3}>
+                  <Nav variant="pills" className="flex-column">
+                    <Nav.Item>
+                      <Nav.Link eventKey="gmail">Gmail</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="olweb">Outlook Web</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="olwindows">Outlook Windows</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="olmac">Outlook Mac</Nav.Link>
+                    </Nav.Item>
+                  </Nav>
+                </Col>
+                <Col sm={9}>
+                  <Tab.Content>
+                    <Tab.Pane eventKey="gmail">
+                      <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                          laboris nisi ut aliquip ex ea commodo consequat. </div>
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="olweb">
+                      <div>Duis aute irure dolor in reprehenderit in voluptate 
+                          velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                           sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                    </Tab.Pane> 
+                    <Tab.Pane eventKey="olwindows">
+                      <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                         ut labore et dolore magna aliqua.</div>
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="olmac">
+                      <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                          laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
+                          velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                           sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                    </Tab.Pane>
+                  </Tab.Content>
+                </Col>
+              </Row>
+            </Tab.Container>
+          </div>
         </div>
       )}
     </div>

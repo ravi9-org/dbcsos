@@ -774,6 +774,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   float: right;
 }
 
+.indi-app .indi-copy-signature-wrapper,
 .indi-app .indi-signature-item-wrapper {
   justify-content: center;
   padding: 16px;
