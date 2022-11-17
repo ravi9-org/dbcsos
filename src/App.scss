@@ -7,12 +7,14 @@
 // 2. Include any default variable overrides here
 $body-bg: #f4f;
 $body-color: #0f0;
+$primary: #304697;
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "bootstrap/scss/variables";
 
 $body-bg: #f4f;
 $body-color: #0f0;
+$primary: #304697;
 
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/maps";
@@ -86,6 +88,10 @@ $body-color: #0f0;
   --bs-btn-disabled-bg: none;
   --bs-btn-disabled-border-color: none;
 }
+
+$theme-colors: (
+  "primary": #304697
+);
 
 .btn-primary.indi-header-userprofile-btn.dropdown-toggle::after {
   display: none;
