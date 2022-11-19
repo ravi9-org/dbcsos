@@ -141,16 +141,28 @@ const EmailSignature = () => {
                 <Col sm={3}>
                   <Nav variant="pills" className="flex-column">
                     <Nav.Item>
-                      <Nav.Link eventKey="gmail">Gmail</Nav.Link>
+                      <Nav.Link eventKey="gmail">
+                        <div className="indi-email-sign-tab-panel-heading">GMAIL</div>
+                        <div className="indi-email-sign-tab-panel-sub-heading">Web</div>
+                      </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="olweb">Outlook Web</Nav.Link>
+                      <Nav.Link eventKey="olweb">
+                        <div className="indi-email-sign-tab-panel-heading">OUTLOOK</div>
+                        <div className="indi-email-sign-tab-panel-sub-heading">Web</div>
+                      </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="olwindows">Outlook Windows</Nav.Link>
+                      <Nav.Link eventKey="olwindows">
+                        <div className="indi-email-sign-tab-panel-heading">OUTLOOK</div>
+                        <div className="indi-email-sign-tab-panel-sub-heading">Windows</div>
+                      </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="olmac">Outlook Mac</Nav.Link>
+                      <Nav.Link eventKey="olmac">
+                        <div className="indi-email-sign-tab-panel-heading">OUTLOOK</div>
+                        <div className="indi-email-sign-tab-panel-sub-heading">Mac</div>
+                      </Nav.Link>
                     </Nav.Item>
                   </Nav>
                 </Col>
@@ -236,12 +248,14 @@ const EmailSignature = () => {
                         For more detailed instructions:
                       </div>
                       <div className="indi-email-sign-help-link">
-                        <a href="https://support.google.com/mail/answer/8395" rel="noreferrer" target="_blank">
-                        https://support.google.com/mail/answer/8395
+                        <a
+                          href="https://support.google.com/mail/answer/8395"
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          https://support.google.com/mail/answer/8395
                         </a>
                       </div>
-
-
                     </Tab.Pane>
                     <Tab.Pane eventKey="olweb">
                       <div className="indi-email-sign-generator-right-side">
@@ -263,9 +277,7 @@ const EmailSignature = () => {
                             02
                           </div>
                           <div className="indi-email-sign-generate-body">
-                            <div>
-                            Sign in to Outlook.com
-                            </div>
+                            <div>Sign in to Outlook.com</div>
                           </div>
                         </div>
                         <div className="indi-email-sign-generate-item d-flex d-flex-row">
@@ -275,7 +287,7 @@ const EmailSignature = () => {
                           </div>
                           <div className="indi-email-sign-generate-body">
                             <div>
-                            Go to Settings, then "View all Outlook Settings"
+                              Go to Settings, then "View all Outlook Settings"
                             </div>
                           </div>
                         </div>
@@ -299,18 +311,18 @@ const EmailSignature = () => {
                         </div>
                       </div>
 
-                      
-
                       <div className="indi-email-sign-help-heading">
-                      For more detailed instructions, see:
+                        For more detailed instructions, see:
                       </div>
                       <div className="indi-email-sign-help-link">
-                        <a href="https://support.microsoft.com/en-us/office/create-and-add-an-email-signature-in-outlook-com-776d9006-abdf-444e-b5b7-a61821dff034" rel="noreferrer" target="_blank">
-                        https://support.microsoft.com/en-us/office/create-and-add-an-email-signature-in-outlook-com-776d9006-abdf-444e-b5b7-a61821dff034
+                        <a
+                          href="https://support.microsoft.com/en-us/office/create-and-add-an-email-signature-in-outlook-com-776d9006-abdf-444e-b5b7-a61821dff034"
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          https://support.microsoft.com/en-us/office/create-and-add-an-email-signature-in-outlook-com-776d9006-abdf-444e-b5b7-a61821dff034
                         </a>
                       </div>
-
-
                     </Tab.Pane>
                     <Tab.Pane eventKey="olwindows">
                       <div className="indi-email-sign-generator-right-side">
@@ -333,7 +345,8 @@ const EmailSignature = () => {
                           </div>
                           <div className="indi-email-sign-generate-body">
                             <div>
-                            In Outlook for Windows, click "New Email" to open a new email message.
+                              In Outlook for Windows, click "New Email" to open
+                              a new email message.
                             </div>
                           </div>
                         </div>
@@ -344,7 +357,8 @@ const EmailSignature = () => {
                           </div>
                           <div className="indi-email-sign-generate-body">
                             <div>
-                            On the Message menu, select Signature {">"} Signatures.
+                              On the Message menu, select Signature {">"}{" "}
+                              Signatures.
                             </div>
                           </div>
                         </div>
@@ -354,7 +368,11 @@ const EmailSignature = () => {
                             04
                           </div>
                           <div className="indi-email-sign-generate-body">
-                            <div>Under Select signature to edit, choose New. In the New Signature dialog box, type in a name for the signature.</div>
+                            <div>
+                              Under Select signature to edit, choose New. In the
+                              New Signature dialog box, type in a name for the
+                              signature.
+                            </div>
                           </div>
                         </div>
                         <div className="indi-email-sign-generate-item d-flex d-flex-row">
@@ -363,7 +381,9 @@ const EmailSignature = () => {
                             05
                           </div>
                           <div className="indi-email-sign-generate-body">
-                            <div>Under Edit signature, paste your signature.</div>
+                            <div>
+                              Under Edit signature, paste your signature.
+                            </div>
                           </div>
                         </div>
                         <div className="indi-email-sign-generate-item d-flex d-flex-row">
@@ -372,17 +392,26 @@ const EmailSignature = () => {
                             06
                           </div>
                           <div className="indi-email-sign-generate-body">
-                            <div>Under Choose default signature, select the email account you want to associate with your signature and if you want it to be added to all new messages by default.</div>
+                            <div>
+                              Under Choose default signature, select the email
+                              account you want to associate with your signature
+                              and if you want it to be added to all new messages
+                              by default.
+                            </div>
                           </div>
                         </div>
                       </div>
 
                       <div className="indi-email-sign-help-heading">
-                      For more detailed instructions, see:
+                        For more detailed instructions, see:
                       </div>
                       <div className="indi-email-sign-help-link">
-                        <a href="https://support.microsoft.com/en-us/office/create-an-email-signature-31fb24f9-e698-4789-b92a-f0e777f774ca" rel="noreferrer" target="_blank">
-                        https://support.microsoft.com/en-us/office/create-an-email-signature-31fb24f9-e698-4789-b92a-f0e777f774ca
+                        <a
+                          href="https://support.microsoft.com/en-us/office/create-an-email-signature-31fb24f9-e698-4789-b92a-f0e777f774ca"
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          https://support.microsoft.com/en-us/office/create-an-email-signature-31fb24f9-e698-4789-b92a-f0e777f774ca
                         </a>
                       </div>
                     </Tab.Pane>
@@ -406,9 +435,7 @@ const EmailSignature = () => {
                             02
                           </div>
                           <div className="indi-email-sign-generate-body">
-                            <div>
-                            In Outlook for Mac, click New Email.
-                            </div>
+                            <div>In Outlook for Mac, click New Email.</div>
                           </div>
                         </div>
                         <div className="indi-email-sign-generate-item d-flex d-flex-row">
@@ -417,9 +444,7 @@ const EmailSignature = () => {
                             03
                           </div>
                           <div className="indi-email-sign-generate-body">
-                            <div>
-                            Click Signature {">"} Signatures.
-                            </div>
+                            <div>Click Signature {">"} Signatures.</div>
                           </div>
                         </div>
                         <div className="indi-email-sign-generate-item d-flex d-flex-row">
@@ -446,17 +471,23 @@ const EmailSignature = () => {
                             06
                           </div>
                           <div className="indi-email-sign-generate-body">
-                            <div>Under New Messages, select your signature.</div>
+                            <div>
+                              Under New Messages, select your signature.
+                            </div>
                           </div>
                         </div>
                       </div>
 
                       <div className="indi-email-sign-help-heading">
-                      For more detailed instructions, see:
+                        For more detailed instructions, see:
                       </div>
                       <div className="indi-email-sign-help-link">
-                        <a href="https://support.microsoft.com/en-us/office/create-an-email-signature-in-outlook-for-mac-637c3b77-3d2a-4610-9cea-e3ad622aa54e" rel="noreferrer" target="_blank">
-                        https://support.microsoft.com/en-us/office/create-an-email-signature-in-outlook-for-mac-637c3b77-3d2a-4610-9cea-e3ad622aa54e
+                        <a
+                          href="https://support.microsoft.com/en-us/office/create-an-email-signature-in-outlook-for-mac-637c3b77-3d2a-4610-9cea-e3ad622aa54e"
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          https://support.microsoft.com/en-us/office/create-an-email-signature-in-outlook-for-mac-637c3b77-3d2a-4610-9cea-e3ad622aa54e
                         </a>
                       </div>
                     </Tab.Pane>

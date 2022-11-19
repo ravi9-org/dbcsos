@@ -1640,3 +1640,22 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-email-sign-tab-content-right-side-area {
   max-width: 400px;
 }
+
+.indi-app .indi-email-sign-tab-panel-heading {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.indi-app .indi-email-sign-tab-panel-sub-heading {
+  font-size: 10px;
+}
+
+.indi-app .nav-pills .nav-link {
+  background-color: transparent;
+  color: #304697;
+}
+
+.indi-app .nav-pills .nav-link.active {
+  background-color: #304697;
+  color: #fff;
+}
