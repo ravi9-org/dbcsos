@@ -9,10 +9,12 @@ import Utils from "../Utils";
 
 function MainPage() {
   let [loadingState, setLoadingState] = useState(false);
+  let [canRender, setCanRender] = useState(false);
   let [canRedirectToLogin, setCanRedirectToLogin] = useState(false);
   let [canRedirectToLanding, setCanRedirectToLanding] = useState(false);
   let [userData, setUserData] = useState({});
   let [badgesCtxData, setBadgesCtxData] = useState([]);
+  let [addrCtxData, setAddrCtxData] = useState([]);
 
   let navigate = useNavigate();
 
@@ -32,6 +34,7 @@ function MainPage() {
 
   const badgeSuccess = (res) => {
     setBadgesCtxData(res.data);
+    setCanRender(true);
   };
   const badgeFail = (err) => {
     err?.message?.length && console.log(err);
@@ -52,6 +55,8 @@ function MainPage() {
         userData,
         setUserData,
         badgesCtxData,
+        addrCtxData,
+        setAddrCtxData,
       }}
     >
       <Mask />

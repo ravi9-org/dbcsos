@@ -7,7 +7,7 @@ import Utils from "../../Utils";
 const Field = (props = {}) => {
   let [canRender, setCanRender] = useState(false);
   let templateBadges = props?.fieldProps?.templateBadges || [];
-  let { badgesCtxData } = useContext(ContextComponent);
+  let { badgesCtxData, addrCtxData } = useContext(ContextComponent);
   let { cardCtxInfo, setCardCtxInfo } = useContext(CardContext);
 
   let fieldIndex = props.fieldIndex;
@@ -18,7 +18,7 @@ const Field = (props = {}) => {
   templateBadges?.map((field) => {
     let schemaObj = field[fieldSchema.badgeUID];
     if (!Utils.isObjectEmpty(schemaObj)) {
-      fieldSchema = { ...fieldSchema, ...schemaObj }
+      fieldSchema = { ...fieldSchema, ...schemaObj };
     }
   });
 
@@ -37,14 +37,33 @@ const Field = (props = {}) => {
   const removeField = (e) => {
     e.preventDefault();
     let tempCardCtxInfo = { ...cardCtxInfo };
-    tempCardCtxInfo.userLinkedBadges = tempCardCtxInfo?.userLinkedBadges?.filter((field, index) => {
-      return index !== fieldIndex;
-    });
-    tempCardCtxInfo.fieldsData = tempCardCtxInfo?.fieldsData?.filter((field, index) => {
-      return index !== fieldIndex;
-    });
+    tempCardCtxInfo.userLinkedBadges =
+      tempCardCtxInfo?.userLinkedBadges?.filter((field, index) => {
+        return index !== fieldIndex;
+      });
+    tempCardCtxInfo.fieldsData = tempCardCtxInfo?.fieldsData?.filter(
+      (field, index) => {
+        return index !== fieldIndex;
+      }
+    );
     setCardCtxInfo(tempCardCtxInfo);
   };
+
+  let isLookupField = fieldType === "address";
+
+  let initFullAddress = "";
+  let initNumber = "";
+
+  if (!!fieldData && isLookupField) {
+    let addrId = parseInt(fieldData, 10);
+    let addrIdx = addrCtxData.ids.indexOf(addrId);
+    initFullAddress = addrCtxData.fullAddresses[addrIdx];
+    initNumber = addrCtxData.numbers[addrIdx];
+    debugger;
+  }
+
+  let [fullAddress, setFullAddress] = useState(initFullAddress);
+  let [contact, setContact] = useState(initNumber);
 
   return (
     <div className="indi-card-field-item d-flex">
@@ -53,7 +72,18 @@ const Field = (props = {}) => {
       ></div>
 
       {(mode === "readonly" || (mode !== "add" && mode !== "edit")) && (
-        <div className="indi-card-field-item-value"> {fieldData}</div>
+        <div className="indi-card-field-item-value">
+          {isLookupField && (
+            <>
+              <div className="indi-card-address-text">{fullAddress}</div>
+              <div className="indi-card-number-text" title="Assistance phone number">
+                <span className="indi-add-card-address-telephone"></span>
+                <span>{contact}</span>
+              </div>
+            </>
+          )}
+          {!isLookupField && <>{fieldData}</>}
+        </div>
       )}
 
       {isEmpty && (
@@ -81,7 +111,7 @@ const Field = (props = {}) => {
         </div>
       )}
     </div>
-  )
+  );
 };
 
 export default Field;

@@ -778,6 +778,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-signature-item-wrapper {
   justify-content: center;
   padding: 16px;
+  min-height: 230px;
 }
 
 .indi-app .indi-mini-card-list {
@@ -1094,7 +1095,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-data-table-wrapper {
   padding: 16px;
   overflow: overlay;
-  height:  calc(100% - 32px);
+  height: calc(100% - 32px);
 }
 
 .indi-app .indi-add-template-form .indi-data-table-wrapper.indi-text-btn-row {
@@ -1145,7 +1146,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-add-page-footer-btn-wrapper.float-right {
- float: right;
+  float: right;
 }
 
 .indi-app tr.indi-data-table-tr {
@@ -1500,4 +1501,162 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .modal-header .modal-title.h4 {
   color: #2f4694;
   font-size: 18px;
+}
+
+.indi-app .indi-modal-addr-preview-contact-number-wrapper {
+  display: flex;
+  justify-content: end;
+}
+
+.indi-app .indi-modal-addr-preview-full-address {
+  width: 100%;
+  height: 70px;
+  border: 1px solid grey;
+  border-radius: 3px;
+  background-color: #d3d3d340;
+  margin-top: 18px;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.indi-app .indi-modal-addr-preview-contact-number {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 28px;
+  margin-left: 10px;
+}
+
+.indi-app .indi-select-address-modal-body {
+  padding-bottom: 0;
+}
+
+.indi-app .indi-select-address-modal-footer {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.indi-app .indi-add-card-select-address-field {
+  font-style: italic;
+  background-color: #d3d3d340;
+}
+
+.indi-app .indi-add-card-address-telephone-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.indi-app .indi-add-card-address-telephone {
+  width: 16px;
+  height: 16px;
+  background-image: url("./../img//fields/telephone.png");
+  display: inline-flex;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.indi-app .indi-add-card-address-telephone-value {
+  font-size: 12px;
+  font-style: italic;
+  color: #ccc;
+}
+
+
+.indi-app .indi-card-address-text {
+  line-height: 18px;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.indi-app .indi-card-number-text {
+  margin-top: 5px;
+  font-size: 12px;
+  display: flex;
+}
+
+.indi-app .indi-email-sign-generate-item {
+  /* border-left: 1px solid blue; */
+  padding-bottom: 14px;
+}
+
+.indi-app .indi-email-sign-generate-item,
+.indi-app .indi-email-sign-generate-body {
+  padding-left: 28px;
+  position: relative;
+}
+
+
+.indi-app .indi-email-sign-vertical-line::before {
+  background-color: #304697;
+  bottom: 0px;
+  content: "";
+  left: 0;
+  position: absolute;
+  top: 0px;
+  transform: translateX(-50%);
+  width: 2px;
+}
+
+.indi-app .indi-email-sign-generate-item:first-child .indi-email-sign-vertical-line::before {
+  top: 10px;
+}
+
+.indi-app .indi-email-sign-generate-item:last-child .indi-email-sign-vertical-line::before {
+  height: 18px;
+  bottom: auto;
+}
+
+.indi-app .indi-email-sign-vertical-line::after {
+  background-color: #304697;
+  border-radius: 50%;
+  content: "";
+  height: 14px;
+  left: 0;
+  position: absolute;
+  top: calc(0.75rem);
+  transform: translateX(-50%) translateY(-50%);
+  width: 14px;
+}
+
+
+
+.indi-app .indi-email-sign-help-heading {
+  font-size: 12px;
+  font-weight: 700;
+
+}
+
+.indi-app .indi-email-sign-help-link {
+  font-size: 16px;
+}
+
+.indi-app .indi-email-sign-help-link>a {
+  text-decoration: none;
+  line-height: 14px;
+  display: block;
+  color: #304697;
+}
+
+.indi-app .indi-email-sign-tab-content-right-side-area {
+  max-width: 400px;
+}
+
+.indi-app .indi-email-sign-tab-panel-heading {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.indi-app .indi-email-sign-tab-panel-sub-heading {
+  font-size: 10px;
+}
+
+.indi-app .nav-pills .nav-link {
+  background-color: transparent;
+  color: #304697;
+}
+
+.indi-app .nav-pills .nav-link.active {
+  background-color: #304697;
+  color: #fff;
 }
