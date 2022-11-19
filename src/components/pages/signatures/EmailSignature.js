@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import {Button} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
-import Col from 'react-bootstrap/Col';
-import Nav from 'react-bootstrap/Nav';
-import Row from 'react-bootstrap/Row';
-import Tab from 'react-bootstrap/Tab';
+import Col from "react-bootstrap/Col";
+import Nav from "react-bootstrap/Nav";
+import Row from "react-bootstrap/Row";
+import Tab from "react-bootstrap/Tab";
 
 import ContextComponent from "../../AppContext";
 import CardMiniItem from "../../body/content.area/CardMiniItem";
@@ -155,27 +155,310 @@ const EmailSignature = () => {
                   </Nav>
                 </Col>
                 <Col sm={9}>
-                  <Tab.Content>
+                  <Tab.Content className="indi-email-sign-tab-content-right-side-area">
                     <Tab.Pane eventKey="gmail">
-                      <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                          laboris nisi ut aliquip ex ea commodo consequat. </div>
+                      <div className="indi-email-sign-generator-right-side">
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            01
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Generate and copy your signature's HTML</div>
+                            <div>
+                              <Button>Generate signature</Button>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            02
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>
+                              Click the settings gear and click "See all
+                              settings"
+                            </div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            03
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>
+                              In the "General" tab, scroll down until you see
+                              "Signature"
+                            </div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            04
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Click the + button</div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            05
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Give your signature a name</div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            06
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Paste your signature</div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            07
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Click "Save Changes"</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="indi-email-sign-help-heading">
+                        For more detailed instructions:
+                      </div>
+                      <div className="indi-email-sign-help-link">
+                        <a href="https://support.google.com/mail/answer/8395" rel="noreferrer" target="_blank">
+                        https://support.google.com/mail/answer/8395
+                        </a>
+                      </div>
+
+
                     </Tab.Pane>
                     <Tab.Pane eventKey="olweb">
-                      <div>Duis aute irure dolor in reprehenderit in voluptate 
-                          velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                           sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                    </Tab.Pane> 
+                      <div className="indi-email-sign-generator-right-side">
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            01
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Generate and copy your signature's HTML</div>
+                            <div>
+                              <Button>Generate signature</Button>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            02
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>
+                            Sign in to Outlook.com
+                            </div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            03
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>
+                            Go to Settings, then "View all Outlook Settings"
+                            </div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            04
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Select "Mail" then "Compose and reply"</div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            05
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Paste your email signature</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      
+
+                      <div className="indi-email-sign-help-heading">
+                      For more detailed instructions, see:
+                      </div>
+                      <div className="indi-email-sign-help-link">
+                        <a href="https://support.microsoft.com/en-us/office/create-and-add-an-email-signature-in-outlook-com-776d9006-abdf-444e-b5b7-a61821dff034" rel="noreferrer" target="_blank">
+                        https://support.microsoft.com/en-us/office/create-and-add-an-email-signature-in-outlook-com-776d9006-abdf-444e-b5b7-a61821dff034
+                        </a>
+                      </div>
+
+
+                    </Tab.Pane>
                     <Tab.Pane eventKey="olwindows">
-                      <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                         ut labore et dolore magna aliqua.</div>
+                      <div className="indi-email-sign-generator-right-side">
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            01
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Generate and copy your signature's HTML</div>
+                            <div>
+                              <Button>Generate signature</Button>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            02
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>
+                            In Outlook for Windows, click "New Email" to open a new email message.
+                            </div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            03
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>
+                            On the Message menu, select Signature {">"} Signatures.
+                            </div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            04
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Under Select signature to edit, choose New. In the New Signature dialog box, type in a name for the signature.</div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            05
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Under Edit signature, paste your signature.</div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            06
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Under Choose default signature, select the email account you want to associate with your signature and if you want it to be added to all new messages by default.</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="indi-email-sign-help-heading">
+                      For more detailed instructions, see:
+                      </div>
+                      <div className="indi-email-sign-help-link">
+                        <a href="https://support.microsoft.com/en-us/office/create-an-email-signature-31fb24f9-e698-4789-b92a-f0e777f774ca" rel="noreferrer" target="_blank">
+                        https://support.microsoft.com/en-us/office/create-an-email-signature-31fb24f9-e698-4789-b92a-f0e777f774ca
+                        </a>
+                      </div>
                     </Tab.Pane>
                     <Tab.Pane eventKey="olmac">
-                      <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                          laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
-                          velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                           sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                      <div className="indi-email-sign-generator-right-side">
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            01
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Generate and copy your signature's HTML</div>
+                            <div>
+                              <Button>Generate signature</Button>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            02
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>
+                            In Outlook for Mac, click New Email.
+                            </div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            03
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>
+                            Click Signature {">"} Signatures.
+                            </div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            04
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Click + and name your signature.</div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            05
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Under Signature, paste your signature.</div>
+                          </div>
+                        </div>
+                        <div className="indi-email-sign-generate-item d-flex d-flex-row">
+                          <div className="indi-email-sign-vertical-line"></div>
+                          <div className="indi-email-sign-generate-number">
+                            06
+                          </div>
+                          <div className="indi-email-sign-generate-body">
+                            <div>Under New Messages, select your signature.</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="indi-email-sign-help-heading">
+                      For more detailed instructions, see:
+                      </div>
+                      <div className="indi-email-sign-help-link">
+                        <a href="https://support.microsoft.com/en-us/office/create-an-email-signature-in-outlook-for-mac-637c3b77-3d2a-4610-9cea-e3ad622aa54e" rel="noreferrer" target="_blank">
+                        https://support.microsoft.com/en-us/office/create-an-email-signature-in-outlook-for-mac-637c3b77-3d2a-4610-9cea-e3ad622aa54e
+                        </a>
+                      </div>
                     </Tab.Pane>
                   </Tab.Content>
                 </Col>
