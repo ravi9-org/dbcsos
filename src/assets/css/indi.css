@@ -1560,3 +1560,16 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   font-style: italic;
   color: #ccc;
 }
+
+
+.indi-app .indi-card-address-text {
+  line-height: 18px;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.indi-app .indi-card-number-text {
+  margin-top: 5px;
+  font-size: 12px;
+  display: flex;
+}

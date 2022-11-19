@@ -48,9 +48,9 @@ const TextAreaInput = (props) => {
   const [previewId, setPreviewId] = useState(currentId);
   const [previewIdIndex, setPreviewIdIndex] = useState(currentIndex);
   const [previewFullAddress, setPreviewFullAddress] =
-    useState(currentFullAddress);
+    useState(currentFullAddress || addrCtxData["fullAddresses"][currentIndex]);
   const [previewContactNumber, setPreviewContactNumber] =
-    useState(currentNumber);
+    useState(currentNumber || addrCtxData["numbers"][currentIndex]);
 
   const onChangeInput = (e) => {};
 
@@ -94,7 +94,7 @@ const TextAreaInput = (props) => {
             required={isRequired}
             ref={inputTextAreaEle}
             readOnly={true}
-            defaultValue={previewFullAddress}
+            defaultValue={fullAddressValue}
             placeholder={`${fieldName}`}
             onChange={onChangeInput}
             onClick={showModal}
