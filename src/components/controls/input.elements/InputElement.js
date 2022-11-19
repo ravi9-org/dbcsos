@@ -1,6 +1,7 @@
 import React from "react";
 import TextInput from "./TextInput";
 import TextAreaInput from "./TextAreaInput";
+import LookupInput from "./LookupInput";
 
 const InputElement = ({ props = {} }) => {
   let schema = props.fieldSchema || {};
@@ -8,8 +9,15 @@ const InputElement = ({ props = {} }) => {
   let fieldData = props?.fieldData;
   let fieldName = props?.fieldName;
   let inputElementClassNames = props?.inputElementClassNames;
+  let isLookupField = schema.badgeUID === 'address';
 
-  if (fieldType === "text") {
+  if (isLookupField) {
+    return (
+      <LookupInput
+        props={{ schema, fieldData, fieldName, inputElementClassNames }}
+      />
+    );
+   } else if (fieldType === "text") {
     return (
       <TextInput
         props={{ schema, fieldData, fieldName, inputElementClassNames }}

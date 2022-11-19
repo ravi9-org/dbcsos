@@ -47,7 +47,6 @@ const Badge = (props) => {
       tempFields.push(badge.badgeUID);
       tempData.push(badge.defaultValue);
       setCardCtxInfo(tempCardCtxInfo);
-      // inform form about new field to be add
     }
   };
 

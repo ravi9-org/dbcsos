@@ -1094,7 +1094,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-data-table-wrapper {
   padding: 16px;
   overflow: overlay;
-  height:  calc(100% - 32px);
+  height: calc(100% - 32px);
 }
 
 .indi-app .indi-add-template-form .indi-data-table-wrapper.indi-text-btn-row {
@@ -1145,7 +1145,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-add-page-footer-btn-wrapper.float-right {
- float: right;
+  float: right;
 }
 
 .indi-app tr.indi-data-table-tr {
@@ -1500,4 +1500,63 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .modal-header .modal-title.h4 {
   color: #2f4694;
   font-size: 18px;
+}
+
+.indi-app .indi-modal-addr-preview-contact-number-wrapper {
+  display: flex;
+  justify-content: end;
+}
+
+.indi-app .indi-modal-addr-preview-full-address {
+  width: 100%;
+  height: 70px;
+  border: 1px solid grey;
+  border-radius: 3px;
+  background-color: #d3d3d340;
+  margin-top: 18px;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.indi-app .indi-modal-addr-preview-contact-number {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 28px;
+  margin-left: 10px;
+}
+
+.indi-app .indi-select-address-modal-body {
+  padding-bottom: 0;
+}
+
+.indi-app .indi-select-address-modal-footer {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.indi-app .indi-add-card-select-address-field {
+  font-style: italic;
+  background-color: #d3d3d340;
+}
+
+.indi-app .indi-add-card-address-telephone-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.indi-app .indi-add-card-address-telephone {
+  width: 16px;
+  height: 16px;
+  background-image: url("./../img//fields/telephone.png");
+  display: inline-flex;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.indi-app .indi-add-card-address-telephone-value {
+  font-size: 12px;
+  font-style: italic;
+  color: #ccc;
 }
