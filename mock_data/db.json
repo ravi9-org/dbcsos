@@ -334,28 +334,53 @@
   ],
   "addresses": [
     {
-      "name": "Washington DC",
-      "address": "Street No, 12, Second lane, Winston lane",
+      "name": "Philadelphia Regional Security",
+      "address": "3600 Horizon Blvd #300, Trevose",
+      "city": "Pennsylvania",
+      "country": "USA",
+      "zip": "19053",
+      "origins": "41.2033\u00b0 N, 77.1945\u00b0 W",
+      "contact": "+1 215 942 8342",
       "id": 1
     },
     {
-      "name": "Washington DC",
-      "address": "Street No. 9, Samuels Road, Fifth lane",
+      "name": "Mumbai Regional Security",
+      "address": "M.V. Road, Marol, Andheri (East)",
+      "city": "Mumbai",
+      "country": "India",
+      "zip": "400 059",
+      "origins": "19.0760\u00b0 N, 72.8777\u00b0 E",
+      "contact": "+91 22 42838383",
       "id": 2
     },
     {
-      "name": "Washington DC",
-      "address": "Street No. 5, Rose cross roads, 8th sector, 15th lane.",
+      "name": "VIENNA",
+      "address": "Graben 19",
+      "city": "Vienna",
+      "country": "Austria",
+      "zip": "1010",
+      "origins": "48.2082\u00b0 N, 16.3738\u00b0 E",
+      "contact": "+43 1 740 40 5201",
       "id": 3
     },
     {
-      "name": "California",
-      "address": "Street No. 23, Downtown, Ring road.",
+      "name": "Paris Regional Security Centre",
+      "address": "Pierre Burelle, Levallois Perret Cedex",
+      "city": "Paris",
+      "country": "France",
+      "zip": "92593",
+      "origins": "48.8566\u00b0 N, 2.3522\u00b0 E",
+      "contact": "+33 (0) 155 633 232",
       "id": 4
     },
     {
-      "name": "California",
-      "address": "Street No. 45, Downtown, Healthcare center.",
+      "name": "Frankfurt Regional Security",
+      "address": "Dornhofstrase 34, Neu-Isenburg",
+      "city": "Frankfurt",
+      "country": "Germany",
+      "zip": "63263",
+      "origins": "50.1109\u00b0 N, 8.6821\u00b0 E",
+      "contact": "+49 6102 3588 100",
       "id": 5
     }
   ],
