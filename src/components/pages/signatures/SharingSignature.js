@@ -7,11 +7,14 @@ import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 
 import html2canvas from "html2canvas";
+import { Alert } from "react-bootstrap";
 
 const SharingSignature = ({ props }) => {
   let [showDefaultBtn, setShowDefaultBtn] = useState(true);
   let [showLoadingBtn, setShowLoadingBtn] = useState(false);
   let [showCopyBtn, setShowCopyBtn] = useState(false);
+
+  let [showAlert, setShowAlert] = useState(false);
 
   let defaultActivekey = "gmailWeb";
   let sharingVariants = [
@@ -92,8 +95,10 @@ const SharingSignature = ({ props }) => {
     setShowLoadingBtn(true);
 
     await prepareClipboardContent().then(() => {
-      setShowLoadingBtn(false);
-      setShowCopyBtn(true);
+      setTimeout(() => {
+        setShowLoadingBtn(false);
+        setShowCopyBtn(true);
+      }, 500);
     });
   };
 
@@ -135,6 +140,10 @@ const SharingSignature = ({ props }) => {
     document.execCommand("copy");
     selection.removeAllRanges();
     container.classList.add("d-none");
+    setShowAlert(true);
+    setTimeout(function () {
+      setShowAlert(false);
+    }, 3000);
   };
 
   return (
@@ -227,6 +236,14 @@ const SharingSignature = ({ props }) => {
           </Col>
         </Row>
       </Tab.Container>
+      <Alert
+        show={showAlert}
+        variant="success"
+        className="indi-email-sign-copied-to-clipboard-alert"
+      >
+        <Alert.Heading>Success!</Alert.Heading>
+        <p>Successfully copied signature to clipboard</p>
+      </Alert>
       <div className="indi-temp-dummy d-none">
         <img src={screenShot} alt="clipboardcontent" />
       </div>

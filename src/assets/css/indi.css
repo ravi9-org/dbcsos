@@ -1671,3 +1671,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   height: 100px;
   width: 200px;
 }
+
+.indi-app .indi-email-sign-copied-to-clipboard-alert {
+  position: fixed;
+  top: 5px;
+  z-index: 1;
+}
