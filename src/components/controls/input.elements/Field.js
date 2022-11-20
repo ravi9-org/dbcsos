@@ -59,7 +59,6 @@ const Field = (props = {}) => {
     let addrIdx = addrCtxData.ids.indexOf(addrId);
     initFullAddress = addrCtxData.fullAddresses[addrIdx];
     initNumber = addrCtxData.numbers[addrIdx];
-    debugger;
   }
 
   let [fullAddress, setFullAddress] = useState(initFullAddress);
