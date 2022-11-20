@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Col from "react-bootstrap/Col";
@@ -6,10 +6,12 @@ import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 
-const SharingSignature = () => {
+import html2canvas from "html2canvas";
+
+const SharingSignature = ({ props }) => {
   let [showDefaultBtn, setShowDefaultBtn] = useState(true);
-  let [showLoadingBtn, setShowLoadingBtn] = useState(true);
-  let [showCopyBtn, setShowCopyBtn] = useState(true);
+  let [showLoadingBtn, setShowLoadingBtn] = useState(false);
+  let [showCopyBtn, setShowCopyBtn] = useState(false);
 
   let defaultActivekey = "gmailWeb";
   let sharingVariants = [
@@ -82,19 +84,58 @@ const SharingSignature = () => {
     },
   ];
 
-  // sharingVariants.map((variant, index) => {
-  //   let key = Object.keys(variant)[0];
-  //   console.log(key);
-  //   console.log(variant[key].heading);
-  //   console.log(variant[key].subHeading);
+  let [screenShot, setScreenShot] = useState("");
 
-  //   variant[key].bullets.map((bullet, index) => {
-  //     if (index !== 0) {
-  //       console.log(bullet);
-  //     }
-  //   });
-  //   debugger;
-  // });
+  const generateSignature = async (e) => {
+    e.preventDefault();
+    setShowDefaultBtn(false);
+    setShowLoadingBtn(true);
+
+    await prepareClipboardContent().then(() => {
+      setShowLoadingBtn(false);
+      setShowCopyBtn(true);
+    });
+  };
+
+  useEffect(() => {
+    setShowDefaultBtn(true);
+    setShowLoadingBtn(false);
+    setShowCopyBtn(false);
+  }, [props.pageInfo]);
+
+  const prepareClipboardContent = async () => {
+    let element = document.querySelector(".indi-signature-item");
+
+    let canvas = await html2canvas(element, {
+        allowTaint: true,
+        useCORS: true,
+      }),
+      data = canvas.toDataURL("image/jpg"),
+      link = document.createElement("a");
+
+    link.href = data;
+    link.download = "downloaded-image.jpg";
+    setScreenShot(link);
+  };
+
+  const copy2Clipboard = (e) => {
+    e.preventDefault();
+
+    let selection = window.getSelection();
+    let container = document.querySelector(".indi-temp-dummy");
+    container.classList.remove("d-none");
+
+    if (selection.rangeCount > 0) {
+      selection.removeAllRanges();
+    }
+
+    const range = document.createRange();
+    range.selectNode(container);
+    selection.addRange(range);
+    document.execCommand("copy");
+    selection.removeAllRanges();
+    container.classList.add("d-none");
+  };
 
   return (
     <div className="indi-copy-signature-wrapper d-flex">
@@ -138,7 +179,9 @@ const SharingSignature = () => {
                                 <>
                                   <div className="d-none1">
                                     {showDefaultBtn && (
-                                      <Button>Generate signature</Button>
+                                      <Button onClick={generateSignature}>
+                                        Generate signature
+                                      </Button>
                                     )}
                                     {showLoadingBtn && (
                                       <Button variant="primary" disabled>
@@ -152,7 +195,11 @@ const SharingSignature = () => {
                                         Generating...
                                       </Button>
                                     )}
-                                    {showCopyBtn && <Button>Copy</Button>}
+                                    {showCopyBtn && (
+                                      <Button onClick={copy2Clipboard}>
+                                        Copy
+                                      </Button>
+                                    )}
                                   </div>
                                 </>
                               )}
@@ -180,6 +227,9 @@ const SharingSignature = () => {
           </Col>
         </Row>
       </Tab.Container>
+      <div className="indi-temp-dummy d-none">
+        <img src={screenShot} alt="clipboardcontent" />
+      </div>
     </div>
   );
 };

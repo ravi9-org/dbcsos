@@ -134,7 +134,7 @@ const EmailSignature = () => {
           )}
           
             
-          <SharingSignature />
+          <SharingSignature props={{ pageInfo }} />
         </div>
       )}
     </div>

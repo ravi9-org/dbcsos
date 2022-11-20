@@ -1660,3 +1660,14 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-color: #304697;
   color: #fff;
 }
+
+.indi-app .indi-temp-dummy {
+  position: fixed;
+  top: 0;
+  left: -1000px;
+}
+
+.indi-app .indi-temp-dummy-img {
+  height: 100px;
+  width: 200px;
+}
