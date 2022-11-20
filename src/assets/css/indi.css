@@ -395,11 +395,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-footer-wrapper .navbar-nav {
-  margin: 0 24px;
+  margin: 0 0 0 24px;
 }
 
 .indi-app .indi-footer-wrapper .navbar-nav-left .nav-link {
-  margin: 0 16px;
+  margin: 0 4px;
   color: #2f4694;
   font-size: 12px;
 }
@@ -764,9 +764,14 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 
-.indi-app .btn-check+.btn.indi-card-item-wrapper.indi-card-mini-item-wrapper.btn-outline-primary:hover,
+.indi-app .btn-check+.btn.indi-card-item-wrapper.indi-card-mini-item-wrapper.btn-outline-primary:hover {
+  box-shadow: -2px 6px 14px rgb(0 0 0 / 80%);
+}
+
 .indi-app .btn-check:checked+.btn.indi-card-item-wrapper.indi-card-mini-item-wrapper.btn-outline-primary {
-  box-shadow: -2px 6px 14px rgb(0 0 0 / 60%);
+  box-shadow: -2px 6px 14px rgb(0 0 0 / 80%);
+  outline: 2px solid #fff;
+  height: 150px;
 }
 
 .indi-app .indi-card-qr-code {
@@ -777,14 +782,15 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-copy-signature-wrapper,
 .indi-app .indi-signature-item-wrapper {
   justify-content: center;
-  padding: 16px;
+  padding: 0 0 24px 0;
   min-height: 230px;
 }
 
 .indi-app .indi-mini-card-list {
-  width: 100%;
-  overflow-x: auto;
-  justify-content: center;
+  margin: 0 auto;
+  overflow-x: overlay;
+  min-height: 184px;
+  justify-content: space-between;
 }
 
 .indi-app .indi-signature-item-wrapper .indi-signature-item {
@@ -795,6 +801,12 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background: #fff;
   box-shadow: 0px 1px 6px #000;
   min-height: 192px;
+  border: none;
+  border: 1px solid transparent;
+}
+
+.indi-app .indi-signature-item-wrapper .indi-signature-item.indi-temp-border-for-email-signature {
+  border: 1px solid #ccc;
 }
 
 .indi-app .indi-qrcode-bg,
@@ -1676,4 +1688,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   position: fixed;
   top: 5px;
   z-index: 1;
+}
+
+.indi-app .indi-temp-dummy-img img {
+  height: 150px;
+  width: 275px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 6px #000;
 }
