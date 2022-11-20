@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Col from "react-bootstrap/Col";
@@ -9,7 +10,16 @@ import Tab from "react-bootstrap/Tab";
 import html2canvas from "html2canvas";
 import { Alert } from "react-bootstrap";
 
+import Utils from "../../Utils";
+
 const SharingSignature = ({ props }) => {
+  const location = useLocation();
+  let cardLink = document.location.href;
+  let currentPath = location.pathname;
+  cardLink = cardLink
+    .replace(currentPath, Utils.APP_URLS.CARD_EXTERNAL_PAGE)
+    .replace(":cardid", props?.pageInfo?.selectedCardId);
+
   let [showDefaultBtn, setShowDefaultBtn] = useState(true);
   let [showLoadingBtn, setShowLoadingBtn] = useState(false);
   let [showCopyBtn, setShowCopyBtn] = useState(false);
@@ -111,16 +121,20 @@ const SharingSignature = ({ props }) => {
   const prepareClipboardContent = async () => {
     let element = document.querySelector(".indi-signature-item");
 
+    element.classList.add("indi-temp-border-for-email-signature");
+
     let canvas = await html2canvas(element, {
         allowTaint: true,
         useCORS: true,
       }),
-      data = canvas.toDataURL("image/jpg"),
+      data = canvas.toDataURL("image/png"),
       link = document.createElement("a");
 
     link.href = data;
     link.download = "downloaded-image.jpg";
     setScreenShot(link);
+
+    element.classList.remove("indi-temp-border-for-email-signature");
   };
 
   const copy2Clipboard = (e) => {
@@ -245,7 +259,16 @@ const SharingSignature = ({ props }) => {
         <p>Successfully copied signature to clipboard</p>
       </Alert>
       <div className="indi-temp-dummy d-none">
-        <img src={screenShot} alt="clipboardcontent" />
+        <a href={cardLink}>
+          <img
+            src={screenShot}
+            alt="clipboardcontent"
+            style={{
+              width: "275px",
+              height: "155px",
+            }}
+          />
+        </a>
       </div>
     </div>
   );

@@ -801,6 +801,12 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background: #fff;
   box-shadow: 0px 1px 6px #000;
   min-height: 192px;
+  border: none;
+  border: 1px solid transparent;
+}
+
+.indi-app .indi-signature-item-wrapper .indi-signature-item.indi-temp-border-for-email-signature {
+  border: 1px solid #ccc;
 }
 
 .indi-app .indi-qrcode-bg,
@@ -1682,4 +1688,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   position: fixed;
   top: 5px;
   z-index: 1;
+}
+
+.indi-app .indi-temp-dummy-img img {
+  height: 150px;
+  width: 275px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 6px #000;
 }
