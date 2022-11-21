@@ -639,11 +639,31 @@ const fileToDataUri = (file) => {
   });
 };
 
+const BADGE_TYPES = {
+  phone: {
+    label: "Phone",
+    formInputType: "text",
+  },
+  address: {
+    label: "Address",
+    formInputType: "textarea",
+  },
+  url: {
+    label: "URL",
+    formInputType: "text",
+  },
+  email: {
+    label: "EMail",
+    formInputType: "text",
+  },
+};
+
 const Utils = {
   REST_API,
   APP_URLS,
   NAV_ITEMS_KEYS,
   NAV_ITEMS_VALUES,
+  BADGE_TYPES,
   userSessionExists,
   getUserProfile,
   getAllUsers,

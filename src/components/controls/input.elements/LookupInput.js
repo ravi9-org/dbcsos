@@ -24,33 +24,27 @@ const TextAreaInput = (props) => {
   let [addrNames, setAddrNames] = useState(addrCtxData.addressNames);
   let [addrValues, setAddrValues] = useState(addrCtxData.addresses);
   let [fullAddrValues, setFullAddrValues] = useState(addrCtxData.fullAddresses);
-  let [addrNumbers, setAddrNumbers] = useState(addrCtxData.numbers);
 
   let currentId = 0;
   let currentIndex = 0;
   let currentAddressName = "";
   let currentAddress = "";
   let currentFullAddress = "";
-  let currentNumber = "";
   if (!!fieldData) {
     currentId = parseInt(fieldData, 10);
     currentIndex = addrCtxData.ids.indexOf(currentId);
     currentAddressName = addrCtxData["addressNames"][currentIndex];
     currentAddress = addrCtxData["addresses"][currentIndex];
     currentFullAddress = addrCtxData["fullAddresses"][currentIndex];
-    currentNumber = addrCtxData["numbers"][currentIndex];
   }
 
   let [addressId, setAddressId] = useState(currentId);
   let [fullAddressValue, setFullAddressValue] = useState(currentFullAddress);
-  let [numberValue, setNumberValue] = useState(currentNumber);
 
   const [previewId, setPreviewId] = useState(currentId);
   const [previewIdIndex, setPreviewIdIndex] = useState(currentIndex);
   const [previewFullAddress, setPreviewFullAddress] =
     useState(currentFullAddress || addrCtxData["fullAddresses"][currentIndex]);
-  const [previewContactNumber, setPreviewContactNumber] =
-    useState(currentNumber || addrCtxData["numbers"][currentIndex]);
 
   const onChangeInput = (e) => {};
 
@@ -69,7 +63,6 @@ const TextAreaInput = (props) => {
 
     inputEle.current.value = previewId;
     inputTextAreaEle.current.value = previewFullAddress;
-    setNumberValue(previewContactNumber);
   };
 
   // useEffect(() => {
@@ -82,7 +75,6 @@ const TextAreaInput = (props) => {
     setPreviewId(selectedVal);
     setPreviewIdIndex(targetIndex);
     setPreviewFullAddress(fullAddrValues[targetIndex]);
-    setPreviewContactNumber(addrNumbers[targetIndex]);
   };
 
   return (
@@ -100,18 +92,6 @@ const TextAreaInput = (props) => {
             onClick={showModal}
           ></textarea>
         </div>
-
-        {numberValue && (
-          <div
-            className="indi-add-card-address-telephone-wrapper"
-            title="Assistance phone number"
-          >
-            <span className="indi-add-card-address-telephone"></span>
-            <span className="indi-add-card-address-telephone-value">
-              {numberValue}
-            </span>
-          </div>
-        )}
       </div>
       <input
         type="text"
@@ -144,12 +124,6 @@ const TextAreaInput = (props) => {
           <div className="indi-modal-addr-preview">
             <div className="indi-modal-addr-preview-full-address">
               {previewFullAddress}
-            </div>
-            <div className="indi-modal-addr-preview-contact-number-wrapper">
-              <label>Assistance phone number: </label>
-              <div className="indi-modal-addr-preview-contact-number">
-                {previewContactNumber}
-              </div>
             </div>
           </div>
           <div className="indi-select-address-modal-footer">

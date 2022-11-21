@@ -160,20 +160,6 @@ const AddAddressPage = ({ props }) => {
                   </div>
                 </div>
 
-                <div className="indi-add-form-item d-flex flex-column">
-                  <div className="indi-add-form-item-input row">
-                    <FloatingLabel label="Assistance phone number">
-                      <Form.Control
-                        type="text"
-                        className="indi-input-field"
-                        id="contact"
-                        placeholder="Enter assistance phone number"
-                        autoComplete="off"
-                        onChange={inputHandler}
-                      />
-                    </FloatingLabel>
-                  </div>
-                </div>
               </div>
 
               <div className="indi-add-footer">

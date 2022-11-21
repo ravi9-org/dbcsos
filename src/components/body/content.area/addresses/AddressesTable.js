@@ -24,8 +24,7 @@ const AddressesTable = () => {
     "city",
     "country",
     "zip",
-    "origins",
-    "contact"
+    "origins"
   ]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
     id: {
@@ -62,10 +61,6 @@ const AddressesTable = () => {
     origins: {
       type: "text",
       title: "Longitude/Lattitude"
-    },
-    contact: {
-      type: "text",
-      title: "Assistance phone number"
     },
   });
 

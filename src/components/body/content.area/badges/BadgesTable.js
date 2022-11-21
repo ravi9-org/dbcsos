@@ -70,8 +70,11 @@ const BadgesTable = () => {
       usersArray = userInfo.map((user, index) => {
         let userTableObj = [];
         let userTableData = [];
-        tableColumns.forEach((col) => {
-          if (col === "select") {
+        tableColumns.forEach((col) => {          
+          if (col === "type") {
+            let badgeDisplayName = Utils.BADGE_TYPES[userInfo[index][col]].label;
+            userTableData.push(badgeDisplayName);
+          } else if (col === "select") {
             userTableData.push(false);
           } else if (col === "username") {
             userTableData.push(
