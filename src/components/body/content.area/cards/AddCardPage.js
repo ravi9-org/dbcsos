@@ -78,6 +78,9 @@ const AddCard = (props) => {
       dataValues.push(val);
     }
 
+    let cardNameElement = document.getElementsByClassName('indi-add-card-name-input');
+    let cardNameValue = cardNameElement[0]?.value || "";     
+
     for (let imgEle of cardImageEle) {
       let imgVal = imgEle?.value || "";
       setCardImageValue(imgVal);
@@ -90,7 +93,7 @@ const AddCard = (props) => {
       imageValues.push(imgVal);
     }
 
-    submitForm(dataValues, imageValues);
+    submitForm(dataValues, imageValues, cardNameValue);
   };
 
   const updateUserInfo = (newCardId) => {
@@ -116,12 +119,13 @@ const AddCard = (props) => {
     }
   };
 
-  const submitForm = (dataValues = {}, imageValues = []) => {
+  const submitForm = (dataValues = {}, imageValues = [], cardNameValue = "") => {
     let info = { ...cardCtxInfo };
 
     info.fieldsData = dataValues;
     info.cardImage = imageValues[0];
     info.croppedImage = imageValues[1];
+    info.cardName = cardNameValue;
 
     const success = (res) => {
       updateUserInfo(res.data.id);

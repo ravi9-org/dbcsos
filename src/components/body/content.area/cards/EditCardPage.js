@@ -103,7 +103,10 @@ const EditCardPage = (props) => {
     for (let ele of inputElements) {
       let val = ele?.value || "";
       dataValues.push(val);
-    }
+    }    
+
+    let cardNameElement = document.getElementsByClassName('indi-add-card-name-input');
+    let cardNameValue = cardNameElement[0]?.value || "";   
 
     for (let imgEle of cardImageEle) {
       let imgVal = imgEle?.value || "";
@@ -117,15 +120,16 @@ const EditCardPage = (props) => {
       imageValues.push(imgVal);
     }
 
-    submitForm(dataValues, imageValues);
+    submitForm(dataValues, imageValues, cardNameValue);
   };
 
-  const submitForm = (dataValues = {}, imageValues = []) => {
+  const submitForm = (dataValues = {}, imageValues = [], cardNameValue = "") => {
     let info = { ...cardCtxInfo };
 
     info.fieldsData = dataValues;
     info.cardImage = imageValues[0];
     info.croppedImage = imageValues[1];
+    info.cardName = cardNameValue;
 
     const success = (res) => {
       goBack();
