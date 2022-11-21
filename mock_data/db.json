@@ -383,7 +383,7 @@
   "usercards": [
     {
       "templateId": 1,
-	  "cardName": "Admin-sos",
+      "cardName": "Admin-sos",
       "userLinkedBadges": [
         "phone",
         "email",
@@ -403,7 +403,7 @@
     },
     {
       "templateId": 2,
-	  "cardName": "Admin-medaire",
+      "cardName": "Admin-medaire",
       "userLinkedBadges": [
         "phone",
         "email",
@@ -429,7 +429,7 @@
     },
     {
       "templateId": 1,
-	  "cardName": "Lisa-sos",
+      "cardName": "Lisa-sos",
       "userLinkedBadges": [
         "phone",
         "email"
@@ -445,7 +445,7 @@
     },
     {
       "templateId": 1,
-	  "cardName": "John-sos",
+      "cardName": "John-sos",
       "userLinkedBadges": [
         "phone",
         "email"
@@ -461,7 +461,7 @@
     },
     {
       "templateId": 2,
-	  "cardName": "John-medaire",
+      "cardName": "John-medaire",
       "userLinkedBadges": [
         "phone",
         "youtube",
@@ -485,7 +485,7 @@
     },
     {
       "templateId": 1,
-	  "cardName": "Laxman-sos",
+      "cardName": "Laxman-sos",
       "userLinkedBadges": [
         "phone",
         "email"
@@ -501,7 +501,7 @@
     },
     {
       "templateId": 2,
-	  "cardName": "Sri-medaire",
+      "cardName": "Sri-medaire",
       "userLinkedBadges": [
         "phone",
         "linkedin",
@@ -538,5 +538,15 @@
       "id": 8
     }
   ],
-  "allbadges": []
+  "allbadges": [],
+  "brands": [
+    {
+      "name": "International SOS",
+      "id": 1
+    },
+    {
+      "name": "Medaire",
+      "id": 2
+    }
+  ]
 }

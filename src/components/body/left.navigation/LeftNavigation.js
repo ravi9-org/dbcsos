@@ -6,6 +6,9 @@ import Utils from "../../Utils";
 import templatesImg from "../../../assets/img/navitems/dark/templates.png";
 import templatesActiveImg from "../../../assets/img/navitems/light/templates.png";
 
+import brandsImg from "../../../assets/img/navitems/dark/settings.png";
+import brandsActiveImg from "../../../assets/img/navitems/light/settings.png";
+
 import usersImg from "../../../assets/img/navitems/dark/users.png";
 import usersActiveImg from "../../../assets/img/navitems/light/users.png";
 
@@ -29,6 +32,7 @@ import settingsActiveImg from "../../../assets/img/navitems/light/settings.png";
 
 const images = {
   templates: templatesImg,
+  brands: brandsImg,
   users: usersImg,
   addresses: addressesImg,
   badges: badgesImg,
@@ -40,6 +44,7 @@ const images = {
 
 const activeImages = {
   templates: templatesActiveImg,
+  brands: brandsActiveImg,
   users: usersActiveImg,
   addresses: addressesActiveImg,
   badges: badgesActiveImg,
