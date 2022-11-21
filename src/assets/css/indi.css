@@ -516,13 +516,24 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-card-fields {
   overflow-y: overlay;
   width: inherit;
+  margin-bottom: 36px;
 }
 
+.indi-app .indi-card-name,
+.indi-app .indi-card-name {
+  text-align: center;
+}
+
+.indi-app .indi-template-title,
 .indi-app .indi-card-title {
   padding-bottom: 8px;
   line-height: 19px;
   min-height: 24px;
   max-height: 40px;
+}
+
+.indi-app .indi-template-title {
+  font-weight: bold;
 }
 
 .indi-app .indi-card-field-wrapper>div {

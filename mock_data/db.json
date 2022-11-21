@@ -388,6 +388,7 @@
   "usercards": [
     {
       "templateId": 1,
+	  "cardName": "Admin-sos",
       "userLinkedBadges": [
         "phone",
         "email",
@@ -407,6 +408,7 @@
     },
     {
       "templateId": 2,
+	  "cardName": "Admin-medaire",
       "userLinkedBadges": [
         "phone",
         "email",
@@ -432,6 +434,7 @@
     },
     {
       "templateId": 1,
+	  "cardName": "Lisa-sos",
       "userLinkedBadges": [
         "phone",
         "email"
@@ -447,6 +450,7 @@
     },
     {
       "templateId": 1,
+	  "cardName": "John-sos",
       "userLinkedBadges": [
         "phone",
         "email"
@@ -462,6 +466,7 @@
     },
     {
       "templateId": 2,
+	  "cardName": "John-medaire",
       "userLinkedBadges": [
         "phone",
         "youtube",
@@ -485,6 +490,7 @@
     },
     {
       "templateId": 1,
+	  "cardName": "Laxman-sos",
       "userLinkedBadges": [
         "phone",
         "email"
@@ -500,6 +506,7 @@
     },
     {
       "templateId": 2,
+	  "cardName": "Sri-medaire",
       "userLinkedBadges": [
         "phone",
         "linkedin",
@@ -521,6 +528,7 @@
     },
     {
       "templateId": 2,
+      "cardName": "Admin-medaire-limited",
       "userLinkedBadges": [
         "phone",
         "address"

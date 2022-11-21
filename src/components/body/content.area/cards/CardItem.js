@@ -129,6 +129,7 @@ const CardItem = (props) => {
             )}
           </div>
         </div>
+        <div className="indi-template-title indi-place-me-bottom-left">{cardData.cardName}</div> 
       </div>
     </CardContext.Provider>
   );
