@@ -876,7 +876,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-card-details-wrapper>div {
-  margin-right: 42px !important;
+  margin-right: 42px;
 }
 
 .indi-app .indi-card-item-page2-qrcode-image img {
