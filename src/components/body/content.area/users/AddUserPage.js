@@ -12,7 +12,7 @@ const AddUserPage = ({ props }) => {
   let setTableData = props?.setTableData || (() => {});
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
-  let [gender, setGender] = useState("");
+  let [pronoun, setPronoun] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [department, setDepartment] = useState("");
@@ -33,7 +33,7 @@ const AddUserPage = ({ props }) => {
         false,
         res.data.user.firstName,
         res.data.user.lastName,
-        res.data.user.gender,
+        res.data.user.pronoun,
         res.data.user.email,
         res.data.user.department,
         res.data.user.brand,
@@ -52,7 +52,7 @@ const AddUserPage = ({ props }) => {
     let formData = {
       firstName,
       lastName,
-      gender,
+      pronoun,
       email,
       password,
       department,
@@ -79,9 +79,9 @@ const AddUserPage = ({ props }) => {
     setLastName(value);
   };
 
-  const genderHandler = (e) => {
+  const pronounHandler = (e) => {
     let value = e?.currentTarget?.value || "";
-    setGender(value);
+    setPronoun(value);
   };
 
   const emailHandler = (e) => {
@@ -162,11 +162,11 @@ const AddUserPage = ({ props }) => {
 
                 <div className="indi-add-form-item d-flex flex-column">
                   <div className="indi-add-form-item-input row">
-                    <FloatingLabel label="Gender">
+                    <FloatingLabel label="Pronoun">
                       <Form.Select
                         defaultValue="Male"
-                        id="gender"
-                        onChange={genderHandler}
+                        id="pronoun"
+                        onChange={pronounHandler}
                         size="sm"
                         className="indi-input-field indi-input-select-field"
                       >

@@ -22,7 +22,7 @@ const UsersTable = () => {
     "select",
     "firstName",
     "lastName",
-    "gender",
+    "pronoun",
     "email",
     "department",
     "brand",
@@ -50,9 +50,9 @@ const UsersTable = () => {
       sort: true,
       title: "Last name",
     },
-    gender: {
+    pronoun: {
       type: "text",
-      title: "Gender",
+      title: "Pronoun",
     },
     email: {
       type: "text",

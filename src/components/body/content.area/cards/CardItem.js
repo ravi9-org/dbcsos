@@ -109,7 +109,7 @@ const CardItem = (props) => {
         </div>
         <div className="indi-info-wrapper">
           <div className="indi-card-name fw-bold">
-            {userData?.firstName} {userData?.lastName} ({userData?.gender})
+            {userData?.firstName} {userData?.lastName} ({userData?.pronoun})
           </div>
           <div className="indi-card-title">{userData?.designation}</div>
         </div>
