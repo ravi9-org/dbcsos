@@ -457,6 +457,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-body-action {
   margin-left: 10px;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .indi-app .indi-add-card-wrapper,
@@ -898,10 +900,6 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   justify-content: space-between;
 }
 
-.indi-app .indi-body-action {
-  cursor: pointer;
-}
-
 .indi-app .indi-modal-dialog-alert .modal-body {
   padding: 0 !important;
 }
@@ -1274,6 +1272,22 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   line-height: 1.25;
   border-color: #2f4696;
   padding: 1rem;
+}
+
+.indi-app .form-floating>.form-select {
+  height: 28px;
+  margin-top: 8px;
+  padding-right: 40px;
+}
+
+.indi-app .indi-empty-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  height: 80%;
+  font-size: 18px;
+  border: 1px solid;
+  margin: 16px;
 }
 
 .indi-app .form-floating>.form-control.indi-input-textarea-field {
