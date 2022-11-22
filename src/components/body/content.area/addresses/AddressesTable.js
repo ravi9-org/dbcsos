@@ -20,6 +20,7 @@ const AddressesTable = () => {
     "id",
     "select",
     "name",
+    "brand",
     "address",
     "city",
     "country",
@@ -41,6 +42,10 @@ const AddressesTable = () => {
       search: true,
       sort: false,
       title: "Name",
+    },
+    brand: {
+      type: "text",
+      title: "Brand"
     },
     address: {
       type: "text",

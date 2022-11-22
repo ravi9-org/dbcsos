@@ -24,6 +24,8 @@ const TemplateItem = (props) => {
   let [templateFields, setTemplateFields] = useState(templateFieldsInfo || []);
 
   let [templateName, setTemplateName] = useState(template?.templateName || "");
+  let [templateBrand, setTemplateBrand] = useState(template?.brand || "");
+
   let [templateDisplayName, setTemplateDisplayName] = useState(
     template?.templateDisplayName || ""
   );
@@ -92,7 +94,7 @@ const TemplateItem = (props) => {
             ))}
           </div>
         </div>
-        <div className="indi-template-title  indi-place-me-bottom-left">{templateName}</div> 
+        <div className="indi-template-title  indi-place-me-bottom-left">{templateName} ({ templateBrand})</div> 
       </div>
     </CardContext.Provider>
   );
