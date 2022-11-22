@@ -1,5 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Button, Modal } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
@@ -7,6 +10,7 @@ import DataTable from "../../../controls/table/DataTable";
 import AddIcon from "../../../../assets/img/add.png";
 import DeleteIcon from "../../../../assets/img/Delete.png";
 import AddUserPage from "./AddUserPage";
+import EmptyPage from "./../../../pages/EmptyPage";
 
 const UsersTable = () => {
   let [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -86,13 +90,12 @@ const UsersTable = () => {
 
   let [tableData, setTableData] = useState([]);
   let [canRender, setCanRender] = useState(false);
+  let [renderDataTable, setRenderDataTable] = useState(false);
+  let [renderEmptyPage, setRenderEmptyPage] = useState(false);
   let [updateTable, setUpdateTable] = useState(false);
 
-  const success = (res) => {
-    setLoadingState({
-      applyMask: false,
-    });
-    let userInfo = res?.data;
+  const updateTableData = (data) => {
+    let userInfo = data;
     let usersArray = [];
     if (!Utils.isObjectEmpty(userInfo)) {
       usersArray = userInfo.map((user, index) => {
@@ -100,9 +103,11 @@ const UsersTable = () => {
         let userTableData = [];
         tableColumns.forEach((col) => {
           if (col === "region") {
-            let regionValue = userInfo[index][col] ? Utils.REGIONS[userInfo[index][col]]: '';
+            let regionValue = userInfo[index][col]
+              ? Utils.REGIONS[userInfo[index][col]]
+              : "";
             userTableData.push(regionValue);
-           } else if (col === "select") {
+          } else if (col === "select") {
             userTableData.push(false);
           } else if (col === "username") {
             userTableData.push(
@@ -119,6 +124,16 @@ const UsersTable = () => {
       setTableData(usersArray);
       setCanRender(true);
     }
+  };
+
+  const success = (res) => {
+    setLoadingState({
+      applyMask: false,
+    });
+    updateTableData(res.data);
+
+    setRenderDataTable(res.data.length !== 0);
+    setRenderEmptyPage(res.data.length === 0);
   };
 
   const fail = (err) => {
@@ -189,7 +204,27 @@ const UsersTable = () => {
 
   const saveAction = (data) => {
     //console.log(data);
-    debugger;
+  };
+
+  let REGIONS = Utils.REGIONS;
+  let [region, setRegion] = useState(Object.keys(REGIONS)[0]);
+
+  const regionHandler = (e) => {
+    let regionId = e.currentTarget.value;
+
+    if (regionId === "clear") {
+      loadAllUsers();
+    } else {
+      const usersFilterSuccess = (res) => {
+        console.log(res);
+        updateTableData(res.data);
+      };
+      const usersFilterFail = (err) => {
+        err?.message?.length && console.log(err);
+      };
+
+      Utils.getFilteredUsers("region", regionId).then(success, fail);
+    }
   };
 
   return (
@@ -197,6 +232,25 @@ const UsersTable = () => {
       <div className="indi-add-card-title">
         Users
         <div className="d-none1 w-50 indi-body-actions">
+          <div className="indi-body-action" role="button" onClick={handleShow}>
+            {/* <img className="indi-w-20" src={DeleteIcon} alt="Delete-icon"></img> */}
+            <FloatingLabel label="">
+              <Form.Select
+                defaultValue="clear"
+                id="region"
+                size="sm"
+                className="indi-input-field indi-input-select-field"
+                onChange={regionHandler}
+              >
+                <option value="clear">Select/Clear</option>
+                {Object.keys(REGIONS).map((keyName, index) => (
+                  <option value={keyName} key={index}>
+                    {REGIONS[keyName]}
+                  </option>
+                ))}
+              </Form.Select>
+            </FloatingLabel>
+          </div>
           <div
             className="indi-body-action"
             role="button"
@@ -213,15 +267,27 @@ const UsersTable = () => {
         </div>
       </div>
       {canRender && (
-        <DataTable
-          tableProps={{
-            tableColumns,
-            tableColumnSchema,
-            tableData,
-            tableSelectedItems,
-            setTableSelectedItems,
-          }}
-        />
+        <>
+          {renderDataTable && (
+            <DataTable
+              minRows={0}
+              tableProps={{
+                tableColumns,
+                tableColumnSchema,
+                tableData,
+                tableSelectedItems,
+                setTableSelectedItems,
+              }}
+            />
+          )}
+          {!renderDataTable && (
+            <EmptyPage
+              props={{
+                emptyMessage: "No users are available",
+              }}
+            />
+          )}
+        </>
       )}
 
       <Modal centered show={showDeleteModal} onHide={handleClose}>
