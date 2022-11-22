@@ -23,6 +23,7 @@ const UsersTable = () => {
     "firstName",
     "lastName",
     "pronoun",
+    "region",
     "email",
     "department",
     "brand",
@@ -53,6 +54,10 @@ const UsersTable = () => {
     pronoun: {
       type: "text",
       title: "Pronoun",
+    },
+    region: {
+      type: "text",
+      title: "Region",
     },
     email: {
       type: "text",
@@ -94,7 +99,10 @@ const UsersTable = () => {
         let userTableObj = [];
         let userTableData = [];
         tableColumns.forEach((col) => {
-          if (col === "select") {
+          if (col === "region") {
+            let regionValue = userInfo[index][col] ? Utils.REGIONS[userInfo[index][col]]: '';
+            userTableData.push(regionValue);
+           } else if (col === "select") {
             userTableData.push(false);
           } else if (col === "username") {
             userTableData.push(

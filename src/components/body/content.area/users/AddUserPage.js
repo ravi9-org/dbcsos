@@ -10,6 +10,7 @@ import Utils from "../../../Utils";
 const AddUserPage = ({ props }) => {
   let tableData = props?.tableData || [];
   let setTableData = props?.setTableData || (() => {});
+  let REGIONS = Utils.REGIONS || {};
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
   let [pronoun, setPronoun] = useState("");
@@ -17,6 +18,7 @@ const AddUserPage = ({ props }) => {
   let [password, setPassword] = useState("");
   let [department, setDepartment] = useState("");
   let [brand, setBrand] = useState("");
+  let [region, setRegion] = useState(Object.keys(REGIONS)[0]);
   let [title, setTitle] = useState("");
   let [isAdmin, setIsAdmin] = useState(false);
   let [picture, setPicture] = useState("");
@@ -37,6 +39,7 @@ const AddUserPage = ({ props }) => {
         res.data.user.email,
         res.data.user.department,
         res.data.user.brand,
+        res.data.user.region,
         res.data.user.title,
         res.data.user.isAdmin /*,
         res.data.user.picture,*/,
@@ -57,11 +60,11 @@ const AddUserPage = ({ props }) => {
       password,
       department,
       brand,
+      region,
       title,
       isAdmin,
       picture,
     };
-    
     try {
       Utils.addUser(formData).then(success, fail);
     } catch (e) {
@@ -104,6 +107,11 @@ const AddUserPage = ({ props }) => {
     setBrand(value);
   };
 
+  const regionHandler = (e) => {
+    let value = e?.currentTarget?.value || "";
+    setRegion(value);
+  };
+
   const titleHandler = (e) => {
     let value = e?.currentTarget?.value || "";
     setTitle(value);
@@ -119,7 +127,6 @@ const AddUserPage = ({ props }) => {
   const handleClose = (e) => {
     props.setAddModalCanOpen(false);
   };
-
 
   let [brandsDataAvailable, setBrandsDataAvailable] = useState(false);
   let [brands, setBrands] = useState([]);
@@ -213,6 +220,26 @@ const AddUserPage = ({ props }) => {
 
                 <div className="indi-add-form-item d-flex flex-column">
                   <div className="indi-add-form-item-input row">
+                    <FloatingLabel label="Region">
+                      <Form.Select
+                        defaultValue={region}
+                        id="region"
+                        size="sm"
+                        className="indi-input-field indi-input-select-field"
+                        onChange={regionHandler}
+                      >
+                        {Object.keys(REGIONS).map((keyName, index) => (
+                          <option value={keyName} key={index}>
+                            {REGIONS[keyName]}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    </FloatingLabel>
+                  </div>
+                </div>
+
+                <div className="indi-add-form-item d-flex flex-column">
+                  <div className="indi-add-form-item-input row">
                     <FloatingLabel label="Initial password">
                       <Form.Control
                         type="password"
@@ -243,7 +270,6 @@ const AddUserPage = ({ props }) => {
 
                 <div className="indi-add-form-item d-flex flex-column">
                   <div className="indi-add-form-item-input row">
-
                     {brandsDataAvailable && (
                       <FloatingLabel label="Brand">
                         <Form.Select
@@ -261,7 +287,6 @@ const AddUserPage = ({ props }) => {
                         </Form.Select>
                       </FloatingLabel>
                     )}
-
                   </div>
                 </div>
 

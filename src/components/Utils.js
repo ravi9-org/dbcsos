@@ -720,12 +720,26 @@ const BADGE_TYPES = {
   },
 };
 
+const REGIONS = {
+  asia: "Asia",
+  africa: "Africa",
+  centralamerica: "Central America",
+  easterneurope: "Eastern Europe",
+  europeanunion: "European Union",
+  middleeast: "Middle East",
+  northamerica: "North America",
+  oceania: "Oceania",
+  southamerica: "South America",
+  caribbean: "Caribbean",
+};
+
 const Utils = {
   REST_API,
   APP_URLS,
   NAV_ITEMS_KEYS,
   NAV_ITEMS_VALUES,
   BADGE_TYPES,
+  REGIONS,
   userSessionExists,
   getUserProfile,
   getAllUsers,
