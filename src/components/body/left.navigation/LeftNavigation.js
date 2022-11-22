@@ -38,7 +38,7 @@ const images = {
   badges: badgesImg,
   cards: cardsImg,
   emailsignature: emailsignatureImg,
-  contacts: contactsImg,
+  //contacts: contactsImg,
   settings: settingsImg,
 };
 
@@ -50,7 +50,7 @@ const activeImages = {
   badges: badgesActiveImg,
   cards: cardsActiveImg,
   emailsignature: emailsignatureActiveImg,
-  contacts: contactsActiveImg,
+  //contacts: contactsActiveImg,
   settings: settingsActiveImg,
 };
 

@@ -57,7 +57,7 @@ const NAV_ITEMS_KEYS = [
   "badges",
   "cards",
   "emailsignature",
-  "contacts",
+  //"contacts",
   "settings",
 ];
 
@@ -97,11 +97,11 @@ const NAV_ITEMS_VALUES = {
     url: APP_URLS.EMAIL_SIGNAURE_PAGE,
     enabled: true,
   },
-  contacts: {
-    title: "Contacts",
-    url: APP_URLS.CONTACTS_PAGE,
-    enabled: true,
-  },
+  // contacts: {
+  //   title: "Contacts",
+  //   url: APP_URLS.CONTACTS_PAGE,
+  //   enabled: true,
+  // },
   settings: {
     title: "Settings",
     url: APP_URLS.SETTINGS_PAGE,
