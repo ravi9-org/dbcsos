@@ -61,7 +61,7 @@ const AddUserPage = ({ props }) => {
       isAdmin,
       picture,
     };
-
+    
     try {
       Utils.addUser(formData).then(success, fail);
     } catch (e) {
@@ -119,6 +119,24 @@ const AddUserPage = ({ props }) => {
   const handleClose = (e) => {
     props.setAddModalCanOpen(false);
   };
+
+
+  let [brandsDataAvailable, setBrandsDataAvailable] = useState(false);
+  let [brands, setBrands] = useState([]);
+
+  const brandsFetchSuccess = (res) => {
+    console.log(res);
+    setBrands(res.data);
+    setBrandsDataAvailable(true);
+    setBrand(res.data[0].name);
+  };
+  const brandsFetchFail = (err) => {
+    err?.message?.length && console.log(err);
+  };
+
+  useEffect(() => {
+    Utils.getBrands().then(brandsFetchSuccess, brandsFetchFail);
+  }, []);
 
   return (
     <>
@@ -225,16 +243,25 @@ const AddUserPage = ({ props }) => {
 
                 <div className="indi-add-form-item d-flex flex-column">
                   <div className="indi-add-form-item-input row">
-                    <FloatingLabel label="Brand">
-                      <Form.Control
-                        type="text"
-                        className="indi-input-field"
-                        id="brand"
-                        placeholder="Enter brand"
-                        autoComplete="off"
-                        onChange={brandHandler}
-                      />
-                    </FloatingLabel>
+
+                    {brandsDataAvailable && (
+                      <FloatingLabel label="Brand">
+                        <Form.Select
+                          defaultValue={brands[0].name}
+                          id="brand"
+                          size="sm"
+                          className="indi-input-field indi-input-select-field"
+                          onChange={brandHandler}
+                        >
+                          {brands?.map((brand, index) => (
+                            <option value={brand.name} key={index}>
+                              {brand.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </FloatingLabel>
+                    )}
+
                   </div>
                 </div>
 
