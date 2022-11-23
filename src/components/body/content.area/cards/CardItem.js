@@ -29,7 +29,7 @@ const CardItem = (props) => {
 
   const navigate = useNavigate();
 
-  let { userData } = useContext(ContextComponent);
+  let { userData, setCardObject = (() => { }) } = useContext(ContextComponent);
 
   const templateSuccess = (res) => {
     setTemplateBackgroundImage(res.data.backgroundImage);
@@ -56,6 +56,7 @@ const CardItem = (props) => {
     tempCardCtxInfo.data = res.data.fieldsData;
     tempCardCtxInfo.fieldsData = res.data.fieldsData;
     setCardCtxInfo(tempCardCtxInfo);
+    setCardObject(tempCardCtxInfo);
   };
 
   const fail = (err) => {
@@ -109,7 +110,7 @@ const CardItem = (props) => {
         </div>
         <div className="indi-info-wrapper">
           <div className="indi-card-name fw-bold">
-            {userData?.firstName} {userData?.lastName} ({userData?.gender})
+            {userData?.firstName} {userData?.lastName} ({userData?.pronoun})
           </div>
           <div className="indi-card-title">{userData?.designation}</div>
         </div>
@@ -129,6 +130,7 @@ const CardItem = (props) => {
             )}
           </div>
         </div>
+        <div className="indi-template-title indi-place-me-bottom-left">{cardData.cardName}</div> 
       </div>
     </CardContext.Provider>
   );

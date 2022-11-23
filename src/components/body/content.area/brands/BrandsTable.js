@@ -1,39 +1,22 @@
 import React, { useState, useContext, useEffect } from "react";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { Button, Modal } from "react-bootstrap";
 
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
 import DataTable from "../../../controls/table/DataTable";
 import AddIcon from "../../../../assets/img/add.png";
 import DeleteIcon from "../../../../assets/img/Delete.png";
-import AddUserPage from "./AddUserPage";
-import EmptyPage from "./../../../pages/EmptyPage";
+import AddBrandPage from "./AddBrandPage";
 
-const UsersTable = () => {
+const BrandsTable = () => {
   let [showDeleteModal, setShowDeleteModal] = useState(false);
   let [selectedItemCount, setSelectedItemCount] = useState(0);
 
   let [tableSelectedItems, setTableSelectedItems] = useState([]);
 
-  let { setCanRedirectToLogin, setLoadingState, userData } =
-    useContext(ContextComponent);
+  let { setCanRedirectToLogin, setLoadingState } = useContext(ContextComponent);
 
-  let [tableColumns, setTableColumns] = useState([
-    "id",
-    "select",
-    "firstName",
-    "lastName",
-    "pronoun",
-    "region",
-    "email",
-    "department",
-    "brand",
-    "title",
-    "isAdmin",
-  ]);
+  let [tableColumns, setTableColumns] = useState(["id", "select", "name"]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
     id: {
       type: "hidden",
@@ -42,72 +25,32 @@ const UsersTable = () => {
     select: {
       type: "checkbox",
       title: "-",
-    },
-    firstName: {
-      type: "text",
-      search: true,
-      sort: true,
-      title: "First name",
-    },
-    lastName: {
-      type: "text",
-      search: true,
-      sort: true,
-      title: "Last name",
-    },
-    pronoun: {
-      type: "text",
-      title: "Pronoun",
-    },
-    region: {
-      type: "text",
-      title: "Region",
-    },
-    email: {
-      type: "text",
-      search: true,
-      title: "Email",
-    },
-    department: {
-      type: "text",
-      title: "Department",
-    },
-    brand: {
-      type: "text",
-      title: "Brand",
-    },
-    title: {
-      type: "text",
-      title: "Title",
-    },
-    isAdmin: {
-      type: "boolean",
-      title: "isAdmin",
-      disabled: true,
       center: true,
+    },
+    name: {
+      type: "text",
+      search: true,
+      sort: false,
+      title: "Name",
     },
   });
 
   let [tableData, setTableData] = useState([]);
   let [canRender, setCanRender] = useState(false);
-  let [renderDataTable, setRenderDataTable] = useState(false);
-  let [renderEmptyPage, setRenderEmptyPage] = useState(false);
   let [updateTable, setUpdateTable] = useState(false);
 
-  const updateTableData = (data) => {
-    let userInfo = data;
+  const success = (res) => {
+    setLoadingState({
+      applyMask: false,
+    });
+    let userInfo = res?.data;
     let usersArray = [];
     if (!Utils.isObjectEmpty(userInfo)) {
       usersArray = userInfo.map((user, index) => {
         let userTableObj = [];
         let userTableData = [];
         tableColumns.forEach((col) => {
-          if (col === "region") {
-            let regionValue = userInfo[index][col]
-              ? Utils.REGIONS[userInfo[index][col]]
-              : "";
-            userTableData.push(regionValue);
-          } else if (col === "select") {
+          if (col === "select") {
             userTableData.push(false);
           } else if (col === "username") {
             userTableData.push(
@@ -126,16 +69,6 @@ const UsersTable = () => {
     }
   };
 
-  const success = (res) => {
-    setLoadingState({
-      applyMask: false,
-    });
-    updateTableData(res.data);
-
-    setRenderDataTable(res.data.length !== 0);
-    setRenderEmptyPage(res.data.length === 0);
-  };
-
   const fail = (err) => {
     setLoadingState({
       applyMask: false,
@@ -146,17 +79,23 @@ const UsersTable = () => {
     }
   };
 
-  const loadAllUsers = () => {
-    Utils.getAllUsers().then(success, fail);
+  const loadFreshBrands = () => {
+    Utils.getBrands().then(success, fail);
   };
 
   useEffect(() => {
     setLoadingState({
       applyMask: false,
-      text: "Loading users",
+      text: "Loading brands",
     });
-    loadAllUsers();
+    loadFreshBrands();
   }, []);
+
+  useEffect(() => {
+    if (tableData.length) {
+      // console.log("table has data now");
+    }
+  }, [tableData]);
 
   const handleShow = async (e) => {
     if (tableSelectedItems?.length > 0) {
@@ -188,7 +127,8 @@ const UsersTable = () => {
       return tableSelectedItems.indexOf(d[0]) === -1;
     });
     setTableData(tempTableData);
-    Utils.deleteUsers(tableSelectedItems).then(deleteSuccess, deleteFail);
+    console.log(tempTableData);
+    Utils.deleteBrands(tableSelectedItems).then(deleteSuccess, deleteFail);
   };
 
   let [addModalCanOpen, setAddModalCanOpen] = useState(false);
@@ -204,53 +144,14 @@ const UsersTable = () => {
 
   const saveAction = (data) => {
     //console.log(data);
-  };
-
-  let REGIONS = Utils.REGIONS;
-  let [region, setRegion] = useState(Object.keys(REGIONS)[0]);
-
-  const regionHandler = (e) => {
-    let regionId = e.currentTarget.value;
-
-    if (regionId === "clear") {
-      loadAllUsers();
-    } else {
-      const usersFilterSuccess = (res) => {
-        console.log(res);
-        updateTableData(res.data);
-      };
-      const usersFilterFail = (err) => {
-        err?.message?.length && console.log(err);
-      };
-
-      Utils.getFilteredUsers("region", regionId).then(success, fail);
-    }
+    debugger;
   };
 
   return (
     <div className="indi-body-cards-wrapper d-flex w-100">
       <div className="indi-add-card-title">
-        Users
+        Brands
         <div className="d-none1 w-50 indi-body-actions">
-          <div className="indi-body-action" role="button" onClick={handleShow}>
-            {/* <img className="indi-w-20" src={DeleteIcon} alt="Delete-icon"></img> */}
-            <FloatingLabel label="">
-              <Form.Select
-                defaultValue="clear"
-                id="region"
-                size="sm"
-                className="indi-input-field indi-input-select-field"
-                onChange={regionHandler}
-              >
-                <option value="clear">Select/Clear</option>
-                {Object.keys(REGIONS).map((keyName, index) => (
-                  <option value={keyName} key={index}>
-                    {REGIONS[keyName]}
-                  </option>
-                ))}
-              </Form.Select>
-            </FloatingLabel>
-          </div>
           <div
             className="indi-body-action"
             role="button"
@@ -267,27 +168,15 @@ const UsersTable = () => {
         </div>
       </div>
       {canRender && (
-        <>
-          {renderDataTable && (
-            <DataTable
-              minRows={0}
-              tableProps={{
-                tableColumns,
-                tableColumnSchema,
-                tableData,
-                tableSelectedItems,
-                setTableSelectedItems,
-              }}
-            />
-          )}
-          {!renderDataTable && (
-            <EmptyPage
-              props={{
-                emptyMessage: "No users are available",
-              }}
-            />
-          )}
-        </>
+        <DataTable
+          tableProps={{
+            tableColumns,
+            tableColumnSchema,
+            tableData,
+            tableSelectedItems,
+            setTableSelectedItems,
+          }}
+        />
       )}
 
       <Modal centered show={showDeleteModal} onHide={handleClose}>
@@ -295,7 +184,7 @@ const UsersTable = () => {
           <Modal.Title>Delete confirmation?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure to delete select {selectedItemCount} user(s)?
+          Are you sure to delete select {selectedItemCount} item(s)?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -308,7 +197,7 @@ const UsersTable = () => {
       </Modal>
 
       {addModalCanOpen && (
-        <AddUserPage
+        <AddBrandPage
           props={{
             addModalCanOpen,
             setAddModalCanOpen,
@@ -321,4 +210,4 @@ const UsersTable = () => {
   );
 };
 
-export default UsersTable;
+export default BrandsTable;

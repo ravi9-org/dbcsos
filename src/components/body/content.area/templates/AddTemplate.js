@@ -20,21 +20,7 @@ const AddTemplate = () => {
   let [imgDataArray, setImgDataArray] = useState(["", "", ""]);
 
   const updateSelectedBadgeInfo = (e) => {};
-  const updateSelectedUserInfo = (e) => {};
-  let [userFields, setUserFields] = useState({
-    firstName: false,
-    lastName: false,
-    email: false,
-    department: false,
-    brand: false,
-    title: false,
-  });
-  const updateUserField = (e) => {
-    let id = e.currentTarget.id;
-    let tempUserFields = { ...userFields };
-    tempUserFields[id] = e.currentTarget.checked;
-    setUserFields({ ...userFields, ...tempUserFields });
-  };
+
   const templateNameHandler = (e) => {
     setTempalteName(e.currentTarget.value);
   };
@@ -59,11 +45,9 @@ const AddTemplate = () => {
   };
 
   let [templateName, setTempalteName] = useState("");
-  let [backgroundImage, setBackgroundImage] = useState("");
 
   const onSaveTemplate = (e) => {
     let linkedBadges = [];
-    let linkedUserFields = [];
 
     badgesCtxData.map((badge) => {
       let selectItem = document.querySelector(
@@ -94,21 +78,15 @@ const AddTemplate = () => {
       }
     });
 
-    let selectedUserFields = [];
-
-    Object.keys(userFields).map((userField) => {
-      let userFieldCheckboxEle = document.querySelector("#" + userField);
-      userFieldCheckboxEle.checked && selectedUserFields.push(userField);
-    });
-
     let templateInfo = {
       templateName,
       backgroundImage: imgDataArray[0],
       logoImage: imgDataArray[1],
       profilePicture: imgDataArray[2],
       linkedBadges: linkedBadges,
-      linkedUserFields: selectedUserFields,
+      brand: selectedBrandValue
     };
+
     submitTemplateForm(templateInfo);
 
     return false;
@@ -133,6 +111,29 @@ const AddTemplate = () => {
     navigate(Utils.APP_URLS.TEMPLATES_PAGE);
   };
 
+  let [brandsDataAvailable, setBrandsDataAvailable] = useState(false);
+  let [brands, setBrands] = useState([]);
+  let [selectedBrandValue, setSelectedBrandValue] = useState("");
+
+  const brandsFetchSuccess = (res) => {
+    console.log(res);
+    setBrands(res.data);
+    setBrandsDataAvailable(true);
+    setSelectedBrandValue(res.data[0].name);
+  };
+  const brandsFetchFail = (err) => {
+    err?.message?.length && console.log(err);
+  };
+
+  useEffect(() => {
+    Utils.getBrands().then(brandsFetchSuccess, brandsFetchFail);
+  }, []);
+
+  const updateBrandValue = e => {
+    let selectedBrandName = e.currentTarget.value;
+    setSelectedBrandValue(selectedBrandName);
+  }
+
   return (
     <>
       {canRender && (
@@ -154,6 +155,24 @@ const AddTemplate = () => {
                 <Button onClick={onSaveTemplate}>Save</Button>
                 <Button onClick={navigateToTemplatesListPage}>Cancel</Button>
               </div>
+            </div>
+
+            <div className="indi-data-table-wrapper d-flex indi-text-btn-row">
+              {brandsDataAvailable && <FloatingLabel label="Select brand">
+                <Form.Select
+                  defaultValue={brands[0].name}
+                  id="brand"
+                  size="sm"
+                  className="indi-input-field indi-input-select-field"
+                  onChange={updateBrandValue}
+                >
+                  {brands?.map((brand, index) => (
+                    <option value={brand.name} key={index}>
+                      {brand.name}
+                    </option>
+                  ))}
+                </Form.Select>
+              </FloatingLabel>}
             </div>
           </div>
           <Accordion className="indi-data-table-wrapper" defaultActiveKey="0">
@@ -337,114 +356,6 @@ const AddTemplate = () => {
                         </td>
                       </tr>
                     ))}
-                  </tbody>
-                </Table>
-              </Accordion.Body>
-            </Accordion.Item>
-
-            <Accordion.Item eventKey="2">
-              <Accordion.Header>User fields selection</Accordion.Header>
-              <Accordion.Body>
-                <Table responsive="sm">
-                  <thead className="indi-data-table-header">
-                    <tr>
-                      <th>Select </th>
-                      <th>Field name </th>
-                      {/* <th>Shuffle</th> */}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="indi-data-table-tr">
-                      <td className="indi-data-table-td-badge-first-name">
-                        <Form.Check
-                          type="checkbox"
-                          onChange={updateUserField}
-                          id="firstName"
-                        />
-                      </td>
-
-                      <td className="indi-data-table-td-badge-name">
-                        First name
-                      </td>
-
-                      {/* <td className="indi-data-table-td-badge-logo">Shuffle</td> */}
-                    </tr>
-
-                    <tr className="indi-data-table-tr">
-                      <td className="indi-data-table-td-badge-last-name">
-                        <Form.Check
-                          type="checkbox"
-                          onChange={updateUserField}
-                          id="lastName"
-                        />
-                      </td>
-
-                      <td className="indi-data-table-td-badge-name">
-                        Last name
-                      </td>
-
-                      {/* <td className="indi-data-table-td-badge-logo">Shuffle</td> */}
-                    </tr>
-
-                    <tr className="indi-data-table-tr">
-                      <td className="indi-data-table-td-user-email">
-                        <Form.Check
-                          type="checkbox"
-                          onChange={updateUserField}
-                          id="email"
-                        />
-                      </td>
-
-                      <td className="indi-data-table-td-badge-name">Email</td>
-
-                      {/* <td className="indi-data-table-td-badge-logo">Shuffle</td> */}
-                    </tr>
-
-                    <tr className="indi-data-table-tr">
-                      <td className="indi-data-table-td-badge-department">
-                        <Form.Check
-                          type="checkbox"
-                          onChange={updateUserField}
-                          id="department"
-                        />
-                      </td>
-
-                      <td className="indi-data-table-td-badge-name">
-                        Department
-                      </td>
-
-                      {/* <td className="indi-data-table-td-badge-logo">Shuffle</td> */}
-                    </tr>
-
-                    <tr className="indi-data-table-tr">
-                      <td className="indi-data-table-td-badge-brand">
-                        <Form.Check
-                          type="checkbox"
-                          onChange={updateUserField}
-                          id="brand"
-                        />
-                      </td>
-
-                      <td className="indi-data-table-td-badge-name">
-                        Brand
-                      </td>
-
-                      {/* <td className="indi-data-table-td-badge-logo">Shuffle</td> */}
-                    </tr>
-
-                    <tr className="indi-data-table-tr">
-                      <td className="indi-data-table-td-badge-title">
-                        <Form.Check
-                          type="checkbox"
-                          onChange={updateUserField}
-                          id="title"
-                        />
-                      </td>
-
-                      <td className="indi-data-table-td-badge-name">Title</td>
-
-                      {/* <td className="indi-data-table-td-badge-logo">Shuffle</td> */}
-                    </tr>
                   </tbody>
                 </Table>
               </Accordion.Body>

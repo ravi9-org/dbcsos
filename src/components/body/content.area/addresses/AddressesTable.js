@@ -20,12 +20,12 @@ const AddressesTable = () => {
     "id",
     "select",
     "name",
+    "brand",
     "address",
     "city",
     "country",
     "zip",
-    "origins",
-    "contact"
+    "origins"
   ]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
     id: {
@@ -42,6 +42,10 @@ const AddressesTable = () => {
       search: true,
       sort: false,
       title: "Name",
+    },
+    brand: {
+      type: "text",
+      title: "Brand"
     },
     address: {
       type: "text",
@@ -62,10 +66,6 @@ const AddressesTable = () => {
     origins: {
       type: "text",
       title: "Longitude/Lattitude"
-    },
-    contact: {
-      type: "text",
-      title: "Assistance phone number"
     },
   });
 

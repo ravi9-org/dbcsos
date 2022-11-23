@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import { useNavigate } from "react-router";
-import { Button, Modal, Alert } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import Modal from "react-bootstrap/Modal";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import Form from "react-bootstrap/Form";
@@ -10,13 +9,15 @@ import Utils from "../../../Utils";
 const AddUserPage = ({ props }) => {
   let tableData = props?.tableData || [];
   let setTableData = props?.setTableData || (() => {});
+  let REGIONS = Utils.REGIONS || {};
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
-  let [gender, setGender] = useState("");
+  let [pronoun, setPronoun] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [department, setDepartment] = useState("");
   let [brand, setBrand] = useState("");
+  let [region, setRegion] = useState(Object.keys(REGIONS)[0]);
   let [title, setTitle] = useState("");
   let [isAdmin, setIsAdmin] = useState(false);
   let [picture, setPicture] = useState("");
@@ -33,10 +34,11 @@ const AddUserPage = ({ props }) => {
         false,
         res.data.user.firstName,
         res.data.user.lastName,
-        res.data.user.gender,
+        res.data.user.pronoun,
         res.data.user.email,
         res.data.user.department,
         res.data.user.brand,
+        res.data.user.region,
         res.data.user.title,
         res.data.user.isAdmin /*,
         res.data.user.picture,*/,
@@ -52,16 +54,16 @@ const AddUserPage = ({ props }) => {
     let formData = {
       firstName,
       lastName,
-      gender,
+      pronoun,
       email,
       password,
       department,
       brand,
+      region,
       title,
       isAdmin,
       picture,
     };
-
     try {
       Utils.addUser(formData).then(success, fail);
     } catch (e) {
@@ -79,9 +81,9 @@ const AddUserPage = ({ props }) => {
     setLastName(value);
   };
 
-  const genderHandler = (e) => {
+  const pronounHandler = (e) => {
     let value = e?.currentTarget?.value || "";
-    setGender(value);
+    setPronoun(value);
   };
 
   const emailHandler = (e) => {
@@ -104,6 +106,11 @@ const AddUserPage = ({ props }) => {
     setBrand(value);
   };
 
+  const regionHandler = (e) => {
+    let value = e?.currentTarget?.value || "";
+    setRegion(value);
+  };
+
   const titleHandler = (e) => {
     let value = e?.currentTarget?.value || "";
     setTitle(value);
@@ -119,6 +126,23 @@ const AddUserPage = ({ props }) => {
   const handleClose = (e) => {
     props.setAddModalCanOpen(false);
   };
+
+  let [brandsDataAvailable, setBrandsDataAvailable] = useState(false);
+  let [brands, setBrands] = useState([]);
+
+  const brandsFetchSuccess = (res) => {
+    console.log(res);
+    setBrands(res.data);
+    setBrandsDataAvailable(true);
+    setBrand(res.data[0].name);
+  };
+  const brandsFetchFail = (err) => {
+    err?.message?.length && console.log(err);
+  };
+
+  useEffect(() => {
+    Utils.getBrands().then(brandsFetchSuccess, brandsFetchFail);
+  }, []);
 
   return (
     <>
@@ -162,11 +186,11 @@ const AddUserPage = ({ props }) => {
 
                 <div className="indi-add-form-item d-flex flex-column">
                   <div className="indi-add-form-item-input row">
-                    <FloatingLabel label="Gender">
+                    <FloatingLabel label="Pronoun">
                       <Form.Select
                         defaultValue="Male"
-                        id="gender"
-                        onChange={genderHandler}
+                        id="pronoun"
+                        onChange={pronounHandler}
                         size="sm"
                         className="indi-input-field indi-input-select-field"
                       >
@@ -189,6 +213,26 @@ const AddUserPage = ({ props }) => {
                         autoComplete="off"
                         onChange={emailHandler}
                       />
+                    </FloatingLabel>
+                  </div>
+                </div>
+
+                <div className="indi-add-form-item d-flex flex-column">
+                  <div className="indi-add-form-item-input row">
+                    <FloatingLabel label="Region">
+                      <Form.Select
+                        defaultValue={region}
+                        id="region"
+                        size="sm"
+                        className="indi-input-field indi-input-select-field"
+                        onChange={regionHandler}
+                      >
+                        {Object.keys(REGIONS).map((keyName, index) => (
+                          <option value={keyName} key={index}>
+                            {REGIONS[keyName]}
+                          </option>
+                        ))}
+                      </Form.Select>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -225,16 +269,23 @@ const AddUserPage = ({ props }) => {
 
                 <div className="indi-add-form-item d-flex flex-column">
                   <div className="indi-add-form-item-input row">
-                    <FloatingLabel label="Brand">
-                      <Form.Control
-                        type="text"
-                        className="indi-input-field"
-                        id="brand"
-                        placeholder="Enter brand"
-                        autoComplete="off"
-                        onChange={brandHandler}
-                      />
-                    </FloatingLabel>
+                    {brandsDataAvailable && (
+                      <FloatingLabel label="Brand">
+                        <Form.Select
+                          defaultValue={brands[0].name}
+                          id="brand"
+                          size="sm"
+                          className="indi-input-field indi-input-select-field"
+                          onChange={brandHandler}
+                        >
+                          {brands?.map((brand, index) => (
+                            <option value={brand.name} key={index}>
+                              {brand.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </FloatingLabel>
+                    )}
                   </div>
                 </div>
 

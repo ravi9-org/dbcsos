@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import ContextComponent from "../../AppContext";
 import CardList from "./cards/CardsList";
 import TemplateList from "./templates/TemplatesList";
+import BrandsTable from "./brands/BrandsTable";
 import AddTemplate from "./templates/AddTemplate";
 import Utils from "../../Utils";
 import Addresses from "../../pages/Addresses";
@@ -37,10 +38,17 @@ const ContentArea = () => {
             element={<TemplateList />}
           ></Route>
         )}
+
         <Route
           path={Utils.APP_URLS.TEMPLATES_PAGE}
           exact
           element={<TemplateList />}
+        ></Route>
+
+        <Route
+          path={Utils.APP_URLS.BRANDS_PAGE}
+          exact
+          element={<BrandsTable />}
         ></Route>
 
         <Route
@@ -85,19 +93,18 @@ const ContentArea = () => {
           exact
           element={<AddressesTable />}
         ></Route>
-        
+
         <Route
           path={Utils.APP_URLS.BADGES_PAGE}
           exact
           element={<BadgesTable />}
         ></Route>
-        
+
         <Route
           path={Utils.APP_URLS.ADD_BADGE_PAGE}
           exact
           element={<AddBadgePage />}
         ></Route>
-
 
         <Route
           path={Utils.APP_URLS.USERS_PAGE}

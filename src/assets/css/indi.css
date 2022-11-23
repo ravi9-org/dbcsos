@@ -457,6 +457,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-body-action {
   margin-left: 10px;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .indi-app .indi-add-card-wrapper,
@@ -516,13 +518,24 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-card-fields {
   overflow-y: overlay;
   width: inherit;
+  margin-bottom: 36px;
 }
 
+.indi-app .indi-card-name,
+.indi-app .indi-card-name {
+  text-align: center;
+}
+
+.indi-app .indi-template-title,
 .indi-app .indi-card-title {
   padding-bottom: 8px;
   line-height: 19px;
   min-height: 24px;
   max-height: 40px;
+}
+
+.indi-app .indi-template-title {
+  font-weight: bold;
 }
 
 .indi-app .indi-card-field-wrapper>div {
@@ -876,7 +889,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-card-details-wrapper>div {
-  margin-right: 42px !important;
+  margin-right: 42px;
 }
 
 .indi-app .indi-card-item-page2-qrcode-image img {
@@ -885,10 +898,6 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-card-item-page2 {
   justify-content: space-between;
-}
-
-.indi-app .indi-body-action {
-  cursor: pointer;
 }
 
 .indi-app .indi-modal-dialog-alert .modal-body {
@@ -1263,6 +1272,22 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   line-height: 1.25;
   border-color: #2f4696;
   padding: 1rem;
+}
+
+.indi-app .form-floating>.form-select {
+  height: 28px;
+  margin-top: 8px;
+  padding-right: 40px;
+}
+
+.indi-app .indi-empty-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  height: 80%;
+  font-size: 18px;
+  border: 1px solid;
+  margin: 16px;
 }
 
 .indi-app .form-floating>.form-control.indi-input-textarea-field {
@@ -1695,4 +1720,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   width: 275px;
   border-radius: 10px;
   box-shadow: 0px 1px 6px #000;
+}
+
+.indi-app .indi-add-card-name-input {
+  min-width: 250px;
 }

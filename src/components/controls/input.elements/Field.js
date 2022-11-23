@@ -52,17 +52,14 @@ const Field = (props = {}) => {
   let isLookupField = fieldType === "address";
 
   let initFullAddress = "";
-  let initNumber = "";
 
   if (!!fieldData && isLookupField) {
     let addrId = parseInt(fieldData, 10);
     let addrIdx = addrCtxData.ids.indexOf(addrId);
     initFullAddress = addrCtxData.fullAddresses[addrIdx];
-    initNumber = addrCtxData.numbers[addrIdx];
   }
 
   let [fullAddress, setFullAddress] = useState(initFullAddress);
-  let [contact, setContact] = useState(initNumber);
 
   return (
     <div className="indi-card-field-item d-flex">
@@ -75,10 +72,6 @@ const Field = (props = {}) => {
           {isLookupField && (
             <>
               <div className="indi-card-address-text">{fullAddress}</div>
-              <div className="indi-card-number-text" title="Assistance phone number">
-                <span className="indi-add-card-address-telephone"></span>
-                <span>{contact}</span>
-              </div>
             </>
           )}
           {!isLookupField && <>{fieldData}</>}

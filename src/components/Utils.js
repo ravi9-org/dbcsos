@@ -24,6 +24,7 @@ const REST_API = {
   TEMPLATES: REST_API_PREFIX + "/templates",
   USER_CARD: REST_API_PREFIX + "/usercards",
   ADDRESSES: REST_API_PREFIX + "/addresses/",
+  BRANDS: REST_API_PREFIX + "/brands/",
 };
 
 const APP_URL_PREFIX = "";
@@ -31,6 +32,7 @@ const APP_URL_PREFIX = "";
 const APP_URLS = {
   LOGIN_PAGE: APP_URL_PREFIX + "login",
   LANDING_PAGE: APP_URL_PREFIX + "/",
+  BRANDS_PAGE: APP_URL_PREFIX + "/brands",
   TEMPLATES_PAGE: APP_URL_PREFIX + "/templates",
   ADD_TEMPLATE_PAGE: APP_URL_PREFIX + "/templates/addtemplate",
   CARDS_PAGE: APP_URL_PREFIX + "/cards",
@@ -49,12 +51,13 @@ const APP_URLS = {
 
 const NAV_ITEMS_KEYS = [
   "templates",
+  "brands",
   "users",
   "addresses",
   "badges",
   "cards",
   "emailsignature",
-  "contacts",
+  //"contacts",
   "settings",
 ];
 
@@ -62,6 +65,11 @@ const NAV_ITEMS_VALUES = {
   templates: {
     title: "Templates",
     url: APP_URLS.TEMPLATES_PAGE,
+    enabled: false,
+  },
+  brands: {
+    title: "Brands",
+    url: APP_URLS.BRANDS_PAGE,
     enabled: false,
   },
   users: {
@@ -89,11 +97,11 @@ const NAV_ITEMS_VALUES = {
     url: APP_URLS.EMAIL_SIGNAURE_PAGE,
     enabled: true,
   },
-  contacts: {
-    title: "Contacts",
-    url: APP_URLS.CONTACTS_PAGE,
-    enabled: true,
-  },
+  // contacts: {
+  //   title: "Contacts",
+  //   url: APP_URLS.CONTACTS_PAGE,
+  //   enabled: true,
+  // },
   settings: {
     title: "Settings",
     url: APP_URLS.SETTINGS_PAGE,
@@ -242,6 +250,93 @@ const deleteUsers = (usersArray) => {
   });
 
   return Promise.all(usersArray);
+};
+
+const getFilteredUsers = (filterKey, filterQuery) => {
+  const myPromise = new Promise((resolve, reject) => {
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+    if (token) {
+      let getUrl = REST_API.USER_PROFILE + "?" + filterKey + "=" + filterQuery;
+      axios
+        .get(getUrl, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          resolve(res);
+        });
+    } else {
+      reject({
+        redirect: true,
+        message: "No token available till now...",
+      });
+    }
+  });
+
+  return myPromise;
+};
+
+const addBrand = (addressData) => {
+  let formData = { ...addressData };
+  delete formData.id;
+  let url = REST_API.BRANDS;
+
+  return axios.post(url, formData);
+};
+
+const getBrands = () => {
+  const myPromise = new Promise((resolve, reject) => {
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+    if (token) {
+      let getUrl = REST_API.BRANDS;
+      axios
+        .get(getUrl, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          resolve(res);
+        });
+    } else {
+      reject({
+        redirect: true,
+        message: "No token available till now...",
+      });
+    }
+  });
+
+  return myPromise;
+};
+
+const deleteBrand = (brandId) => {
+  let url = REST_API.BRANDS;
+  return axios.delete(url + brandId);
+};
+
+const deleteBrands = (brandsArray) => {
+  let promises = [];
+  brandsArray.forEach((brand) => {
+    promises.push(deleteBrand(brand));
+  });
+  return Promise.all(brandsArray);
 };
 
 const getAddresses = () => {
@@ -639,11 +734,45 @@ const fileToDataUri = (file) => {
   });
 };
 
+const BADGE_TYPES = {
+  phone: {
+    label: "Phone",
+    formInputType: "text",
+  },
+  address: {
+    label: "Address",
+    formInputType: "textarea",
+  },
+  url: {
+    label: "URL",
+    formInputType: "text",
+  },
+  email: {
+    label: "EMail",
+    formInputType: "text",
+  },
+};
+
+const REGIONS = {
+  asia: "Asia",
+  africa: "Africa",
+  centralamerica: "Central America",
+  easterneurope: "Eastern Europe",
+  europeanunion: "European Union",
+  middleeast: "Middle East",
+  northamerica: "North America",
+  oceania: "Oceania",
+  southamerica: "South America",
+  caribbean: "Caribbean",
+};
+
 const Utils = {
   REST_API,
   APP_URLS,
   NAV_ITEMS_KEYS,
   NAV_ITEMS_VALUES,
+  BADGE_TYPES,
+  REGIONS,
   userSessionExists,
   getUserProfile,
   getAllUsers,
@@ -657,6 +786,7 @@ const Utils = {
   addBadge,
   deleteBadges,
   getUserId,
+  getFilteredUsers,
   getCardDetails,
   deleteCard,
   addNewTemplate,
@@ -668,6 +798,9 @@ const Utils = {
   executeCardEditRESTAPI,
   addOrRemoveCardFromUser,
   getUniqueSetOfArray,
+  addBrand,
+  getBrands,
+  deleteBrands,
   createSession,
   deleteSession,
   isObjectEmpty,

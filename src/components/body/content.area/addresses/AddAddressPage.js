@@ -24,6 +24,7 @@ const AddAddressPage = ({ props }) => {
         false,
         res.data.name,
         res.data.address,
+        res.data.brand,
         res.data.city,
         res.data.country,
         res.data.zip,
@@ -39,8 +40,7 @@ const AddAddressPage = ({ props }) => {
     };
 
     let formData = fullAddress;
-    console.log(formData);
-
+    formData["brand"] = selectedBrandValue;
     try {
       Utils.addAddress(formData).then(success, fail);
     } catch (e) {
@@ -59,6 +59,29 @@ const AddAddressPage = ({ props }) => {
   const handleClose = (e) => {
     props.setAddModalCanOpen(false);
   };
+
+  let [brandsDataAvailable, setBrandsDataAvailable] = useState(false);
+  let [brands, setBrands] = useState([]);
+  let [selectedBrandValue, setSelectedBrandValue] = useState("");
+
+  const brandsFetchSuccess = (res) => {
+    console.log(res);
+    setBrands(res.data);
+    setBrandsDataAvailable(true);
+    setSelectedBrandValue(res.data[0].name);
+  };
+  const brandsFetchFail = (err) => {
+    err?.message?.length && console.log(err);
+  };
+
+  useEffect(() => {
+    Utils.getBrands().then(brandsFetchSuccess, brandsFetchFail);
+  }, []);
+
+  const updateBrandValue = e => {
+    let selectedBrandName = e.currentTarget.value;
+    setSelectedBrandValue(selectedBrandName);
+  }
 
   return (
     <>
@@ -82,6 +105,28 @@ const AddAddressPage = ({ props }) => {
                         onChange={inputHandler}
                       />
                     </FloatingLabel>
+                  </div>
+                </div>
+
+                <div className="indi-add-form-item d-flex flex-column">
+                  <div className="indi-add-form-item-input row">
+                    {brandsDataAvailable && (
+                      <FloatingLabel label="Select brand">
+                        <Form.Select
+                          defaultValue={brands[0].name}
+                          id="brand"
+                          size="sm"
+                          className="indi-input-field indi-input-select-field"
+                          onChange={updateBrandValue}
+                        >
+                          {brands?.map((brand, index) => (
+                            <option value={brand.name} key={index}>
+                              {brand.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </FloatingLabel>
+                    )}
                   </div>
                 </div>
 
@@ -153,21 +198,6 @@ const AddAddressPage = ({ props }) => {
                         className="indi-input-field"
                         id="origins"
                         placeholder="Enter langitude/latitude"
-                        autoComplete="off"
-                        onChange={inputHandler}
-                      />
-                    </FloatingLabel>
-                  </div>
-                </div>
-
-                <div className="indi-add-form-item d-flex flex-column">
-                  <div className="indi-add-form-item-input row">
-                    <FloatingLabel label="Assistance phone number">
-                      <Form.Control
-                        type="text"
-                        className="indi-input-field"
-                        id="contact"
-                        placeholder="Enter assistance phone number"
                         autoComplete="off"
                         onChange={inputHandler}
                       />

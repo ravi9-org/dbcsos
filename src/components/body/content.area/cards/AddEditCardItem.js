@@ -40,6 +40,12 @@ const AddCardItem = ({ props }) => {
   let [croppedImage, setCroppedImage] = useState(
     cardInfo?.croppedImage || cardImage || ""
   );
+  let [cardName, setCardName] = useState(cardInfo?.cardName || "");
+
+  const onChangeCardName = (e) => {
+    let cardNameValue = e?.currentTarget?.value || "";
+    setCardName(cardNameValue);
+  };
 
   useEffect(() => {
     setFields(cardCtxInfo.userLinkedBadges);
@@ -141,6 +147,18 @@ const AddCardItem = ({ props }) => {
       </div>
       <div className="indi-card-fields">
         <div className="indi-card-field-wrapper">
+          <div className="indi-card-field-item d-flex">
+            <div className={`indi-card-field-item-img}`}></div>
+            <input
+              type="text"
+              className="indi-add-card-name-input"
+              required={true}
+              defaultValue={cardName}
+              //placeholder={`Enter ${fieldName}`}
+              placeholder="Enter card name"
+              onChange={onChangeCardName}
+            ></input>
+          </div>
           {fields?.map((field, index) => (
             <Field
               fieldIndex={index}
