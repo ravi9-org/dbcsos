@@ -32,8 +32,8 @@ const UserProfileMenu = () => {
   useEffect(() => {
     if (!Utils.isObjectEmpty(userData)) {
       setUserFirstName(userData.firstName);
-      if (userData?.picture) {
-        setUserImage(userData?.picture);
+      if (userData?.profileImage) {
+        setUserImage(userData?.profileImage);
       }
       setCanRender(true);
     }

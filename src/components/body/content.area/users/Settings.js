@@ -131,8 +131,9 @@ const Settings = () => {
         const fieldEle = document.querySelector("#" + fieldKey);
         fieldEle && (userObjToBeSubmit[fieldKey] = fieldEle.value);
       });
-      userObjToBeSubmit["email"] = userData.email;
-      userObjToBeSubmit["brands"] = userData.brands;
+      // userObjToBeSubmit["email"] = userData.email;
+      // userObjToBeSubmit["brands"] = userData.brands;
+      // userObjToBeSubmit["admin"] = true;
     }
     const success = (response) => {
       setErrorMessage("");     

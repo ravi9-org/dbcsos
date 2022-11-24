@@ -21,6 +21,7 @@ const REST_API = {
   LOGIN: REST_API_PREFIX + "/login",
   LOGOUT: REST_API_PREFIX + "/logout",
   USER_PROFILE: REST_API_PREFIX + "/users/",
+  EDIT_USER_PROFILE: REST_API_PREFIX + "/users/profile/",
   BADGES: REST_API_PREFIX + "/badges/",
   CARDS: REST_API_PREFIX + "/cards",
   TEMPLATES: REST_API_PREFIX + "/templates",
@@ -235,7 +236,7 @@ const addUser = (userData) => {
 const editUser = (userData, userId) => {
   let formData = { ...userData };
   delete formData.id;
-  let url = REST_API.USER_PROFILE + userId;
+  let url = REST_API.EDIT_USER_PROFILE + userId;
 
   return axios.patch(url, formData);
 };
