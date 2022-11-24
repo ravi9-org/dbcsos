@@ -1210,6 +1210,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   height: 64px;
   border-radius: 50%;
   background-size: contain !important;
+  background-repeat: no-repeat;
 }
 
 .indi-app .indi-add-form-wrapper {

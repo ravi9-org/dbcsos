@@ -22,6 +22,7 @@ const BadgesTable = () => {
     "name",
     "iconImage",
     "darkIconImage",
+    "prefixurl",
     "type",
   ]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
@@ -50,6 +51,10 @@ const BadgesTable = () => {
       title: "Icon label",
       center: true,
     },
+    prefixurl: {
+      type: "text",
+      title: "Prefix Url",
+    },
     type: {
       type: "text",
       title: "Type",
@@ -72,7 +77,9 @@ const BadgesTable = () => {
         let userTableData = [];
         tableColumns.forEach((col) => {          
           if (col === "type") {
-            let badgeDisplayName = Utils.BADGE_TYPES[userInfo[index][col]].label;
+            let fieldType = userInfo[index][col] === "text" ? "phone" : userInfo[index][col];
+            
+            let badgeDisplayName = Utils.BADGE_TYPES[fieldType].label;
             userTableData.push(badgeDisplayName);
           } else if (col === "select") {
             userTableData.push(false);

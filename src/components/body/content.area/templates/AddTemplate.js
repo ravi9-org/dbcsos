@@ -50,44 +50,55 @@ const AddTemplate = () => {
   const onSaveTemplate = (e) => {
     let linkedBadges = [];
 
-    // badgesCtxData.map((badge) => {
-    //   let selectItem = document.querySelector(
+    // badges.map((badge, index) => {
+    //   let badgeEle = document.querySelector(
     //     ".indi-template-badge-select-" + badge.badgeUID + " input"
     //   );
-    //   if (selectItem.checked) {
-    //     let isConstant = document.querySelector(
-    //       ".indi-template-badge-constant-" + badge.badgeUID + " input"
-    //     ).checked;
-    //     let isDefault = document.querySelector(
-    //       ".indi-template-badge-isdefault-" + badge.badgeUID + " input"
-    //     ).checked;
-    //     let isMultiple = document.querySelector(
-    //       ".indi-template-badge-multiple-" + badge.badgeUID + " input"
-    //     ).checked;
-    //     let defaulValue =
-    //       document.querySelector(
-    //         ".indi-template-badge-defaultvalue-" + badge.badgeUID
-    //       ).value || "";
-    //     linkedBadges.push({
-    //       [badge.badgeUID]: {
-    //         constant: isConstant,
-    //         isDefault: isDefault,
-    //         multiple: isMultiple,
-    //         defaultValue: defaulValue,
-    //       },
-    //     });
+    //   if (badgeEle?.checked) {
+
     //   }
     // });
+
+    badges.map((badge, index) => {
+      let selectItem = document.querySelector(
+        ".indi-template-badge-select-" + badge.badgeUID + " input"
+      );
+      if (selectItem?.checked) {
+        let isConstant = document.querySelector(
+          ".indi-template-badge-constant-" + badge.badgeUID + " input"
+        ).checked;
+        let isDefault = document.querySelector(
+          ".indi-template-badge-isdefault-" + badge.badgeUID + " input"
+        ).checked;
+        let isMultiple = document.querySelector(
+          ".indi-template-badge-multiple-" + badge.badgeUID + " input"
+        ).checked;
+        let defaulValue =
+          document.querySelector(
+            ".indi-template-badge-defaultvalue-" + badge.badgeUID
+          ).value || "";
+        linkedBadges.push({
+          id: badge.id,
+          constant: isConstant,
+          default: isDefault,
+          multiple: isMultiple,
+          defaultValue: defaulValue,
+        });
+      }
+    });
 
     let templateInfo = {
       templateName,
       backgroundImage: imgDataArray[0],
       logoImage: imgDataArray[1],
       profilePicture: imgDataArray[2],
-      linkedBadges: linkedBadges,
+      linkedBadges: linkedBadges, //
       brand: selectedBrandValue,
     };
 
+    console.log(templateInfo);
+
+    // debugger;
     submitTemplateForm(templateInfo);
 
     return false;

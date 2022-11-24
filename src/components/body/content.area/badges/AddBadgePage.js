@@ -11,6 +11,7 @@ const AddBadgePage = ({ props }) => {
   let tableData = props?.tableData || [];
   let setTableData = props?.setTableData || (() => {});
   let [badgeName, setBadgeName] = useState("");
+  let [prefixUrl, setPrefixUrl] = useState("");
   let [badgeType, setBadgeType] = useState("text");
   let [badgeIconImage, setBadgeIconImage] = useState("");
   let [badgeDarkIconImage, setBadgeDarkIconImage] = useState("");
@@ -43,10 +44,10 @@ const AddBadgePage = ({ props }) => {
       iconImage: badgeIconImage,
       darkIconImage: badgeDarkIconImage,
       name: badgeName,
+      prefixurl: prefixUrl,
       badgeUID: badgeUID,
       type: badgeType,
     };
-
     try {
       Utils.addBadge(formData).then(success, fail);
     } catch (e) {
@@ -59,6 +60,11 @@ const AddBadgePage = ({ props }) => {
     let badgeUID = value.trim().replaceAll(" ", "").toLowerCase();
     setBadgeName(value);
     setBadgeUID(badgeUID);
+  };
+
+  const prefixUrlHandler = (e) => {
+    let value = e?.currentTarget?.value || "";
+    setPrefixUrl(value);
   };
 
   const selectHandler = (e) => {
@@ -135,18 +141,36 @@ const AddBadgePage = ({ props }) => {
 
                 <div className="indi-add-form-item d-flex flex-column">
                   <div className="indi-add-form-item-input row">
+                    <FloatingLabel label="Prefix Url">
+                      <Form.Control
+                        type="text"
+                        className="indi-input-field"
+                        id="prefixUrl"
+                        placeholder="Enter prefix url"
+                        autoComplete="off"
+                        onChange={prefixUrlHandler}
+                      />
+                    </FloatingLabel>
+                  </div>
+                </div>
+
+                <div className="indi-add-form-item d-flex flex-column">
+                  <div className="indi-add-form-item-input row">
                     <FloatingLabel label="Badge type">
                       <Form.Select
-                        defaultValue="text"
+                        defaultValue={Object.keys(Utils.BADGE_TYPES)[0]}
                         id="type"
                         onChange={selectHandler}
                         size="sm"
                         className="indi-input-field indi-input-select-field"
                       >
-                        <option value="text">Text</option>
-                        <option value="textarea">Textarea</option>
-                        <option value="select">Select</option>
-                        <option value="boolean">Boolean</option>
+                        {Object.keys(Utils.BADGE_TYPES).map(
+                          (badgeKey, index) => (
+                            <option value={badgeKey} key={index}>
+                              {Utils.BADGE_TYPES[badgeKey].label}
+                            </option>
+                          )
+                        )}
                       </Form.Select>
                     </FloatingLabel>
                   </div>
@@ -167,7 +191,7 @@ const AddBadgePage = ({ props }) => {
                   </div>
                   <div
                     className="indi-img-preview"
-                    style={{ background: `url(${iconImagePreview})` }}
+                    style={{ backgroundImage: `url(${iconImagePreview})` }}
                   ></div>
                 </div>
 
@@ -186,7 +210,7 @@ const AddBadgePage = ({ props }) => {
                   </div>
                   <div
                     className="indi-img-preview"
-                    style={{ background: `url(${iconDarkImagePreview})` }}
+                    style={{ backgroundImage: `url(${iconDarkImagePreview})` }}
                   ></div>
                 </div>
               </div>

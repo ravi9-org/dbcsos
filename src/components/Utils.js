@@ -738,19 +738,19 @@ const fileToDataUri = (file) => {
 };
 
 const BADGE_TYPES = {
-  PHONE: {
+  phone: {
     label: "Phone",
     formInputType: "text",
   },
-  ADDRESS: {
+  address: {
     label: "Address",
     formInputType: "textarea",
   },
-  URL: {
+  url: {
     label: "URL",
     formInputType: "text",
   },
-  EMAIL: {
+  email: {
     label: "EMail",
     formInputType: "text",
   },

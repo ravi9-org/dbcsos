@@ -5,67 +5,66 @@ import ContextComponent from "../AppContext";
 import Utils from "../Utils";
 
 const Body = () => {
-  let { addrCtxData, setAddrCtxData } = useContext(ContextComponent);
-  let [canRender, setCanRender] = useState(false);
+  let [canRender, setCanRender] = useState(true);
 
-  useEffect(() => {
-    const success = (res) => {
-      let data = res.data;
-      let tempAddrIds = [];
-      let tempAddrNames = [];
-      let tempAddrValues = [];
-      let tempCityValues = [];
-      let tempCountryValues = [];
-      let tempZipValues = [];
-      let tempFullAddrValues = [];
-      let tempAddrNumbers = [];
-      data.map((addr, index) => {
-        tempAddrIds.push(addr.id);
-        tempAddrNames.push(addr.name);
+  // useEffect(() => {
+  //   const success = (res) => {
+  //     let data = res.data;
+  //     let tempAddrIds = [];
+  //     let tempAddrNames = [];
+  //     let tempAddrValues = [];
+  //     let tempCityValues = [];
+  //     let tempCountryValues = [];
+  //     let tempZipValues = [];
+  //     let tempFullAddrValues = [];
+  //     let tempAddrNumbers = [];
+  //     data.map((addr, index) => {
+  //       tempAddrIds.push(addr.id);
+  //       tempAddrNames.push(addr.name);
 
-        let address = addr?.address || "";
-        let city = addr?.city || "";
-        let country = addr?.country || "";
-        let zip = addr?.zip || "";
+  //       let address = addr?.address || "";
+  //       let city = addr?.city || "";
+  //       let country = addr?.country || "";
+  //       let zip = addr?.zip || "";
 
-        tempAddrValues.push(address);
-        tempCityValues.push(city);
-        tempCountryValues.push(country);
-        tempZipValues.push(zip);
+  //       tempAddrValues.push(address);
+  //       tempCityValues.push(city);
+  //       tempCountryValues.push(country);
+  //       tempZipValues.push(zip);
 
-        tempFullAddrValues.push(
-          address + " " + city + " " + country + " " + zip
-        );
-        tempAddrNumbers.push(addr.contact);
-      });
+  //       tempFullAddrValues.push(
+  //         address + " " + city + " " + country + " " + zip
+  //       );
+  //       tempAddrNumbers.push(addr.contact);
+  //     });
 
-      let addrObj = {
-        ids: tempAddrIds,
-        addressNames: tempAddrNames,
-        addresses: tempAddrValues,
-        cities: tempCityValues,
-        countries: tempCountryValues,
-        fullAddresses: tempFullAddrValues,
-        numbers: tempAddrNumbers,
-      };
-      setAddrCtxData(addrObj);
-    };
-    const fail = (err) => {
-      console.log(err);
-    };
+  //     let addrObj = {
+  //       ids: tempAddrIds,
+  //       addressNames: tempAddrNames,
+  //       addresses: tempAddrValues,
+  //       cities: tempCityValues,
+  //       countries: tempCountryValues,
+  //       fullAddresses: tempFullAddrValues,
+  //       numbers: tempAddrNumbers,
+  //     };
+  //     setAddrCtxData(addrObj);
+  //   };
+  //   const fail = (err) => {
+  //     console.log(err);
+  //   };
 
-    try {
-      Utils.getAddresses().then(success, fail);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
+  //   try {
+  //     Utils.getAddresses().then(success, fail);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    if (!Utils.isObjectEmpty(addrCtxData)) {
-      setCanRender(true);
-    }
-  }, [addrCtxData]);
+  // useEffect(() => {
+  //   if (!Utils.isObjectEmpty(addrCtxData)) {
+  //     setCanRender(true);
+  //   }
+  // }, [addrCtxData]);
 
   return (
     <>
