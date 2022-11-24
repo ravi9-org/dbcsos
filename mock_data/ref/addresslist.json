@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Address1",
+        "city": "London",
+        "country": "United Kingdom",
+        "zip": "W3BC6",
+        "address": "test address--London",
+        "longitude": "100.54",
+        "latitude": "123.34",
+        "brandId": 3,
+        "brandName": "InternationalSOS"
+    },
+    {
+        "id": 2,
+        "name": "Address2",
+        "city": "Manchestor",
+        "country": "Great Britain",
+        "zip": "ABCDEF",
+        "address": "Manchestor Address",
+        "longitude": "587.23",
+        "latitude": "325.25",
+        "brandId": 3,
+        "brandName": "InternationalSOS"
+    }
+]
