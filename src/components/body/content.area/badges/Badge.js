@@ -35,10 +35,8 @@ const Badge = (props) => {
     e.preventDefault();
     if (freezeBadge) {
       // do nothing
-      console.log("do nothing");
-      debugger;
+      // console.log("do nothing");
     } else {
-      debugger;
       if (!isMultiple) {
         setFreezeBadge(true);
         setClassNameList("indi-badge-freeze");

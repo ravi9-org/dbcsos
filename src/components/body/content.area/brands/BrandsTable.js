@@ -138,14 +138,14 @@ const BrandsTable = () => {
     setAddModalCanOpen(true);
   };
 
-  const closeAddModal = (e) => {
-    setAddModalCanOpen(false);
-  };
+  // const closeAddModal = (e) => {
+  //   setAddModalCanOpen(false);
+  // };
 
-  const saveAction = (data) => {
-    //console.log(data);
-    debugger;
-  };
+  // const saveAction = (data) => {
+  //   //console.log(data);
+  //   debugger;
+  // };
 
   return (
     <div className="indi-body-cards-wrapper d-flex w-100">

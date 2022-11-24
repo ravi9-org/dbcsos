@@ -174,11 +174,6 @@ const AddressesTable = () => {
     setAddModalCanOpen(false);
   };
 
-  const saveAction = (data) => {
-    //console.log(data);
-    debugger;
-  };
-
   return (
     <div className="indi-body-cards-wrapper d-flex w-100">
       <div className="indi-add-card-title">

@@ -34,7 +34,6 @@ const CardItem = (props) => {
   let { userData, setCardObject = (() => { }) } = useContext(ContextComponent);
 
   const success = (res) => {
-    debugger;
     setCardData(res.data);
     
     setFields(res.data.userLinkedBadges);

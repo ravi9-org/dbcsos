@@ -137,9 +137,6 @@ const AddCard = (props) => {
     submitCardInfo.croppedImage = imageValues[1];
     submitCardInfo.cardName = cardNameValue;
     submitCardInfo.customId = cardNameValue.toLowerCase().replaceAll(" ", "") + "";
-    
-    console.log(submitCardInfo);
-    debugger;
 
     const success = (res) => {
       updateUserInfo(res.data.id);

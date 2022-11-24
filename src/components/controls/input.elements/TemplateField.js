@@ -41,7 +41,7 @@ const Field = (props = {}) => {
     // });
     // setCardCtxInfo(tempCardCtxInfo);
     // //inform form about new field to be add
-    debugger;
+    // debugger;
   };
 
   let bgImg = linkedBadge.darkIconImage;
