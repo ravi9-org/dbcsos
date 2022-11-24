@@ -4,27 +4,28 @@ import ContextComponent from "../../AppContext";
 import CardContext from "../../body/content.area/cards/CardContext";
 import Utils from "../../Utils";
 
-const Field = (props = {}) => {
-  let [canRender, setCanRender] = useState(false);
-  let templateBadges = props?.fieldProps?.templateBadges || [];
-  let { badgesCtxData, addrCtxData } = useContext(ContextComponent);
+const Field = (props = {}) => {  
   let { cardCtxInfo, setCardCtxInfo } = useContext(CardContext);
 
-  let fieldIndex = props.fieldIndex;
+  let fieldIndex = props?.fieldIndex || 0;
   let fieldProps = props.fieldProps;
-  let fieldType = fieldProps.fieldType;
+  let fieldType = fieldProps.badgeUID;
   let showEmptyField = fieldProps?.showEmptyField || false;
-  let fieldSchema = badgesCtxData.filter((b) => b.badgeUID === fieldType)[0];
-  templateBadges?.map((field) => {
-    let schemaObj = field[fieldSchema.badgeUID];
-    if (!Utils.isObjectEmpty(schemaObj)) {
-      fieldSchema = { ...fieldSchema, ...schemaObj };
-    }
-  });
+  let fieldSchema = fieldProps;
+  let iconDarkImage = fieldProps.darkIconImage; 
 
-  let isDefault = fieldSchema?.isDefault;
+  // templateBadges?.map((field) => {
+  //   // let schemaObj = field[fieldSchema.badgeUID];
+  //   let schemaObj = field[fieldSchema.badgeUID];
+  //   if (!Utils.isObjectEmpty(schemaObj)) {
+  //     fieldSchema = { ...fieldSchema, ...schemaObj };
+  //   }
+  // });
 
-  let fieldData = fieldProps.fieldData;
+  let isDefault = fieldSchema?.default;
+
+  let fieldData = fieldProps.value || fieldProps.defaultValue;
+  
   let isEmpty = false;
   if ((fieldData === undefined || fieldData?.length === 0) && showEmptyField) {
     isEmpty = true;
@@ -55,8 +56,9 @@ const Field = (props = {}) => {
 
   if (!!fieldData && isLookupField) {
     let addrId = parseInt(fieldData, 10);
-    let addrIdx = addrCtxData.ids.indexOf(addrId);
-    initFullAddress = addrCtxData.fullAddresses[addrIdx];
+    // let addrIdx = addrCtxData.ids.indexOf(addrId);
+    // initFullAddress = addrCtxData.fullAddresses[addrIdx];
+    initFullAddress = "";
   }
 
   let [fullAddress, setFullAddress] = useState(initFullAddress);
@@ -64,8 +66,8 @@ const Field = (props = {}) => {
   return (
     <div className="indi-card-field-item d-flex">
       <div
-        className={`indi-card-field-item-img indi-card-field-item-${fieldType}`}
-      ></div>
+        style={{ backgroundImage: `url(${iconDarkImage})` }}
+        className="indi-card-field-item-img"></div>
 
       {(mode === "readonly" || (mode !== "add" && mode !== "edit")) && (
         <div className="indi-card-field-item-value">

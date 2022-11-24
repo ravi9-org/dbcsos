@@ -29,11 +29,9 @@ const AddCard = (props) => {
   };
 
   templateData?.linkedBadges?.map((badge, index) => {
-    if (Object.values(badge)[0].isDefault) {
-      detailsForAddCardPage.card.userLinkedBadges.push(Object.keys(badge)[0]);
-      detailsForAddCardPage.card.fieldsData.push(
-        Object.values(badge)[0].defaultValue
-      );
+    if (badge.default) {
+      detailsForAddCardPage.card.userLinkedBadges.push(badge);
+      detailsForAddCardPage.card.fieldsData.push(badge.defaultValue);
     }
   });
 
@@ -92,7 +90,6 @@ const AddCard = (props) => {
       setCroppedImageValue(imgVal);
       imageValues.push(imgVal);
     }
-
     submitForm(dataValues, imageValues, cardNameValue);
   };
 
@@ -121,11 +118,28 @@ const AddCard = (props) => {
 
   const submitForm = (dataValues = {}, imageValues = [], cardNameValue = "") => {
     let info = { ...cardCtxInfo };
+    let submitCardInfo = { ...info, userLinkedBadges: []};
 
-    info.fieldsData = dataValues;
-    info.cardImage = imageValues[0];
-    info.croppedImage = imageValues[1];
-    info.cardName = cardNameValue;
+    
+
+    console.log(dataValues);
+    info.userLinkedBadges.map((badge, index) => {
+      let badgeData = {
+        "badgeId": badge.badgeId,
+        "badgeName": badge.badgeName,
+        "badgeOrder": index,
+        "value": dataValues[index]
+      };
+      submitCardInfo.userLinkedBadges.push(badgeData);
+    });
+
+    submitCardInfo.cardImage = imageValues[0];
+    submitCardInfo.croppedImage = imageValues[1];
+    submitCardInfo.cardName = cardNameValue;
+    submitCardInfo.customId = cardNameValue.toLowerCase().replaceAll(" ", "") + "";
+    
+    console.log(submitCardInfo);
+    debugger;
 
     const success = (res) => {
       updateUserInfo(res.data.id);
@@ -136,7 +150,7 @@ const AddCard = (props) => {
     };
 
     try {
-      Utils.executeCardAddRESTAPI(info).then(success, fail);
+      Utils.executeCardAddRESTAPI(submitCardInfo).then(success, fail);
     } catch (e) {
       console.log(e);
     }

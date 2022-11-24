@@ -288,6 +288,39 @@ const getFilteredUsers = (filterKey, filterQuery) => {
   return myPromise;
 };
 
+const getUserCardsList = () => {
+  const myPromise = new Promise((resolve, reject) => {
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+    if (token) {
+      let getUrl = REST_API.USER_CARD;
+      axios
+        .get(getUrl, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then((res) => {
+          resolve(res);
+        });
+    } else {
+      reject({
+        redirect: true,
+        message: "No token available till now...",
+      });
+    }
+  });
+
+  return myPromise;
+};
+
 const addBrand = (addressData) => {
   let formData = { ...addressData };
   delete formData.id;
@@ -789,6 +822,7 @@ const Utils = {
   addUser,
   editUser,
   deleteUsers,
+  getUserCardsList,
   deleteAddresses,
   getAddresses,
   addAddress,

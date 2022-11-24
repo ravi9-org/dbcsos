@@ -10,10 +10,11 @@ import Utils from "../../../Utils";
 
 const AddCardItem = ({ props }) => {
   let pageInfo = props?.pageInfo || {};
+  console.log(pageInfo);
   let templateInfo = pageInfo?.template || {};
   let cardInfo = pageInfo?.card || {};
 
-  let { userData, badgesCtxData } = useContext(ContextComponent);
+  let { userData } = useContext(ContextComponent);
   let { cardCtxInfo } = useContext(CardContext);
 
   let pageMode = props.pageMode || "add";
@@ -104,6 +105,10 @@ const AddCardItem = ({ props }) => {
     </Popover>
   );
 
+  // fields?.map((field, index) => { 
+  //   console.log(field);
+  //   debugger;
+  // });
   return (
     <div
       className="indi-card-item-parent indi-add-card-wrapper card-with-bg"
@@ -163,7 +168,8 @@ const AddCardItem = ({ props }) => {
             <Field
               fieldIndex={index}
               fieldProps={{
-                fieldType: field,
+                fieldSchema: field,
+                fieldType: field.badgeUID,
                 inputElementClassNames,
                 fieldData: fieldsData[index],
                 templateBadges,

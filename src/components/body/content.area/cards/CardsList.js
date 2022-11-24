@@ -7,16 +7,29 @@ import Utils from "../../../Utils";
 import CardItem from "./CardItem";
 
 const CardsList = () => {
+  let [canRender, setCanRender] = useState(false);
   let { userData } = useContext(ContextComponent);
 
   let [userCards, setUserCards] = useState(userData?.cards || []);
   let navigate = useNavigate();
 
+  // useEffect(() => {
+  //   if (userData?.cards?.length) {
+  //     setUserCards(Utils.getUniqueSetOfArray(userData.cards));
+  //   }
+  // }, [userData]);
+
+  const success = (res) => {
+    setUserCards(res.data || {});
+    setCanRender(true);
+  };
+  const fail = (err) => {
+    err?.message?.length && console.log(err);
+  };
+
   useEffect(() => {
-    if (userData?.cards) {
-      setUserCards(Utils.getUniqueSetOfArray(userData.cards));
-    }
-  }, [userData]);
+    Utils.getUserCardsList().then(success, fail);
+  }, []);
 
   const navgiatToAddPage = (e) => {
     e.preventDefault();
@@ -24,7 +37,7 @@ const CardsList = () => {
   };
   return (
     <>
-      <div className="indi-body-cards-wrapper d-flex w-100">
+      {canRender && <div className="indi-body-cards-wrapper d-flex w-100">
         <div className="indi-body-action-bar w-100">
           <div className="w-50 indi-body-action-bar-title">
             Digital Business Cards
@@ -43,13 +56,13 @@ const CardsList = () => {
               Add card
             </div>
           </div>
-          {userCards.map((id, index) => (
+          {userCards.map((card, index) => (
             <div className="indi-card-item-wrapper" key={index}>
-              <CardItem cardId={id} applyActions={true} />
+              <CardItem cardId={card.id} card={card} applyActions={true} />
             </div>
           ))}
         </div>
-      </div>
+      </div>}
     </>
   );
 };

@@ -7,7 +7,7 @@ import Utils from "../../Utils";
 
 const InputElement = ({ props = {} }) => {
   let schema = props.fieldSchema || {};
-  let fieldType = schema?.type;
+  let fieldType = schema.badgeType;
   let fieldData = props?.fieldData;
   let fieldName = props?.fieldName;
   let inputElementClassNames = props?.inputElementClassNames;
