@@ -24,7 +24,7 @@ const Footer = () => {
             className="nav-item d-none d-sm-inline-block"
           >
             <a href="/" className="nav-link pl-0 footer-list">
-              About internationality SOS
+              About International SOS
             </a>
           </li>
           <li key="privacynotice" className="nav-item d-none d-sm-inline-block">
