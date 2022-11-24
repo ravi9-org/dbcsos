@@ -32,7 +32,7 @@ const UsersTable = () => {
     "department",
     "brand",
     "title",
-    "isAdmin",
+    "admin",
   ]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
     id: {
@@ -80,9 +80,9 @@ const UsersTable = () => {
       type: "text",
       title: "Title",
     },
-    isAdmin: {
+    admin: {
       type: "boolean",
-      title: "isAdmin",
+      title: "admin",
       disabled: true,
       center: true,
     },
@@ -109,6 +109,8 @@ const UsersTable = () => {
             userTableData.push(regionValue);
           } else if (col === "select") {
             userTableData.push(false);
+          } else if (col === "brand") {
+            userTableData.push(userInfo[0].brands[0]);
           } else if (col === "username") {
             userTableData.push(
               userInfo[index].firstName + " " + userInfo[index].lastName
@@ -242,7 +244,7 @@ const UsersTable = () => {
                 className="indi-input-field indi-input-select-field"
                 onChange={regionHandler}
               >
-                <option value="clear">Select/Clear</option>
+                <option value="clear">All</option>
                 {Object.keys(REGIONS).map((keyName, index) => (
                   <option value={keyName} key={index}>
                     {REGIONS[keyName]}

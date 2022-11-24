@@ -28,7 +28,8 @@ const AddAddressPage = ({ props }) => {
         res.data.city,
         res.data.country,
         res.data.zip,
-        res.data.origins,
+        res.data.longitude,
+        res.data.latitude,
         res.data.contact,
       ];
       let tempTableData = [...tableData];
@@ -192,12 +193,27 @@ const AddAddressPage = ({ props }) => {
 
                 <div className="indi-add-form-item d-flex flex-column">
                   <div className="indi-add-form-item-input row">
-                    <FloatingLabel label="Langitude/Latitude">
+                    <FloatingLabel label="Longitude">
                       <Form.Control
                         type="text"
                         className="indi-input-field"
-                        id="origins"
-                        placeholder="Enter langitude/latitude"
+                        id="longitude"
+                        placeholder="Enter longitude"
+                        autoComplete="off"
+                        onChange={inputHandler}
+                      />
+                    </FloatingLabel>
+                  </div>
+                </div>
+
+                <div className="indi-add-form-item d-flex flex-column">
+                  <div className="indi-add-form-item-input row">
+                    <FloatingLabel label="Latitude">
+                      <Form.Control
+                        type="text"
+                        className="indi-input-field"
+                        id="latitude"
+                        placeholder="Enter latitude"
                         autoComplete="off"
                         onChange={inputHandler}
                       />

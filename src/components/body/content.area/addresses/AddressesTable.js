@@ -25,7 +25,8 @@ const AddressesTable = () => {
     "city",
     "country",
     "zip",
-    "origins"
+    "longitude",
+    "latitude"
   ]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
     id: {
@@ -63,9 +64,13 @@ const AddressesTable = () => {
       type: "text",
       title: "Zip code"
     },
-    origins: {
+    longitude: {
       type: "text",
-      title: "Longitude/Lattitude"
+      title: "Longitude"
+    },
+    latitude: {
+      type: "text",
+      title: "Latitude"
     },
   });
 

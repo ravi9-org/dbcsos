@@ -20,18 +20,18 @@ import EditCard from "./cards/EditCardPage";
 import CardDetailsPage from "./cards/CardDetailsPage";
 
 const ContentArea = () => {
-  let [isAdmin, setIsAdmin] = useState(false);
+  let [admin, setAdmin] = useState(false);
 
   let { userData } = useContext(ContextComponent);
 
   useEffect(() => {
-    setIsAdmin(!!userData?.isAdmin);
-  }, [isAdmin, userData]);
+    setAdmin(!!userData?.admin);
+  }, [admin, userData]);
 
   return (
     <div className="indi-content-area-wrapper d-flex h-100">
       <Routes>
-        {isAdmin && (
+        {admin && (
           <Route
             path={Utils.APP_URLS.LANDING_PAGE}
             exact
@@ -57,7 +57,7 @@ const ContentArea = () => {
           element={<AddTemplate />}
         ></Route>
 
-        {!isAdmin && (
+        {!admin && (
           <Route
             path={Utils.APP_URLS.LANDING_PAGE}
             exact

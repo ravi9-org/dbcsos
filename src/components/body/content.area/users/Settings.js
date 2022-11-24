@@ -7,16 +7,16 @@ import ContextComponent from "../../../AppContext";
 import ProfilePicture from "./../../../../assets/img/default-profile.png";
 
 const Settings = () => {
-  let { userData, setUserData } = useContext(ContextComponent);
+  let { userData, setUserData, setLoadingState } = useContext(ContextComponent);
 
   let [canRender, setCanRender] = useState(false);
   let [userInfo, setUserInfo] = useState({});
-  let [profilePicture, setProfilePicture] = useState(ProfilePicture);
+  let [profileImage, setProfileImage] = useState(ProfilePicture);
 
   useEffect(() => {
     if (!Utils.isObjectEmpty(userData)) {
-      if (!!userData.picture) {
-        setProfilePicture(userData.picture);
+      if (!!userData.profileImage) {
+        setProfileImage(userData.profileImage || ProfilePicture);
       }
       setUserInfo(userData);
     }
@@ -73,7 +73,14 @@ const Settings = () => {
   let obj = {
     email: ["email"],
     resetpassword: ["password", "confirmPassword"],
-    profile: ["firstName", "lastName", "title", "department", "brand", "picture"],
+    profile: [
+      "firstName",
+      "lastName",
+      "title",
+      "department",
+      "pronoun",
+      "profileImage",
+    ],
   };
 
   let [errorMessage, setErrorMessage] = useState("");
@@ -85,9 +92,9 @@ const Settings = () => {
   const fileChangeHandler = async (e) => {
     let file = e.currentTarget.files[0];
     await Utils.fileToDataUri(file).then((dataUri) => {
-      setProfilePicture(dataUri);
+      setProfileImage(dataUri);
     });
-  }
+  };
 
   const handleUpdate = (e) => {
     let userObjToBeSubmit = {};
@@ -113,26 +120,46 @@ const Settings = () => {
       setErrorMessage("");
       userObjToBeSubmit["password"] = newPwd;
     } else {
-      obj[postfix].map((fieldKey, index) => {
-        userObjToBeSubmit[fieldKey] = document.querySelector(
-          "#" + fieldKey
-        ).value;
+
+      setLoadingState({
+        applyMask: true,
+        text: "Updating profile information",
       });
+
+
+      obj[postfix].map((fieldKey, index) => {
+        const fieldEle = document.querySelector("#" + fieldKey);
+        fieldEle && (userObjToBeSubmit[fieldKey] = fieldEle.value);
+      });
+      userObjToBeSubmit["email"] = userData.email;
+      userObjToBeSubmit["brands"] = userData.brands;
     }
     const success = (response) => {
-      setErrorMessage("");
-      setUserData(response.data);
-      handleClose();
+      setErrorMessage("");     
+
+      const userFetchSuccess = (response) => {
+        setErrorMessage("");
+        setUserData(response.data);
+        handleClose();
+        setLoadingState({
+          applyMask: false
+        });
+      };
+
+      Utils.getUserProfile().then(userFetchSuccess, fail);
+
     };
 
     const fail = (err) => {
       err?.message?.length && console.log(err);
       setErrorMessage(err);
     };
+    console.log(userObjToBeSubmit);
+    // debugger;
     Utils.editUser(userObjToBeSubmit, userData.id).then(success, fail);
   };
 
-  
+  const pronounChangeHandler = (e) => {};
 
   return (
     <>
@@ -200,10 +227,14 @@ const Settings = () => {
                   onChange={fileChangeHandler}
                   className="indi-card-upload-picture-file-input"
                 />
-                <input type="hidden" id="picture" defaultValue={profilePicture} />
+                <input
+                  type="hidden"
+                  id="profileImage"
+                  defaultValue={profileImage}
+                />
                 <img
                   className="indi-card-upload-picture-img-input"
-                  src={profilePicture}
+                  src={profileImage}
                   alt="profilepic"
                 />
               </div>
@@ -264,7 +295,8 @@ const Settings = () => {
                 onChange={profileFieldChangeHandler}
               />
             </FloatingLabel>
-            <FloatingLabel
+
+            {/* <FloatingLabel
               label="Brand"
               className="indi-modal-edit-user-profile-floating-inputs"
             >
@@ -274,9 +306,25 @@ const Settings = () => {
                 id="brand"
                 placeholder="Enter brand"
                 autoComplete="off"
-                defaultValue={userData.brand}
+                defaultValue={userData.brands[0]}
                 onChange={profileFieldChangeHandler}
               />
+            </FloatingLabel> */}
+
+            <FloatingLabel label="Select pronoun">
+              <Form.Select
+                defaultValue={userData.pronoun}
+                id="pronoun"
+                size="sm"
+                className="indi-input-field indi-input-select-field"
+                onChange={profileFieldChangeHandler}
+              >
+                {Object.keys(Utils.PRONOUNS)?.map((key, index) => (
+                  <option value={key} key={index}>
+                    {Utils.PRONOUNS[key]}
+                  </option>
+                ))}
+              </Form.Select>
             </FloatingLabel>
           </div>
         </Modal.Body>
@@ -313,11 +361,11 @@ const Settings = () => {
               <div className="indi-user-settings-page-card-inner d-flex">
                 <div
                   role="button"
-                  onClick={allowEmailEdit}
+                  //onClick={allowEmailEdit}
                   className="indi-user-settings-page-change-email d-flex indi-user-settings-page-card-inner-item"
                 >
                   <div className="indi-user-settings-page-change-email-label">
-                    Change your email ID
+                    Your email ID
                   </div>
                   <div className="indi-user-settings-page-change-email-value">
                     {userInfo.email}
@@ -353,8 +401,8 @@ const Settings = () => {
                 <div className="indi-user-settings-page-image-wrapper">
                   <img
                     className="indi-user-settings-page-image"
-                    src={profilePicture}
-                    alt="profile"
+                    src={profileImage}
+                    alt="profileImage"
                   />
                 </div>
                 <div className="indi-user-settings-page-display-name">

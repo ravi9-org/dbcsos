@@ -4,47 +4,47 @@ import ContextComponent from "../../AppContext";
 import CardContext from "../../body/content.area/cards/CardContext";
 
 const Field = (props = {}) => {
-  let { badgesCtxData } = useContext(ContextComponent);
-  let { cardCtxInfo, setCardCtxInfo } = useContext(CardContext);
 
-  let fieldIndex = props.fieldIndex;
   let fieldProps = props.fieldProps;
-  let fieldType = fieldProps.fieldType;
+  let linkedBadge = fieldProps.linkedBadge;
+  let fieldIndex = fieldProps.badgeIndex;
+  let fieldType = linkedBadge.badgeType;
   let showEmptyField = fieldProps?.showEmptyField || false;
-  let fieldSchema = badgesCtxData.filter((b) => b.badgeUID === fieldType)[0];
-  let isDefault = fieldSchema?.isDefault;
+  let fieldSchema = {
+    default: linkedBadge?.default,
+  };
+  let isDefault = fieldSchema?.default;
 
-  let fieldData = fieldProps.fieldData;
+  let fieldData = linkedBadge?.defaultValue;
+
   let isEmpty = false;
   if ((fieldData === undefined || fieldData?.length === 0) && showEmptyField) {
     isEmpty = true;
   }
-  let mode = props.pageMode;
+
+  let mode = props?.pageMode || '';
+
   let canRemoveField = !isDefault && (mode === "add" || mode === "edit");
 
-  let inputElementClassNames = fieldProps.inputElementClassNames;
-  //console.log(fieldSchema);
-  //debugger;
+  let inputElementClassNames = fieldProps?.inputElementClassNames || '';
+
+  
 
   const removeField = (e) => {
     e.preventDefault();
-    let tempCardCtxInfo = { ...cardCtxInfo };
-    tempCardCtxInfo.fields = tempCardCtxInfo?.fields?.filter((field, index) => {
-      return index !== fieldIndex;
-    });
-    tempCardCtxInfo.data = tempCardCtxInfo?.data?.filter((field, index) => {
-      return index !== fieldIndex;
-    });
-    setCardCtxInfo(tempCardCtxInfo);
-    //inform form about new field to be add
+    // let tempCardCtxInfo = { ...cardCtxInfo };
+    // tempCardCtxInfo.fields = tempCardCtxInfo?.fields?.filter((field, index) => {
+    //   return index !== fieldIndex;
+    // });
+    // tempCardCtxInfo.data = tempCardCtxInfo?.data?.filter((field, index) => {
+    //   return index !== fieldIndex;
+    // });
+    // setCardCtxInfo(tempCardCtxInfo);
+    // //inform form about new field to be add
+    debugger;
   };
 
-  let bgImg = "";
-  badgesCtxData.map((badge) => {
-    if (Object.keys(props.fieldProps.fieldType)[0] === badge.badgeUID) {
-      bgImg = badge.darkIconImage;
-    }
-   });
+  let bgImg = linkedBadge.darkIconImage;
 
   return (
     <div className="indi-card-field-item d-flex">

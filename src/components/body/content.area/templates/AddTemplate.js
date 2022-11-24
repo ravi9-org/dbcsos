@@ -7,23 +7,20 @@ import Utils from "../../../Utils";
 
 const AddTemplate = () => {
   const navigate = useNavigate();
-  let { userData, badgesCtxData } = useContext(ContextComponent);
+  let { userData } = useContext(ContextComponent);
   let [canRender, setCanRnder] = useState(false);
 
-  useEffect(() => {
-    if (userData?.id && !Utils.isObjectEmpty(badgesCtxData)) {
-      //console.log(badgesCtxData);
-      setCanRnder(true);
-    }
-  }, [userData, badgesCtxData]);
+  // useEffect(() => {
+  //   if (userData?.id && !Utils.isObjectEmpty(badgesCtxData)) {
+  //     console.log(badgesCtxData);
+  //     setCanRnder(true);
+  //   }
+  // }, [userData, badgesCtxData]);
 
   let [imgDataArray, setImgDataArray] = useState(["", "", ""]);
 
   const updateSelectedBadgeInfo = (e) => {};
 
-  const templateNameHandler = (e) => {
-    setTempalteName(e.currentTarget.value);
-  };
   const onChangeImage = async (e) => {
     let file = e.currentTarget.files[0];
     let targetIndex = parseInt(
@@ -46,37 +43,41 @@ const AddTemplate = () => {
 
   let [templateName, setTempalteName] = useState("");
 
+  const templateNameHandler = (e) => {
+    setTempalteName(e.currentTarget.value);
+  };
+
   const onSaveTemplate = (e) => {
     let linkedBadges = [];
 
-    badgesCtxData.map((badge) => {
-      let selectItem = document.querySelector(
-        ".indi-template-badge-select-" + badge.badgeUID + " input"
-      );
-      if (selectItem.checked) {
-        let isConstant = document.querySelector(
-          ".indi-template-badge-constant-" + badge.badgeUID + " input"
-        ).checked;
-        let isDefault = document.querySelector(
-          ".indi-template-badge-isdefault-" + badge.badgeUID + " input"
-        ).checked;
-        let isMultiple = document.querySelector(
-          ".indi-template-badge-multiple-" + badge.badgeUID + " input"
-        ).checked;
-        let defaulValue =
-          document.querySelector(
-            ".indi-template-badge-defaultvalue-" + badge.badgeUID
-          ).value || "";
-        linkedBadges.push({
-          [badge.badgeUID]: {
-            constant: isConstant,
-            isDefault: isDefault,
-            multiple: isMultiple,
-            defaultValue: defaulValue,
-          },
-        });
-      }
-    });
+    // badgesCtxData.map((badge) => {
+    //   let selectItem = document.querySelector(
+    //     ".indi-template-badge-select-" + badge.badgeUID + " input"
+    //   );
+    //   if (selectItem.checked) {
+    //     let isConstant = document.querySelector(
+    //       ".indi-template-badge-constant-" + badge.badgeUID + " input"
+    //     ).checked;
+    //     let isDefault = document.querySelector(
+    //       ".indi-template-badge-isdefault-" + badge.badgeUID + " input"
+    //     ).checked;
+    //     let isMultiple = document.querySelector(
+    //       ".indi-template-badge-multiple-" + badge.badgeUID + " input"
+    //     ).checked;
+    //     let defaulValue =
+    //       document.querySelector(
+    //         ".indi-template-badge-defaultvalue-" + badge.badgeUID
+    //       ).value || "";
+    //     linkedBadges.push({
+    //       [badge.badgeUID]: {
+    //         constant: isConstant,
+    //         isDefault: isDefault,
+    //         multiple: isMultiple,
+    //         defaultValue: defaulValue,
+    //       },
+    //     });
+    //   }
+    // });
 
     let templateInfo = {
       templateName,
@@ -84,7 +85,7 @@ const AddTemplate = () => {
       logoImage: imgDataArray[1],
       profilePicture: imgDataArray[2],
       linkedBadges: linkedBadges,
-      brand: selectedBrandValue
+      brand: selectedBrandValue,
     };
 
     submitTemplateForm(templateInfo);
@@ -111,15 +112,19 @@ const AddTemplate = () => {
     navigate(Utils.APP_URLS.TEMPLATES_PAGE);
   };
 
-  let [brandsDataAvailable, setBrandsDataAvailable] = useState(false);
+  let [hasBrands, setHasBrands] = useState(false);
+  let [hasBadges, setHasBadges] = useState(false);
+
   let [brands, setBrands] = useState([]);
+  let [badges, setBadges] = useState([]);
+
   let [selectedBrandValue, setSelectedBrandValue] = useState("");
 
   const brandsFetchSuccess = (res) => {
     console.log(res);
     setBrands(res.data);
-    setBrandsDataAvailable(true);
     setSelectedBrandValue(res.data[0].name);
+    setHasBrands(true);
   };
   const brandsFetchFail = (err) => {
     err?.message?.length && console.log(err);
@@ -129,10 +134,29 @@ const AddTemplate = () => {
     Utils.getBrands().then(brandsFetchSuccess, brandsFetchFail);
   }, []);
 
-  const updateBrandValue = e => {
+  const badgesFetchSuccess = (res) => {
+    console.log(res);
+    setBadges(res.data);
+    setHasBadges(true);
+  };
+  const badgesFetchFail = (err) => {
+    err?.message?.length && console.log(err);
+  };
+
+  useEffect(() => {
+    Utils.getBadges().then(badgesFetchSuccess, badgesFetchFail);
+  }, []);
+
+  useEffect(() => {
+    if (hasBrands && hasBadges) {
+      setCanRnder(true);
+    }
+  }, [hasBrands, hasBadges]);
+
+  const updateBrandValue = (e) => {
     let selectedBrandName = e.currentTarget.value;
     setSelectedBrandValue(selectedBrandName);
-  }
+  };
 
   return (
     <>
@@ -158,7 +182,7 @@ const AddTemplate = () => {
             </div>
 
             <div className="indi-data-table-wrapper d-flex indi-text-btn-row">
-              {brandsDataAvailable && <FloatingLabel label="Select brand">
+              <FloatingLabel label="Select brand">
                 <Form.Select
                   defaultValue={brands[0].name}
                   id="brand"
@@ -172,7 +196,7 @@ const AddTemplate = () => {
                     </option>
                   ))}
                 </Form.Select>
-              </FloatingLabel>}
+              </FloatingLabel>
             </div>
           </div>
           <Accordion className="indi-data-table-wrapper" defaultActiveKey="0">
@@ -292,7 +316,7 @@ const AddTemplate = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {badgesCtxData?.map((badge, index) => (
+                    {badges?.map((badge, index) => (
                       <tr key={index} className="indi-data-table-tr">
                         <td className="indi-data-table-td-badge-id">
                           <Form.Check

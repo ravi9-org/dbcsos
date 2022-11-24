@@ -68,9 +68,9 @@ const LeftNavigation = () => {
 
   useEffect(() => {
     if (Object.keys(userData).length) {
-      let isAdmin = userData.isAdmin;
+      let admin = userData.admin;
       navLinkKeys.forEach((navLinkKey) => {
-        if (isAdmin || navLinkValues[navLinkKey].enabled) {
+        if (admin || navLinkValues[navLinkKey].enabled) {
           tempFilteredNavLinkKeys.push(navLinkKey);
         }
       });

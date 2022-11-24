@@ -7,56 +7,48 @@ import ContextComponent from "../../../AppContext";
 import CardContext from "./../cards/CardContext";
 
 const TemplateItem = (props) => {
-  let { userData, badgesCtxData } = useContext(ContextComponent);
+  let { userData } = useContext(ContextComponent);
 
   let template = props?.template;
   let templateFieldsInfo = [];
   let templateFieldsData = [];
-  badgesCtxData?.map((badge) => {
-    props?.template?.linkedBadges?.map((linkedBadge) => {
-      if (!Utils.isObjectEmpty(linkedBadge[badge.badgeUID])) {
-        templateFieldsInfo.push({ [badge.badgeUID]: badge });
-        templateFieldsData.push(linkedBadge[badge.badgeUID].defaultValue);
-      }
-    });
-  });
+  let badgesCtxData = [];
+  // if (template.linkedBadges.length) {
+  //   let badgesCtxData = template.linkedBadges;
+  //   badgesCtxData?.map((badge) => {
+  //     props?.template?.linkedBadges?.map((linkedBadge) => {
+  //       // if (!Utils.isObjectEmpty(linkedBadge[badge.badgeUID])) {
+  //         templateFieldsInfo.push({ [badge.badgeUID]: badge });
+  //       templateFieldsData.push(linkedBadge[badge.badgeUID].defaultValue);
+  //       console.log(templateFields);
+  //       // }
+  //     });
+  //   });
+  //   console.log(badgesCtxData);
+  // }
 
-  let [templateFields, setTemplateFields] = useState(templateFieldsInfo || []);
+  // let [templateFields, setTemplateFields] = useState(templateFieldsInfo || []);
 
   let [templateName, setTemplateName] = useState(template?.templateName || "");
   let [templateBrand, setTemplateBrand] = useState(template?.brand || "");
 
-  let [templateDisplayName, setTemplateDisplayName] = useState(
-    template?.templateDisplayName || ""
-  );
   let [backgroundImage, setBackgroundImage] = useState(
     template?.backgroundImage || ""
   );
+
   let [profilePicture, setProfilePicture] = useState(
     template?.profilePicture || ""
   );
+
   let [logoImage, setLogoImage] = useState(template?.logoImage || "");
 
-  const navigate = useNavigate();
-
-  let tempCardCtxInfo = {};
-  tempCardCtxInfo.fields = templateFields;
-  tempCardCtxInfo.data = templateFieldsData;
-  //setCardCtxInfo(tempCardCtxInfo);
-
-  let [cardCtxInfo, setCardCtxInfo] = useState(tempCardCtxInfo);
 
   const navigateToTemplateDetailsPage = (e) => {
     e.preventDefault();
     return false;
   };
   return (
-    <CardContext.Provider
-      value={{
-        cardCtxInfo,
-        setCardCtxInfo,
-      }}
-    >
+    <>
       <div
         onClick={navigateToTemplateDetailsPage}
         className={`indi-card-item-parent card-with-bg ${
@@ -82,11 +74,11 @@ const TemplateItem = (props) => {
         </div>
         <div className="indi-card-fields">
           <div className="indi-card-field-wrapper">
-            {templateFields?.map((field, index) => (
+            {template.linkedBadges?.map((linkedBadge, index) => (
               <TemplateField
                 fieldProps={{
-                  fieldType: field,
-                  fieldData: templateFieldsData[index],
+                  badgeIndex: index,
+                  linkedBadge,
                   showEmptyField: true,
                 }}
                 key={index}
@@ -96,7 +88,7 @@ const TemplateItem = (props) => {
         </div>
         <div className="indi-template-title  indi-place-me-bottom-left">{templateName} ({ templateBrand})</div> 
       </div>
-    </CardContext.Provider>
+    </>
   );
 };
 

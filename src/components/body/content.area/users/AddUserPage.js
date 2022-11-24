@@ -19,7 +19,7 @@ const AddUserPage = ({ props }) => {
   let [brand, setBrand] = useState("");
   let [region, setRegion] = useState(Object.keys(REGIONS)[0]);
   let [title, setTitle] = useState("");
-  let [isAdmin, setIsAdmin] = useState(false);
+  let [admin, setAdmin] = useState(false);
   let [picture, setPicture] = useState("");
 
   const hideModal = (e) => {
@@ -40,7 +40,7 @@ const AddUserPage = ({ props }) => {
         res.data.user.brand,
         res.data.user.region,
         res.data.user.title,
-        res.data.user.isAdmin /*,
+        res.data.user.admin /*,
         res.data.user.picture,*/,
       ];
       let tempTableData = [...tableData];
@@ -61,7 +61,7 @@ const AddUserPage = ({ props }) => {
       brand,
       region,
       title,
-      isAdmin,
+      admin,
       picture,
     };
     try {
@@ -116,9 +116,9 @@ const AddUserPage = ({ props }) => {
     setTitle(value);
   };
 
-  const isAdminHandler = (e) => {
+  const adminHandler = (e) => {
     let value = e?.currentTarget?.value || "";
-    setIsAdmin(value);
+    setAdmin(value);
   };
 
   useEffect(() => {}, [props.addModalCanOpen]);
@@ -309,9 +309,9 @@ const AddUserPage = ({ props }) => {
                     <Form.Check
                       type="switch"
                       className="indi-input-switch-field indi-input-field"
-                      id="isadmin"
+                      id="admin"
                       label="is admin?"
-                      onChange={isAdminHandler}
+                      onChange={adminHandler}
                     />
                   </div>
                 </div>

@@ -1,19 +1,21 @@
 import axios from "axios";
 
-/*
+
 const CTX = {
   PROTOCOL: "http://",
-  HOST: "app.hostname.com",
-  PORT: ":80",
-};
-*/
-const CTX = {
-  PROTOCOL: "http://",
-  HOST: "localhost",
-  PORT: ":3004",
+  HOST: "dbc.cmsedge.com",
+  PORT: "",
+  // POSTFIX: "/api/"
+  POSTFIX: ""
 };
 
-const REST_API_PREFIX = CTX.PROTOCOL + CTX.HOST + CTX.PORT;
+// const CTX = {
+//   PROTOCOL: "http://",
+//   HOST: "localhost",
+//   PORT: ":3004",
+// };
+
+const REST_API_PREFIX = CTX.PROTOCOL + CTX.HOST + CTX.PORT+ CTX.POSTFIX;
 
 const REST_API = {
   LOGIN: REST_API_PREFIX + "/login",
@@ -264,7 +266,7 @@ const getFilteredUsers = (filterKey, filterQuery) => {
 
     let token = getToken();
     if (token) {
-      let getUrl = REST_API.USER_PROFILE + "?" + filterKey + "=" + filterQuery;
+      let getUrl = REST_API.USER_PROFILE + filterKey + "/" + filterQuery;
       axios
         .get(getUrl, {
           headers: {
@@ -735,19 +737,19 @@ const fileToDataUri = (file) => {
 };
 
 const BADGE_TYPES = {
-  phone: {
+  PHONE: {
     label: "Phone",
     formInputType: "text",
   },
-  address: {
+  ADDRESS: {
     label: "Address",
     formInputType: "textarea",
   },
-  url: {
+  URL: {
     label: "URL",
     formInputType: "text",
   },
-  email: {
+  EMAIL: {
     label: "EMail",
     formInputType: "text",
   },
@@ -766,6 +768,12 @@ const REGIONS = {
   caribbean: "Caribbean",
 };
 
+const PRONOUNS = {
+  hehim: "He/Him",
+  sheher: "She/Her",
+  them: "Them",
+};
+
 const Utils = {
   REST_API,
   APP_URLS,
@@ -773,6 +781,7 @@ const Utils = {
   NAV_ITEMS_VALUES,
   BADGE_TYPES,
   REGIONS,
+  PRONOUNS,
   userSessionExists,
   getUserProfile,
   getAllUsers,
