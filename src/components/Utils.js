@@ -43,7 +43,7 @@ const APP_URLS = {
   ADD_CARD_PAGE: APP_URL_PREFIX + "/cards/addcard",
   EDIT_CARD_PAGE: APP_URL_PREFIX + "/cards/editcard/:cardid",
   CARD_DETAILS_PAGE: APP_URL_PREFIX + "/cards/:cardid",
-  CARD_EXTERNAL_PAGE: APP_URL_PREFIX + "/cardextdetails/:cardid",
+  CARD_EXTERNAL_PAGE: APP_URL_PREFIX + "/card/:cardid",
   ADDRESS_PAGE: APP_URL_PREFIX + "/addresses",
   BADGES_PAGE: APP_URL_PREFIX + "/badges",
   ADD_BADGE_PAGE: APP_URL_PREFIX + "/addbadgepage",
