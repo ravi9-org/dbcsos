@@ -1,12 +1,11 @@
 import axios from "axios";
 
-
 const CTX = {
   PROTOCOL: "http://",
   HOST: "dbc.cmsedge.com",
   PORT: "",
   // POSTFIX: "/api/"
-  POSTFIX: ""
+  POSTFIX: "",
 };
 
 // const CTX = {
@@ -15,12 +14,13 @@ const CTX = {
 //   PORT: ":3004",
 // };
 
-const REST_API_PREFIX = CTX.PROTOCOL + CTX.HOST + CTX.PORT+ CTX.POSTFIX;
+const REST_API_PREFIX = CTX.PROTOCOL + CTX.HOST + CTX.PORT + CTX.POSTFIX;
 
 const REST_API = {
   LOGIN: REST_API_PREFIX + "/login",
   LOGOUT: REST_API_PREFIX + "/logout",
   USER_PROFILE: REST_API_PREFIX + "/users/",
+  USER_BULK_UPLOAD: REST_API_PREFIX + "/usersbulkupload/",
   EDIT_USER_PROFILE: REST_API_PREFIX + "/users/profile/",
   BADGES: REST_API_PREFIX + "/badges/",
   CARDS: REST_API_PREFIX + "/cards",
@@ -223,6 +223,25 @@ const getAllUsers = () => {
   });
 
   return myPromise;
+};
+
+const bulkUsersUpload = (userData) => {
+  let formData = { ...userData };
+  delete formData.id;
+  let url = REST_API.USER_BULK_UPLOAD;
+
+  return axios.post(url, formData);
+
+  // try {
+  //   return axios({
+  //     method: "post",
+  //     url: "/api/upload/file",
+  //     data: formData,
+  //     headers: { "Content-Type": "multipart/form-data" },
+  //   });
+  // } catch(error) {
+  //   console.log(error)
+  // }
 };
 
 const addUser = (userData) => {
@@ -819,6 +838,7 @@ const Utils = {
   userSessionExists,
   getUserProfile,
   getAllUsers,
+  bulkUsersUpload,
   addUser,
   editUser,
   deleteUsers,

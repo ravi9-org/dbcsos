@@ -1727,3 +1727,13 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-add-card-name-input {
   min-width: 250px;
 }
+
+.indi-app .indi-bulk-upload-img {
+  width: 24px;
+  height: 24px;
+  margin: 0 8px;
+}
+
+.indi-app .indi-bulk-upload-file-name.indi-img-preview {
+  width: 100%;
+}

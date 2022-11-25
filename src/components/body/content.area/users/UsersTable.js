@@ -7,10 +7,12 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
 import DataTable from "../../../controls/table/DataTable";
+import BulkUploadIcon from "../../../../assets/img/Upload.png";
 import AddIcon from "../../../../assets/img/add.png";
 import DeleteIcon from "../../../../assets/img/Delete.png";
 import AddUserPage from "./AddUserPage";
 import EmptyPage from "./../../../pages/EmptyPage";
+import UsersBulkUpload from "./UsersBulkUpload";
 
 const UsersTable = () => {
   let [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -199,7 +201,13 @@ const UsersTable = () => {
   };
 
   let [addModalCanOpen, setAddModalCanOpen] = useState(false);
+  let [bulkUploadModalCanOpen, setBulkUploadModalCanOpen] = useState(false);
 
+  const openBulkUploadModal = (e) => {
+    e.preventDefault();
+    setBulkUploadModalCanOpen(true);
+  };
+  
   const openAddModal = (e) => {
     e.preventDefault();
     setAddModalCanOpen(true);
@@ -257,6 +265,14 @@ const UsersTable = () => {
                 ))}
               </Form.Select>
             </FloatingLabel>
+          </div>
+          <div
+            className="indi-body-action"
+            role="button"
+            onClick={openBulkUploadModal}
+          >
+            <img className="indi-w-24 indi-bulk-upload-img" src={BulkUploadIcon} alt="Bulk-upload-icon"></img>
+            Bulk upload
           </div>
           <div
             className="indi-body-action"
@@ -319,6 +335,17 @@ const UsersTable = () => {
           props={{
             addModalCanOpen,
             setAddModalCanOpen,
+            tableData,
+            setTableData,
+          }}
+        />
+      )}
+      
+      {bulkUploadModalCanOpen && (
+        <UsersBulkUpload
+          props={{
+            addModalCanOpen: bulkUploadModalCanOpen,
+            setAddModalCanOpen: setBulkUploadModalCanOpen,
             tableData,
             setTableData,
           }}
