@@ -348,6 +348,7 @@ const UsersTable = () => {
             setAddModalCanOpen: setBulkUploadModalCanOpen,
             tableData,
             setTableData,
+            success,
           }}
         />
       )}
