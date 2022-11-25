@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import Alert from "react-bootstrap/Alert";
 import Modal from "react-bootstrap/Modal";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-
-import Form from "react-bootstrap/Form";
 
 import Utils from "../../../Utils";
 
 const UsersBulkUpload = ({ props }) => {
+  let [showAlert, setShowAlert] = useState(false);
   let [fileInput, setFileInput] = useState();
   let [fileName, setFileName] = useState("");
+  let bulkUploadFileInput = useRef(null);
+    let tableDataSuccess = props.success || (() => { });
 
   const hideModal = (e) => {
     props.setAddModalCanOpen(false);
@@ -16,15 +17,19 @@ const UsersBulkUpload = ({ props }) => {
 
   const uploadUsers = (e) => {
     const success = (res) => {
-      hideModal();
-      // update users table with latest data.
+      setShowAlert(true);
+      setTimeout(function () {
+        setShowAlert(false);
+      }, 3000);
+        hideModal();
+        tableDataSuccess(res);
     };
     const fail = (err) => {
       console.log(err);
     };
 
     let formData = {
-      file: fileInput,
+      file: bulkUploadFileInput.current.files[0],
     };
     try {
       Utils.bulkUsersUpload(formData).then(success, fail);
@@ -61,6 +66,7 @@ const UsersBulkUpload = ({ props }) => {
                 <div className="indi-add-form-item-input">
                   <input
                     type="file"
+                    ref={bulkUploadFileInput}
                     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                     id="iconImage"
                     className="indi-upload-picture-file-input"
@@ -96,6 +102,15 @@ const UsersBulkUpload = ({ props }) => {
           </Modal.Body>
         </Modal>
       }
+
+      <Alert
+        show={showAlert}
+        variant="success"
+        className="indi-email-sign-copied-to-clipboard-alert"
+      >
+        <Alert.Heading>Success!</Alert.Heading>
+        <p>Successfully uploaded users</p>
+      </Alert>
     </>
   );
 };

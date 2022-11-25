@@ -20,7 +20,7 @@ const REST_API = {
   LOGIN: REST_API_PREFIX + "/login",
   LOGOUT: REST_API_PREFIX + "/logout",
   USER_PROFILE: REST_API_PREFIX + "/users/",
-  USER_BULK_UPLOAD: REST_API_PREFIX + "/usersbulkupload/",
+  USER_BULK_UPLOAD: REST_API_PREFIX + "/users/import",
   EDIT_USER_PROFILE: REST_API_PREFIX + "/users/profile/",
   BADGES: REST_API_PREFIX + "/badges/",
   CARDS: REST_API_PREFIX + "/cards",
@@ -229,19 +229,12 @@ const bulkUsersUpload = (userData) => {
   let formData = { ...userData };
   delete formData.id;
   let url = REST_API.USER_BULK_UPLOAD;
-
-  return axios.post(url, formData);
-
-  // try {
-  //   return axios({
-  //     method: "post",
-  //     url: "/api/upload/file",
-  //     data: formData,
-  //     headers: { "Content-Type": "multipart/form-data" },
-  //   });
-  // } catch(error) {
-  //   console.log(error)
-  // }
+  return axios({
+    method: "post",
+    url: url,
+    data: formData,
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 };
 
 const addUser = (userData) => {
