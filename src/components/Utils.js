@@ -790,16 +790,22 @@ const BADGE_TYPES = {
 };
 
 const REGIONS = {
-  asia: "Asia",
+  aviation: "Aviation",
+  maritime: "Maritime",
+  greaterchina: "Greater China",
+  anz: "ANZ",
+  centraleurope: "Central Europe",
+  northasia: "North Asia",
+  northerneurope: "Northern Europe",
+  singapore: "Singapore",
+  southerneurope: "Southern Europe",
+  northamericah3s: "North America H3S",
   africa: "Africa",
-  centralamerica: "Central America",
-  easterneurope: "Eastern Europe",
-  europeanunion: "European Union",
-  middleeast: "Middle East",
-  northamerica: "North America",
-  oceania: "Oceania",
-  southamerica: "South America",
-  caribbean: "Caribbean",
+  eme: "EME",
+  latam: "LATAM",
+  canadamsbl: "Canada MSBL",
+  pacific: "Pacific",
+  sea: "SEA",
 };
 
 const PRONOUNS = {
