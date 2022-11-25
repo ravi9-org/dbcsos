@@ -27,6 +27,7 @@ const REST_API = {
   TEMPLATES: REST_API_PREFIX + "/templates",
   USER_CARD: REST_API_PREFIX + "/usercards",
   ADDRESSES: REST_API_PREFIX + "/addresses/",
+  ADDRESS_BULK_UPLOAD: REST_API_PREFIX + "/addresses/import",
   BRANDS: REST_API_PREFIX + "/brands/",
 };
 
@@ -432,6 +433,18 @@ const deleteAddresses = (addressesArray) => {
   });
 
   return Promise.all(addressesArray);
+};
+
+const bulkAddressUpload = (addressData) => {
+  let formData = { ...addressData };
+  delete formData.id;
+  let url = REST_API.ADDRESS_BULK_UPLOAD;
+  return axios({
+    method: "post",
+    url: url,
+    data: formData,
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 };
 
 const addAddress = (addressData) => {
@@ -845,6 +858,7 @@ const Utils = {
   deleteAddresses,
   getAddresses,
   addAddress,
+  bulkAddressUpload,
   getBadges,
   addBadge,
   deleteBadges,

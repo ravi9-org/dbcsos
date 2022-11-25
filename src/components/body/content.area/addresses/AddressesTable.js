@@ -7,6 +7,8 @@ import DataTable from "../../../controls/table/DataTable";
 import AddIcon from "../../../../assets/img/add.png";
 import DeleteIcon from "../../../../assets/img/Delete.png";
 import AddAddressPage from "./AddAddressPage";
+import AddressBulkUpload from "./AddressBulkUpload";
+import BulkUploadIcon from "../../../../assets/img/Upload.png";
 
 const AddressesTable = () => {
   let [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -26,7 +28,7 @@ const AddressesTable = () => {
     "country",
     "zip",
     "longitude",
-    "latitude"
+    "latitude",
   ]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
     id: {
@@ -46,11 +48,11 @@ const AddressesTable = () => {
     },
     brand: {
       type: "text",
-      title: "Brand"
+      title: "Brand",
     },
     address: {
       type: "text",
-      title: "Address"
+      title: "Address",
     },
     city: {
       type: "text",
@@ -58,19 +60,19 @@ const AddressesTable = () => {
     },
     country: {
       type: "text",
-      title: "Country"
+      title: "Country",
     },
     zip: {
       type: "text",
-      title: "Zip code"
+      title: "Zip code",
     },
     longitude: {
       type: "text",
-      title: "Longitude"
+      title: "Longitude",
     },
     latitude: {
       type: "text",
-      title: "Latitude"
+      title: "Latitude",
     },
   });
 
@@ -164,6 +166,12 @@ const AddressesTable = () => {
   };
 
   let [addModalCanOpen, setAddModalCanOpen] = useState(false);
+  let [bulkUploadModalCanOpen, setBulkUploadModalCanOpen] = useState(false);
+
+  const openBulkUploadModal = (e) => {
+    e.preventDefault();
+    setBulkUploadModalCanOpen(true);
+  };
 
   const openAddModal = (e) => {
     e.preventDefault();
@@ -179,6 +187,14 @@ const AddressesTable = () => {
       <div className="indi-add-card-title">
         Addresses
         <div className="d-none1 w-50 indi-body-actions">
+          <div
+            className="indi-body-action"
+            role="button"
+            onClick={openBulkUploadModal}
+          >
+            <img className="indi-w-24 indi-bulk-upload-img" src={BulkUploadIcon} alt="Bulk-upload-icon"></img>
+            Bulk upload
+          </div>
           <div
             className="indi-body-action"
             role="button"
@@ -230,6 +246,18 @@ const AddressesTable = () => {
             setAddModalCanOpen,
             tableData,
             setTableData,
+          }}
+        />
+      )}
+
+      {bulkUploadModalCanOpen && (
+        <AddressBulkUpload
+          props={{
+            addModalCanOpen: bulkUploadModalCanOpen,
+            setAddModalCanOpen: setBulkUploadModalCanOpen,
+            tableData,
+            setTableData,
+            success,
           }}
         />
       )}
