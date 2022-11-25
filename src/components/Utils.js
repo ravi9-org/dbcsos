@@ -20,7 +20,7 @@ const REST_API = {
   LOGIN: REST_API_PREFIX + "/login",
   LOGOUT: REST_API_PREFIX + "/logout",
   USER_PROFILE: REST_API_PREFIX + "/users/",
-  USER_BULK_UPLOAD: REST_API_PREFIX + "/usersbulkupload/",
+  USER_BULK_UPLOAD: REST_API_PREFIX + "/users/import/",
   EDIT_USER_PROFILE: REST_API_PREFIX + "/users/profile/",
   BADGES: REST_API_PREFIX + "/badges/",
   CARDS: REST_API_PREFIX + "/cards",
