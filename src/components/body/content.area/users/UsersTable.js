@@ -102,7 +102,12 @@ const UsersTable = () => {
         let userTableObj = [];
         let userTableData = [];
         tableColumns.forEach((col) => {
-          if (col === "region") {
+          if (col === "pronoun") {
+            let regionValue = userInfo[index][col]
+              ? Utils.PRONOUNS[userInfo[index][col]]
+              : "";
+            userTableData.push(regionValue);
+          } else if (col === "region") {
             let regionValue = userInfo[index][col]
               ? Utils.REGIONS[userInfo[index][col]]
               : "";
