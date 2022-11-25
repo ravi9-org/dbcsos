@@ -10,65 +10,39 @@ import CardContext from "./CardContext";
 
 const EditCardPage = (props) => {
   const { cardid } = useParams();
-  //console.log("cardid : " + cardid);
   const navigate = useNavigate();
+
   let { userData } = useContext(ContextComponent);
 
   let [cardCtxInfo, setCardCtxInfo] = useState({});
   let [templateData, setTemplateData] = useState({});
 
   let [cardImageValue, setCardImageValue] = useState("");
-  let [croppedImageValue, setCroppedImageValue] = useState("");
-
-  let [templateBadges, setTemplateBadges] = useState([]);
+  let [croppedImageValue, setCroppedImageValue] = useState("");  
 
   let [canRender, setCanRender] = useState(false);
-
-  let [hasCardDetails, setHasCardDetails] = useState(false);
-  let [hasTemplateDetails, setHasTemplateDetails] = useState(false);
+  // let [hasTemplateDetails, setHasTemplateDetails] = useState(false);
 
   let [detailsForEditCardPage, setDetailsForEditCardPage] = useState({
     template: {},
     card: {},
   });
 
-  useEffect(() => {
-    if (hasCardDetails) {
-        const templateSuccess = (res) => {
-        setTemplateData(res.data);
-        setHasTemplateDetails(true);
-      };
-      const templateFail = (err) => {
-        err?.message?.length && console.log(err);
-      };
-
-      let templateId = cardCtxInfo.templateId;
-
-      Utils.getTemplateDetails(templateId).then(templateSuccess, templateFail);
-    }
-  }, [hasCardDetails]);
-
-  useEffect(() => {
-    if (hasTemplateDetails) {
-      setTemplateBadges(templateData.linkedBadges);
-    }
-  }, [hasTemplateDetails]);
-
-  useEffect(() => {
-    if (hasCardDetails && hasTemplateDetails) {
-      setDetailsForEditCardPage({
-        template: templateData,
-        card: cardCtxInfo,
-      });
-      setCanRender(true);
-    }
-  }, [hasCardDetails, hasTemplateDetails]);
-
   const success = (res) => {
     setCardCtxInfo(res.data);
     setCardImageValue(res.data.cardImage);
     setCroppedImageValue(res.data.croppedImage);
-    setHasCardDetails(true);
+    let templateInfo = { ...res.data.templateInfo, userLinkedBadges: res.data.userLinkedBadges };
+    
+    setTemplateData(templateInfo);
+
+    setDetailsForEditCardPage({
+      template: templateInfo,
+      fieldsData: [],
+      card: res.data
+    });
+    
+    setCanRender(true);
   };
 
   const fail = (err) => {
@@ -169,7 +143,7 @@ const EditCardPage = (props) => {
             }
             <div className="indi-add-card-item-footer d-flex d-flex-row">
               <div className="indi-add-card-page-badge-ribbon-wrapper">
-                <BadgesRibbon templateBadges={templateBadges} />
+                <BadgesRibbon templateBadges={templateData.userLinkedBadges} />
               </div>
 
               <div className="indi-add-card-page-footer-btn-wrapper d-flex d-flex-row">

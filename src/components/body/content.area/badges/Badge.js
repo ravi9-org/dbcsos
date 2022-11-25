@@ -44,7 +44,7 @@ const Badge = (props) => {
       }
       let tempCardCtxInfo = { ...cardCtxInfo };
       let tempFields = tempCardCtxInfo.userLinkedBadges;
-      let tempData = tempCardCtxInfo.fieldsData;
+      let tempData = tempCardCtxInfo?.fieldsData || [];
       tempFields.push(badge);
       tempData.push(badge.defaultValue);
       setCardCtxInfo(tempCardCtxInfo);

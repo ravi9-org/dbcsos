@@ -170,7 +170,7 @@ const AddCardItem = ({ props }) => {
                 fieldSchema: field,
                 fieldType: field.badgeUID,
                 inputElementClassNames,
-                fieldData: fieldsData[index],
+                fieldData: field.value || field.defaultValue || '',
                 templateBadges,
               }}
               pageMode={pageMode}
