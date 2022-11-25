@@ -23,12 +23,12 @@ const Footer = () => {
             key="aboutinternationalsos"
             className="nav-item d-none d-sm-inline-block"
           >
-            <a href="/" className="nav-link pl-0 footer-list">
+            <a href="https://www.internationalsos.com/about-us" rel="noreferrer" target="_blank" className="nav-link pl-0 footer-list">
               About International SOS
             </a>
           </li>
           <li key="privacynotice" className="nav-item d-none d-sm-inline-block">
-            <a href="/" className="nav-link pl-0 footer-list">
+            <a href="https://www.internationalsos.com/privacy" rel="noreferrer" target="_blank" className="nav-link pl-0 footer-list">
               Privacy Notice
             </a>
           </li>
@@ -36,29 +36,24 @@ const Footer = () => {
 
         <ul className="navbar-nav navbar-nav-right d-flex flex-row align-items-center justify-content-end">
           <li key="vimImage" className="nav-item">
-            <a
-              className="nav-link"
-              data-widget="navbar-search"
-              href="/"
-              role="button"
-            >
+            <a className="nav-link" data-widget="navbar-search" href="https://vimeo.com/internationalsos" rel="noreferrer" target="_blank" role="button">
               <img className="indi-w-20" src={vimImage} alt="vim"></img>
             </a>
           </li>
 
           <li key="instaImage" className="nav-item">
-            <a className="nav-link" href="/">
+            <a className="nav-link" href="https://www.instagram.com/intlsos/?hl=en" rel="noreferrer" target="_blank">
               <img className="indi-w-20" src={instaImage} alt="instagram"></img>
             </a>
           </li>
 
           <li key="tweeterImage" className="nav-item">
-            <a className="nav-link" href="/" role="button">
+            <a className="nav-link" href="https://twitter.com/intlsos?lang=en" rel="noreferrer" target="_blank" role="button">
               <img className="indi-w-20" src={tweeterImage} alt="twitter"></img>
             </a>
           </li>
           <li key="linkedinImage" className="nav-item">
-            <a className="nav-link" href="/" role="button">
+            <a className="nav-link" href="https://www.linkedin.com/company/international-sos" rel="noreferrer" target="_blank" role="button">
               <img
                 className="indi-w-20"
                 src={linkedinImage}
@@ -67,12 +62,12 @@ const Footer = () => {
             </a>
           </li>
           <li key="fbImage" className="nav-item">
-            <a className="nav-link" href="/">
+            <a className="nav-link" href="https://www.facebook.com/InternationalSOS/" rel="noreferrer" target="_blank">
               <img className="indi-w-20" src={fbImage} alt="fb"></img>
             </a>
           </li>
           <li key="youtubeImage" className="nav-item">
-            <a className="nav-link" href="/">
+            <a className="nav-link" href="https://www.youtube.com/user/intlsos" rel="noreferrer" target="_blank">
               <img className="indi-w-20" src={youtubeImage} alt="youtube"></img>
             </a>
           </li>
