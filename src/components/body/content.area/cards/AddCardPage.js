@@ -90,6 +90,7 @@ const AddCard = (props) => {
       setCroppedImageValue(imgVal);
       imageValues.push(imgVal);
     }
+    debugger;
     submitForm(dataValues, imageValues, cardNameValue);
   };
 
@@ -118,11 +119,8 @@ const AddCard = (props) => {
 
   const submitForm = (dataValues = {}, imageValues = [], cardNameValue = "") => {
     let info = { ...cardCtxInfo };
-    let submitCardInfo = { ...info, userLinkedBadges: []};
-
-    
-
-    console.log(dataValues);
+    let submitCardInfo = { ...info, userLinkedBadges: [] };
+    delete submitCardInfo.fieldsData;
     info.userLinkedBadges.map((badge, index) => {
       let badgeData = {
         "badgeId": badge.badgeId,
@@ -136,7 +134,10 @@ const AddCard = (props) => {
     submitCardInfo.cardImage = imageValues[0];
     submitCardInfo.croppedImage = imageValues[1];
     submitCardInfo.cardName = cardNameValue;
-    submitCardInfo.customId = cardNameValue.toLowerCase().replaceAll(" ", "") + "";
+    submitCardInfo.customId = cardNameValue.toLowerCase().replaceAll(" ", "") + "";    
+
+    console.log(submitCardInfo);
+    debugger;
 
     const success = (res) => {
       updateUserInfo(res.data.id);

@@ -6,10 +6,10 @@ import LookupInput from "./LookupInput";
 import Utils from "../../Utils";
 
 const InputElement = ({ props = {} }) => {
-  let schema = props.fieldSchema || {};
+  let schema = props?.fieldProps?.fieldSchema || {};
   let fieldType = schema.badgeType;
-  let fieldData = props?.fieldData;
-  let fieldName = props?.fieldName;
+  let fieldData = schema?.value || schema?.defaultValue || "";
+  let fieldName = schema?.badgeName;
   let inputElementClassNames = props?.inputElementClassNames;
   let isLookupField = schema.badgeUID === "address";
 
@@ -23,8 +23,8 @@ const InputElement = ({ props = {} }) => {
         props={{ schema, fieldData, fieldName, inputElementClassNames }}
       />
     );
-  } else if (fieldType === "text") {
-    return (
+  } else if (fieldType === "text"/* || fieldType === "phone" || fieldType === "url" || fieldType === "email"*/) {
+    return (//
       <TextInput
         props={{ schema, fieldData, fieldName, inputElementClassNames }}
       />

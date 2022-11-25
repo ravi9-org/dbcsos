@@ -12,17 +12,9 @@ const Field = (props = {}) => {
   let fieldType = fieldProps.badgeUID;
   let showEmptyField = fieldProps?.showEmptyField || false;
   let fieldSchema = fieldProps;
-  let iconDarkImage = fieldProps.darkIconImage; 
+  let iconDarkImage = fieldProps?.fieldSchema?.darkIconImage || ""; 
 
-  // templateBadges?.map((field) => {
-  //   // let schemaObj = field[fieldSchema.badgeUID];
-  //   let schemaObj = field[fieldSchema.badgeUID];
-  //   if (!Utils.isObjectEmpty(schemaObj)) {
-  //     fieldSchema = { ...fieldSchema, ...schemaObj };
-  //   }
-  // });
-
-  let isDefault = fieldSchema?.default;
+  let isDefault = !!fieldProps?.fieldSchema?.default;
 
   let fieldData = fieldProps.value || fieldProps.defaultValue;
   
@@ -87,7 +79,7 @@ const Field = (props = {}) => {
       {(mode === "add" || mode === "edit") && (
         <InputElement
           props={{
-            fieldSchema,
+            fieldProps: fieldSchema,
             fieldData,
             fieldName: fieldType,
             inputElementClassNames,
