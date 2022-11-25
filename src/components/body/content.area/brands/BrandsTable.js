@@ -85,7 +85,7 @@ const BrandsTable = () => {
 
   useEffect(() => {
     setLoadingState({
-      applyMask: false,
+      applyMask: true,
       text: "Loading brands",
     });
     loadFreshBrands();

@@ -161,7 +161,7 @@ const UsersTable = () => {
 
   useEffect(() => {
     setLoadingState({
-      applyMask: false,
+      applyMask: true,
       text: "Loading users",
     });
     loadAllUsers();

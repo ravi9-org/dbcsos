@@ -8,26 +8,30 @@ import CardItem from "./CardItem";
 
 const CardsList = () => {
   let [canRender, setCanRender] = useState(false);
-  let { userData } = useContext(ContextComponent);
+  let { userData, setLoadingState } = useContext(ContextComponent);
 
   let [userCards, setUserCards] = useState(userData?.cards || []);
   let navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (userData?.cards?.length) {
-  //     setUserCards(Utils.getUniqueSetOfArray(userData.cards));
-  //   }
-  // }, [userData]);
-
   const success = (res) => {
     setUserCards(res.data || {});
     setCanRender(true);
+    setLoadingState({
+      applyMask: false
+    });
   };
   const fail = (err) => {
     err?.message?.length && console.log(err);
+    setLoadingState({
+      applyMask: false
+    });
   };
 
   useEffect(() => {
+    setLoadingState({
+      applyMask: true,
+      text: "Loading user cards",
+    });
     Utils.getUserCardsList().then(success, fail);
   }, []);
 

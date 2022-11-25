@@ -126,7 +126,7 @@ const AddressesTable = () => {
 
   useEffect(() => {
     setLoadingState({
-      applyMask: false,
+      applyMask: true,
       text: "Loading addresses",
     });
     loadFreshAddresses();

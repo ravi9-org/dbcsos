@@ -24,7 +24,7 @@ const EmailSignature = () => {
     },
   };
 
-  const { userData } = useContext(ContextComponent);
+  const { userData, setLoadingState } = useContext(ContextComponent);
 
   const [userCards, setUserCards] = useState([]);
   const [pageInfo, setPageInfo] = useState(null);
@@ -78,6 +78,9 @@ const EmailSignature = () => {
         selectedCardOption: "qrcode",
       });
       setRenderPage(true);
+      setLoadingState({
+        applyMask: false
+      });
     }
   };
   const fail = (err) => {
@@ -85,12 +88,12 @@ const EmailSignature = () => {
   };
 
   useEffect(() => {
+    setLoadingState({
+      applyMask: true,
+      text: "Loading email signatures",
+    });
     Utils.getUserCardsList().then(success, fail);
   }, []);
-
-
-
-
 
   const handleChange = (updatedValue) => {
     // debugger;

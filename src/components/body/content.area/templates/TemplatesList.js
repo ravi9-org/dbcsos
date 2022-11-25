@@ -7,7 +7,7 @@ import Utils from "../../../Utils";
 import TemplateItem from "./TemplateItem";
 
 const TemplatesList = () => {
-  let { userData, setCanRedirectToLogin } = useContext(ContextComponent);
+  let { userData, setCanRedirectToLogin, setLoadingState } = useContext(ContextComponent);
 
   let [templates, setTemplates] = useState([]);
   let navigate = useNavigate();
@@ -26,15 +26,25 @@ const TemplatesList = () => {
   const success = (res) => {
     setTemplates(res.data);
     //setUserData(res.data || {});
+    setLoadingState({
+      applyMask: false
+    });
   };
   const fail = (err) => {
     err?.message?.length && console.log(err);
+    setLoadingState({
+      applyMask: false
+    });
     if (err?.redirect) {
       setCanRedirectToLogin(true);
     }
   };
 
   useEffect(() => {
+    setLoadingState({
+      applyMask: true,
+      text: "Loading templates",
+    });
     Utils.getTemplates().then(success, fail);
   }, []);
 

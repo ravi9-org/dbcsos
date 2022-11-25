@@ -47,8 +47,6 @@ const Badge = (props) => {
       let tempData = tempCardCtxInfo.fieldsData;
       tempFields.push(badge);
       tempData.push(badge.defaultValue);
-      console.log(tempFields);
-      console.log(tempData);
       setCardCtxInfo(tempCardCtxInfo);
     }
   };

@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import Spinner from "react-bootstrap/Spinner";
 import ContextComponent from "../AppContext";
 
 const Mask = () => {
@@ -8,11 +9,17 @@ const Mask = () => {
   useEffect(() => {
     let text = loadingState?.text ?? "Loading";
     loadingState?.applyMask && setLoadingText(text);
-    setAdditionalClasses(loadingState?.applyMask ? "" : "d-none");
+    setAdditionalClasses(loadingState?.applyMask ? "" : "d-none1");
   }, [loadingState]);
   return (
     <div className={`indi-global-mask ${additionalClasses}`}>
-      <div className="indi-global-mask-loading-text">{loadingText}...</div>
+      <div className="visually-hidden1 indi-global-mask-loading-text">
+        <Spinner animation="border" variant="light" role="status"></Spinner>
+        <span className="indi-global-mask-loading-text-message">{loadingText}...</span>
+        {/* <Spinner animation="grow" variant="light" size="sm"/>
+        <Spinner animation="grow" variant="light" size="sm"/>
+        <Spinner animation="grow" variant="light" size="sm"/> */}
+      </div>
     </div>
   );
 };

@@ -116,7 +116,7 @@ const BadgesTable = () => {
 
   useEffect(() => {
     setLoadingState({
-      applyMask: false,
+      applyMask: true,
       text: "Loading badges",
     });
     loadFreshBadges();

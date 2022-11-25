@@ -90,31 +90,7 @@ const AddCard = (props) => {
       setCroppedImageValue(imgVal);
       imageValues.push(imgVal);
     }
-    debugger;
     submitForm(dataValues, imageValues, cardNameValue);
-  };
-
-  const updateUserInfo = (newCardId) => {
-    const success = (res) => {
-      goBack();
-    };
-    const fail = (err) => {
-      console.log(err);
-    };
-
-    try {
-      let userCardsArray = [...userData?.cards];
-      userCardsArray.push(newCardId);
-      userCardsArray = [...new Set(userCardsArray)];
-
-      let tempUserData = userData;
-
-      tempUserData.cards = userCardsArray;
-
-      Utils.addOrRemoveCardFromUser(userCardsArray).then(success, fail);
-    } catch (e) {
-      console.log(e);
-    }
   };
 
   const submitForm = (dataValues = {}, imageValues = [], cardNameValue = "") => {
@@ -134,13 +110,10 @@ const AddCard = (props) => {
     submitCardInfo.cardImage = imageValues[0];
     submitCardInfo.croppedImage = imageValues[1];
     submitCardInfo.cardName = cardNameValue;
-    submitCardInfo.customId = cardNameValue.toLowerCase().replaceAll(" ", "") + "";    
-
-    console.log(submitCardInfo);
-    debugger;
+    submitCardInfo.customId = cardNameValue.toLowerCase().replaceAll(" ", "") + "";  
 
     const success = (res) => {
-      updateUserInfo(res.data.id);
+      goBack();
     };
 
     const fail = (err) => {

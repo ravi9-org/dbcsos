@@ -10,7 +10,6 @@ import Utils from "../../../Utils";
 
 const AddCardItem = ({ props }) => {
   let pageInfo = props?.pageInfo || {};
-  console.log(pageInfo);
   let templateInfo = pageInfo?.template || {};
   let cardInfo = pageInfo?.card || {};
 

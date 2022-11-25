@@ -110,6 +110,10 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   width: 100%;
 }
 
+.indi-app .indi-global-mask .indi-global-mask-loading-text .indi-global-mask-loading-text-message {
+  margin-left: 9px;
+}
+
 .indi-app .indi-hidden {
   display: none !important;
   visibility: hidden !important;
