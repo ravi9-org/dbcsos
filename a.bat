@@ -1,2 +1,3 @@
 cls
-npm run dev-start
+@REM npm run dev-start
+npm run start

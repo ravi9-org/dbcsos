@@ -29,45 +29,89 @@ const EmailSignature = () => {
   const [userCards, setUserCards] = useState([]);
   const [pageInfo, setPageInfo] = useState(null);
   const [renderPage, setRenderPage] = useState(false);
+
   const [renderPreview, setRenderPreview] = useState(false);
-  let [cardsInfo, setCardsInfo] = useState([]);
 
-  let localVar = [];
+  // let [cardsInfo, setCardsInfo] = useState([]);
 
-  setCardsInfo = (newCardsObj) => {
-    let tempObj = {},
-      tempArray = [];
-    tempObj[newCardsObj.id] = newCardsObj;
-    tempArray.push(tempObj);
-    localVar = [...localVar, ...tempArray];
-    if (localVar?.length === userCards?.length) {
-      setRenderPreview(true);
-    }
-    return [...cardsInfo, ...localVar];
-  };
+  // let localVar = [];
 
-  const addCardsInfo = (cardsObj) => {
-    setCardsInfo(cardsObj);
-  };
+  // setCardsInfo = (newCardsObj) => {
+  //   let tempObj = {},
+  //     tempArray = [];
+  //   tempObj[newCardsObj.id] = newCardsObj;
+  //   tempArray.push(tempObj);
+  //   localVar = [...localVar, ...tempArray];
+  //   debugger;
+  //   if (localVar?.length === userCards?.length) {
+  //     setRenderPreview(true);
+  //   }
+  //   debugger;
+  //   return [...cardsInfo, ...localVar];
+  //   // setRenderPreview(true);
+  //   // return newCardsObj;
+  // };
 
-  useEffect(() => {
-    if (!Utils.isObjectEmpty(userData)) {
-      let userCardsArray = Utils.getUniqueSetOfArray(userData.cards);
-      setUserCards(Utils.getUniqueSetOfArray(userData.cards));
+  // const addCardsInfo = (cardsObj) => {
+  //   setCardsInfo(cardsObj);
+  // };
+
+  // useEffect(() => {
+    // if (!Utils.isObjectEmpty(userData)) {
+    //   let userCardsArray = Utils.getUniqueSetOfArray(userData.cards);
+    //   setUserCards(Utils.getUniqueSetOfArray(userData.cards));
+    //   setPageInfo({
+    //     selectedCardId: userCardsArray[0],
+    //     selectedCardOption: "qrcode",
+    //   });
+    //   setRenderPage(true);
+    // }
+  // }, [userData, cardsInfo]);
+
+  const success = (res) => {
+    if (!Utils.isObjectEmpty(res.data)) {
+      let userCardsArray = res.data;
+      setUserCards(userCardsArray);
       setPageInfo({
-        selectedCardId: userCardsArray[0],
+        selectedCardId: userCardsArray[0].id,
+        selectedCard: userCardsArray[0],
         selectedCardOption: "qrcode",
       });
       setRenderPage(true);
     }
-  }, [userData, cardsInfo]);
+  };
+  const fail = (err) => {
+    err?.message?.length && console.log(err);
+  };
+
+  useEffect(() => {
+    Utils.getUserCardsList().then(success, fail);
+  }, []);
+
+
+
+
 
   const handleChange = (updatedValue) => {
+    // debugger;
+    // let selectedCard = {};
+    // userCards.map(userCard => {
+    //   if (selectedCardId === userCard.id) {
+    //     selectedCard = userCard;
+    //   }
+    // });
+    // setPageInfo({ ...pageInfo, selectedCardId, selectedCard });
     setPageInfo({ ...pageInfo, selectedCardOption: updatedValue });
   };
 
-  const handleCardSelection = (updatedValue) => {
-    setPageInfo({ ...pageInfo, selectedCardId: updatedValue });
+  const handleCardSelection = (selectedCardId) => {
+    let selectedCard = {};
+    userCards.map(userCard => {
+      if (selectedCardId === userCard.id) {
+        selectedCard = userCard;
+      }
+    });
+    setPageInfo({ ...pageInfo, selectedCardId, selectedCard });
   }; 
 
   return (
@@ -80,22 +124,22 @@ const EmailSignature = () => {
               className="indi-mini-card-list"
               type="radio"
               name="cards"
-              defaultValue={userCards[0]}
+              defaultValue={userCards[0].id}
               onChange={handleCardSelection}
             >
-              {userCards.map((id, index) => (
+              {userCards.map((card, index) => (
                 <ToggleButton
                   className="indi-card-item-wrapper indi-card-mini-item-wrapper"
                   key={index}
-                  value={id}
+                  value={card?.id}
                   // variant="outline-primary"
                   variant="outline-primary"
-                  id={`tbg-radio-${id}`}
+                  id={`tbg-radio-${card.id}`}
                 >
                   <CardMiniItem
-                    cardId={id}
+                    cardId={card.id}
+                    card={card}
                     role="button"
-                    addCardsInfo={addCardsInfo}
                   />
                 </ToggleButton>
               ))}
@@ -122,16 +166,16 @@ const EmailSignature = () => {
               ))}
             </ToggleButtonGroup>
           </div>
-          {renderPreview && (
+          
             <div className="indi-signature-item-wrapper d-flex">
               <Signature
                 selectedCardOption={pageInfo.selectedCardOption}
                 cardId={pageInfo.selectedCardId}
-                cardsInfo={cardsInfo}
+                cardInfo={pageInfo.selectedCard}
                 userData={userData}
               />
             </div>
-          )}
+          
           
             
           <SharingSignature props={{ pageInfo }} />

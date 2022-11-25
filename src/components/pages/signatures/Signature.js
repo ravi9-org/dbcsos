@@ -7,13 +7,16 @@ import Utils from "../../Utils";
 
 const Signature = (props) => {
   let cardId = props.cardId;
-  let info = props.cardsInfo;
+  let card = props.cardInfo;
   let userData = props.userData;
+
   let selectedCardOption = props.selectedCardOption;
-  const [cardInfo, setCardInfo] = useState(info);
+  let [cardInfo, setCardInfo] = useState(card || {});
+  let [canRender, setCanRender] = useState(false);
 
   const success = (res) => {
     setCardInfo(res.data);
+    setCanRender(true);
   };
 
   const fail = (err) => {
@@ -21,24 +24,22 @@ const Signature = (props) => {
   };
 
   useEffect(() => {
-    if (Utils.isObjectEmpty(info)) {
+    if (Utils.isObjectEmpty(card)) {
       Utils.getCardDetails(cardId).then(success, fail);
     } else {
       let obj = {
-        res: {
-          data: info,
-        },
+        data: card,
       };
       success(obj);
     }
-  }, []);
+  }, [card, cardId, cardInfo]);
 
   return (
     <>
-      {selectedCardOption === "qrcode" && (
+      {canRender && selectedCardOption === "qrcode" && (
         <QRCode cardId={cardId} cardInfo={cardInfo} userData={userData} />
       )}
-      {selectedCardOption === "text" && (
+      {canRender && selectedCardOption === "text" && (
         <Text cardId={cardId} cardInfo={cardInfo} userData={userData} />
       )}
     </>

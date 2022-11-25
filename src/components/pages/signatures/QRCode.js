@@ -7,10 +7,11 @@ import DefaultQRCode from "./../../../assets/img/qrcode.png";
 
 const QRCode = (props) => {
   let cardId = props.cardId;
+  let card = props.cardInfo;
   let { userData } = useContext(ContextComponent);
 
-  const [cardInfo, setCardInfo] = useState({});
-  const [templateInfo, setTemplateInfo] = useState({});
+  const [cardInfo, setCardInfo] = useState(card);
+  const [templateInfo, setTemplateInfo] = useState(card.templateInfo);
 
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
@@ -19,8 +20,19 @@ const QRCode = (props) => {
   const [canRender, setCanRender] = useState(false);
 
   const success = (res) => {
-    setMobile(res.data.fieldsData[0]);
-    setEmail(res.data.fieldsData[1]);
+    let mobile = "";
+    let email = "";
+    let userLinkedBadges = res.data?.userLinkedBadges || [];
+    userLinkedBadges.map((badge, index) => {
+      if (badge.badgeUID === "phone") {
+        mobile = badge.value || badge.defaultValue || '';
+      }
+      if (badge.badgeUID === "email") {
+        email = badge.value || badge.defaultValue || '';
+      }
+    });
+    setMobile(mobile);
+    setEmail(email);
     setQrCode(res.data.qrcode || DefaultQRCode);
     setCardInfo(res.data);
   };
@@ -30,8 +42,14 @@ const QRCode = (props) => {
   };
 
   useEffect(() => {
-    Utils.getCardDetails(cardId).then(success, fail);
-  }, [cardId]);
+    if (Utils.isObjectEmpty(card)) {
+      Utils.getCardDetails(cardId).then(success, fail);
+    } else {
+      success({
+        data: card
+      })
+    }
+  }, [card, cardId, cardInfo]);
 
   const templateSuccess = (res) => {
     setTemplateInfo(res.data);
@@ -39,9 +57,13 @@ const QRCode = (props) => {
   };
 
   useEffect(() => {
-    if (!Utils.isObjectEmpty(cardInfo)) {
+    if (Utils.isObjectEmpty(cardInfo)) {
       let templateId = cardInfo.templateId;
       Utils.getTemplateDetails(templateId).then(templateSuccess, fail);
+    } else {
+      templateSuccess({
+        data: cardInfo.templateInfo
+      })
     }
   }, [cardInfo]);
 

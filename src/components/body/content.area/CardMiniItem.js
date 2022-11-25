@@ -6,10 +6,9 @@ import DefaultQRCode from "./../../../assets/img/qrcode.png";
 
 const CardMiniItem = (props) => {
   let cardId = props.cardId;
-  let addCardsInfo = props.addCardsInfo;
-
-  let [cardData, setCardData] = useState({});
-  let [templateData, setTemplateData] = useState({});
+  let card = props.card;
+  let [cardData, setCardData] = useState(card || {});
+  let [templateData, setTemplateData] = useState(card.templateInfo || {});
   let [canRender, setCanRender] = useState(false);
   let [qrcode, setQrcode] = useState(DefaultQRCode);
 
@@ -17,7 +16,6 @@ const CardMiniItem = (props) => {
 
   const success = (res) => {
     setCardData(res.data);
-    addCardsInfo(res.data);
   };
 
   const fail = (err) => {
@@ -25,7 +23,13 @@ const CardMiniItem = (props) => {
   };
 
   useEffect(() => {
-    Utils.getCardDetails(cardId).then(success, fail);
+    if (Utils.isObjectEmpty(card)) {
+      Utils.getCardDetails(cardId).then(success, fail);
+    } else {
+      success({
+        data: card
+      });
+    }
   }, []);
 
   const templateSuccess = (res) => {
