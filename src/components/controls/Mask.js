@@ -9,7 +9,7 @@ const Mask = () => {
   useEffect(() => {
     let text = loadingState?.text ?? "Loading";
     loadingState?.applyMask && setLoadingText(text);
-    setAdditionalClasses(loadingState?.applyMask ? "" : "d-none1");
+    setAdditionalClasses(loadingState?.applyMask ? "" : "d-none");
   }, [loadingState]);
   return (
     <div className={`indi-global-mask ${additionalClasses}`}>
