@@ -9,92 +9,48 @@ import downloadImage from "./../../assets/img/Upload.png";
 
 const CardExternalDetailsPage = () => {
   const { cardid } = useParams();
+  const cardPublicId = cardid;
 
-  let [badgesCtxData, setBadgesCtxData] = useState([]);
-  let [addrCtxData, setAddrCtxData] = useState([]);
   let [canRender, setCanRender] = useState(false);
-  let [fetchAddresses, setFetchAddresses] = useState(false);
-  let [cardObject, setCardObject] = useState({});
+  let [cardInfo, setCardInfo] = useState({});
+  let [cardId, setCardId] = useState(cardPublicId);
+
+  const success = (res) => {
+    setCardInfo(res?.data || {});
+    setCardId(res?.data?.id || {});
+    setCanRender(true);
+  };
+  const fail = (err) => {
+    err?.message?.length && console.log(err);
+  };
 
   useEffect(() => {
-    const badgeSuccess = (res) => {
-      setBadgesCtxData(res.data);
-      setFetchAddresses(true);
-    };
-    const badgeFail = (err) => {
-      err?.message?.length && console.log(err);
-    };
-
-    Utils.getBadges().then(badgeSuccess, badgeFail);
-  }, []);
-
-  useEffect(() => {
-    const success = (res) => {
-      let data = res.data;
-      let tempAddrIds = [];
-      let tempAddrNames = [];
-      let tempAddrValues = [];
-      let tempCityValues = [];
-      let tempCountryValues = [];
-      let tempZipValues = [];
-      let tempFullAddrValues = [];
-      let tempAddrNumbers = [];
-      data.map((addr, index) => {
-        tempAddrIds.push(addr.id);
-        tempAddrNames.push(addr.name);
-
-        let address = addr?.address || "";
-        let city = addr?.city || "";
-        let country = addr?.country || "";
-        let zip = addr?.zip || "";
-
-        tempAddrValues.push(address);
-        tempCityValues.push(city);
-        tempCountryValues.push(country);
-        tempZipValues.push(zip);
-
-        tempFullAddrValues.push(
-          address + " " + city + " " + country + " " + zip
-        );
-        tempAddrNumbers.push(addr.contact);
-      });
-
-      let addrObj = {
-        ids: tempAddrIds,
-        addressNames: tempAddrNames,
-        addresses: tempAddrValues,
-        cities: tempCityValues,
-        countries: tempCountryValues,
-        fullAddresses: tempFullAddrValues,
-        numbers: tempAddrNumbers,
-      };
-      setAddrCtxData(addrObj);
-
-      setCanRender(true);
-    };
-    const fail = (err) => {
-      console.log(err);
-    };
-
-    if (fetchAddresses) {
-      try {
-        Utils.getAddresses().then(success, fail);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  }, [fetchAddresses]);
+    Utils.getCardDetailsAsAnonymous(cardPublicId).then(success, fail);
+  }, [cardPublicId]);
 
   const downloadHandler = (e) => {
-    // console.log(cardObject);
+    console.log(cardInfo);
 
-    let userFirstName = "test first name";
-    let userID = "test UID";
-    let userEmail = "test@email.com";
-    let telephone = "+91 98832 42424";
-    let title = "Sr. Manager";
+    let userFirstName = cardInfo.userFieldInfo.firstName;
+    let userID = cardInfo.userFieldInfo.email;
+    let userEmail = cardInfo.userFieldInfo.email;
+    let title = cardInfo.userFieldInfo.title;
+
     let url = "https://cmsedge.com";
-    let urlLink = "https://cmsedge.com";
+    let urlLink = "https://cmsedge.com";    
+    let telephone = "";
+
+    cardInfo.userLinkedBadges.map((badge) => {
+      if (badge.badgeUID === "phone") {
+        telephone = badge.value || badge.defaultValue || '';
+      }
+      if (badge.badgeUID === "url") {
+        url = badge.value || badge.defaultValue || '';
+      }
+      if (badge.badgeUID === "website") {
+        urlLink = badge.value || badge.defaultValue || '';
+      }
+    });
 
     const POSTFIX = "\n";
     let vcfData = [];
@@ -109,20 +65,20 @@ const CardExternalDetailsPage = () => {
     vcfData.push("URL:" + url + POSTFIX);
     vcfData.push("URL;TYPE=LINK:" + urlLink + POSTFIX);
 
-    cardObject.fields.map((field, index) => {
-      let value = cardObject.fieldsData[index];
+    cardInfo.userLinkedBadges.map((field, index) => {
+      let value = field.value || field.defaultValue || '';
       let pushString = "";
       if (value.trim().length > 0) {
         if (
-          field === "vimeo" ||
-          field === "wechat" ||
-          field === "instagram" ||
-          field === "linkedin" ||
-          field === "twitter" ||
-          field === "link"
+          field.badgeUID === "vimeo" ||
+          field.badgeUID === "wechat" ||
+          field.badgeUID === "instagram" ||
+          field.badgeUID === "linkedin" ||
+          field.badgeUID === "twitter" ||
+          field.badgeUID === "link"
         ) {
           pushString =
-            "URL;TYPE=" + field.toUpperCase() + ":" + value + POSTFIX;
+            "URL;TYPE=" + field.badgeUID.toUpperCase() + ":" + value + POSTFIX;
         }
       }
       pushString.length && vcfData.push(pushString);
@@ -142,28 +98,23 @@ const CardExternalDetailsPage = () => {
   };
 
   return (
-    <ContextComponent.Provider
-      value={{
-        badgesCtxData,
-        addrCtxData,
-        setCardObject,
-      }}
-    >
+    <>
       {canRender && (
         <Container className="indi-app indi-ext-card-details-page">
           <div className="indi-ext-card-item-wrapper d-flex">
-            <CardItem cardId={cardid} />
-          </div>
-          <div
+            <CardItem cardId={cardId} card={cardInfo} userData={cardInfo.userFieldInfo} />
+            <div
             className="indi-card-ext-download-card"
             role="button"
             onClick={downloadHandler}
           >
             <img src={downloadImage} alt="download" />
           </div>
+          </div>
+          
         </Container>
       )}
-    </ContextComponent.Provider>
+    </>
   );
 };
 

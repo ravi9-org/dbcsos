@@ -36,6 +36,8 @@ const CardItem = (props) => {
     setCardObject = () => {},
     setLoadingState,
   } = useContext(ContextComponent);
+
+  userData = props?.userData || userData || {};
   let [pronoun, setPronoun] = useState(Utils.PRONOUNS[userData.pronoun]);
 
   const success = (res) => {

@@ -869,6 +869,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   width: 100vw;
   background-repeat: repeat;
   background-size: contain;
+  position: relative;
 }
 
 .indi-ext-card-item-wrapper {
@@ -1288,7 +1289,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-empty-page {
   display: flex;
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
   height: 80%;
   font-size: 18px;
   border: 1px solid;
@@ -1740,4 +1741,17 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-bulk-upload-file-name.indi-img-preview {
   width: 100%;
+}
+
+.indi-app .indi-card-ext-download-card {
+  position: absolute;
+  bottom: 50px;
+  width: 400px;
+  justify-content: flex-end;
+  display: flex;
+}
+
+.indi-app .indi-card-ext-download-card img {
+  width: 32px;
+  height: 32px;
 }

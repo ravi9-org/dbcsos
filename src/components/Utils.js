@@ -25,6 +25,7 @@ const REST_API = {
   BADGES: REST_API_PREFIX + "/badges/",
   CARDS: REST_API_PREFIX + "/cards",
   TEMPLATES: REST_API_PREFIX + "/templates",
+  ANONYMOUS_CARD: REST_API_PREFIX + "/card",
   USER_CARD: REST_API_PREFIX + "/usercards",
   ADDRESSES: REST_API_PREFIX + "/addresses/",
   ADDRESS_BULK_UPLOAD: REST_API_PREFIX + "/addresses/import",
@@ -618,6 +619,17 @@ const getTemplateDetails = (templateId) => {
   return myPromise;
 };
 
+const getCardDetailsAsAnonymous = (cardPublicId) => {
+  const myPromise = new Promise((resolve, reject) => {
+    let getUrl = REST_API.ANONYMOUS_CARD + "/" + cardPublicId;
+    axios.get(getUrl).then((res) => {
+      resolve(res);
+    });
+  });
+
+  return myPromise;
+};
+
 const getCardDetails = (cardId) => {
   const myPromise = new Promise((resolve, reject) => {
     let session = getSession();
@@ -864,6 +876,7 @@ const Utils = {
   deleteBadges,
   getUserId,
   getFilteredUsers,
+  getCardDetailsAsAnonymous,
   getCardDetails,
   deleteCard,
   addNewTemplate,

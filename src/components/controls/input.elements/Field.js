@@ -12,7 +12,7 @@ const Field = (props = {}) => {
   let fieldType = fieldProps.badgeUID;
   let showEmptyField = fieldProps?.showEmptyField || false;
   let fieldSchema = fieldProps;
-  let iconDarkImage = fieldProps?.fieldSchema?.darkIconImage || ""; 
+  let iconDarkImage = fieldProps?.darkIconImage || fieldProps?.fieldSchema?.darkIconImage || "";
 
   let isDefault = !!fieldProps?.fieldSchema?.default;
 

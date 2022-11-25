@@ -10,18 +10,21 @@ const QRCode = (props) => {
   const location = useLocation();
   let [cardData, setCardData] = useState(props.cardData || {});
   let [cardId, setCardId] = useState(props.cardId || "");
-  let cardLink = document.location.href;
-  let currentPath = location.pathname;
-  cardLink = cardLink
-    .replace(currentPath, Utils.APP_URLS.CARD_EXTERNAL_PAGE)
-    .replace(":cardid", cardId);
 
   let [canRender, setCanRender] = useState(false);
   let [qrCode, setQrCode] = useState(DefaultQRCode);
 
+  let [cardLink, setCardLink] = useState(document.location.href);
+
   useEffect(() => {
     if (!Utils.isObjectEmpty(cardData)) {
       setQrCode(cardData.qrcode || DefaultQRCode);
+      let cLink = document.location.href;
+      let currentPath = location.pathname;
+      cLink = cLink
+        .replace(currentPath, Utils.APP_URLS.CARD_EXTERNAL_PAGE)
+        .replace(":cardid", cardData.publicId);
+      setCardLink(cLink);
       setCanRender(true);
     }
   }, [cardData]);
