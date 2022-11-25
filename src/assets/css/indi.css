@@ -525,9 +525,13 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   margin-bottom: 36px;
 }
 
-.indi-app .indi-card-name,
 .indi-app .indi-card-name {
   text-align: center;
+}
+
+.indi-app .indi-card-name.indi-mini-card-name {
+  text-align: left;
+  max-width: calc(100% - 50px);
 }
 
 .indi-app .indi-template-title,
@@ -536,6 +540,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   line-height: 19px;
   min-height: 24px;
   max-height: 40px;
+}
+
+.indi-app .indi-card-title.indi-mini-card-title {
+  max-width: calc(100% - 50px);
+  font-size: 10px;
 }
 
 .indi-app .indi-template-title {
@@ -581,6 +590,20 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   display: flex;
   display: flex;
   justify-content: end;
+}
+
+.indi-app .indi-card-company-logo-wrapper.indi-mini-card-company-logo-wrapper {
+  position: absolute;
+    height: 40px;
+    width: calc(100% - 15px);
+    background-size: 50px 50px;
+    background-position: 10px;
+    background-size: cover;
+    display: flex;
+    justify-content: end;
+    max-width: 50px;
+    float: right;
+    right: 5px;
 }
 
 .indi-app .indi-ext-card-item-wrapper .indi-card-company-logo-wrapper {

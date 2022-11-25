@@ -53,18 +53,24 @@ const CardMiniItem = (props) => {
             background: `url(${templateData.backgroundImage})`,
           }}
         >
-          <div className="d-none1 indi-card-company-logo-wrapper">
+          <div className="d-none1 indi-card-company-logo-wrapper indi-mini-card-company-logo-wrapper">
             <img src={templateData.logoImage} alt="logoiamge" />
           </div>
+
           <div className="indi-card-upload-picture d-none"></div>
+
           <div className="indi-info-wrapper">
-            <div className="indi-card-name fw-bold">
+
+            <div className="indi-card-name indi-mini-card-name fw-bold">
               {userData.firstName} {userData.lastName}
             </div>
-            <div className="indi-card-title">{userData.designation}</div>
+
+            <div className="indi-card-title indi-mini-card-title">{userData.title}</div>
+
             <div className="indi-card-qr-code d-flex">
               <img src={qrcode} alt="qrcode" />
             </div>
+
           </div>
         </div>
       )}
