@@ -32,6 +32,7 @@ const CardItem = (props) => {
   const navigate = useNavigate();
 
   let { userData, setCardObject = (() => { }) } = useContext(ContextComponent);
+  let [pronoun, setPronoun] = useState(Utils.PRONOUNS[userData.pronoun]);
 
   const success = (res) => {
     setCardData(res.data);
@@ -104,7 +105,7 @@ const CardItem = (props) => {
           </div>
           <div className="indi-info-wrapper">
             <div className="indi-card-name fw-bold">
-              {userData?.firstName} {userData?.lastName} ({userData?.pronoun})
+              {userData?.firstName} {userData?.lastName} ({pronoun})
             </div>
             <div className="indi-card-title">{userData?.designation}</div>
           </div>
