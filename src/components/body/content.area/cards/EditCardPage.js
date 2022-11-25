@@ -99,11 +99,35 @@ const EditCardPage = (props) => {
 
   const submitForm = (dataValues = {}, imageValues = [], cardNameValue = "") => {
     let info = { ...cardCtxInfo };
+    let submitCardInfo = { ...info, userLinkedBadges: [] };
+    delete submitCardInfo.fieldsData;
+    info.userLinkedBadges.map((badge, index) => {
+      let badgeData = {
+        "badgeId": badge.badgeId,
+        "badgeName": badge.badgeName,
+        "badgeOrder": index,
+        "value": dataValues[index]
+      };
+      submitCardInfo.userLinkedBadges.push(badgeData);
+    });
 
-    info.fieldsData = dataValues;
-    info.cardImage = imageValues[0];
-    info.croppedImage = imageValues[1];
-    info.cardName = cardNameValue;
+    submitCardInfo.cardImage = imageValues[0];
+    submitCardInfo.croppedImage = imageValues[1];
+    submitCardInfo.cardName = cardNameValue;
+
+    delete submitCardInfo.fieldsData;
+    delete submitCardInfo.customId;
+    delete submitCardInfo.customUrl;
+    delete submitCardInfo.id;
+    delete submitCardInfo.publicId;
+    delete submitCardInfo.publicUrl;
+    delete submitCardInfo.qrCode;
+    delete submitCardInfo.templateId;
+    delete submitCardInfo.templateInfo;
+    delete submitCardInfo.userFieldInfo;
+    delete submitCardInfo.userId;
+
+    // console.log(submitCardInfo);
 
     const success = (res) => {
       goBack();
@@ -114,7 +138,7 @@ const EditCardPage = (props) => {
     };
 
     try {
-      Utils.executeCardEditRESTAPI(info, cardid).then(success, fail);
+      Utils.executeCardEditRESTAPI(submitCardInfo, cardid).then(success, fail);
     } catch (e) {
       console.log(e);
     }
