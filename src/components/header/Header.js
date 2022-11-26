@@ -15,7 +15,7 @@ const AppHeader = () => {
       </div>
       <div className="indi-header-right-bg-wrapper d-flex flex-row justify-content-end">
         <BackgroundImage />
-        <Notification />
+        {/* <Notification /> */}
         <UserProfileMenu />
       </div>
     </Container>

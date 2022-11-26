@@ -78,7 +78,8 @@ const Footer = () => {
             <Logo
               externalLinkProps={{
                 classes: "nav-link indi-footer-logo",
-                toWhere: "http://www.github.com",
+                samePage: true,
+                toWhere: "/",
               }}
             />
             <div className="indi-footer-logo-text float-right d-none d-sm-block">

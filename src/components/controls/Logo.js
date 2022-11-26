@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 const Logo = (props = {}) => {
   let internalLinkProps = props.internalLinkProps || {};
   let externalLinkProps = props.externalLinkProps || {};
+  let newTabOrWindow = !props?.sameWindow || true;
 
   let isInternalLink = internalLinkProps?.toWhere?.length;
   let isExternalLink = externalLinkProps?.toWhere?.length;
@@ -22,8 +23,8 @@ const Logo = (props = {}) => {
     return [
       <a
         href={toWhere}
-        target="_blank"
-        rel={"noreferrer"}
+        target={newTabOrWindow ? "_blank" : ""}
+        rel={"noreferrer"} 
         className={classes}
         key="logofooterrightside"
       >

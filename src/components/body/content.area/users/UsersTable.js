@@ -222,7 +222,7 @@ const UsersTable = () => {
   };
 
   let REGIONS = Utils.REGIONS;
-  let [region, setRegion] = useState(Object.keys(REGIONS)[0]);
+  let sortedRegions = Object.keys(REGIONS).sort();
 
   const regionHandler = (e) => {
     let regionId = e.currentTarget.value;
@@ -258,7 +258,7 @@ const UsersTable = () => {
                 onChange={regionHandler}
               >
                 <option value="clear">All</option>
-                {Object.keys(REGIONS).map((keyName, index) => (
+                {sortedRegions.map((keyName, index) => (
                   <option value={keyName} key={index}>
                     {REGIONS[keyName]}
                   </option>
