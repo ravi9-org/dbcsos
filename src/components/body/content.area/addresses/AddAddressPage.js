@@ -19,6 +19,8 @@ const AddAddressPage = ({ props }) => {
   const saveAddress = (e) => {
     const success = (res) => {
       hideModal();
+      console.log(res);
+      debugger;
       let newRecord = [
         res.data.id,
         false,

@@ -30,6 +30,7 @@ const AddBadgePage = ({ props }) => {
         res.data.name,
         res.data.iconImage,
         res.data.darkIconImage,
+        res.data.prefixurl,
         res.data.type,
       ];
       let tempTableData = [...tableData];
@@ -48,6 +49,7 @@ const AddBadgePage = ({ props }) => {
       badgeUID: badgeUID,
       type: badgeType,
     };
+
     try {
       Utils.addBadge(formData).then(success, fail);
     } catch (e) {
