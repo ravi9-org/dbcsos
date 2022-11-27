@@ -78,7 +78,7 @@ const Footer = () => {
             <Logo
               externalLinkProps={{
                 classes: "nav-link indi-footer-logo",
-                samePage: true,
+                sameWindow: true,
                 toWhere: "/",
               }}
             />

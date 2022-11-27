@@ -4,8 +4,7 @@ import { NavLink } from "react-router-dom";
 const Logo = (props = {}) => {
   let internalLinkProps = props.internalLinkProps || {};
   let externalLinkProps = props.externalLinkProps || {};
-  let newTabOrWindow = !props?.sameWindow || true;
-
+  let newTabOrWindow = !externalLinkProps?.sameWindow;
   let isInternalLink = internalLinkProps?.toWhere?.length;
   let isExternalLink = externalLinkProps?.toWhere?.length;
 
