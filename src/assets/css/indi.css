@@ -96,7 +96,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-color: rgba(0, 0, 0, 0.5);
   top: 0;
   left: 0;
-  z-index: 99999;
+  z-index: 99998;
 }
 
 .indi-app .indi-global-mask .indi-global-mask-loading-text {

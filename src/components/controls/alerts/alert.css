@@ -15,6 +15,7 @@
 .indi-app .indi-status-message-wrapper {
     opacity: 1;
     transition: all 250ms linear;
+    z-index: 99999;
 }
 
 .indi-app .indi-status-message-wrapper.indi-alert-hide {
