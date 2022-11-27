@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import ContextComponent from "../AppContext";
 import Login from "./Login";
+import ResetPassword from "./ResetPassword";
 import CardExternalDetailsPage from "./CardExternalDetailsPage";
 import Mask from "../controls/Mask";
 import Alert from "../controls/alerts/Alert";
@@ -13,6 +14,7 @@ function MainPage() {
   let [alert, setAlert] = useState({});
   let [canRender, setCanRender] = useState(false);
   let [canRedirectToLogin, setCanRedirectToLogin] = useState(false);
+  let [canRedirectToResetPassword, setCanRedirectToResetPassword] = useState(false);
   let [canRedirectToLanding, setCanRedirectToLanding] = useState(false);
   let [userData, setUserData] = useState({});
   let [addrCtxData, setAddrCtxData] = useState([]);
@@ -26,12 +28,25 @@ function MainPage() {
       setCanRedirectToLogin(false);
       navigate(Utils.APP_URLS.LOGIN_PAGE);
     }
+  }, [navigate, canRedirectToLogin]);
+
+  useEffect(() => {
+    document.body.classList.add("indi-app");
+
+    if (canRedirectToResetPassword) {
+      setCanRedirectToResetPassword(false);
+      navigate(Utils.APP_URLS.RESET_PASSWORD_PAGE);
+    }
+  }, [navigate, canRedirectToResetPassword]);
+
+  useEffect(() => {
+    document.body.classList.add("indi-app");
 
     if (canRedirectToLanding) {
       setCanRedirectToLanding(false);
       navigate(Utils.APP_URLS.LANDING_PAGE);
     }
-  });
+  }, [navigate, canRedirectToLanding]);
 
   return (
     <ContextComponent.Provider
@@ -44,6 +59,7 @@ function MainPage() {
         setCanRedirectToLogin,
         canRedirectToLanding,
         setCanRedirectToLanding,
+        setCanRedirectToResetPassword,
         userData,
         setUserData,
         addrCtxData,
@@ -57,6 +73,11 @@ function MainPage() {
           path={Utils.APP_URLS.LOGIN_PAGE}
           exact
           element={<Login />}
+        ></Route>
+        <Route
+          path={Utils.APP_URLS.RESET_PASSWORD_PAGE}
+          exact
+          element={<ResetPassword />}
         ></Route>
 
         <Route

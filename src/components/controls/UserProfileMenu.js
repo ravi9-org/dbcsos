@@ -43,7 +43,7 @@ const UserProfileMenu = () => {
     e.preventDefault();
     let commonFn = (data) => {
       Utils.deleteSession();
-      navigate("/login");
+      navigate(Utils.APP_URLS.LOGIN_PAGE);
     };
     Utils.executeLogoutRESTAPI().then(commonFn, commonFn);
   };

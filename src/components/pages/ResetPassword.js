@@ -9,19 +9,14 @@ import LoginRightBGImg from "../../assets/img/logo-on-white-bg.png";
 
 import { Container, Card, Form, Button } from "react-bootstrap";
 
-const LoginForm = () => {
+const ResetPasswordForm = () => {
   const HIDDEN_CLASS = "d-none";
-  let emailField = useRef(null);
-  let userPasswordField = useRef(null);
-  let rememberMe = useRef(null);
-  let emailErrMsgDiv = useRef(null);
-  let userPwdErrMsgDiv = useRef(null);
+  let passwordField = useRef(null);
+  let confirmPasswordField = useRef(null);
+  let passwordErrMsgDiv = useRef(null);
+  let confirmPasswordErrMsgDiv = useRef(null);
   let gloablError = useRef(null);
-  let {
-    setLoadingState,
-    setCanRedirectToLanding,
-    setCanRedirectToResetPassword,
-  } = useContext(ContextComponent);
+  let { setLoadingState, setCanRedirectToLogin } = useContext(ContextComponent);
   let [formErrorMsg, setFormErrorMsg] = useState("");
   let navigate = useNavigate();
 
@@ -36,92 +31,92 @@ const LoginForm = () => {
   const onClickHandler = (e) => {
     e.preventDefault();
     let valid = true;
-    let email = emailField.current.value || "";
-    let userPwd = userPasswordField.current.value || "";
-    if (email.length === 0) {
-      toggleErrMsgClass(emailField, emailErrMsgDiv, true);
+    let password = passwordField.current.value || "";
+    let confirmPassword = confirmPasswordField.current.value || "";
+    if (password.length === 0 || password.length < 6 || password.length > 40) {
+      toggleErrMsgClass(passwordField, passwordErrMsgDiv, true);
       valid = false;
     } else {
-      toggleErrMsgClass(emailField, emailErrMsgDiv, false);
+      toggleErrMsgClass(passwordField, passwordErrMsgDiv, false);
     }
-    if (userPwd.length === 0) {
-      toggleErrMsgClass(userPasswordField, userPwdErrMsgDiv, true);
+    if (
+      confirmPassword.length === 0 ||
+      confirmPassword.length < 6 ||
+      confirmPassword.length > 40
+    ) {
+      toggleErrMsgClass(confirmPasswordField, confirmPasswordErrMsgDiv, true);
       valid = false;
     } else {
-      toggleErrMsgClass(userPasswordField, userPwdErrMsgDiv, false);
+      toggleErrMsgClass(confirmPasswordField, confirmPasswordErrMsgDiv, false);
+    }
+
+    if (valid && password !== confirmPassword) {
+      valid = false;
+      setFormErrorMsg("Password and confirm password fields are not equal");
+    } else {
+      setFormErrorMsg("");
     }
 
     if (valid) {
-      const loginSuccess = (res) => {
+      const resetSuccess = (res) => {
         setFormErrorMsg("");
         if (res?.redirect) {
-          navigate(Utils.APP_URLS.LANDING_PAGE);
+          Utils.deleteSession();
+          navigate(Utils.APP_URLS.LOGIN_PAGE);
         }
       };
-      const loginFail = (err) => {
+      const failCallback = (err) => {
         setFormErrorMsg(err.data);
       };
-      const loginCallback = (response) => {
+      const successCallback = (response) => {
         setLoadingState({
           applyMask: false,
         });
         if (response.status === 200) {
-          if (response.redirectToResetPwd) {
-            navigate(Utils.APP_URLS.RESET_PASSWORD_PAGE);
-          } else {
-            loginSuccess(response);
-          }
+          resetSuccess(response);
         } else {
-          loginFail(response);
+          //loginFail(response);
         }
       };
       let params = {
-        email: email,
-        userPwd: userPwd,
-        rememberMe: rememberMe.current.checked,
+        newpassword: password,
+        confirmpassword: confirmPassword,
       };
       setLoadingState({
         applyMask: true,
         text: "Log-in is in progress",
       });
-      Utils.executeLoginRESTAPI(params).then(loginCallback, loginCallback);
+      Utils.executeResetPassword(params).then(successCallback, failCallback);
     } else {
       console.log("login form is in-complete...");
     }
   };
 
-  const emailFocusOutEventHandler = (e) => {
+  const passwordFocusOutEventHandler = (e) => {
     e.preventDefault();
-    let email = emailField.current.value || "";
-    if (email.length === 0) {
-      toggleErrMsgClass(emailField, emailErrMsgDiv, true);
+    let password = passwordField.current.value || "";
+    if (password.length === 0) {
+      toggleErrMsgClass(passwordField, passwordErrMsgDiv, true);
     } else {
-      toggleErrMsgClass(emailField, emailErrMsgDiv, false);
+      toggleErrMsgClass(passwordField, passwordErrMsgDiv, false);
     }
   };
 
-  const userPwdFocusOutEventHandler = (e) => {
+  const confirmPasswordFocusOutEventHandler = (e) => {
     e.preventDefault();
-    let userPwd = userPasswordField.current.value || "";
-    if (userPwd.length === 0) {
-      toggleErrMsgClass(userPasswordField, userPwdErrMsgDiv, true);
+    let confirmPassword = confirmPasswordField.current.value || "";
+    if (confirmPassword.length === 0) {
+      toggleErrMsgClass(confirmPasswordField, confirmPasswordErrMsgDiv, true);
     } else {
-      toggleErrMsgClass(userPasswordField, userPwdErrMsgDiv, false);
+      toggleErrMsgClass(confirmPasswordField, confirmPasswordErrMsgDiv, false);
     }
   };
-
-  Utils.userSessionExists() && setCanRedirectToLanding(true);
-
-  useEffect(() => {}, []);
 
   useEffect(() => {
     gloablError.current.classList[
       formErrorMsg?.trim().length ? "remove" : "add"
     ]("d-none");
   }, [formErrorMsg]);
-
-  // let defaultEmailValue = "user_1@company.com";
-  // let defaultPwdValue = "user_1";
 
   return (
     <Container className="vh-100 vw-100 p-0 m-0 mw-100 mh-100">
@@ -151,9 +146,9 @@ const LoginForm = () => {
 
             <div className="indi-login-form-wrapper">
               <div className="indi-login-form-headings text-left">
-                <div className="indi-login-form-text-login">Log in</div>
+                <div className="indi-login-form-text-login">Reset password</div>
                 <div className="indi-login-form-text-desc">
-                  Please log in to your account.
+                  Please reset your password.
                 </div>
               </div>
 
@@ -162,17 +157,17 @@ const LoginForm = () => {
                   <input
                     // className={` ${warnemail ? "indi-login-form-input-warning" : ""}`}
                     className={`indi-login-form-input indi-login-form-input-email`}
-                    type="text"
-                    placeholder="Enter email"
-                    name="email"
+                    type="password"
+                    placeholder="Enter new password"
+                    name="password"
                     required
-                    ref={emailField}
+                    ref={passwordField}
                     //value={defaultEmailValue}
-                    onChange={emailFocusOutEventHandler}
+                    onChange={passwordFocusOutEventHandler}
                   />
                   {/* <p className={` ${danger ? "danger" : ""}`}> */}
-                  <p ref={emailErrMsgDiv} className="d-none">
-                    Please enter a valid email address.
+                  <p ref={passwordErrMsgDiv} className="d-none">
+                    Please enter new password (6 to 40 characters).
                   </p>
                 </div>
                 <div className="indi-login-form-input-wrapper">
@@ -180,30 +175,17 @@ const LoginForm = () => {
                     // className={` ${warnpass ? "indi-login-form-input-warning" : ""}`}
                     className={`indi-login-form-input indi-login-form-input-password`}
                     type="password"
-                    ref={userPasswordField}
-                    placeholder="Enter Password"
-                    name="password"
+                    ref={confirmPasswordField}
+                    placeholder="Enter confirm password"
+                    name="confirmPassword"
                     required
                     //value={defaultPwdValue}
-                    onChange={userPwdFocusOutEventHandler}
+                    onChange={confirmPasswordFocusOutEventHandler}
                   />
                   {/* <p className={` ${danger ? "danger" : ""}`}> */}
-                  <p ref={userPwdErrMsgDiv} className="d-none">
-                    Please enter password.
+                  <p ref={confirmPasswordErrMsgDiv} className="d-none">
+                    Please enter confirm password (6 to 40 characters).
                   </p>
-                </div>
-                <div className="indi-login-remember-reset">
-                  <div className="indi-login-remember-wrapper">
-                    <input
-                      className="form-check-input indi-login-remember-checkbox p-0 m-0"
-                      type="checkbox"
-                      ref={rememberMe}
-                    />
-                    <div className="indi-login-remember-label">Remember me</div>
-                  </div>
-                  <div className="indi-login-reset-wrapper">
-                    Reset password?
-                  </div>
                 </div>
 
                 <div className="btn w-100 h-100 p-0 m-0 indi-login-form-btn-wrapper">
@@ -212,7 +194,7 @@ const LoginForm = () => {
                     type="submit"
                     onClick={onClickHandler}
                   >
-                    Login
+                    Reset
                   </Button>
                 </div>
               </div>
@@ -235,4 +217,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ResetPasswordForm;

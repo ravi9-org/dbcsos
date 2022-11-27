@@ -231,7 +231,8 @@
     display: flex;
     position: relative;
     justify-content: left;
-    height: 29px;
+    /* height: 29px; */
+    height: auto;
 }
 
 

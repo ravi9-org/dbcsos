@@ -30,12 +30,14 @@ const REST_API = {
   ADDRESSES: REST_API_PREFIX + "/addresses/",
   ADDRESS_BULK_UPLOAD: REST_API_PREFIX + "/addresses/import",
   BRANDS: REST_API_PREFIX + "/brands/",
+  RESET_PASSWORD: REST_API_PREFIX + "/resetpassword",
 };
 
 const APP_URL_PREFIX = "";
 
 const APP_URLS = {
-  LOGIN_PAGE: APP_URL_PREFIX + "login",
+  LOGIN_PAGE: APP_URL_PREFIX + "/login",
+  RESET_PASSWORD_PAGE: APP_URL_PREFIX + "/resetpassword",
   LANDING_PAGE: APP_URL_PREFIX + "/",
   BRANDS_PAGE: APP_URL_PREFIX + "/brands",
   TEMPLATES_PAGE: APP_URL_PREFIX + "/templates",
@@ -135,8 +137,8 @@ const userSessionExists = () => {
 const createSession = (userObj) => {
   let storageObj = {};
   storageObj[TOKEN] = userObj.accessToken;
-  storageObj[EMAIL] = userObj.user.email;
-  storageObj[USERID] = userObj.user.id;
+  storageObj[EMAIL] = userObj?.user?.email || "";
+  storageObj[USERID] = userObj?.user?.id || "";
 
   const now = new Date();
 
@@ -172,7 +174,7 @@ const getSession = () => {
 
 const getToken = (session = getSession()) => {
   let token = session[TOKEN] || "";
-  return token;
+  return token.length ? ("Bearer " + token) : '';
 };
 
 const getUserEmail = (session = getSession()) => {
@@ -708,10 +710,17 @@ const executeLogoutRESTAPI = () => {
     });
   };
   const myPromise = new Promise((resolve, reject) => {
-    let formData = {
-      email: getUserEmail(),
-      password: getUserId(),
-    };
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+
+    let formData = {};
     let logoutUrl = REST_API.LOGOUT;
     let success = (response) => {
       alwaysClassback(response, resolve);
@@ -720,7 +729,11 @@ const executeLogoutRESTAPI = () => {
       alwaysClassback(err.response, reject);
     };
     try {
-      axios.post(logoutUrl, formData /*, headersInfo*/).then(success, failure);
+      axios.post(logoutUrl, formData , {
+        headers: {
+          Authorization: `${token}`
+        },
+      }).then(success, failure);
     } catch (e) {
       console.log(e);
     }
@@ -743,14 +756,20 @@ const executeLoginRESTAPI = (params) => {
     let loginUrl = REST_API.LOGIN;
 
     let success = (res) => {
+      let returnObject = {
+        redirect: true,
+        redirectToResetPwd: false,
+        ...res,
+      };
       if (res.status === STATUS_OK) {
         deleteSession();
         createSession({ ...res.data, rememberMe: params.rememberMe });
+        if (!!res.data.user) {
+        } else {
+          returnObject.redirectToResetPwd = true;
+        }
       }
-      resolve({
-        redirect: true,
-        ...res,
-      });
+      resolve(returnObject);
     };
 
     let failure = (err) => {
@@ -760,6 +779,72 @@ const executeLoginRESTAPI = (params) => {
       });
     };
     axios.post(loginUrl, formData /*, headersInfo*/).then(success, failure);
+  });
+
+  return myPromise;
+};
+
+const executeResetPassword = (params) => {
+  const myPromise = new Promise((resolve, reject) => {
+    let session = getSession();
+    if (isObjectEmpty(session).length === 0) {
+      reject({
+        redirect: true,
+        message: "No session establised till now...",
+      });
+    }
+
+    let token = getToken();
+
+    let failure = (err) => {
+      resolve({
+        redirect: false,
+        ...err.response,
+      });
+    };
+
+    if (token) {
+      let formData = {
+        newpassword: params.newpassword,
+        confirmpassword: params.confirmpassword,
+      };
+      // let headersInfo = {
+      //   headers: {
+      //     "Content-type": "application/json",
+      //   },
+      // };
+      let resetUrl = REST_API.RESET_PASSWORD;
+
+      let success = (res) => {
+        let returnObject = {
+          redirect: true,
+          redirectToResetPwd: true,
+          ...res,
+        };
+        if (res.status === STATUS_OK) {
+          deleteSession();
+          createSession({ ...res.data, rememberMe: params.rememberMe });
+          if (!!res.data.user) {
+          } else {
+            returnObject.redirectToResetPwd = true;
+          }
+        }
+        resolve(returnObject);
+      };
+
+      axios
+        .post(resetUrl, formData, {
+          headers: {
+            Authorization: `${token}`
+          },
+        })
+        .then(success, failure);
+    } else {
+      reject({
+        redirect: true,
+        message: "No token is available...",
+      });
+    }
   });
 
   return myPromise;
@@ -879,6 +964,7 @@ const Utils = {
   getTemplateDetails,
   executeLoginRESTAPI,
   executeLogoutRESTAPI,
+  executeResetPassword,
   executeCardAddRESTAPI,
   executeCardEditRESTAPI,
   addOrRemoveCardFromUser,
