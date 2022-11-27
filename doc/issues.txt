@@ -3,9 +3,9 @@ Slide 1:
 1)When I created the below test template it gave me the test brand I previously created to choose from so working well for that
 [Ravi]: Working fine
 2)I understand you are currently working on the badges so they will be ready on Monday right?
-[Ravi]: Badge ribbons are working fine.
-3)I understand you are currently working on the badges so they will be ready on Monday right?
-[Ravi]: Save card is working fine now.
+[Ravi]: Fixed.
+3)Nothing happened when I hit save?
+[Ravi]: Fixed along the way.
 
 Slide 2:
 --------
@@ -14,10 +14,10 @@ Slide 2:
 
 Slide 3:
 --------
-1)Nothing happened when click send
-[Ravi]: Working fine now
+1)Link breaks when clicking on edit
+[Ravi]: cannot reproduce.
 2)QR not working
-[Ravi]: Showing the qr code from REST API's response as it is.
+[Ravi]: Showing the qr code from REST API's response as it is. Lux has to validate it.
 
 Slide 4:
 --------
@@ -27,27 +27,27 @@ Slide 4:
 Slide 5:
 --------
 1) Logos overlapping the name
-[Ravi]: just now fixed and checked-in as well.
+[Ravi]: Fixed.
 
 Slide 6:
 --------
-1) Although I followed the steps for the Outlook windows one, the signature appears with a black background on my email – same for both QR and picture versions
+1) Although I followed the steps for the Outlook windows one, the signature appears with a black background on my email ï¿½ same for both QR and picture versions
 [Ravi]: Not able to repro this on web outlook. Need to verify with Lux
 
 
 Slide 7:
 --------
 1) What is that meant to be for?
-[Ravi]: Removed notification (bell icon) from header.
+[Ravi]: Fixed, removed notification (bell icon) from header.
 2) Currently when clicking on the two existing template nothing happens. I assume moving forward when clicking on it should open the option to edit these existing ones?
-[Ravi]: Edit templates are not yet done. Will do once REST API's are available.
-3)This links currently to a random page – can you link it to our website homepage pls?
-[Ravi]: Will fix.
+[Ravi]: Edit templates are not yet done. Will do once REST API's are available by Lux.
+3)This links currently to a random page ï¿½ can you link it to our website homepage pls?
+[Ravi]: Fixed, navigating to landing page.
 
 Slide 8:
 --------
 1)Upload went smoothly however can we add some instruction on the dimension for each of the elements?
-[Ravi]: Need to enhance cropped image dialog.
+[Ravi]: Need to enhance upload image interface.
 
 Slide 9:
 ---------
@@ -60,26 +60,27 @@ No issues mentioned.
 
 Slide 11:
 ---------
-1)When selecting a user nothing happen. I would expect for an “Edit” or “modify” option to show so that the admin is able to update user info
-[Ravi]: Users editing is not yet started, will do once REST API support is available.
+1)When selecting a user nothing happen. I would expect for an ï¿½Editï¿½ or ï¿½modifyï¿½ option to show so that the admin is able to update user info
+[Ravi]: Users editing is not yet started, will do once REST API support is available by Lux.
 
 2)Not urgent at all but can we order them in alphabetical order pls?
-[Ravi]: Done, checked-in just now.
+[Ravi]: Fixed.
 
 Slide 12:
 ---------
-1)I tried to create a test user but nothing happened when clicking save. Also as an expected behaviour once the user created is he/she supposed to received a notification email with the link and password to login? Also would that work the same way when we load the pilot users as bulk upload
-[Ravi]: REST API issue, Lux has to look into this.
+1)I tried to create a test user but nothing happened when clicking save. Also as an expected behaviour 
+once the user created is he/she supposed to received a notification email with the link and password to login? 
+Also would that work the same way when we load the pilot users as bulk upload
+[Ravi]: Fixed at front-end. Backed email communication is an REST API impediment, Lux has to look into this.
 
 Slide 13:
 ---------
-1)I tried to create a test office, filled in all the fields and hit save, the row appears but empty and info doesn’t display. Also is it ok for me to proceed of the bult upload?
+1)I tried to create a test office, filled in all the fields and hit save, the row appears but empty and info doesnï¿½t display. Also is it ok for me to proceed of the bult upload?
 [Ravi]: REST API issue, successfully data has sent to backend, upon success not getting the expected response. Lux has to look into this.
-[Ravi]: REST API issue, Lux has to look into this.
 
 Slide 14:
 ---------
-1)When selecting a badge nothing happen. I would expect for an “Edit” or “modify” option to show so that the admin is able to update user info
+1)When selecting a badge nothing happen. I would expect for an ï¿½Editï¿½ or ï¿½modifyï¿½ option to show so that the admin is able to update user info
 [Ravi]: REST API issue, Lux has to look into this.
 
 Slide 15:
@@ -88,7 +89,7 @@ Slide 15:
 [Ravi]: Yes agree, nice to have. Need to be reviewed.
 2)Tried to create a new test one for nothing happened when I hit save
 [Ravi]: Working fine, however there is an issue whiel showing the newly added item in table, fixed now.
-3)Can you specify what “Upload image for ribbon” and “Upload image for form” are for?
+3)Can you specify what ï¿½Upload image for ribbonï¿½ and ï¿½Upload image for formï¿½ are for?
 [Ravi]: Lux has to educate the enduser :-)
 
 
