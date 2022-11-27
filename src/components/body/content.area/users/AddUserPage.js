@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import Form from "react-bootstrap/Form";
 
 import Utils from "../../../Utils";
+import ContextComponent from "../../../AppContext";
 
 const AddUserPage = ({ props }) => {
+  let { setAlert } = useContext(ContextComponent);
   let tableData = props?.tableData || [];
   let setTableData = props?.setTableData || (() => {});
   let REGIONS = Utils.REGIONS || {};
@@ -29,6 +31,11 @@ const AddUserPage = ({ props }) => {
   const saveUser = (e) => {
     const success = (res) => {
       hideModal();
+      setAlert({
+        show: true,
+        message: "User added successfully!",
+        type: "success",
+      });
       let newRecord = [
         res.data.user.id,
         false,
