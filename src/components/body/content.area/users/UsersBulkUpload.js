@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
-import Alert from "react-bootstrap/Alert";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import Modal from "react-bootstrap/Modal";
 
 import Utils from "../../../Utils";
+import ContextComponent from "./../../../AppContext";
 
 const UsersBulkUpload = ({ props }) => {
-  let [showAlert, setShowAlert] = useState(false);
+  let { setAlert } = useContext(ContextComponent);
   let [fileInput, setFileInput] = useState();
   let [fileName, setFileName] = useState("");
   let bulkUploadFileInput = useRef(null);
-    let tableDataSuccess = props.success || (() => { });
+  let tableDataSuccess = props.success || (() => {});
 
   const hideModal = (e) => {
     props.setAddModalCanOpen(false);
@@ -17,12 +17,12 @@ const UsersBulkUpload = ({ props }) => {
 
   const uploadUsers = (e) => {
     const success = (res) => {
-      setShowAlert(true);
-      setTimeout(function () {
-        setShowAlert(false);
-      }, 3000);
-        hideModal();
-        tableDataSuccess(res);
+      hideModal();
+      setAlert({
+        show: true,
+        message: "Bulk users submitted successfully",
+      });
+      tableDataSuccess(res);
     };
     const fail = (err) => {
       console.log(err);
@@ -102,15 +102,6 @@ const UsersBulkUpload = ({ props }) => {
           </Modal.Body>
         </Modal>
       }
-
-      <Alert
-        show={showAlert}
-        variant="success"
-        className="indi-email-sign-copied-to-clipboard-alert"
-      >
-        <Alert.Heading>Success!</Alert.Heading>
-        <p>Successfully uploaded users</p>
-      </Alert>
     </>
   );
 };
