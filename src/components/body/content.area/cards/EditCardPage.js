@@ -103,7 +103,7 @@ const EditCardPage = (props) => {
     delete submitCardInfo.fieldsData;
     info.userLinkedBadges.map((badge, index) => {
       let badgeData = {
-        "badgeId": badge.badgeId,
+        "id": badge.id,
         "badgeName": badge.badgeName,
         "badgeOrder": index,
         "value": dataValues[index]
