@@ -8,12 +8,14 @@ import "./alert.css";
 
 const defalutAlert = {
   message: "Success!",
+  messages: [],
   type: "success",
   ttl: 5000,
 };
 
 const IndiAlert = () => {
   let [message, setMessage] = useState("");
+  let [messages, setMessages] = useState([]);
   let [type, setType] = useState("");
 
   const { alert } = useContext(ContextComponent);
@@ -23,6 +25,7 @@ const IndiAlert = () => {
     if (alert.show) {
       let alertObject = { ...defalutAlert, ...alert };
       setMessage(alertObject.message || "Success");
+      setMessages(alertObject.messages || []);
       setType(alertObject.type || "success");
       setAllertClassName("");
 
@@ -36,6 +39,9 @@ const IndiAlert = () => {
     <Container className={`indi-status-message-wrapper ${allertClassName}`}>
       <Alert className="indi-status-message in" variant={type}>
         {message}
+        {messages.map((msg, index) => (
+          <div key={index}>{msg}</div>
+        ))}
       </Alert>
     </Container>
   );

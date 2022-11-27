@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router";
-import { Table, Form, Accordion, Button, FloatingLabel } from "react-bootstrap";
+import { Table, Form, Accordion, Button, FloatingLabel, Alert } from "react-bootstrap";
 
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
@@ -42,6 +42,9 @@ const AddTemplate = () => {
   };
 
   let [templateName, setTempalteName] = useState("");
+
+  let [showAlert, setShowAlert] = useState(false);
+  let [formValidateErrorMessage, setFormValidateErrorMessage] = useState("");
 
   const templateNameHandler = (e) => {
     setTempalteName(e.currentTarget.value);
@@ -96,13 +99,36 @@ const AddTemplate = () => {
       brand: selectedBrandValue,
     };
 
-    console.log(templateInfo);
-
-    // debugger;
-    submitTemplateForm(templateInfo);
-
+    if (validateForm(templateInfo)) {
+      submitTemplateForm(templateInfo);
+    }
     return false;
   };
+
+  const validateForm = (formData) => {
+    let errMsg = [];
+    if (formData.templateName.trim().length === 0) {
+      errMsg.push("Template name is required");
+    }
+    if (formData.backgroundImage.trim().length === 0) {
+      errMsg.push("Template background image is required");
+    }
+    if (formData.logoImage.trim().length === 0) {
+      errMsg.push("Template logo image is required");
+    }
+    if (formData.linkedBadges.length === 0) {
+      errMsg.push("Atleast one badge should assosiate with the current template");
+    }
+    if (errMsg.length) {
+      setShowAlert(true);
+      setFormValidateErrorMessage(errMsg.join(", "));
+      return false;
+    } else {
+      setShowAlert(false);
+      setFormValidateErrorMessage("");
+      return true;
+    }
+  }
 
   const submitTemplateForm = (info) => {
     const success = (res) => {
@@ -179,6 +205,9 @@ const AddTemplate = () => {
         <form className="indi-add-template-form">
           <div>
             <div className="indi-body-title">Add template</div>
+            {showAlert && <Alert className="indi-status-message in" variant="danger">
+              {formValidateErrorMessage}
+            </Alert>}
             <div className="indi-data-table-wrapper d-flex indi-text-btn-row">
               <FloatingLabel label="Template name">
                 <Form.Control
