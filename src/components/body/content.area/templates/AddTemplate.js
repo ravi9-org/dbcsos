@@ -7,7 +7,7 @@ import Utils from "../../../Utils";
 
 const AddTemplate = () => {
   const navigate = useNavigate();
-  let { userData } = useContext(ContextComponent);
+  let { setAlert } = useContext(ContextComponent);
   let [canRender, setCanRnder] = useState(false);
 
   // useEffect(() => {
@@ -107,6 +107,10 @@ const AddTemplate = () => {
   const submitTemplateForm = (info) => {
     const success = (res) => {
       navigate(Utils.APP_URLS.TEMPLATES_PAGE);
+      setAlert({
+        show: true,
+        message: "Templace added successfully",
+      });
     };
     const fail = (err) => {
       console.log(err);

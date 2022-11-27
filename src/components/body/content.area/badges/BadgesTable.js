@@ -14,7 +14,8 @@ const BadgesTable = () => {
 
   let [tableSelectedItems, setTableSelectedItems] = useState([]);
 
-  let { setCanRedirectToLogin, setLoadingState } = useContext(ContextComponent);
+  let { setCanRedirectToLogin, setLoadingState, setAlert } =
+    useContext(ContextComponent);
 
   let [tableColumns, setTableColumns] = useState([
     "id",
@@ -75,12 +76,15 @@ const BadgesTable = () => {
       usersArray = userInfo.map((user, index) => {
         let userTableObj = [];
         let userTableData = [];
-        tableColumns.forEach((col) => {          
+        tableColumns.forEach((col) => {
           if (col === "type") {
-            let fieldType = userInfo[index][col] === "text" ? "phone" : userInfo[index][col];
-            
+            let fieldType =
+              userInfo[index][col] === "text" ? "phone" : userInfo[index][col];
+
             let badgeDisplayName = Utils.BADGE_TYPES[fieldType].label;
             userTableData.push(badgeDisplayName);
+          } else if (col === "id") {
+            userTableData.push(userInfo[index].id);
           } else if (col === "select") {
             userTableData.push(false);
           } else if (col === "username") {
@@ -135,6 +139,11 @@ const BadgesTable = () => {
   };
 
   const deleteSuccess = (res) => {
+    setAlert({
+      show: true,
+      message: "Successfully deleted badge(s)!",
+    });
+
     setUpdateTable(!updateTable);
   };
 
@@ -143,11 +152,8 @@ const BadgesTable = () => {
   };
 
   const handleDelete = async (e) => {
+    console.log("in handleDelete");
     setShowDeleteModal(false);
-    // setLoadingState({
-    //   applyMask: true,
-    //   text: "Deleting selected " + tableSelectedItems.length + " items",
-    // });
     let tempTableData = tableData.filter((d) => {
       return tableSelectedItems.indexOf(d[0]) === -1;
     });

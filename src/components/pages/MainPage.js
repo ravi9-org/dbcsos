@@ -4,11 +4,13 @@ import ContextComponent from "../AppContext";
 import Login from "./Login";
 import CardExternalDetailsPage from "./CardExternalDetailsPage";
 import Mask from "../controls/Mask";
+import Alert from "../controls/alerts/Alert";
 import LandingPage from "./LandingPage";
 import Utils from "../Utils";
 
 function MainPage() {
   let [loadingState, setLoadingState] = useState(false);
+  let [alert, setAlert] = useState({});
   let [canRender, setCanRender] = useState(false);
   let [canRedirectToLogin, setCanRedirectToLogin] = useState(false);
   let [canRedirectToLanding, setCanRedirectToLanding] = useState(false);
@@ -36,6 +38,8 @@ function MainPage() {
       value={{
         loadingState,
         setLoadingState,
+        alert,
+        setAlert,
         canRedirectToLogin,
         setCanRedirectToLogin,
         canRedirectToLanding,
@@ -47,6 +51,7 @@ function MainPage() {
       }}
     >
       <Mask />
+      <Alert />
       <Routes>
         <Route
           path={Utils.APP_URLS.LOGIN_PAGE}

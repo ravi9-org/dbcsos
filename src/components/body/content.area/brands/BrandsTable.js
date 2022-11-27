@@ -14,7 +14,8 @@ const BrandsTable = () => {
 
   let [tableSelectedItems, setTableSelectedItems] = useState([]);
 
-  let { setCanRedirectToLogin, setLoadingState } = useContext(ContextComponent);
+  let { setCanRedirectToLogin, setLoadingState, setAlert } =
+    useContext(ContextComponent);
 
   let [tableColumns, setTableColumns] = useState(["id", "select", "name"]);
   let [tableColumnSchema, setTableColumnSchema] = useState({
@@ -110,6 +111,10 @@ const BrandsTable = () => {
   };
 
   const deleteSuccess = (res) => {
+    setAlert({
+      show: true,
+      message: "Brand deleted successfully",
+    });
     setUpdateTable(!updateTable);
   };
 

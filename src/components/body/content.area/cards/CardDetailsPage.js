@@ -18,7 +18,6 @@ const CardDetailsPage = (props) => {
   let [fieldsSchema, setFieldsSchema] = useState(cardData?.fieldsSchema || {});
 
   const [show, setShow] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -27,7 +26,8 @@ const CardDetailsPage = (props) => {
 
   const navigate = useNavigate();
 
-  let { userData, setUserData, setLoadingState } = useContext(ContextComponent);
+  let { userData, setUserData, setLoadingState, setAlert } =
+    useContext(ContextComponent);
 
   const success = (res) => {
     setCardData(res.data);
@@ -64,10 +64,10 @@ const CardDetailsPage = (props) => {
   };
 
   const deleteSuccess = (res) => {
-    let tempUserData = { ...userData };
-    tempUserData.cards = res.updatedCardsArray;
-    setUserData(tempUserData);
-    setShowAlert(true);
+    setAlert({
+      show: true,
+      message: "Card deleted successfully",
+    });
     setLoadingState({
       applyMask: false,
     });
@@ -83,14 +83,7 @@ const CardDetailsPage = (props) => {
     setLoadingState({
       applyMask: false,
     });
-    setShowAlert(true);
     err?.message?.length && console.log(err);
-  };
-
-  const closeAlertHandler = (e) => {
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 300);
   };
 
   return (
@@ -144,7 +137,7 @@ const CardDetailsPage = (props) => {
             </button>
           </div>
         </div>
-      )}      
+      )}
 
       <Modal centered show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -161,24 +154,6 @@ const CardDetailsPage = (props) => {
             Yes
           </Button>
         </Modal.Footer>
-      </Modal>
-
-      <Modal
-        show={showAlert}
-        className="indi-modal-dialog-alert"
-        onHide={closeAlertHandler}
-      >
-        <Modal.Body>
-          <Alert
-            key="success"
-            className="indi-modal-dialog-alert-body"
-            onClose={closeAlertHandler}
-            dismissible
-            variant="success"
-          >
-            Successfully deleted!
-          </Alert>
-        </Modal.Body>
       </Modal>
     </>
   );

@@ -1,15 +1,17 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import Alert from "react-bootstrap/Alert";
 import Modal from "react-bootstrap/Modal";
 
 import Utils from "../../../Utils";
+import ContextComponent from "../../../AppContext";
 
 const AddressBulkUpload = ({ props }) => {
+  let { setAlert } = useContext(ContextComponent);
   let [showAlert, setShowAlert] = useState(false);
   let [fileInput, setFileInput] = useState();
   let [fileName, setFileName] = useState("");
   let bulkUploadFileInput = useRef(null);
-    let tableDataSuccess = props.success || (() => { });
+  let tableDataSuccess = props.success || (() => {});
 
   const hideModal = (e) => {
     props.setAddModalCanOpen(false);
@@ -17,12 +19,12 @@ const AddressBulkUpload = ({ props }) => {
 
   const uploadUsers = (e) => {
     const success = (res) => {
-      setShowAlert(true);
-      setTimeout(function () {
-        setShowAlert(false);
-      }, 3000);
-        hideModal();
-        tableDataSuccess(res);
+      hideModal();
+      setAlert({
+        show: true,
+        message: "Bulk upload successful!",
+      });
+      tableDataSuccess(res);
     };
     const fail = (err) => {
       console.log(err);

@@ -10,7 +10,7 @@ import CardContext from "./CardContext";
 
 const AddCard = (props) => {
   const navigate = useNavigate();
-  let { userData } = useContext(ContextComponent);
+  let { setAlert } = useContext(ContextComponent);
 
   let [templateData, setTemplateData] = useState(
     props?.template?.selectedTemplate || {}
@@ -114,6 +114,10 @@ const AddCard = (props) => {
 
     const success = (res) => {
       goBack();
+      setAlert({
+        show: true,
+        message: "Card added successfully",
+      });
     };
 
     const fail = (err) => {

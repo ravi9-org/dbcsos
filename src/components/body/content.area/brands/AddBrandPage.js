@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
 import Utils from "../../../Utils";
+import ContextComponent from "../../../AppContext";
 
 const AddBrandPage = ({ props }) => {
+  let { setAlert } = useContext(ContextComponent);
   let tableData = props?.tableData || [];
   let setTableData = props?.setTableData || (() => {});
   let [brand, setBrand] = useState({});
@@ -17,6 +19,10 @@ const AddBrandPage = ({ props }) => {
   const saveBrand = (e) => {
     const success = (res) => {
       hideModal();
+      setAlert({
+        show: true,
+        message: "Successfully added brand!",
+      });
       let newRecord = [res.data.id, false, res.data.name];
       let tempTableData = [...tableData];
       tempTableData.push(newRecord);

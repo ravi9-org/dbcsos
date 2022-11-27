@@ -16,7 +16,8 @@ const AddressesTable = () => {
 
   let [tableSelectedItems, setTableSelectedItems] = useState([]);
 
-  let { setCanRedirectToLogin, setLoadingState } = useContext(ContextComponent);
+  let { setCanRedirectToLogin, setLoadingState, setAlert } =
+    useContext(ContextComponent);
 
   let [tableColumns, setTableColumns] = useState([
     "id",
@@ -145,6 +146,10 @@ const AddressesTable = () => {
   };
 
   const deleteSuccess = (res) => {
+    setAlert({
+      show: true,
+      message: "Successfully deleted!",
+    });
     setUpdateTable(!updateTable);
   };
 
@@ -192,7 +197,11 @@ const AddressesTable = () => {
             role="button"
             onClick={openBulkUploadModal}
           >
-            <img className="indi-w-24 indi-bulk-upload-img" src={BulkUploadIcon} alt="Bulk-upload-icon"></img>
+            <img
+              className="indi-w-24 indi-bulk-upload-img"
+              src={BulkUploadIcon}
+              alt="Bulk-upload-icon"
+            ></img>
             Bulk upload
           </div>
           <div

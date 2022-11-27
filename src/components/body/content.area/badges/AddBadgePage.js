@@ -6,8 +6,10 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
 import Utils from "../../../Utils";
+import ContextComponent from "../../../AppContext";
 
 const AddBadgePage = ({ props }) => {
+  let { setAlert } = useContext(ContextComponent);
   let tableData = props?.tableData || [];
   let setTableData = props?.setTableData || (() => {});
   let [badgeName, setBadgeName] = useState("");
@@ -23,6 +25,10 @@ const AddBadgePage = ({ props }) => {
 
   const saveBadge = (e) => {
     const success = (res) => {
+      setAlert({
+        show: true,
+        message: "Successfully added badge!"
+      });
       hideModal();
       let newRecord = [
         res.data.id,

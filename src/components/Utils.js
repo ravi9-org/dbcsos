@@ -663,9 +663,8 @@ const getCardDetails = (cardId) => {
   return myPromise;
 };
 
-const deleteCard = (cardId, userCardsArray) => {
+const deleteCard = (cardId) => {
   let dataCardId = parseInt(cardId, 10);
-  let cardsArray = getUniqueSetOfArray(userCardsArray);
   const myPromise = new Promise((resolve, reject) => {
     let session = getSession();
     if (isObjectEmpty(session).length === 0) {
@@ -685,11 +684,7 @@ const deleteCard = (cardId, userCardsArray) => {
           },
         })
         .then((res) => {
-          cardsArray = cardsArray.filter((card) => card !== dataCardId);
-          addOrRemoveCardFromUser(cardsArray).then((res1) => {
-            res["updatedCardsArray"] = cardsArray;
-            resolve(res);
-          });
+          resolve(res);
         });
     } else {
       reject({

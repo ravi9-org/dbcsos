@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import { useNavigate } from "react-router";
-import { Button, Modal, Alert } from "react-bootstrap";
+import React, { useEffect, useState, useContext } from "react";
+import Modal from "react-bootstrap/Modal";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-
 import Form from "react-bootstrap/Form";
 
 import Utils from "../../../Utils";
+import ContextComponent from "../../../AppContext";
 
 const AddAddressPage = ({ props }) => {
+  let { setAlert } = useContext(ContextComponent);
   let tableData = props?.tableData || [];
   let setTableData = props?.setTableData || (() => {});
   let [fullAddress, setFullAddress] = useState({});
@@ -19,8 +19,8 @@ const AddAddressPage = ({ props }) => {
   const saveAddress = (e) => {
     const success = (res) => {
       hideModal();
-      console.log(res);
-      debugger;
+      // console.log(res);
+      // debugger;
       let newRecord = [
         res.data.id,
         false,
@@ -37,6 +37,10 @@ const AddAddressPage = ({ props }) => {
       let tempTableData = [...tableData];
       tempTableData.push(newRecord);
       setTableData(tempTableData);
+      setAlert({
+        show: true,
+        message: "Successfully added!",
+      });
     };
     const fail = (err) => {
       console.log(err);
@@ -81,10 +85,10 @@ const AddAddressPage = ({ props }) => {
     Utils.getBrands().then(brandsFetchSuccess, brandsFetchFail);
   }, []);
 
-  const updateBrandValue = e => {
+  const updateBrandValue = (e) => {
     let selectedBrandName = e.currentTarget.value;
     setSelectedBrandValue(selectedBrandName);
-  }
+  };
 
   return (
     <>

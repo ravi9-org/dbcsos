@@ -1,0 +1,23 @@
+.indi-app .indi-status-message-wrapper {
+    position: absolute;
+    top: 15px;
+    width: 100%;
+    display: flex;
+    left: 0;
+    justify-content: center;
+}
+
+.indi-app .indi-status-message {
+    min-width: 350px;
+}
+
+/* .indi-app .indi-status-message-wrapper.indi-alert-show { */
+.indi-app .indi-status-message-wrapper {
+    opacity: 1;
+    transition: all 250ms linear;
+}
+
+.indi-app .indi-status-message-wrapper.indi-alert-hide {
+    opacity: 0;
+    transition: all 250ms linear;
+}

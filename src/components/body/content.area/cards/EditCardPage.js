@@ -12,7 +12,7 @@ const EditCardPage = (props) => {
   const { cardid } = useParams();
   const navigate = useNavigate();
 
-  let { userData } = useContext(ContextComponent);
+  let { setAlert } = useContext(ContextComponent);
 
   let [cardCtxInfo, setCardCtxInfo] = useState({});
   let [templateData, setTemplateData] = useState({});
@@ -130,6 +130,10 @@ const EditCardPage = (props) => {
     // console.log(submitCardInfo);
 
     const success = (res) => {
+      setAlert({
+        show: true,
+        message: "Card updated successfully",
+      });
       goBack();
     };
 
