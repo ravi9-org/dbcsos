@@ -33,7 +33,7 @@ const QRCode = (props) => {
     });
     setMobile(mobile);
     setEmail(email);
-    setQrCode(res.data.qrcode || DefaultQRCode);
+    setQrCode(res.data.qrCode || DefaultQRCode);
     setCardInfo(res.data);
   };
 

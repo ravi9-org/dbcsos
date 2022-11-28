@@ -18,7 +18,7 @@ const QRCode = (props) => {
 
   useEffect(() => {
     if (!Utils.isObjectEmpty(cardData)) {
-      setQrCode(cardData.qrcode || DefaultQRCode);
+      setQrCode(cardData.qrCode || DefaultQRCode);
       let cLink = document.location.href;
       let currentPath = location.pathname;
       cLink = cLink

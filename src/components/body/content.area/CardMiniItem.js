@@ -39,7 +39,7 @@ const CardMiniItem = (props) => {
 
   useEffect(() => {
     if (!Utils.isObjectEmpty(cardData)) {
-      setQrcode(cardData.qrcode || qrcode);
+      setQrcode(cardData.qrCode || qrcode);
       Utils.getTemplateDetails(cardData.templateId).then(templateSuccess, fail);
     }
   }, [cardData]);
