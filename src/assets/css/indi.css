@@ -56,6 +56,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-app-normal-scrolling {
   overflow-x: auto;
   overflow-y: auto;
+  overflow: auto !important;
   overflow: overlay !important;
 }
 
@@ -264,6 +265,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-left-navigation-wrapper,
 .indi-app .indi-content-area-wrapper {
   background: #f0f3f9;
+  overflow-y: auto;
   overflow-y: overlay;
 }
 
@@ -470,6 +472,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-cards-collection-wrapper {
   height: calc(100% - 32px);
   padding: 0;
+  overflow-x: auto;
   overflow-x: overlay;
 }
 
@@ -520,6 +523,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-card-fields {
+  overflow-y: auto;
   overflow-y: overlay;
   width: inherit;
   margin-bottom: 36px;
@@ -749,6 +753,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-card-mini-items-wrapper {
   flex-direction: column;
   width: 100%;
+  overflow-y: auto;
   overflow-y: overlay;
 }
 
@@ -811,7 +816,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .btn-check:checked+.btn.indi-card-item-wrapper.indi-card-mini-item-wrapper.btn-outline-primary {
   box-shadow: -2px 6px 14px rgb(0 0 0 / 80%);
   outline: 2px solid #fff;
-  height: 150px;
+  /* height: 150px; */
+}
+
+.indi-app .btn-check:checked+.btn.indi-card-item-wrapper.indi-card-mini-item-wrapper.btn-outline-primary .indi-mini-card-name {
+  font-weight: 700;
 }
 
 .indi-app .indi-card-qr-code {
@@ -828,9 +837,11 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-mini-card-list {
   margin: 0 auto;
-  overflow-x: overlay;
+  overflow-x: auto;
+  /* overflow-x: overlay; */
   min-height: 184px;
   justify-content: space-between;
+  padding-bottom: 9px;
 }
 
 .indi-app .indi-signature-item-wrapper .indi-signature-item {
@@ -890,8 +901,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-image: url("./../img/ext-bg.png");
   height: 100vh;
   width: 100vw;
-  background-repeat: repeat;
-  background-size: contain;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   position: relative;
 }
 
@@ -1087,6 +1098,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   text-align: center;
   padding: 16px;
   display: flex;
+  overflow-x: auto;
   overflow-x: overlay;
 }
 
@@ -1143,6 +1155,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-data-table-wrapper {
   padding: 16px;
+  overflow: auto;
   overflow: overlay;
   height: calc(100% - 32px);
 }
@@ -1403,6 +1416,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-card-template-preview-wrapper {
   max-height: 500px;
+  overflow: auto;
   overflow: overlay;
 }
 
@@ -1410,6 +1424,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-user-settings-page-wrapper {
   flex-direction: column;
   width: 100%;
+  overflow-y: auto;
   overflow-y: overlay;
 }
 

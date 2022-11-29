@@ -139,11 +139,10 @@ const EmailSignature = () => {
                   variant="outline-primary"
                   id={`tbg-radio-${card.id}`}
                 >
-                  <CardMiniItem
-                    cardId={card.id}
-                    card={card}
-                    role="button"
-                  />
+                  <>
+                    <div className="indi-mini-card-name">{card.cardName}</div>
+                    <CardMiniItem cardId={card.id} card={card} role="button" />
+                  </>
                 </ToggleButton>
               ))}
             </ToggleButtonGroup>

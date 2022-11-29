@@ -67,7 +67,7 @@ const CardMiniItem = (props) => {
 
             <div className="indi-card-title indi-mini-card-title">{userData.title}</div>
 
-            <div className="indi-card-qr-code d-flex">
+            <div className="indi-card-qr-code d-flex d-none1">
               <img src={qrcode} alt="qrcode" />
             </div>
 
