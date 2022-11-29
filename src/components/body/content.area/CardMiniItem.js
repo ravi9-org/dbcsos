@@ -59,18 +59,20 @@ const CardMiniItem = (props) => {
 
           <div className="indi-card-upload-picture d-none"></div>
 
-          <div className="indi-info-wrapper">
-
-            <div className="indi-card-name indi-mini-card-name fw-bold">
-              {userData.firstName} {userData.lastName}
+          <div className="indi-info-wrapper d-flex flex-row align-items-end">
+            <div className="indi-info-left">
+              <div className="indi-card-name indi-mini-card-name fw-bold">
+                {userData.firstName} {userData.lastName}
+              </div>
+              <div className="indi-card-title indi-mini-card-title">
+                {userData.title}
+              </div>
             </div>
-
-            <div className="indi-card-title indi-mini-card-title">{userData.title}</div>
-
-            <div className="indi-card-qr-code d-flex d-none1">
-              <img src={qrcode} alt="qrcode" />
+            <div className="indi-card-qr-right">
+              <div className="indi-card-qr-code d-flex d-none1">
+                <img src={qrcode} alt="qrcode" />
+              </div>
             </div>
-
           </div>
         </div>
       )}

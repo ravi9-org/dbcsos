@@ -535,7 +535,6 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-card-name.indi-mini-card-name {
   text-align: left;
-  max-width: calc(100% - 50px);
 }
 
 .indi-app .indi-template-title,
@@ -547,7 +546,6 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-card-title.indi-mini-card-title {
-  max-width: calc(100% - 50px);
   font-size: 10px;
 }
 
@@ -597,14 +595,6 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-card-company-logo-wrapper.indi-mini-card-company-logo-wrapper {
-  position: absolute;
-    height: 40px;
-    width: calc(100% - 15px);
-    background-size: 50px 50px;
-    background-position: 10px;
-    background-size: cover;
-    display: flex;
-    justify-content: end;
     max-width: 50px;
     float: right;
     right: 5px;
@@ -748,6 +738,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   border-radius: 10px;
   width: 100%;
   text-align: left;
+  margin-top: 40px;
 }
 
 .indi-app .indi-card-mini-items-wrapper {
@@ -816,7 +807,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .btn-check:checked+.btn.indi-card-item-wrapper.indi-card-mini-item-wrapper.btn-outline-primary {
   box-shadow: -2px 6px 14px rgb(0 0 0 / 80%);
   outline: 2px solid #fff;
-  /* height: 150px; */
+  height: 164px;
+  padding-bottom: 24px;
 }
 
 .indi-app .btn-check:checked+.btn.indi-card-item-wrapper.indi-card-mini-item-wrapper.btn-outline-primary .indi-mini-card-name {
@@ -824,8 +816,10 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-card-qr-code {
-  height: 60px;
+  width: 32px;
+  height: 32px;
   float: right;
+  margin-bottom: 12px;
 }
 
 .indi-app .indi-copy-signature-wrapper,
@@ -838,10 +832,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-mini-card-list {
   margin: 0 auto;
   overflow-x: auto;
-  /* overflow-x: overlay; */
+  overflow-x: overlay;
   min-height: 184px;
   justify-content: space-between;
-  padding-bottom: 9px;
 }
 
 .indi-app .indi-signature-item-wrapper .indi-signature-item {

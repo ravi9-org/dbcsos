@@ -98,8 +98,8 @@ Slide 15:
 
 
 ===================================================
-1) email signature layout issues
-2) email signature FF issue
+1) email signature layout issues (Fixed)}
+2) email signature FF issue (Fixed)
 3) friendly id
 4) verify bg image for external card
 5) email send form
