@@ -807,8 +807,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .btn-check:checked+.btn.indi-card-item-wrapper.indi-card-mini-item-wrapper.btn-outline-primary {
   box-shadow: -2px 6px 14px rgb(0 0 0 / 80%);
   outline: 2px solid #fff;
-  height: 164px;
+  height: 154px;
   padding-bottom: 24px;
+  margin-top: 14px;
 }
 
 .indi-app .btn-check:checked+.btn.indi-card-item-wrapper.indi-card-mini-item-wrapper.btn-outline-primary .indi-mini-card-name {
