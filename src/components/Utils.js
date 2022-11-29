@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const CTX = {
-  PROTOCOL: "http://",
+  PROTOCOL: "https://",
   HOST: "dbc.cmsedge.com",
   PORT: "",
   // POSTFIX: "/api/"
