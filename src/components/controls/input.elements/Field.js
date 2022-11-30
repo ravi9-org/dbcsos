@@ -6,6 +6,7 @@ import Utils from "../../Utils";
 
 const Field = (props = {}) => {  
   let { cardCtxInfo, setCardCtxInfo } = useContext(CardContext);
+  let { addrCtxData } = useContext(ContextComponent);
 
   let fieldIndex = props?.fieldIndex || 0;
   let fieldProps = props.fieldProps;
@@ -48,9 +49,9 @@ const Field = (props = {}) => {
 
   if (!!fieldData && isLookupField) {
     let addrId = parseInt(fieldData, 10);
-    // let addrIdx = addrCtxData.ids.indexOf(addrId);
-    // initFullAddress = addrCtxData.fullAddresses[addrIdx];
-    initFullAddress = "";
+    let addrIdx = addrCtxData.ids.indexOf(addrId);
+    initFullAddress = addrCtxData.fullAddresses[addrIdx];
+    //initFullAddress = "";
   }
 
   let [fullAddress, setFullAddress] = useState(initFullAddress);
