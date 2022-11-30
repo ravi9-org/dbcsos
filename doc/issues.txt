@@ -117,7 +117,7 @@ d) address while card creation [[FIXED]]
 11) scroll should apply for the whole page
 12) send email from card details page: /cardmail(POST - email,cardId,name,description)
 13) card addtion/edition donot allow any fields with empty data
-14) remove qrcode from mini card view in email signature
+14) remove qrcode from mini card view in email signature[[FIXED]]
 15) add badge icons at bottom of the mini card view in email signature
 16) email signature ->  QR Code card...
 a) show 4 first default fields

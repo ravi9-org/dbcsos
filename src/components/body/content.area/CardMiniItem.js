@@ -69,7 +69,7 @@ const CardMiniItem = (props) => {
               </div>
             </div>
             <div className="indi-card-qr-right">
-              <div className="indi-card-qr-code d-flex d-none1">
+              <div className="indi-card-qr-code d-flex d-none">
                 <img src={qrcode} alt="qrcode" />
               </div>
             </div>
