@@ -40,10 +40,11 @@ const CardItem = (props) => {
   } = useContext(ContextComponent);
 
   userData = props?.userData || userData || {};
-  let [pronoun, setPronoun] = useState(Utils.PRONOUNS[userData.pronoun]);
+  let [pronoun, setPronoun] = useState("");
 
   const success = (res) => {
     setCardData(res.data);
+    setPronoun(Utils.PRONOUNS[res.data.userFieldInfo.pronoun]);
 
     setFields(res.data.userLinkedBadges);
     setTemplateBackgroundImage(res.data.templateInfo.backgroundImage);
@@ -125,7 +126,7 @@ const CardItem = (props) => {
             </div>
             <div className="indi-info-wrapper">
               <div className="indi-card-name fw-bold">
-                {userData?.firstName} {userData?.lastName} ({pronoun})
+                {cardData?.userFieldInfo?.firstName} {cardData?.userFieldInfo?.lastName} ({pronoun})
               </div>
               <div className="indi-card-title">{userData?.title}</div>
             </div>
