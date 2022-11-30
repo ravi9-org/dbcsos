@@ -24,8 +24,7 @@ const EmailSignature = () => {
     },
   };
 
-  const { userData, setLoadingState } = useContext(ContextComponent);
-
+  const { userData, setLoadingState, setCanRedirectToLogin } = useContext(ContextComponent);
   const [userCards, setUserCards] = useState([]);
   const [pageInfo, setPageInfo] = useState(null);
   const [renderPage, setRenderPage] = useState(false);
@@ -85,6 +84,9 @@ const EmailSignature = () => {
   };
   const fail = (err) => {
     err?.message?.length && console.log(err);
+    if (err?.redirect) {
+      setCanRedirectToLogin(true);
+    }
   };
 
   useEffect(() => {

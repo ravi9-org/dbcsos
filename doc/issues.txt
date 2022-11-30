@@ -105,7 +105,7 @@ Slide 15:
 5) email send form [[Duplicate of 12]]
 6) invalid user login
 7) badge edition
-8) email signature -> invalid user, no data
+8) email signature -> invalid user, no data [[FIXED]]
 9) card creation ->
 a1) friendly ID
 a) beside name -> name (pron) [[Fixed]]
@@ -121,7 +121,7 @@ d) address while card creation [[FIXED]]
 15) add badge icons at bottom of the mini card view in email signature
 16) email signature ->  QR Code card...
 a) show 4 first default fields
-b) adjust qrcode at top
+b) adjust logo in "TEXT" at top-right corner
 c) show badges just like 15)
 d) html2canav linkto should include public-ID [[FIXED]]
 
