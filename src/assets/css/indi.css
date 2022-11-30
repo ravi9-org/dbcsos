@@ -549,6 +549,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-card-title.indi-mini-card-title {
   font-size: 10px;
+  text-align: left;
 }
 
 .indi-app .indi-template-title {
