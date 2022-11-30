@@ -98,8 +98,8 @@ Slide 15:
 
 
 ====================== Ravi items =============================
-1) email signature layout issues (Fixed)
-2) email signature FF issue (Fixed)
+1) email signature layout issues
+2) email signature FF issue [[Fixed]]
 3) friendly id
 4) verify bg image for external card
 5) email send form
@@ -123,6 +123,6 @@ d) address while card creation
 a) show 4 first default fields
 b) adjust qrcode at top
 c) show badges just like 15)
-d) html2canav linkto should include public-ID
+d) html2canav linkto should include public-ID [[FIXED]]
 =========================== Laks Items ========================
 1) send template linked badges while editing the car

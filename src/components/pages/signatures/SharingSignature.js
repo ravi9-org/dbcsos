@@ -18,7 +18,7 @@ const SharingSignature = ({ props }) => {
   let currentPath = location.pathname;
   cardLink = cardLink
     .replace(currentPath, Utils.APP_URLS.CARD_EXTERNAL_PAGE)
-    .replace(":cardid", props?.pageInfo?.selectedCardId);
+    .replace(":cardid", props?.pageInfo?.selectedCard.publicId);
 
   let [showDefaultBtn, setShowDefaultBtn] = useState(true);
   let [showLoadingBtn, setShowLoadingBtn] = useState(false);
