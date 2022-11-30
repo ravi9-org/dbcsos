@@ -89,7 +89,7 @@ const CardExternalDetailsPage = () => {
       pushString.length && vcfData.push(pushString);
     });
 
-    vcfData.push("NOTE:Created with by cmsedge" + POSTFIX);
+    //vcfData.push("NOTE:Created with by cmsedge" + POSTFIX);
     vcfData.push("N:;" + userFirstName + ";;;;" + POSTFIX);
     vcfData.push("END:VCARD");
 
