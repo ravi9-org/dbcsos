@@ -543,6 +543,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   line-height: 19px;
   min-height: 24px;
   max-height: 40px;
+  text-align: center;
+  font-size: 14px;
 }
 
 .indi-app .indi-card-title.indi-mini-card-title {

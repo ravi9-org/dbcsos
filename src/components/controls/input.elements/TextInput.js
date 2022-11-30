@@ -1,8 +1,14 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext, useState } from "react";
+
+import ContextComponent from "../../AppContext";
 
 const TextInput = (props) => {
+  let { userData } = useContext(ContextComponent);
   let schema = props.props.schema;
-  let fieldData = props.props.fieldData;
+  let fieldData = schema.value || schema.defaultValue || '';
+  if (schema?.badgeUID === "email" && fieldData === "") {
+    fieldData = userData.email;
+  }
   let fieldName = props.props.fieldName;
   let inputElementClassNames = props.props.inputElementClassNames;
   let fieldClassNames = "indi-add-card-input-field " + inputElementClassNames;

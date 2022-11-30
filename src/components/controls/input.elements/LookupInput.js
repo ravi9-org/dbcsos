@@ -5,7 +5,7 @@ import ContextComponent from "../../AppContext";
 
 const TextAreaInput = (props) => {
   let schema = props.props.schema;
-  let fieldData = props.props.fieldData;
+  let fieldData = schema.value || schema.defaultValue || '';
   let inputElementClassNames = props.props.inputElementClassNames;
   let fieldClassNames = "indi-add-card-input-field " + inputElementClassNames;
   let fieldName = props.props.fieldName;

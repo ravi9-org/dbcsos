@@ -67,7 +67,7 @@ const Field = (props = {}) => {
         <InputElement
           props={{
             fieldSchema,
-            fieldData,
+            // fieldData,
             fieldName: fieldType,
             inputElementClassNames,
           }}

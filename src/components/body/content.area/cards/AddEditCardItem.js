@@ -16,6 +16,9 @@ const AddCardItem = ({ props }) => {
   let { userData } = useContext(ContextComponent);
   let { cardCtxInfo } = useContext(CardContext);
 
+  
+  let [pronoun, setPronoun] = useState(Utils.PRONOUNS[userData.pronoun]);
+
   let pageMode = props.pageMode || "add";
 
   let inputElementClassNames = props.inputElementClassNames || "";
@@ -145,9 +148,9 @@ const AddCardItem = ({ props }) => {
       </div>
       <div className="indi-info-wrapper">
         <div className="indi-card-name fw-bold">
-          {userData.firstName} {userData.lastName}
+          {userData.firstName} {userData.lastName} ({pronoun})
         </div>
-        <div className="indi-card-title">{userData.designation}</div>
+        <div className="indi-card-title">{userData.title}</div>
       </div>
       <div className="indi-card-fields">
         <div className="indi-card-field-wrapper">
@@ -170,7 +173,6 @@ const AddCardItem = ({ props }) => {
                 fieldSchema: field,
                 fieldType: field.badgeUID,
                 inputElementClassNames,
-                fieldData: field.value || field.defaultValue || '',
                 templateBadges,
               }}
               pageMode={pageMode}

@@ -80,7 +80,6 @@ const Field = (props = {}) => {
         <InputElement
           props={{
             fieldProps: fieldSchema,
-            fieldData,
             fieldName: fieldType,
             inputElementClassNames,
           }}

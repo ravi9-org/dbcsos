@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 
 const TextAreaInput = (props) => {
   let schema = props.props.schema;
-  let fieldData = props.props.fieldData;
+  let fieldData = schema.value || schema.defaultValue || '';
   let fieldName = props.props.fieldName;
   let inputElementClassNames = props.props.inputElementClassNames;
   let fieldClassNames = "indi-add-card-input-field " + inputElementClassNames;

@@ -125,7 +125,7 @@ const CardItem = (props) => {
               <div className="indi-card-name fw-bold">
                 {userData?.firstName} {userData?.lastName} ({pronoun})
               </div>
-              <div className="indi-card-title">{userData?.designation}</div>
+              <div className="indi-card-title">{userData?.title}</div>
             </div>
             <div className="indi-card-fields">
               <div className="indi-card-field-wrapper">

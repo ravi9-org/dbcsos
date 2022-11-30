@@ -102,15 +102,15 @@ Slide 15:
 2) email signature FF issue [[Fixed]]
 3) friendly id
 4) verify bg image for external card
-5) email send form
+5) email send form [[Duplicate of 12]]
 6) invalid user login
 7) badge edition
 8) email signature -> invalid user, no data
 9) card creation ->
 a1) friendly ID
-a) beside name -> name (pron)
-b) under name -> title
-c) if email field is empty then fill with current user's email id
+a) beside name -> name (pron) [[Fixed]]
+b) under name -> title [[Fixed]]
+c) if email field is empty then fill with current user's email id [[FIXED]]
 d) address while card creation
 
 10) share icon in card ext page, no action for now, remove card name
