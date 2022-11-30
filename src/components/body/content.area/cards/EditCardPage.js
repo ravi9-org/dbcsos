@@ -18,7 +18,7 @@ const EditCardPage = (props) => {
   let [templateData, setTemplateData] = useState({});
 
   let [cardImageValue, setCardImageValue] = useState("");
-  let [croppedImageValue, setCroppedImageValue] = useState("");  
+  let [croppedImageValue, setCroppedImageValue] = useState("");
 
   let [canRender, setCanRender] = useState(false);
   // let [hasTemplateDetails, setHasTemplateDetails] = useState(false);
@@ -28,20 +28,32 @@ const EditCardPage = (props) => {
     card: {},
   });
 
+  let [templateLinkedBadges, setTemplateLinkedBadges] = useState({});
+
   const success = (res) => {
     setCardCtxInfo(res.data);
     setCardImageValue(res.data.cardImage);
     setCroppedImageValue(res.data.croppedImage);
-    let templateInfo = { ...res.data.templateInfo, userLinkedBadges: res.data.userLinkedBadges };
+
+    let templateInfo = {
+      ...res.data.templateInfo,
+      userLinkedBadges: res.data.templateInfo.linkedBadges,
+    };
+    
+    let templateLinkedBadgesObj = {};
+    res.data.templateInfo.linkedBadges.forEach((badge) => {
+      templateLinkedBadgesObj[badge.badgeUID] = badge.id;
+    });
+    setTemplateLinkedBadges(templateLinkedBadgesObj);
     
     setTemplateData(templateInfo);
 
     setDetailsForEditCardPage({
       template: templateInfo,
       fieldsData: [],
-      card: res.data
+      card: res.data,
     });
-    
+
     setCanRender(true);
   };
 
@@ -77,10 +89,12 @@ const EditCardPage = (props) => {
     for (let ele of inputElements) {
       let val = ele?.value || "";
       dataValues.push(val);
-    }    
+    }
 
-    let cardNameElement = document.getElementsByClassName('indi-add-card-name-input');
-    let cardNameValue = cardNameElement[0]?.value || "";   
+    let cardNameElement = document.getElementsByClassName(
+      "indi-add-card-name-input"
+    );
+    let cardNameValue = cardNameElement[0]?.value || "";
 
     for (let imgEle of cardImageEle) {
       let imgVal = imgEle?.value || "";
@@ -97,16 +111,20 @@ const EditCardPage = (props) => {
     submitForm(dataValues, imageValues, cardNameValue);
   };
 
-  const submitForm = (dataValues = {}, imageValues = [], cardNameValue = "") => {
+  const submitForm = (
+    dataValues = {},
+    imageValues = [],
+    cardNameValue = ""
+  ) => {
     let info = { ...cardCtxInfo };
     let submitCardInfo = { ...info, userLinkedBadges: [] };
     delete submitCardInfo.fieldsData;
     info.userLinkedBadges.map((badge, index) => {
       let badgeData = {
-        "id": badge.id,
-        "badgeName": badge.badgeName,
-        "badgeOrder": index,
-        "value": dataValues[index]
+        id: templateLinkedBadges[badge.badgeUID],
+        badgeName: badge.badgeName,
+        badgeOrder: index,
+        value: dataValues[index],
       };
       submitCardInfo.userLinkedBadges.push(badgeData);
     });

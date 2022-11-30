@@ -125,6 +125,8 @@ b) adjust qrcode at top
 c) show badges just like 15)
 d) html2canav linkto should include public-ID [[FIXED]]
 
+17) while editing card, obtain badges from templateInfo and show them in badge ribbon [[FIXED]]
+
 
 
 

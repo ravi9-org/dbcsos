@@ -76,8 +76,10 @@ const AddCard = (props) => {
       dataValues.push(val);
     }
 
-    let cardNameElement = document.getElementsByClassName('indi-add-card-name-input');
-    let cardNameValue = cardNameElement[0]?.value || "";     
+    let cardNameElement = document.getElementsByClassName(
+      "indi-add-card-name-input"
+    );
+    let cardNameValue = cardNameElement[0]?.value || "";
 
     for (let imgEle of cardImageEle) {
       let imgVal = imgEle?.value || "";
@@ -93,16 +95,20 @@ const AddCard = (props) => {
     submitForm(dataValues, imageValues, cardNameValue);
   };
 
-  const submitForm = (dataValues = {}, imageValues = [], cardNameValue = "") => {
+  const submitForm = (
+    dataValues = {},
+    imageValues = [],
+    cardNameValue = ""
+  ) => {
     let info = { ...cardCtxInfo };
     let submitCardInfo = { ...info, userLinkedBadges: [] };
     delete submitCardInfo.fieldsData;
     info.userLinkedBadges.map((badge, index) => {
       let badgeData = {
-        "id": badge.id,
-        "badgeName": badge.badgeName,
-        "badgeOrder": index,
-        "value": dataValues[index]
+        id: badge.id,
+        badgeName: badge.badgeName,
+        badgeOrder: index,
+        value: dataValues[index],
       };
       submitCardInfo.userLinkedBadges.push(badgeData);
     });
@@ -110,7 +116,8 @@ const AddCard = (props) => {
     submitCardInfo.cardImage = imageValues[0];
     submitCardInfo.croppedImage = imageValues[1];
     submitCardInfo.cardName = cardNameValue;
-    submitCardInfo.customId = cardNameValue.toLowerCase().replaceAll(" ", "") + "";  
+    submitCardInfo.customId =
+      cardNameValue.toLowerCase().replaceAll(" ", "") + "";
 
     const success = (res) => {
       goBack();
