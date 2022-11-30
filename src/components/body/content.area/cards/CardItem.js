@@ -9,6 +9,8 @@ import CardContext from "./CardContext";
 const CardItem = (props) => {
   let cardId = props.cardId;
 
+  let showCardName = props?.showCardName ?? true;
+
   let cardObj = props.card || {};
   let [cardData, setCardData] = useState(cardObj || {});
 
@@ -141,9 +143,9 @@ const CardItem = (props) => {
                 )}
               </div>
             </div>
-            <div className="indi-template-title indi-place-me-bottom-left">
+            {showCardName && <div className="indi-template-title indi-place-me-bottom-left">
               {cardData.cardName}
-            </div>
+            </div>}
           </div>
         </CardContext.Provider>
       )}

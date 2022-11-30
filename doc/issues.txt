@@ -113,7 +113,7 @@ b) under name -> title [[Fixed]]
 c) if email field is empty then fill with current user's email id [[FIXED]]
 d) address while card creation
 
-10) share icon in card ext page, no action for now, remove card name
+10) share icon in card ext page, no action for now, remove card name [[FIXED]]
 11) scroll should apply for the whole page
 12) send email from card details page: /cardmail(POST - email,cardId,name,description)
 13) card addtion/edition donot allow any fields with empty data
@@ -124,5 +124,9 @@ a) show 4 first default fields
 b) adjust qrcode at top
 c) show badges just like 15)
 d) html2canav linkto should include public-ID [[FIXED]]
+
+
+
+
 =========================== Laks Items ========================
 1) send template linked badges while editing the car

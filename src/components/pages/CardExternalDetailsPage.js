@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import Container from "react-bootstrap/Container";
 
-import ContextComponent from "../AppContext";
 import CardItem from "../body/content.area/cards/CardItem";
 import Utils from "../Utils";
+import shareImage from "./../../assets/img/Share.png";
 import downloadImage from "./../../assets/img/Upload.png";
 
 const CardExternalDetailsPage = () => {
@@ -28,8 +28,13 @@ const CardExternalDetailsPage = () => {
     Utils.getCardDetailsAsAnonymous(cardPublicId).then(success, fail);
   }, [cardPublicId]);
 
+  const shareHandler = (e) => {
+    e.preventDefault();
+    console.log("do nothing for now");
+  };
+
   const downloadHandler = (e) => {
-    console.log(cardInfo);
+    //console.log(cardInfo);
 
     let userFirstName = cardInfo.userFieldInfo.firstName;
     let userID = cardInfo.userFieldInfo.email;
@@ -37,18 +42,18 @@ const CardExternalDetailsPage = () => {
     let title = cardInfo.userFieldInfo.title;
 
     let url = "https://cmsedge.com";
-    let urlLink = "https://cmsedge.com";    
+    let urlLink = "https://cmsedge.com";
     let telephone = "";
 
     cardInfo.userLinkedBadges.map((badge) => {
       if (badge.badgeUID === "phone") {
-        telephone = badge.value || badge.defaultValue || '';
+        telephone = badge.value || badge.defaultValue || "";
       }
       if (badge.badgeUID === "url") {
-        url = badge.value || badge.defaultValue || '';
+        url = badge.value || badge.defaultValue || "";
       }
       if (badge.badgeUID === "website") {
-        urlLink = badge.value || badge.defaultValue || '';
+        urlLink = badge.value || badge.defaultValue || "";
       }
     });
 
@@ -66,7 +71,7 @@ const CardExternalDetailsPage = () => {
     vcfData.push("URL;TYPE=LINK:" + urlLink + POSTFIX);
 
     cardInfo.userLinkedBadges.map((field, index) => {
-      let value = field.value || field.defaultValue || '';
+      let value = field.value || field.defaultValue || "";
       let pushString = "";
       if (value.trim().length > 0) {
         if (
@@ -102,16 +107,24 @@ const CardExternalDetailsPage = () => {
       {canRender && (
         <Container className="indi-app indi-ext-card-details-page">
           <div className="indi-ext-card-item-wrapper d-flex">
-            <CardItem cardId={cardId} card={cardInfo} userData={cardInfo.userFieldInfo} />
+            <CardItem
+              cardId={cardId}
+              card={cardInfo}
+              userData={cardInfo.userFieldInfo}
+              showCardName={false}
+            />
             <div
-            className="indi-card-ext-download-card"
-            role="button"
-            onClick={downloadHandler}
-          >
-            <img src={downloadImage} alt="download" />
+              className="indi-card-ext-footer-btn indi-card-ext-download-card"
+              role="button"
+            >
+              <img onClick={shareHandler} src={shareImage} alt="share" />
+              <img
+                onClick={downloadHandler}
+                src={downloadImage}
+                alt="download"
+              />
+            </div>
           </div>
-          </div>
-          
         </Container>
       )}
     </>
