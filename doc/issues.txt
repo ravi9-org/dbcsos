@@ -131,4 +131,4 @@ d) html2canav linkto should include public-ID [[FIXED]]
 
 
 =========================== Laks Items ========================
-1) send template linked badges while editing the car
+1) send template linked badges while editing the car [[FIEXED]]
