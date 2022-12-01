@@ -125,7 +125,7 @@ const AddUserPage = ({ props }) => {
 
   const adminHandler = (e) => {
     let value = e?.currentTarget?.value || "";
-    setAdmin(value);
+    setAdmin(true);
   };
 
   useEffect(() => {}, [props.addModalCanOpen]);
@@ -195,15 +195,15 @@ const AddUserPage = ({ props }) => {
                   <div className="indi-add-form-item-input row">
                     <FloatingLabel label="Pronoun">
                       <Form.Select
-                        defaultValue="Male"
+                        defaultValue="hehim"
                         id="pronoun"
                         onChange={pronounHandler}
                         size="sm"
                         className="indi-input-field indi-input-select-field"
                       >
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Them">Them</option>
+                        <option value="hehim">He/Him</option>
+                        <option value="sheher">She/Her</option>
+                        <option value="them">Them</option>
                       </Form.Select>
                     </FloatingLabel>
                   </div>
