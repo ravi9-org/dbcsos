@@ -1830,3 +1830,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   width: 20px;
   margin: 4px;
 }
+
+.indi-app .indi-ext-card-social-link {
+  color: #fff;
+}

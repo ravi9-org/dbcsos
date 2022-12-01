@@ -10,13 +10,14 @@ const CardItem = (props) => {
   let cardId = props.cardId;
 
   let showCardName = props?.showCardName ?? true;
+  let enableSocialLinks = props?.enableSocialLinks ?? false;
 
   let cardObj = props.card || {};
   let [cardData, setCardData] = useState(cardObj || {});
 
   let [fields, setFields] = useState(cardData?.fields || []);
-  let [fieldsData, setFieldsData] = useState(cardData?.fieldsData || []);
-  let [fieldsSchema, setFieldsSchema] = useState(cardData?.fieldsSchema || {});
+  // let [fieldsData, setFieldsData] = useState(cardData?.fieldsData || []);
+  // let [fieldsSchema, setFieldsSchema] = useState(cardData?.fieldsSchema || {});
   let [applyActions, setApplyActions] = useState(props.applyActions || false);
 
   let [templateBackgroundImage, setTemplateBackgroundImage] = useState("");
@@ -139,6 +140,7 @@ const CardItem = (props) => {
                         fieldProps={field}
                         fieldIndex={index}
                         key={index}
+                        enableSocialLinks={enableSocialLinks}
                       />
                     )
                 )}

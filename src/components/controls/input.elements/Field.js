@@ -10,6 +10,7 @@ const Field = (props = {}) => {
 
   let fieldIndex = props?.fieldIndex || 0;
   let fieldProps = props.fieldProps;
+  let enableSocialLinks = props?.enableSocialLinks;
   let fieldType = fieldProps.badgeUID;
   let showEmptyField = fieldProps?.showEmptyField || false;
   let fieldSchema = fieldProps;
@@ -18,6 +19,17 @@ const Field = (props = {}) => {
   let isDefault = !!fieldProps?.fieldSchema?.default;
 
   let fieldData = fieldProps.value || fieldProps.defaultValue;
+  let showAsLink = false;
+  let toWhere = fieldProps.value;
+
+  if (enableSocialLinks) {
+    if (fieldProps.badgeType === "url") {
+      showAsLink = true;
+    } else if (fieldProps.badgeType === "email") {
+      showAsLink = true;
+      toWhere = "mailto:" + toWhere;
+    }
+  }
   
   let isEmpty = false;
   if ((fieldData === undefined || fieldData?.length === 0) && showEmptyField) {
@@ -48,10 +60,15 @@ const Field = (props = {}) => {
   let initFullAddress = "";
 
   if (!!fieldData && isLookupField) {
-    let addrId = parseInt(fieldData, 10);
-    let addrIdx = addrCtxData.ids.indexOf(addrId);
-    initFullAddress = addrCtxData.fullAddresses[addrIdx];
-    //initFullAddress = "";
+    if (fieldProps.addressData) {
+      initFullAddress = fieldProps.addressData.address +
+        " " + fieldProps.addressData.city + " " +
+        fieldProps.addressData.country + " " + fieldProps.addressData.zip;
+    } else {
+      let addrId = parseInt(fieldData, 10);
+      let addrIdx = addrCtxData.ids.indexOf(addrId);
+      initFullAddress = addrCtxData.fullAddresses[addrIdx];
+    }
   }
 
   let [fullAddress, setFullAddress] = useState(initFullAddress);
@@ -60,7 +77,8 @@ const Field = (props = {}) => {
     <div className="indi-card-field-item d-flex">
       <div
         style={{ backgroundImage: `url(${iconDarkImage})` }}
-        className="indi-card-field-item-img"></div>
+        className="indi-card-field-item-img"
+      ></div>
 
       {(mode === "readonly" || (mode !== "add" && mode !== "edit")) && (
         <div className="indi-card-field-item-value">
@@ -69,7 +87,12 @@ const Field = (props = {}) => {
               <div className="indi-card-address-text">{fullAddress}</div>
             </>
           )}
-          {!isLookupField && <>{fieldData}</>}
+          {!isLookupField && showAsLink && (
+            <a className="indi-ext-card-social-link" href={toWhere} target={"_blank"} rel={"noreferrer"}>
+              {fieldData}
+            </a>
+          )}
+          {!isLookupField && !showAsLink && <>{fieldData}</>}
         </div>
       )}
 

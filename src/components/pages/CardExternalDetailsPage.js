@@ -16,9 +16,30 @@ const CardExternalDetailsPage = () => {
   let [cardId, setCardId] = useState(cardPublicId);
 
   const success = (res) => {
-    setCardInfo(res?.data || {});
-    setCardId(res?.data?.id || {});
-    setCanRender(true);
+    let tempCardInfo = res?.data || {};
+    setCardInfo(tempCardInfo);
+    setCardId(tempCardInfo?.id || '');
+
+    let addrId = "";
+    let addrIdx = -1;
+
+    res.data.userLinkedBadges.map((badge, index) => {
+      badge.badgeType === "address" && (addrId = badge.value) && (addrIdx = index);
+    });
+    if (addrId.length) {
+      const addrSuccess = (res) => {
+        tempCardInfo.userLinkedBadges[addrIdx].addressData = res.data;
+        //setCardInfo({ ...tempCardInfo, addressData: res.data });
+        setCanRender(true);
+      };
+      const addrFail = (err) => {
+        err?.message?.length && console.log(err);
+      };
+
+      Utils.getAddressAsAnonymous(addrId).then(addrSuccess, addrFail);
+    } else {
+      setCanRender(true);
+    }
   };
   const fail = (err) => {
     err?.message?.length && console.log(err);
@@ -112,6 +133,7 @@ const CardExternalDetailsPage = () => {
               card={cardInfo}
               userData={cardInfo.userFieldInfo}
               showCardName={false}
+              enableSocialLinks={true}
             />
             <div
               className="indi-card-ext-footer-btn indi-card-ext-download-card"

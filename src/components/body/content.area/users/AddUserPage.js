@@ -12,9 +12,10 @@ const AddUserPage = ({ props }) => {
   let tableData = props?.tableData || [];
   let setTableData = props?.setTableData || (() => {});
   let REGIONS = Utils.REGIONS || {};
+  let PRONOUNS = Utils.PRONOUNS || {};
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
-  let [pronoun, setPronoun] = useState("");
+  let [pronoun, setPronoun] = useState(Object.keys(PRONOUNS)[0]);
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [department, setDepartment] = useState("");
@@ -72,7 +73,8 @@ const AddUserPage = ({ props }) => {
       picture,
     };
     try {
-      Utils.addUser(formData).then(success, fail);
+      debugger;
+      //Utils.addUser(formData).then(success, fail);
     } catch (e) {
       console.log(e);
     }
@@ -89,7 +91,7 @@ const AddUserPage = ({ props }) => {
   };
 
   const pronounHandler = (e) => {
-    let value = e?.currentTarget?.value || "";
+    let value = e?.currentTarget?.value || pronoun;
     setPronoun(value);
   };
 
@@ -195,15 +197,17 @@ const AddUserPage = ({ props }) => {
                   <div className="indi-add-form-item-input row">
                     <FloatingLabel label="Pronoun">
                       <Form.Select
-                        defaultValue="hehim"
+                        defaultValue={pronoun}
                         id="pronoun"
                         onChange={pronounHandler}
                         size="sm"
                         className="indi-input-field indi-input-select-field"
                       >
-                        <option value="hehim">He/Him</option>
-                        <option value="sheher">She/Her</option>
-                        <option value="them">Them</option>
+                        {Object.keys(PRONOUNS).map((keyName, index) => (
+                          <option value={keyName} key={index}>
+                            {PRONOUNS[keyName]}
+                          </option>
+                        ))}
                       </Form.Select>
                     </FloatingLabel>
                   </div>
