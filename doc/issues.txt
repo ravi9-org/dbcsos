@@ -97,7 +97,7 @@ Slide 15:
 
 
 
-====================== Ravi items =============================
+====================== Ravi items ============================= social links, 6, email signature - 2 fields icons
 1) email signature layout issues [[Fixed]]
 a) horizontal scrollbar overlaps on mini card view [[Fixed]]
 b) last mini card title is having blue color [[fixed]]
@@ -112,8 +112,8 @@ d) move the company log to top right corner [[Fixed]]
 6) invalid user login
 7) badge edition
 8) email signature -> invalid user, no data [[FIXED]]
-9) card creation ->
-a1) friendly ID
+9) card creation -> 
+a1) friendly ID(Fixed)
 a) beside name -> name (pron) [[Fixed]]
 b) under name -> title [[Fixed]]
 c) if email field is empty then fill with current user's email id [[FIXED]]
@@ -126,9 +126,9 @@ d) address while card creation [[FIXED]]
 14) remove qrcode from mini card view in email signature[[FIXED]]
 15) add badge icons at bottom of the mini card view in email signature [[FIXED]]
 16) email signature ->  QR Code card...
-a) show 4 first default fields
-b) adjust logo in "TEXT" at top-right corner
-c) show badges just like 15)
+a) show 2 first default fields - phone, email only
+b) adjust logo in "TEXT" at top-right corner[Fixed]
+c) show badges just like 15) {Fixed]
 d) html2canav linkto should include public-ID [[FIXED]]
 
 17) while editing card, obtain badges from templateInfo and show them in badge ribbon [[FIXED]]
