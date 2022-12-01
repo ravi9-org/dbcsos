@@ -100,7 +100,7 @@ Slide 15:
 ====================== Ravi items =============================
 1) email signature layout issues
 2) email signature FF issue [[Fixed]]
-3) friendly id
+3) friendly id [[FIEXED]]
 4) verify bg image for external card
 5) email send form [[Duplicate of 12]]
 6) invalid user login

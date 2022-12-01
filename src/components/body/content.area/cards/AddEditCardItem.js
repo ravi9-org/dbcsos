@@ -49,6 +49,12 @@ const AddCardItem = ({ props }) => {
     let cardNameValue = e?.currentTarget?.value || "";
     setCardName(cardNameValue);
   };
+  let [cardCustomID, setCardCustomID] = useState(cardInfo?.customId || "");
+
+  const onChangeCardCustomID = (e) => {
+    let cardCustomIDValue = e?.currentTarget?.value || "";
+    setCardCustomID(cardCustomIDValue);
+  };
 
   useEffect(() => {
     setFields(cardCtxInfo.userLinkedBadges);
@@ -164,6 +170,17 @@ const AddCardItem = ({ props }) => {
               //placeholder={`Enter ${fieldName}`}
               placeholder="Enter card name"
               onChange={onChangeCardName}
+            ></input>
+          </div>
+          <div className="indi-card-field-item d-flex">
+            <div className={`indi-card-field-item-img}`}></div>
+            <input
+              type="text"
+              className="indi-add-card-custom-id-input"
+              required={true}
+              defaultValue={cardCustomID}
+              placeholder="Enter friendly id"
+              onChange={onChangeCardCustomID}
             ></input>
           </div>
           {fields?.map((field, index) => (
