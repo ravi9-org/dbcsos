@@ -71,8 +71,11 @@ const Text = (props) => {
       {canRender && (
         <div className="indi-text-wrapper indi-signature-item">
           <div className="indi-qrcode-box row">
-            <div className="w-100 indi-signature-title col-sm-12">
+            <div className="indi-signature-title col-sm-10">
               {userData.firstName} {userData.lastName}
+            </div>
+            <div className="col-sm-2 indi-logo-image">
+                    <img src={templateInfo.logoImage} alt="card"></img>
             </div>
             <div className=" d-flex flex-row indi-signature-template">
               <div className="indi-qrcode-box-info-col">
@@ -107,9 +110,6 @@ const Text = (props) => {
                     background: `url(${cardInfo.cardImage})`,
                   }}
                 >
-                  <div className="indi-place-me-top-right ">
-                    <img src={templateInfo.logoImage} alt="card"></img>
-                  </div>
                 </div>
               </div>
             </div>

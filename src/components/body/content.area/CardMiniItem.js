@@ -59,24 +59,26 @@ const CardMiniItem = (props) => {
 
           <div className="indi-card-upload-picture d-none"></div>
 
-          <div className="indi-info-wrapper d-flex flex-row align-items-end">
-            <div className="indi-info-left">
-              <div className="indi-card-name indi-mini-card-name fw-bold">
-                {userData.firstName} {userData.lastName}
+          <div className="indi-info-wrapper d-flex flex-column align-items-start">
+            <div className="d-flex flex-row align-items-end w-100">
+              <div className="indi-info-left">
+                <div className="indi-card-name indi-mini-card-name fw-bold">
+                  {userData.firstName} {userData.lastName}
+                </div>
+                <div className="indi-card-title indi-mini-card-title">
+                  {userData.title}
+                </div>
               </div>
-              <div className="indi-card-title indi-mini-card-title">
-                {userData.title}
+              <div className="indi-card-qr-right">
+                <div className="indi-card-qr-code d-flex d-none">
+                  <img src={qrcode} alt="qrcode" />
+                </div>
               </div>
             </div>
             <div className="indi-info-left">
               {cardData?.userLinkedBadges?.map((badge, index) => (
-                <img className="indi-mini-card-badge-icon" key={index} src={badge.iconImage} alt="" />
+                <a href="#"><img className="indi-mini-card-badge-icon" key={index} src={badge.darkIconImage} alt="" /></a>
               ))}
-            </div>
-            <div className="indi-card-qr-right">
-              <div className="indi-card-qr-code d-flex d-none">
-                <img src={qrcode} alt="qrcode" />
-              </div>
             </div>
           </div>
         </div>

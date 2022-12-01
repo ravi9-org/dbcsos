@@ -98,11 +98,11 @@ Slide 15:
 
 
 ====================== Ravi items =============================
-1) email signature layout issues
-a) horizontal scrollbar overlaps on mini card view
-b) last mini card title is having blue color
-c) adjust badge icons properly
-d) move the company log to top right corner
+1) email signature layout issues [[Fixed]]
+a) horizontal scrollbar overlaps on mini card view [[Fixed]]
+b) last mini card title is having blue color [[fixed]]
+c) adjust badge icons properly [[fixed]]
+d) move the company log to top right corner [[Fixed]]
 
 
 2) email signature FF issue [[Fixed]]
