@@ -97,7 +97,7 @@ Slide 15:
 
 
 
-====================== Ravi items ============================= social links, 6, email signature - 2 fields icons
+====================== Ravi items ============================= 6, email signature - 2 fields icons
 1) email signature layout issues [[Fixed]]
 a) horizontal scrollbar overlaps on mini card view [[Fixed]]
 b) last mini card title is having blue color [[fixed]]
@@ -109,7 +109,7 @@ d) move the company log to top right corner [[Fixed]]
 3) friendly id [[FIEXED]]
 4) verify bg image for external card
 5) email send form [[Duplicate of 12]]
-6) invalid user login
+6) invalid user login [[FIXED]]
 7) badge edition
 8) email signature -> invalid user, no data [[FIXED]]
 9) card creation -> 
@@ -134,6 +134,9 @@ d) html2canav linkto should include public-ID [[FIXED]]
 17) while editing card, obtain badges from templateInfo and show them in badge ribbon [[FIXED]]
 
 
+18) social actions should have respective links, and clicking on them open in new tab.
+19) no login, card ext link is not working
+20) while adding user pronoun is not part of REST API request data.
 
 
 =========================== Laks Items ========================

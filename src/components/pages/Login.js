@@ -59,7 +59,8 @@ const LoginForm = () => {
         }
       };
       const loginFail = (err) => {
-        setFormErrorMsg(err.data);
+        setFormErrorMsg(err?.data?.message || "Login failed...");
+        return false;
       };
       const loginCallback = (response) => {
         setLoadingState({
@@ -69,6 +70,7 @@ const LoginForm = () => {
           if (response.redirectToResetPwd) {
             navigate(Utils.APP_URLS.RESET_PASSWORD_PAGE);
           } else {
+            navigate(Utils.APP_URLS.LANDING_PAGE);
             loginSuccess(response);
           }
         } else {
@@ -84,7 +86,7 @@ const LoginForm = () => {
         applyMask: true,
         text: "Log-in is in progress",
       });
-      Utils.executeLoginRESTAPI(params).then(loginCallback, loginCallback);
+      Utils.executeLoginRESTAPI(params).then(loginCallback, loginFail);
     } else {
       console.log("login form is in-complete...");
     }
@@ -152,9 +154,14 @@ const LoginForm = () => {
             <div className="indi-login-form-wrapper">
               <div className="indi-login-form-headings text-left">
                 <div className="indi-login-form-text-login">Log in</div>
+
                 <div className="indi-login-form-text-desc">
                   Please log in to your account.
                 </div>
+              </div>
+
+              <div className="indi-login-global-error d-none" ref={gloablError}>
+                {formErrorMsg}
               </div>
 
               <div className="indi-login-form">
@@ -215,10 +222,6 @@ const LoginForm = () => {
                     Login
                   </Button>
                 </div>
-              </div>
-
-              <div className="indi-login-global-error d-none" ref={gloablError}>
-                {formErrorMsg}
               </div>
             </div>
 
