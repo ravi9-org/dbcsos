@@ -126,6 +126,9 @@ const QRCode = (props) => {
               </div>
             </div>
           </div>
+          {cardInfo?.userLinkedBadges?.map((badge, index) => (
+                <img className="indi-mini-card-badge-icon" key={index} src={badge.iconImage} alt="" />
+              ))}
         </div>
       )}
     </>

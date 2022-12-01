@@ -99,6 +99,12 @@ Slide 15:
 
 ====================== Ravi items =============================
 1) email signature layout issues
+a) horizontal scrollbar overlaps on mini card view
+b) last mini card title is having blue color
+c) adjust badge icons properly
+d) move the company log to top right corner
+
+
 2) email signature FF issue [[Fixed]]
 3) friendly id [[FIEXED]]
 4) verify bg image for external card
@@ -118,7 +124,7 @@ d) address while card creation [[FIXED]]
 12) send email from card details page: /cardmail(POST - email,cardId,name,description)
 13) card addtion/edition donot allow any fields with empty data
 14) remove qrcode from mini card view in email signature[[FIXED]]
-15) add badge icons at bottom of the mini card view in email signature
+15) add badge icons at bottom of the mini card view in email signature [[FIXED]]
 16) email signature ->  QR Code card...
 a) show 4 first default fields
 b) adjust logo in "TEXT" at top-right corner

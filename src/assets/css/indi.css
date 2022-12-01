@@ -1800,3 +1800,8 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-card-ext-footer-btn img:last-child {
   margin-left: 10px;
 }
+
+.indi-app .indi-mini-card-badge-icon {
+  width: 24px;
+  height: 24px;
+}

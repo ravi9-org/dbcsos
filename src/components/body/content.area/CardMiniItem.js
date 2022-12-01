@@ -27,7 +27,7 @@ const CardMiniItem = (props) => {
       Utils.getCardDetails(cardId).then(success, fail);
     } else {
       success({
-        data: card
+        data: card,
       });
     }
   }, []);
@@ -67,6 +67,11 @@ const CardMiniItem = (props) => {
               <div className="indi-card-title indi-mini-card-title">
                 {userData.title}
               </div>
+            </div>
+            <div className="indi-info-left">
+              {cardData?.userLinkedBadges?.map((badge, index) => (
+                <img className="indi-mini-card-badge-icon" key={index} src={badge.iconImage} alt="" />
+              ))}
             </div>
             <div className="indi-card-qr-right">
               <div className="indi-card-qr-code d-flex d-none">
