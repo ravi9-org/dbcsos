@@ -150,7 +150,7 @@ d) html2canav linkto should include public-ID [[FIXED]]
 24) emailsignature: show email by obtaining from userFieldInfo.email
 
 
-25) sometimes/firsttime, card page is not loading
+25) sometimes/firsttime, card page is not loading [[FIEXED]]
 
 
 =========================== Laks Items ========================

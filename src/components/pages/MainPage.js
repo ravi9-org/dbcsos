@@ -12,76 +12,12 @@ import Utils from "../Utils";
 function MainPage() {
   let [loadingState, setLoadingState] = useState(false);
   let [alert, setAlert] = useState({});
-  let [canRender, setCanRender] = useState(false);
   let [canRedirectToLogin, setCanRedirectToLogin] = useState(false);
-  let [canRedirectToResetPassword, setCanRedirectToResetPassword] = useState(false);
+  let [canRedirectToResetPassword, setCanRedirectToResetPassword] =
+    useState(false);
   let [canRedirectToLanding, setCanRedirectToLanding] = useState(false);
   let [userData, setUserData] = useState({});
   let [addrCtxData, setAddrCtxData] = useState([]);
-
-  useEffect(() => {
-    const success = (res) => {
-      let data = res.data;
-      let tempAddrIds = [];
-      let tempAddrNames = [];
-      let tempAddrValues = [];
-      let tempCityValues = [];
-      let tempCountryValues = [];
-      let tempZipValues = [];
-      let tempFullAddrValues = [];
-      let tempAddrNumbers = [];
-      data.map((addr, index) => {
-        //debugger;
-        tempAddrIds.push(addr.id);
-        tempAddrNames.push(addr.name);
-
-        let address = addr?.address || "";
-        let city = addr?.city || "";
-        let country = addr?.country || "";
-        let zip = addr?.zip || "";
-
-        tempAddrValues.push(address);
-        tempCityValues.push(city);
-        tempCountryValues.push(country);
-        tempZipValues.push(zip);
-
-        tempFullAddrValues.push(
-          address + " " + city + " " + country + " " + zip
-        );
-        tempAddrNumbers.push(addr.contact);
-      });
-
-      let addrObj = {
-        ids: tempAddrIds,
-        addressNames: tempAddrNames,
-        addresses: tempAddrValues,
-        cities: tempCityValues,
-        countries: tempCountryValues,
-        fullAddresses: tempFullAddrValues,
-        numbers: tempAddrNumbers,
-      };
-      setAddrCtxData(addrObj);
-    };
-    const fail = (err) => {
-      console.log(err);
-    };
-
-    try {
-      Utils.getAddresses().then(success, fail);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!Utils.isObjectEmpty(addrCtxData)) {
-      setCanRender(true);
-    }
-  }, [addrCtxData]);
-
-
-
-
 
   let navigate = useNavigate();
 
