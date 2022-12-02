@@ -138,7 +138,7 @@ d) html2canav linkto should include public-ID [[FIXED]]
 19) no login, card ext link is not working [[FIXED]]
 20) while adding user pronoun is not part of REST API request data.[[FIEXED]]
 
-21) avoid spans in email signature and show only original icons
+21) avoid spans in email signature and show only original icons [[FIXED]]
 22) zoom in and zoom out in card image add/edit
 23)white card
 - logo should come in both qrcode and text
@@ -148,10 +148,7 @@ d) html2canav linkto should include public-ID [[FIXED]]
 - wrap social icons based on the available width
 
 24) emailsignature: show email by obtaining from userFieldInfo.email [[FIXED]]
-
-
 25) sometimes/firsttime, card page is not loading [[FIEXED]]
-
 26) show dark background for badges table -> iconLabel column [[FIXED]]
 
 

@@ -632,15 +632,15 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-card-field-item {}
 
-.indi-card-field-item-img {
+/* .indi-card-field-item-img {
   min-width: 26px;
   height: 24px;
   margin-right: 8px;
   background-size: contain;
   background-repeat: no-repeat;
-}
+} */
 
-.indi-card-field-item-img.indi-card-field-item-phone {
+/* .indi-card-field-item-img.indi-card-field-item-phone {
   background-image: url("./../img/fields/phone.png");
 }
 
@@ -690,7 +690,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-card-field-item-img.indi-card-field-item-email {
   background-image: url("./../img/fields/email.png");
-}
+} */
 
 .indi-card-field-item-value {
   color: #fff;
@@ -914,6 +914,10 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-signature-template .indi-qrcode-box-info-col div span.indi-card-field-item-img {
   background-size: 20PX;
   background-position: 0px 2px;
+  background-repeat: no-repeat;
+  width: 32px;
+  height: 32px;
+  background-repeat: no-repeat;
 }
 
 .indi-app .indi-qrcode-qrcode {

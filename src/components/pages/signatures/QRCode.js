@@ -18,17 +18,22 @@ const QRCode = (props) => {
   const [qrcode, setQrCode] = useState(DefaultQRCode);
 
   const [canRender, setCanRender] = useState(false);
+  let [mobileImg, setMobileImg] = useState("");
+  let [emailImg, setEmailImg] = useState("");
 
   const success = (res) => {
     let mobile = "";
     let email = "";
+    let emailImg = "";
     let userLinkedBadges = res.data?.userLinkedBadges || [];
     userLinkedBadges.map((badge, index) => {
       if (badge.badgeUID === "phone") {
         mobile = badge.value || badge.defaultValue || "";
+        setMobileImg(badge.iconImage);
       }
       if (badge.badgeUID === "email") {
         email = badge.value || badge.defaultValue || "";
+        setEmailImg(badge.iconImage);
       }
     });
     setMobile(mobile);
@@ -88,12 +93,24 @@ const QRCode = (props) => {
                 </div>
                 <div className="indi-qrcode-box-contacts">
                   <div className="indi-qrcode-box-mobile">
-                    <span className="indi-card-field-item-img indi-card-field-item-mobile"></span>
+                    <span
+                      className="indi-card-field-item-img indi-card-field-item-mobile"
+                      style={{
+                        backgroundImage: `url(${mobileImg})`,
+                      }}
+                    ></span>
                     <span>{mobile}</span>
                   </div>
                   <div className="indi-qrcode-box-email">
-                    <span className="indi-card-field-item-img indi-card-field-item-email"></span>
-                    <span>{cardInfo?.userFieldInfo?.email || userData.email}</span>
+                    <span
+                      className="indi-card-field-item-img indi-card-field-item-email"
+                      style={{
+                        backgroundImage: `url(${emailImg})`,
+                      }}
+                    ></span>
+                    <span>
+                      {cardInfo?.userFieldInfo?.email || userData.email}
+                    </span>
                   </div>
                 </div>
                 <div className="indi-qrcode-box-save-contact">
