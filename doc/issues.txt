@@ -141,11 +141,11 @@ d) html2canav linkto should include public-ID [[FIXED]]
 21) avoid spans in email signature and show only original icons [[FIXED]]
 22) zoom in and zoom out in card image add/edit
 23)white card
-a) logo should come in both qrcode and text [[FIXED]]
-b) apply ellipses on white badge informations
-c) profile picture should come below the badge informations
-d) qrcode/image should go to bottom right
-e) wrap social icons based on the available width
+a) logo should come in both qrcode and text [[FIXED]] 
+b) apply ellipses on white badge informations [[Fixed]]
+c) profile picture should come below the badge informations [[FIEXED]]
+d) qrcode/image should go to bottom right [[Fixed]]
+e) wrap social icons based on the available width [[FIEXED]]
 
 24) emailsignature: show email by obtaining from userFieldInfo.email [[FIXED]]
 25) sometimes/firsttime, card page is not loading [[FIEXED]]

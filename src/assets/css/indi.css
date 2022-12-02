@@ -349,6 +349,16 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   right: 16px;
 }
 
+.indi-qrcode-box-codes  {
+  position: absolute;
+  bottom: -5px;
+  right: -10px;
+}
+
+.indi-wrap-overflow-icons {
+  max-width: calc(100% - 90px);
+}
+
 .indi-place-me-bottom-left {
   position: absolute;
   bottom: 16px;
@@ -452,6 +462,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   padding: 0 16px;
   text-overflow: ellipsis;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .indi-app .indi-signature-item-wrapper .indi-logo-image {
@@ -841,6 +852,17 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   white-space: nowrap;
 }
 
+.indi-app .indi-ellipsis {
+white-space: nowrap;
+overflow: hidden;
+width: inherit;
+text-overflow: ellipsis;
+}
+
+.indi-float-left {
+  float: left !important;
+} 
+
 .indi-app .indi-card-qr-code {
   width: 32px;
   height: 32px;
@@ -869,7 +891,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-signature-item-wrapper .indi-signature-item {
   border-radius: 10px;
-  padding: 20px 10px;
+  padding: 16px 10px;
   min-width: 400px;
   max-width: 400px;
   background: #fff;
@@ -889,9 +911,13 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-qrcode-bg {
-  background-size: cover !important;
-  width: 160px;
-  height: 120px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  bottom: -5px;
+  right: -4px;
 }
 
 .indi-app .indi-qrcode-logo {
@@ -916,8 +942,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-position: 0px 2px;
   background-repeat: no-repeat;
   width: 32px;
-  height: 32px;
+  height: 26px;
   background-repeat: no-repeat;
+  padding-bottom: 0;
 }
 
 .indi-app .indi-qrcode-qrcode {

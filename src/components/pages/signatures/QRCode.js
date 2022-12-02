@@ -71,19 +71,17 @@ const QRCode = (props) => {
       });
     }
   }, [cardInfo]);
-
+  let displayName = userData.firstName+ " "+ userData.lastName
   return (
     <>
       {canRender && (
         <div className="indi-qrcode-wrapper indi-signature-item">
           <div className="indi-qrcode-box row">
-            <div className="w-100 indi-signature-title col-sm-12">
-              {userData.firstName} {userData.lastName}
-            </div>
+            <div className="indi-signature-title col-sm-10">{displayName}</div>
             <div className="col-sm-2 indi-logo-image">
-                    <img src={templateInfo.logoImage} alt="card"></img>
+              <img src={templateInfo.logoImage} alt="card"></img>
             </div>
-            <div className=" d-flex flex-row indi-signature-template">
+            <div className="indi-signature-template">
               <div className="indi-qrcode-box-info-col">
                 <div className="indi-qrcode-box-logo"></div>
                 <div className="indi-qrcode-box-personal-info">
@@ -96,28 +94,49 @@ const QRCode = (props) => {
                 </div>
                 <div className="indi-qrcode-box-contacts">
                   <div className="indi-qrcode-box-mobile">
-                    <span
-                      className="indi-card-field-item-img indi-card-field-item-mobile"
-                      style={{
-                        backgroundImage: `url(${mobileImg})`,
-                      }}
-                    ></span>
-                    <span>{mobile}</span>
+                    <div className="indi-ellipsis">
+                      <span className="indi-float-left">
+                        <span
+                          className="indi-card-field-item-img indi-card-field-item-mobile"
+                          style={{
+                            backgroundImage: `url(${mobileImg})`,
+                          }}
+                        ></span>
+                      </span>
+                      {mobile}
+                    </div>
                   </div>
                   <div className="indi-qrcode-box-email">
-                    <span
-                      className="indi-card-field-item-img indi-card-field-item-email"
-                      style={{
-                        backgroundImage: `url(${emailImg})`,
-                      }}
-                    ></span>
-                    <span>
+                    <div className="indi-ellipsis">
+                      <span className="indi-float-left">
+                        <span
+                          className="indi-card-field-item-img indi-card-field-item-email"
+                          style={{
+                            backgroundImage: `url(${emailImg})`,
+                          }}
+                        ></span>
+                      </span>
                       {cardInfo?.userFieldInfo?.email || userData.email}
-                    </span>
+                    </div>
                   </div>
                 </div>
                 <div className="indi-qrcode-box-save-contact">
                   <Button variant="primary">SAVE CONTACT</Button>
+                </div>
+                <div className="indi-wrap-overflow-icons">
+                  {cardInfo?.userLinkedBadges?.map((badge, index) => (
+                    <React.Fragment key={index}>
+                      {badge?.badgeUID !== "phone" &&
+                        badge?.badgeUID !== "email" && (
+                          <img
+                            className="indi-mini-card-badge-icon"
+                            key={index}
+                            src={badge.iconImage}
+                            alt=""
+                          />
+                        )}
+                    </React.Fragment>
+                  ))}
                 </div>
               </div>
               <div className="indi-qrcode-box-img-col">
@@ -130,7 +149,7 @@ const QRCode = (props) => {
                   <div
                     className="indi-qrcode-logo"
                     style={{
-                      background: `url(${templateInfo.logoImage})`,
+                      backgroundImage: `url(${templateInfo.logoImage})`,
                     }}
                   ></div>
                 </div>
@@ -146,18 +165,6 @@ const QRCode = (props) => {
               </div>
             </div>
           </div>
-          {cardInfo?.userLinkedBadges?.map((badge, index) => (
-            <React.Fragment key={index}>
-              {badge?.badgeUID !== "phone" && badge?.badgeUID !== "email" && (
-                <img
-                  className="indi-mini-card-badge-icon"
-                  key={index}
-                  src={badge.iconImage}
-                  alt=""
-                />
-              )}
-            </React.Fragment>
-          ))}
         </div>
       )}
     </>
