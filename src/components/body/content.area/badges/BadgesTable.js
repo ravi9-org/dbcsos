@@ -20,7 +20,7 @@ const BadgesTable = () => {
   let [tableColumns, setTableColumns] = useState([
     "id",
     "select",
-    "edit",
+    // "edit",
     "name",
     "iconImage",
     "darkIconImage",
@@ -37,10 +37,10 @@ const BadgesTable = () => {
       title: "-",
       center: true,
     },
-    edit: {
-      type: "image",
-      title: "Edit",
-    },
+    // edit: {
+    //   type: "image",
+    //   title: "Edit",
+    // },
     name: {
       type: "text",
       search: true,
