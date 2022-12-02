@@ -80,6 +80,9 @@ const QRCode = (props) => {
             <div className="w-100 indi-signature-title col-sm-12">
               {userData.firstName} {userData.lastName}
             </div>
+            <div className="col-sm-2 indi-logo-image">
+                    <img src={templateInfo.logoImage} alt="card"></img>
+            </div>
             <div className=" d-flex flex-row indi-signature-template">
               <div className="indi-qrcode-box-info-col">
                 <div className="indi-qrcode-box-logo"></div>

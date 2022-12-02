@@ -13,6 +13,8 @@ const Text = (props) => {
 
   const [cardInfo, setCardInfo] = useState(card);
   const [templateInfo, setTemplateInfo] = useState(card.templateInfo);
+  let [mobileImg, setMobileImg] = useState("");
+  let [emailImg, setEmailImg] = useState("");
 
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
@@ -26,9 +28,11 @@ const Text = (props) => {
     userLinkedBadges.map((badge, index) => {
       if (badge.badgeUID === "phone") {
         mobile = badge.value || badge.defaultValue || '';
+        setMobileImg(badge.iconImage);
       }
       if (badge.badgeUID === "email") {
         email = badge.value || badge.defaultValue || '';
+        setEmailImg(badge.iconImage);
       }
     });
     setMobile(mobile);
@@ -90,11 +94,21 @@ const Text = (props) => {
                 </div>
                 <div className="indi-qrcode-box-contacts">
                   <div className="indi-qrcode-box-mobile">
-                    <span className="indi-card-field-item-img indi-card-field-item-mobile"></span>
+                  <span
+                      className="indi-card-field-item-img indi-card-field-item-mobile"
+                      style={{
+                        backgroundImage: `url(${mobileImg})`,
+                      }}
+                    ></span>
                     <span>{mobile}</span>
                   </div>
                   <div className="indi-qrcode-box-email">
-                    <span className="indi-card-field-item-img indi-card-field-item-email"></span>
+                  <span
+                      className="indi-card-field-item-img indi-card-field-item-email"
+                      style={{
+                        backgroundImage: `url(${emailImg})`,
+                      }}
+                    ></span>
                     <span>{email}</span>
                   </div>
                 </div>
