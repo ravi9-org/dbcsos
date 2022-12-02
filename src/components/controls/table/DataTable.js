@@ -72,7 +72,8 @@ const DataTable = ({ tableProps }) => {
               {tableData.map((data, index) => (
                 <tr key={index} className="indi-data-table-tr">
                   {tableColumns.map((col, colIndex) => (
-                    <td key={`${colIndex}`} className={tableColumnSchema[col]?.classes || ''}>
+                    <td key={`${colIndex}`} className={(tableColumnSchema[col]?.classes || '') +
+                      (tableColumnSchema[col]?.type === "hidden" ? "d-none" : "")}>
                       {tableColumnSchema[col]?.type === "text" && (
                         <TextCell
                           props={{

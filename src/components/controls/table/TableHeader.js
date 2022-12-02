@@ -7,6 +7,8 @@ const TableHeader = ({ props }) => {
   let col = props.col;
   let title = tableColumnSchema[col].title;
   let isSortable = !!tableColumnSchema[col].sort;
+  let classes =
+    tableColumnSchema[col]?.classes?.indexOf("text-center") > -1 ? " text-center" : "";
 
   const doSort = (e) => {
     e.preventDefault();
@@ -15,19 +17,19 @@ const TableHeader = ({ props }) => {
 
   if (tableColumnSchema[col].type === "search") {
     <TableHeaderSearchboxCell
-      props={{ classNames: "indi-data-table-checkbox-all" }}
+      props={{ classNames: "indi-data-table-checkbox-all" + classes }}
     />;
   } else if (tableColumnSchema[col].type === "hidden") {
     return <></>;
   } else if (tableColumnSchema[col].type === "checkbox") {
     return (
       <TableHeaderCheckboxCell
-        props={{ classNames: "indi-data-table-checkbox-all" }}
+        props={{ classNames: "indi-data-table-checkbox-all" + classes }}
       />
     );
   } else {
     return (
-      <th>
+      <th className={classes}>
         {title}{" "}
         {isSortable && (
           <div role="button" className="d-none" onClick={doSort}>
