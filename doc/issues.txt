@@ -151,9 +151,14 @@ e) wrap social icons based on the available width [[FIEXED]]
 25) sometimes/firsttime, card page is not loading [[FIEXED]]
 26) show dark background for badges table -> iconLabel column [[FIXED]]
 
+Issues- 2nd December 2022
+
+27. The icons display on the web card is missing.
+28. On Signature/cards pages, the name is taken from the current user name rather from the card user name.
 
 =========================== Laks Items ========================
 1) send template linked badges while editing the car [[FIEXED]]
+
 
 
 laks@cmsedge.com
