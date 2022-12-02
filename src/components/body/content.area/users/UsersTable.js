@@ -247,7 +247,7 @@ const UsersTable = () => {
       <div className="indi-add-card-title">
         Users
         <div className="d-none1 w-50 indi-body-actions">
-          <div className="indi-body-action" role="button" onClick={handleShow}>
+          <div className="indi-body-action">
             {/* <img className="indi-w-20" src={DeleteIcon} alt="Delete-icon"></img> */}
             <FloatingLabel label="">
               <Form.Select
