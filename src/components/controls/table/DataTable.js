@@ -72,7 +72,7 @@ const DataTable = ({ tableProps }) => {
               {tableData.map((data, index) => (
                 <tr key={index} className="indi-data-table-tr">
                   {tableColumns.map((col, colIndex) => (
-                    <React.Fragment key={`${colIndex}`}>
+                    <td key={`${colIndex}`} className={tableColumnSchema[col]?.classes || ''}>
                       {tableColumnSchema[col]?.type === "text" && (
                         <TextCell
                           props={{
@@ -127,7 +127,7 @@ const DataTable = ({ tableProps }) => {
                           }}
                         />
                       )}
-                    </React.Fragment>
+                    </td>
                   ))}
                 </tr>
               ))}

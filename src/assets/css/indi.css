@@ -453,6 +453,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
 .indi-app .indi-signature-item-wrapper .indi-logo-image {
   padding: 0;
   border: 4px solid #232862;
@@ -607,9 +608,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-card-company-logo-wrapper.indi-mini-card-company-logo-wrapper {
-    max-width: 50px;
-    float: right;
-    right: 5px;
+  max-width: 50px;
+  float: right;
+  right: 5px;
 }
 
 .indi-app .indi-ext-card-item-wrapper .indi-card-company-logo-wrapper {
@@ -1833,4 +1834,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-ext-card-social-link {
   color: #fff;
+}
+
+.indi-app .indi-apply-dark-background {
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  background-color: rgba(48, 82, 158, .5);
 }

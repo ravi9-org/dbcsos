@@ -19,16 +19,13 @@ const CheckBoxCell = ({ props }) => {
     setSelectedItem(setObjValu);
   };
   return (
-    <td>
-      <Form.Check
-        type="checkbox"
-        //dataId={data[0]}        
-        disabled={isDisabled ? true : false}
-        onChange={updateCheckboxValue}
-        defaultChecked={checkedText}
-        id={`indi-table-item-${data[0]}`}
-      />
-    </td>
+    <Form.Check
+      type="checkbox"
+      disabled={isDisabled ? true : false}
+      onChange={updateCheckboxValue}
+      defaultChecked={checkedText}
+      id={`indi-table-item-${data[0]}`}
+    />
   );
 };
 

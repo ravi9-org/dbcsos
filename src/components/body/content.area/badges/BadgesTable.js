@@ -46,11 +46,13 @@ const BadgesTable = () => {
       type: "image",
       title: "Icon",
       center: true,
+      classes: "text-center"
     },
     darkIconImage: {
       type: "image",
       title: "Icon label",
       center: true,
+      classes: "indi-apply-dark-background text-center"
     },
     prefixurl: {
       type: "text",
