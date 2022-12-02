@@ -147,7 +147,7 @@ d) html2canav linkto should include public-ID [[FIXED]]
 - qrcode/image should go to bottom right
 - wrap social icons based on the available width
 
-24) emailsignature: show email by obtaining from userFieldInfo.email
+24) emailsignature: show email by obtaining from userFieldInfo.email [[FIXED]]
 
 
 25) sometimes/firsttime, card page is not loading [[FIEXED]]

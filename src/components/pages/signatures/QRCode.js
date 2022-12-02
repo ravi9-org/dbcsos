@@ -25,10 +25,10 @@ const QRCode = (props) => {
     let userLinkedBadges = res.data?.userLinkedBadges || [];
     userLinkedBadges.map((badge, index) => {
       if (badge.badgeUID === "phone") {
-        mobile = badge.value || badge.defaultValue || '';
+        mobile = badge.value || badge.defaultValue || "";
       }
       if (badge.badgeUID === "email") {
-        email = badge.value || badge.defaultValue || '';
+        email = badge.value || badge.defaultValue || "";
       }
     });
     setMobile(mobile);
@@ -46,8 +46,8 @@ const QRCode = (props) => {
       Utils.getCardDetails(cardId).then(success, fail);
     } else {
       success({
-        data: card
-      })
+        data: card,
+      });
     }
   }, [card, cardId, cardInfo]);
 
@@ -62,8 +62,8 @@ const QRCode = (props) => {
       Utils.getTemplateDetails(templateId).then(templateSuccess, fail);
     } else {
       templateSuccess({
-        data: cardInfo.templateInfo
-      })
+        data: cardInfo.templateInfo,
+      });
     }
   }, [cardInfo]);
 
@@ -93,7 +93,7 @@ const QRCode = (props) => {
                   </div>
                   <div className="indi-qrcode-box-email">
                     <span className="indi-card-field-item-img indi-card-field-item-email"></span>
-                    <span>{userData.email}</span>
+                    <span>{cardInfo?.userFieldInfo?.email || userData.email}</span>
                   </div>
                 </div>
                 <div className="indi-qrcode-box-save-contact">
@@ -127,8 +127,17 @@ const QRCode = (props) => {
             </div>
           </div>
           {cardInfo?.userLinkedBadges?.map((badge, index) => (
-                <img className="indi-mini-card-badge-icon" key={index} src={badge.iconImage} alt="" />
-              ))}
+            <React.Fragment key={index}>
+              {badge?.badgeUID !== "phone" && badge?.badgeUID !== "email" && (
+                <img
+                  className="indi-mini-card-badge-icon"
+                  key={index}
+                  src={badge.iconImage}
+                  alt=""
+                />
+              )}
+            </React.Fragment>
+          ))}
         </div>
       )}
     </>

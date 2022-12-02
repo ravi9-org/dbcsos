@@ -27,7 +27,8 @@ const Field = (props = {}) => {
       showAsLink = true;
     } else if (fieldProps.badgeType === "email") {
       showAsLink = true;
-      toWhere = "mailto:" + toWhere;
+      fieldData = cardCtxInfo?.userFieldInfo?.email || fieldData;
+      toWhere = "mailto:" + (fieldData || toWhere);
     }
   }
   

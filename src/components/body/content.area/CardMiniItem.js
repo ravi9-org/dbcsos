@@ -77,7 +77,12 @@ const CardMiniItem = (props) => {
             </div>
             <div className="indi-info-left">
               {cardData?.userLinkedBadges?.map((badge, index) => (
-                <a href="#"><img className="indi-mini-card-badge-icon" key={index} src={badge.darkIconImage} alt="" /></a>
+                <img
+                  className="indi-mini-card-badge-icon"
+                  key={index}
+                  src={badge.darkIconImage}
+                  alt=""
+                />
               ))}
             </div>
           </div>

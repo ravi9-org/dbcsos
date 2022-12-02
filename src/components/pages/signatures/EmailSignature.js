@@ -84,6 +84,9 @@ const EmailSignature = () => {
   };
   const fail = (err) => {
     err?.message?.length && console.log(err);
+    setLoadingState({
+      applyMask: false
+    });
     if (err?.redirect) {
       setCanRedirectToLogin(true);
     }
