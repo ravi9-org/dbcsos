@@ -20,6 +20,7 @@ const BadgesTable = () => {
   let [tableColumns, setTableColumns] = useState([
     "id",
     "select",
+    "edit",
     "name",
     "iconImage",
     "darkIconImage",
@@ -35,6 +36,10 @@ const BadgesTable = () => {
       type: "checkbox",
       title: "-",
       center: true,
+    },
+    edit: {
+      type: "image",
+      title: "Edit",
     },
     name: {
       type: "text",

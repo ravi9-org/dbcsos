@@ -154,3 +154,7 @@ e) wrap social icons based on the available width
 
 =========================== Laks Items ========================
 1) send template linked badges while editing the car [[FIEXED]]
+
+
+laks@cmsedge.com
+Cmsedge123!
