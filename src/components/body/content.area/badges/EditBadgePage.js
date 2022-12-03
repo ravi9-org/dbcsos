@@ -242,7 +242,7 @@ const EditBadgePage = ({ props }) => {
                     <div className="indi-add-img-wrapper"></div>
                   </div>
                   <div
-                    className="indi-img-preview"
+                    className="indi-img-preview indi-dark-img-preview"
                     style={{ backgroundImage: `url(${iconDarkImagePreview})` }}
                   ></div>
                 </div>

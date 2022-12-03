@@ -1307,6 +1307,10 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-size: contain !important;
   background-repeat: no-repeat;
 }
+.indi-app .indi-img-preview.indi-dark-img-preview {
+  border-radius: 0;
+  background-color: rgba(0,0,0,0.5);
+}
 
 .indi-app .indi-add-form-wrapper {
   justify-content: start;
@@ -1860,6 +1864,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-signature-item-wrapper .indi-mini-card-badge-icon {
   width: 20px;
+  height: 20px;
   margin: 4px;
 }
 
