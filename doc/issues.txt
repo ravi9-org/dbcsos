@@ -151,6 +151,11 @@ e) wrap social icons based on the available width [[FIEXED]]
 25) sometimes/firsttime, card page is not loading [[FIEXED]]
 26) show dark background for badges table -> iconLabel column [[FIXED]]
 
+27) for constants always show defaultValue (donot consider value), accross the app.
+28) phone number is missing for few cards [[FIXED]]
+29) icons missing in card item views
+30) 
+
 Issues- 2nd December 2022
 
 27. The icons display on the web card is missing.

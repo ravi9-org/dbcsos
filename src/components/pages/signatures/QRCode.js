@@ -24,11 +24,13 @@ const QRCode = (props) => {
   const success = (res) => {
     let mobile = "";
     let email = "";
-    let emailImg = "";
     let userLinkedBadges = res.data?.userLinkedBadges || [];
     userLinkedBadges.map((badge, index) => {
       if (badge.badgeUID === "phone") {
-        mobile = badge.value || badge.defaultValue || "";
+        let mobileValue = badge.value || badge.defaultValue || "";
+        if (mobileValue.length && mobile === "") {
+          mobile = mobileValue;
+        }
         setMobileImg(badge.iconImage);
       }
       if (badge.badgeUID === "email") {
