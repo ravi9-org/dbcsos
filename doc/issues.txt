@@ -153,7 +153,7 @@ e) wrap social icons based on the available width [[FIEXED]]
 
 27) for constants always show defaultValue (donot consider value), accross the app.
 28) phone number is missing for few cards [[FIXED]]
-29) icons missing in card item views
+29) icons missing in card item views [[FIXED]]
 30) 
 
 Issues- 2nd December 2022

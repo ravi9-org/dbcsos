@@ -349,7 +349,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   right: 16px;
 }
 
-.indi-qrcode-box-codes  {
+.indi-qrcode-box-codes {
   position: absolute;
   bottom: -5px;
   right: -10px;
@@ -643,13 +643,13 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-card-field-item {}
 
-/* .indi-card-field-item-img {
+.indi-card-field-item-img {
   min-width: 26px;
   height: 24px;
   margin-right: 8px;
   background-size: contain;
   background-repeat: no-repeat;
-} */
+}
 
 /* .indi-card-field-item-img.indi-card-field-item-phone {
   background-image: url("./../img/fields/phone.png");
@@ -853,15 +853,15 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-ellipsis {
-white-space: nowrap;
-overflow: hidden;
-width: inherit;
-text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: inherit;
+  text-overflow: ellipsis;
 }
 
 .indi-float-left {
   float: left !important;
-} 
+}
 
 .indi-app .indi-card-qr-code {
   width: 32px;
