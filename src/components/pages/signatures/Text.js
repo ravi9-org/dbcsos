@@ -27,11 +27,11 @@ const Text = (props) => {
     let userLinkedBadges = res.data?.userLinkedBadges || [];
     userLinkedBadges.map((badge, index) => {
       if (badge.badgeUID === "phone") {
-        mobile = badge.value || badge.defaultValue || '';
+        mobile = badge.value || badge.defaultValue || "";
         setMobileImg(badge.iconImage);
       }
       if (badge.badgeUID === "email") {
-        email = badge.value || badge.defaultValue || '';
+        email = badge.value || badge.defaultValue || "";
         setEmailImg(badge.iconImage);
       }
     });
@@ -49,8 +49,8 @@ const Text = (props) => {
       Utils.getCardDetails(cardId).then(success, fail);
     } else {
       success({
-        data: card
-      })
+        data: card,
+      });
     }
   }, [card, cardId, cardInfo]);
 
@@ -65,11 +65,11 @@ const Text = (props) => {
       Utils.getTemplateDetails(templateId).then(templateSuccess, fail);
     } else {
       templateSuccess({
-        data: cardInfo.templateInfo
-      })
+        data: cardInfo.templateInfo,
+      });
     }
   }, [cardInfo]);
-  let displayName = userData.firstName+ " "+ userData.lastName
+  let displayName = userData.firstName + " " + userData.lastName;
   return (
     <>
       {canRender && (
@@ -77,14 +77,15 @@ const Text = (props) => {
           <div className="indi-qrcode-box row">
             <div className="indi-signature-title col-sm-10">{displayName}</div>
             <div className="col-sm-2 indi-logo-image">
-                    <img src={templateInfo.logoImage} alt="card"></img>
+              <img src={templateInfo.logoImage} alt="card"></img>
             </div>
             <div className="indi-signature-template">
               <div className="indi-qrcode-box-info-col">
                 <div className="indi-qrcode-box-logo"></div>
                 <div className="indi-qrcode-box-personal-info">
                   <div className="indi-qrcode-box-personal-name d-none">
-                    {userData.firstName} {userData.lastName}
+                    {cardInfo?.userFieldInfo?.firstName}{" "}
+                    {cardInfo?.userFieldInfo?.lastName}
                   </div>
                   <div className="indi-qrcode-box-personal-desgination">
                     {userData.designation}
@@ -100,18 +101,22 @@ const Text = (props) => {
                             backgroundImage: `url(${mobileImg})`,
                           }}
                         ></span>
-                      </span>{mobile}</div>
+                      </span>
+                      {mobile}
+                    </div>
                   </div>
                   <div className="indi-qrcode-box-email">
-                    <div className="indi-ellipsis">                      
-                    <span className="indi-float-left">
+                    <div className="indi-ellipsis">
+                      <span className="indi-float-left">
                         <span
                           className="indi-card-field-item-img indi-card-field-item-email"
                           style={{
                             backgroundImage: `url(${emailImg})`,
                           }}
                         ></span>
-                      </span>{email}</div>
+                      </span>
+                      {email}
+                    </div>
                   </div>
                 </div>
                 <div className="indi-qrcode-box-save-contact">
@@ -140,12 +145,11 @@ const Text = (props) => {
                   style={{
                     backgroundImage: `url(${cardInfo.cardImage})`,
                   }}
-                >
-                </div>
+                ></div>
               </div>
             </div>
           </div>
-{/*           {cardInfo?.userLinkedBadges?.map((badge, index) => (
+          {/*           {cardInfo?.userLinkedBadges?.map((badge, index) => (
                 <img className="indi-mini-card-badge-icon" key={index} src={badge.iconImage} alt="" />
               ))} */}
         </div>

@@ -63,7 +63,7 @@ const CardMiniItem = (props) => {
             <div className="d-flex flex-row align-items-end w-100">
               <div className="indi-info-left">
                 <div className="indi-card-name indi-mini-card-name fw-bold">
-                  {userData.firstName} {userData.lastName}
+                  {cardData?.userFieldInfo?.firstName} {cardData?.userFieldInfo?.lastName}
                 </div>
                 <div className="indi-card-title indi-mini-card-title">
                   {userData.title}

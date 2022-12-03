@@ -71,13 +71,16 @@ const QRCode = (props) => {
       });
     }
   }, [cardInfo]);
-  let displayName = userData.firstName+ " "+ userData.lastName
+
   return (
     <>
       {canRender && (
         <div className="indi-qrcode-wrapper indi-signature-item">
           <div className="indi-qrcode-box row">
-            <div className="indi-signature-title col-sm-10">{displayName}</div>
+            <div className="indi-signature-title col-sm-10">
+              {cardInfo?.userFieldInfo?.firstName}{" "}
+              {cardInfo?.userFieldInfo?.lastName}
+            </div>
             <div className="col-sm-2 indi-logo-image">
               <img src={templateInfo.logoImage} alt="card"></img>
             </div>
@@ -86,7 +89,8 @@ const QRCode = (props) => {
                 <div className="indi-qrcode-box-logo"></div>
                 <div className="indi-qrcode-box-personal-info">
                   <div className="indi-qrcode-box-personal-name d-none">
-                    {userData.firstName} {userData.lastName}
+                    {cardInfo?.userFieldInfo?.firstName}{" "}
+                    {cardInfo?.userFieldInfo?.lastName}
                   </div>
                   <div className="indi-qrcode-box-personal-desgination">
                     {userData.designation}
