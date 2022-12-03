@@ -66,7 +66,7 @@ const CardMiniItem = (props) => {
                   {cardData?.userFieldInfo?.firstName} {cardData?.userFieldInfo?.lastName}
                 </div>
                 <div className="indi-card-title indi-mini-card-title">
-                  {userData.title}
+                  {cardData?.userFieldInfo?.title}
                 </div>
               </div>
               <div className="indi-card-qr-right">
