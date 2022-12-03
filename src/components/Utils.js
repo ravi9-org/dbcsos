@@ -467,6 +467,15 @@ const addBadge = (badgeData) => {
   return axios.post(url, formData);
 };
 
+const editBadge = (badgeData, badgeId) => {
+  let formData = { ...badgeData };
+  delete formData.id;
+  let url = REST_API.BADGES + badgeId;
+
+  return axios.patch(url, formData);
+};
+
+
 const deleteBadge = (badgeUID) => {
   let url = REST_API.BADGES;
   return axios.delete(url + badgeUID);
@@ -965,6 +974,7 @@ const Utils = {
   bulkAddressUpload,
   getBadges,
   addBadge,
+  editBadge,
   deleteBadges,
   getUserId,
   getFilteredUsers,

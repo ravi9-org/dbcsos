@@ -4,15 +4,30 @@ import { Button, Modal } from "react-bootstrap";
 import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
 import DataTable from "../../../controls/table/DataTable";
+import EditIcon from "../../../../assets/img/Edit.png";
 import AddIcon from "../../../../assets/img/add.png";
 import DeleteIcon from "../../../../assets/img/Delete.png";
 import AddBadgePage from "./AddBadgePage";
+import EditBadgePage from "./EditBadgePage";
 
 const BadgesTable = () => {
   let [showDeleteModal, setShowDeleteModal] = useState(false);
   let [selectedItemCount, setSelectedItemCount] = useState(0);
+  const DISABLED_ICON = "indi-disable-action-icon";
+  let [editIconClass, setEditIconClass] = useState(DISABLED_ICON);
 
   let [tableSelectedItems, setTableSelectedItems] = useState([]);
+  let [badgeIdForEdit, setBadgeIdForEdit] = useState("");
+
+  useEffect(() => {
+    if (tableSelectedItems.length === 1) {
+      setEditIconClass("");
+      setBadgeIdForEdit(tableSelectedItems[0]);
+    } else {
+      setEditIconClass(DISABLED_ICON);
+      setBadgeIdForEdit("");
+    }
+  }, [tableSelectedItems]);
 
   let { setCanRedirectToLogin, setLoadingState, setAlert } =
     useContext(ContextComponent);
@@ -51,13 +66,13 @@ const BadgesTable = () => {
       type: "image",
       title: "Icon",
       center: true,
-      classes: "text-center"
+      classes: "text-center",
     },
     darkIconImage: {
       type: "image",
       title: "Icon label",
       center: true,
-      classes: "indi-apply-dark-background text-center"
+      classes: "indi-apply-dark-background text-center",
     },
     prefixurl: {
       type: "text",
@@ -72,34 +87,36 @@ const BadgesTable = () => {
   let [tableData, setTableData] = useState([]);
   let [canRender, setCanRender] = useState(false);
   let [updateTable, setUpdateTable] = useState(false);
+  let [allBadges, setAllBadges] = useState([]);
 
   const success = (res) => {
     setLoadingState({
       applyMask: false,
     });
-    let userInfo = res?.data;
+    let badgesInfo = res?.data;
     let usersArray = [];
-    if (!Utils.isObjectEmpty(userInfo)) {
-      usersArray = userInfo.map((user, index) => {
+    if (!Utils.isObjectEmpty(badgesInfo)) {
+      setAllBadges(res.data);
+      usersArray = badgesInfo.map((user, index) => {
         let userTableObj = [];
         let userTableData = [];
         tableColumns.forEach((col) => {
           if (col === "type") {
             let fieldType =
-              userInfo[index][col] === "text" ? "phone" : userInfo[index][col];
+            badgesInfo[index][col] === "text" ? "phone" : badgesInfo[index][col];
 
             let badgeDisplayName = Utils.BADGE_TYPES[fieldType].label;
             userTableData.push(badgeDisplayName);
           } else if (col === "id") {
-            userTableData.push(userInfo[index].id);
+            userTableData.push(badgesInfo[index].id);
           } else if (col === "select") {
             userTableData.push(false);
           } else if (col === "username") {
             userTableData.push(
-              userInfo[index].firstName + " " + userInfo[index].lastName
+              badgesInfo[index].firstName + " " + badgesInfo[index].lastName
             );
           } else {
-            userTableData.push(userInfo[index][col]);
+            userTableData.push(badgesInfo[index][col]);
           }
         });
         userTableObj = userTableData;
@@ -159,7 +176,7 @@ const BadgesTable = () => {
   };
 
   const handleDelete = async (e) => {
-    console.log("in handleDelete");
+    // console.log("in handleDelete");
     setShowDeleteModal(false);
     let tempTableData = tableData.filter((d) => {
       return tableSelectedItems.indexOf(d[0]) === -1;
@@ -175,8 +192,31 @@ const BadgesTable = () => {
     setAddModalCanOpen(true);
   };
 
+  let [editModalCanOpen, setEditModalCanOpen] = useState(false);
+  let [editableBadge, setEditableBadge] = useState({});
+  let [editableBadgeIndex, setEditableBadgeIndex] = useState(-1);
+
+  const openEditModal = (e) => {
+    e.preventDefault();
+    setEditModalCanOpen(true);
+    let targetBadge = {};
+    allBadges.forEach((badge, index) => {
+      if (badge.id === badgeIdForEdit) {
+        targetBadge = badge;
+        setEditableBadgeIndex(index);
+      }
+    });
+    !Utils.isObjectEmpty(targetBadge) && setEditableBadge(targetBadge);
+  };
+
+  useEffect(() => { }, [editableBadge]);
+
   const closeAddModal = (e) => {
     setAddModalCanOpen(false);
+  };
+
+  const closeEditModal = (e) => {
+    setEditModalCanOpen(false);
   };
 
   // const saveAction = (data) => {
@@ -196,6 +236,14 @@ const BadgesTable = () => {
           >
             <img className="indi-w-20" src={AddIcon} alt="Edit-icon"></img>
             Add
+          </div>
+          <div
+            className={`indi-body-action aaa ${editIconClass}`}
+            role="button"
+            onClick={openEditModal}
+          >
+            <img className="indi-w-20" src={EditIcon} alt="Edit-icon"></img>
+            Edit
           </div>
 
           <div className="indi-body-action" role="button" onClick={handleShow}>
@@ -240,6 +288,21 @@ const BadgesTable = () => {
             setAddModalCanOpen,
             tableData,
             setTableData,
+          }}
+        />
+      )}
+
+      {editModalCanOpen && (
+        <EditBadgePage
+          props={{
+            editModalCanOpen,
+            setEditModalCanOpen,
+            tableData,
+            setTableData,
+            editableBadge,
+            editableBadgeIndex,
+            allBadges,
+            setAllBadges
           }}
         />
       )}

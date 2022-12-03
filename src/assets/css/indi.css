@@ -1871,3 +1871,24 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   /* background-color: rgba(0, 0, 0, 0.5); */
   background-color: rgba(48, 82, 158, .5);
 }
+
+.indi-app .indi-disable-action-icon {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.indi-app .indi-card-external-badge-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: end;
+}
+
+.indi-app .indi-card-external-badge-wrapper img {
+  display: flex;
+  flex-direction: row;
+  height: 16px;
+  width: 16px;
+  margin-left: 6px;
+}
