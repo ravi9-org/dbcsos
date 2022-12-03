@@ -17,8 +17,13 @@ const Field = (props = {}) => {
   let iconDarkImage = fieldProps?.darkIconImage || fieldProps?.fieldSchema?.darkIconImage || "";
 
   let isDefault = !!fieldProps?.fieldSchema?.default;
-
+  
   let fieldData = fieldProps.value || fieldProps.defaultValue;
+
+  if (fieldProps.constant) {
+    fieldData = fieldProps.defaultValue || fieldProps.value;
+  }
+
   let showAsLink = false;
   let toWhere = fieldProps.value;
 

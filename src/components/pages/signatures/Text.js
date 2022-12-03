@@ -35,6 +35,9 @@ const Text = (props) => {
       }
       if (badge.badgeUID === "email") {
         email = badge.value || badge.defaultValue || "";
+        if (badge.constant) {
+          email = badge.defaultValue || badge.value || "";          
+        }
         setEmailImg(badge.iconImage);
       }
     });
