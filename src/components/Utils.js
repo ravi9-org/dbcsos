@@ -175,7 +175,7 @@ const getSession = () => {
 
 const getToken = (session = getSession()) => {
   let token = session[TOKEN] || "";
-  return token.length ? ("Bearer " + token) : '';
+  return token.length ? "Bearer " + token : "";
 };
 
 const getUserEmail = (session = getSession()) => {
@@ -326,6 +326,16 @@ const getUserCardsList = () => {
         })
         .then((res) => {
           resolve(res);
+        })
+        .catch(function (error) {
+          console.log(error.response.status);
+          console.log(error.response.data.error);
+          if (error.response.status === 401) {
+            reject({
+              redirect: true,
+              error,
+            });
+          }
         });
     } else {
       reject({
@@ -474,7 +484,6 @@ const editBadge = (badgeData, badgeId) => {
 
   return axios.patch(url, formData);
 };
-
 
 const deleteBadge = (badgeUID) => {
   let url = REST_API.BADGES;
@@ -750,11 +759,13 @@ const executeLogoutRESTAPI = () => {
       alwaysClassback(err.response, reject);
     };
     try {
-      axios.post(logoutUrl, formData , {
-        headers: {
-          Authorization: `${token}`
-        },
-      }).then(success, failure);
+      axios
+        .post(logoutUrl, formData, {
+          headers: {
+            Authorization: `${token}`,
+          },
+        })
+        .then(success, failure);
     } catch (e) {
       console.log(e);
     }
@@ -856,7 +867,7 @@ const executeResetPassword = (params) => {
       axios
         .post(resetUrl, formData, {
           headers: {
-            Authorization: `${token}`
+            Authorization: `${token}`,
           },
         })
         .then(success, failure);

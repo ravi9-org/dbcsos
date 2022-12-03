@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext, useNavigate } from "react";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 
@@ -24,12 +24,13 @@ const EmailSignature = () => {
     },
   };
 
-  const { userData, setLoadingState, setCanRedirectToLogin } = useContext(ContextComponent);
+  const { userData, setLoadingState } = useContext(ContextComponent);
   const [userCards, setUserCards] = useState([]);
   const [pageInfo, setPageInfo] = useState(null);
   const [renderPage, setRenderPage] = useState(false);
+  let navigate = useNavigate();
 
-  const [renderPreview, setRenderPreview] = useState(false);
+  // const [renderPreview, setRenderPreview] = useState(false);
 
   // let [cardsInfo, setCardsInfo] = useState([]);
 
@@ -88,7 +89,8 @@ const EmailSignature = () => {
       applyMask: false
     });
     if (err?.redirect) {
-      setCanRedirectToLogin(true);
+      Utils.deleteSession();
+      navigate(Utils.APP_URLS.LANDING_PAGE);
     }
   };
 
