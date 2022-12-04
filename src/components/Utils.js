@@ -18,7 +18,7 @@ const REST_API_PREFIX = CTX.PROTOCOL + CTX.HOST + CTX.PORT + CTX.POSTFIX;
 
 const REST_API = {
   LOGIN: REST_API_PREFIX + "/login",
-  LOGOUT: REST_API_PREFIX + "/logout",
+  LOGOUT: REST_API_PREFIX + "/logout/",
   USER_PROFILE: REST_API_PREFIX + "/users/",
   USER_BULK_UPLOAD: REST_API_PREFIX + "/users/import",
   EDIT_USER_PROFILE: REST_API_PREFIX + "/users/profile/",
