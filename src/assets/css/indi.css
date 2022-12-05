@@ -288,7 +288,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-content-area-wrapper button.btn.btn-primary,
 .indi-app .modal-dialog button.btn.btn-primary {
   /* float: right; */
-  margin: 8px;
+  margin: 12px 0;
   background-color: #232862;
   border: 1px solid #232862;
 }
@@ -905,7 +905,10 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   border: 1px solid #ccc;
 }
 
-.indi-app .indi-qrcode-bg,
+/* .indi-app .indi-signature-item-wrapper .indi-signature-item.indi-temp-border-for-email-signature *{
+  background-color: transparent !important;
+} */
+
 .indi-app .indi-qrcode-logo {
   border-radius: 10px;
 }
@@ -913,11 +916,14 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-qrcode-bg {
   background-size: contain;
   background-repeat: no-repeat;
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   position: absolute;
   bottom: -5px;
-  right: -4px;
+  right: -2px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0px 0px 4px 0px #000;
 }
 
 .indi-app .indi-qrcode-logo {
@@ -952,11 +958,13 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 }
 
 .indi-app .indi-ext-card-details-page {
-  background-image: url("./../img/ext-bg.png");
-  height: 100%;
+  background-image: url("./../img/image 6.png"), url("./../img/sos-header-right-bg.png");
+  background-position: left, right;
+  height: 100vh;
   width: 100vw;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: contain;
+  float: left;
   position: relative;
 }
 
@@ -964,7 +972,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   justify-content: center;
   width: 400px;
   margin: 0 auto;
-  padding: 90px 0;
+  padding: 40px 0;
   height: 100%;
 }
 
@@ -1842,7 +1850,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-card-ext-footer-btn {
   position: absolute;
-  bottom: 50px;
+  bottom: 4px;
   width: 400px;
   justify-content: flex-end;
   display: flex;
