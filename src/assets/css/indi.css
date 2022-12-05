@@ -953,7 +953,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-ext-card-details-page {
   background-image: url("./../img/ext-bg.png");
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   background-repeat: no-repeat;
   background-size: 100% 100%;

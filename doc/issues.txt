@@ -120,7 +120,7 @@ c) if email field is empty then fill with current user's email id [[FIXED]]
 d) address while card creation [[FIXED]]
 
 10) share icon in card ext page, no action for now, remove card name [[FIXED]]
-11) scroll should apply for the whole page
+11) for external card scroll should apply for the whole page [[FIXED]]
 12) send email from card details page: /cardmail(POST - email,cardId,name,description)
 13) card addtion/edition donot allow any fields with empty data
 14) remove qrcode from mini card view in email signature[[FIXED]]
