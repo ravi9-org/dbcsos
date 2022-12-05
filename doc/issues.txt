@@ -161,6 +161,89 @@ Issues- 2nd December 2022
 27. The icons display on the web card is missing. [[FIXED]]
 28. On Signature/cards pages, the name is taken from the current user name rather from the card user name. [[FIXED]]
 
+
+29) Signature:
+It looks like the black background issue when implementing the signature in outlook is back. 
+It was working well when I tested for Laurent’s asset’s and mine over the week end but now 
+showing again the black background. Can you please help fixing it asap?
+ 
+
+30) Save contact functionality:
+On the web view of the card, where testing the save contact functionality is works as expected 
+on desktop and mobile with android however Cherry who as an iphone is getting the attached code 
+screenshot when trying through IOS, can you please fix that?
+
+
+31) Badges:
+I cannot see the second linked badge available, right not only the company fixed linkedin
+is an option to choose from, can you please add Phone secondary number.
+
+
+32) Bulk upload:
+We will be having the onboading session with the pilot users on Wednesday and I plan to load 
+them in the system prior the session, can you please load both spreadsheets in there. 
+On sake of time, I would prefer you to do to ensure no error occurs.
+ 
+
+33) Cherry’s account:
+Cherry (cc’d) was able to receive the usual reset password email and login in her account. 
+She can access the card tab and start create the card but when she hit save 
+nothing happens (similar to the issue I had initially on my side) and then for the signature 
+tab when she clicks on it, it keeps loading but not showing anything.
+ 
+
+34) Address:
+Currently the zip code showing in the different offices addresses has a weird 
+formatting with a “.0” at the end, can you please remove that?
+ 
+
+35) Friendly id:
+We will specify to the pilot user that for now their friendly if must be unique 
+and short to ensure it works properly but can we please look at expanding the server 
+to prevent and issue happening in future? @Cherryseth and @Syazlina – Just confirmed 
+with Lak on this one for the instruction to give to the pilot users on the onboading 
+session on Wednesday, length will not really matter but they must input unique id and 
+no special character (space if considered as special ones and this hence explained 
+the issue I had for Laurent’s one initially)
+ 
+36) Picture:
+Right now only people who are having a mouse can zoom in and out to adjust the picture 
+on their card, can you please implement the + and – button on it. 
+Also when trying to resize the focus circle the circle doesn’t maintain the ratio.
+
+Secondary bugs to fix (these can be fixed next week while the pilot has started):
+
+37) When trying to login late night, giving bad credentials error – check the server to improve
+-> Lux has to fix it at backend
+
+38) Change the scroll on the web view from the card to the page
+-> Duplicate of (11) item and already fixed. [[FIEXED]]
+
+39) On the web view, make the share contact functionality work
+
+40) On the card view in the platform, make the “Send card” under the email option work (screenshot below)
+-> Duplicate of (12), yet to fix.
+
+41) Make the offices addresses not appearing italic
+-> Intenionally given. As customer is not liking it removed just now. [[FIXED]]
+
+42) Currently the picture of the web view (globe and ribbon) look blurry can we fix it?
+-> Duplicate of (4), will fix it.
+
+43) On the card background
+The logo looks close to the edge and I expect that Kai would comment on it, 
+if you let me know the current image background you use for it, happy to tweak it so the logo 
+shows applying the correct exclusion zone around 
+-> need more information on this.
+
+44) On the signature (both QR and text options)
+The International SOS logo showing on the dark blue rectangle should be the no tagline 
+version instead, let me know which format of the no tagline you will need and I will provide it to you.
+-> It will be fixed once new logo has uploaded to those cards, nothing to fix from UI side.
+
+45) Include wechat badges (personal and company)
+-> Laks can fix it.
+
 =========================== Laks Items ========================
 1) send template linked badges while editing the car [[FIEXED]]
 

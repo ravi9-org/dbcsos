@@ -1705,7 +1705,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-card-address-text {
   line-height: 18px;
-  font-style: italic;
+  /* font-style: italic; */
   font-size: 14px;
 }
 
