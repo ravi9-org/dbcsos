@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 
 import Utils from "../../../Utils";
 import ContextComponent from "../../../AppContext";
@@ -7,6 +8,7 @@ import QRCode from "./QRCode";
 import Email from "./Email";
 
 const CardItemWithActions = (props) => {
+  const location = useLocation();
   let cardId = props.cardId;
 
   const [selectedOption, setSelectedOption] = useState("code");
@@ -35,7 +37,17 @@ const CardItemWithActions = (props) => {
     Utils.getTemplateDetails(templateId).then(templateSuccess, templateFail);
   };
 
+  const setCardExternalLink = (cardData) => {
+    let cLink = document.location.href;
+    let currentPath = location.pathname;
+    cLink = cLink
+      .replace(currentPath, Utils.APP_URLS.CARD_EXTERNAL_PAGE)
+      .replace(":cardid", cardData.publicId);
+    setCardExtLink(cLink);
+  };
+
   const success = (res) => {
+    setCardExternalLink(res.data);
     setCardData(res.data);
     getTemplate(res.data.templateId);
     setFields(res.data.fields);
@@ -49,6 +61,8 @@ const CardItemWithActions = (props) => {
   const fail = (err) => {
     err?.message?.length && console.log(err);
   };
+
+  let [cardExtLink, setCardExtLink] = useState("");
 
   useEffect(() => {
     if (Utils.isObjectEmpty(cardObj)) {
@@ -73,10 +87,10 @@ const CardItemWithActions = (props) => {
       <div className="indi-card-item-page2-send-card-label">Send Card</div>
 
       {selectedOption === "code" && (
-        <QRCode cardData={cardData} cardId={cardId} />
+        <QRCode cardData={cardData} cardId={cardId} cardExtLink={cardExtLink} />
       )}
       {selectedOption === "email" && (
-        <Email cardData={cardData} cardId={cardId} />
+        <Email cardData={cardData} cardId={cardId} cardExtLink={cardExtLink} />
       )}
 
       <div className="indi-card-item-page2-code-email-options">
@@ -90,7 +104,7 @@ const CardItemWithActions = (props) => {
           >
             <ToggleButton
               variant="outline-primary"
-              className="indi-mini-card-selection-btn1"
+              className="indi-mini-card-selection-btn"
               id={`tbg-radio-options-code`}
               value="code"
             >
@@ -98,7 +112,7 @@ const CardItemWithActions = (props) => {
             </ToggleButton>
             <ToggleButton
               variant="outline-primary"
-              className="indi-mini-card-selection-btn1"
+              className="indi-mini-card-selection-btn"
               id={`tbg-radio-options-email`}
               value="email"
             >

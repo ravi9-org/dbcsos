@@ -1905,3 +1905,9 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   width: 16px;
   margin-left: 6px;
 }
+
+.indi-app .indi-send-email-form-disable {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: default;
+}

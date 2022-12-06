@@ -32,6 +32,7 @@ const REST_API = {
   ADDRESS_BULK_UPLOAD: REST_API_PREFIX + "/addresses/import",
   BRANDS: REST_API_PREFIX + "/brands/",
   RESET_PASSWORD: REST_API_PREFIX + "/resetpassword",
+  CARD_MAIL: REST_API_PREFIX + "/cardmail",
 };
 
 const APP_URL_PREFIX = "";
@@ -905,6 +906,13 @@ const addOrRemoveCardFromUser = (userCardsArray) => {
   return axios.patch(url, formData);
 };
 
+const cardMail = (mailData) => {
+  let formData = { ...mailData };
+  let url = REST_API.CARD_MAIL;
+
+  return axios.post(url, formData);
+};
+
 const getUniqueSetOfArray = (arr) => {
   return [...new Set(arr)];
 };
@@ -1010,6 +1018,7 @@ const Utils = {
   deleteSession,
   isObjectEmpty,
   fileToDataUri,
+  cardMail,
 };
 
 export default Utils;

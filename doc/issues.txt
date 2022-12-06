@@ -110,7 +110,7 @@ d) move the company log to top right corner [[Fixed]]
 4) verify bg image for external card [[Fixed]]
 a) padding issue
 b) bg issue
-5) email send form [[Duplicate of 12]]
+5) email send form [[Duplicate of 12]] [[FIXED]]
 6) invalid user login [[FIXED]]
 7) badge edition [[FIXED]]
 8) email signature -> invalid user, no data [[FIXED]]
@@ -123,7 +123,7 @@ d) address while card creation [[FIXED]]
 
 10) share icon in card ext page, no action for now, remove card name [[FIXED]]
 11) for external card scroll should apply for the whole page [[FIXED]]
-12) send email from card details page: /cardmail(POST - email,cardId,name,description)
+12) send email from card details page: /cardmail(POST - email,cardId,name,description) [[FIXED]]
 13) card addtion/edition donot allow any fields with empty data
 14) remove qrcode from mini card view in email signature[[FIXED]]
 15) add badge icons at bottom of the mini card view in email signature [[FIXED]]
