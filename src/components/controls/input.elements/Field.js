@@ -4,20 +4,21 @@ import ContextComponent from "../../AppContext";
 import CardContext from "../../body/content.area/cards/CardContext";
 import Utils from "../../Utils";
 
-const Field = (props = {}) => {  
+const Field = (props = {}) => {
   let { cardCtxInfo, setCardCtxInfo } = useContext(CardContext);
   let { addrCtxData } = useContext(ContextComponent);
 
-  let fieldIndex = props?.fieldIndex || 0;
+  let fieldIndex = props?.fieldIndex ?? -1;
   let fieldProps = props.fieldProps;
   let enableSocialLinks = props?.enableSocialLinks;
   let fieldType = fieldProps.badgeUID;
   let showEmptyField = fieldProps?.showEmptyField || false;
   let fieldSchema = fieldProps;
-  let iconDarkImage = fieldProps?.darkIconImage || fieldProps?.fieldSchema?.darkIconImage || "";
+  let iconDarkImage =
+    fieldProps?.darkIconImage || fieldProps?.fieldSchema?.darkIconImage || "";
 
   let isDefault = !!fieldProps?.fieldSchema?.default;
-  
+
   let fieldData = fieldProps.value || fieldProps.defaultValue;
 
   if (fieldProps.constant) {
@@ -36,13 +37,26 @@ const Field = (props = {}) => {
       toWhere = "mailto:" + (fieldData || toWhere);
     }
   }
-  
+
   let isEmpty = false;
   if ((fieldData === undefined || fieldData?.length === 0) && showEmptyField) {
     isEmpty = true;
   }
   let mode = props.pageMode;
   let canRemoveField = !isDefault && (mode === "add" || mode === "edit");
+
+  if (
+    !canRemoveField &&
+    (mode === "add" || mode === "edit") &&
+    fieldIndex > 0
+  ) {
+    for (let i = 0; i < fieldIndex; i++) {
+      let badgeUID = cardCtxInfo.userLinkedBadges[i].badgeUID;
+      if (badgeUID === fieldProps.fieldSchema.badgeUID) {
+        canRemoveField = true;
+      }
+    }
+  }
 
   let inputElementClassNames = fieldProps.inputElementClassNames;
 
@@ -67,9 +81,14 @@ const Field = (props = {}) => {
 
   if (!!fieldData && isLookupField) {
     if (fieldProps.addressData) {
-      initFullAddress = fieldProps.addressData.address +
-        " " + fieldProps.addressData.city + " " +
-        fieldProps.addressData.country + " " + fieldProps.addressData.zip;
+      initFullAddress =
+        fieldProps.addressData.address +
+        " " +
+        fieldProps.addressData.city +
+        " " +
+        fieldProps.addressData.country +
+        " " +
+        fieldProps.addressData.zip;
     } else {
       let addrId = parseInt(fieldData, 10);
       let addrIdx = addrCtxData.ids.indexOf(addrId);
@@ -94,7 +113,12 @@ const Field = (props = {}) => {
             </>
           )}
           {!isLookupField && showAsLink && (
-            <a className="indi-ext-card-social-link" href={toWhere} target={"_blank"} rel={"noreferrer"}>
+            <a
+              className="indi-ext-card-social-link"
+              href={toWhere}
+              target={"_blank"}
+              rel={"noreferrer"}
+            >
               {fieldData}
             </a>
           )}

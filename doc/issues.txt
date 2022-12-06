@@ -180,7 +180,9 @@ screenshot when trying through IOS, can you please fix that?
 31) Badges:
 I cannot see the second linked badge available, right not only the company fixed linkedin
 is an option to choose from, can you please add Phone secondary number.
--> Laks can fix it.
+-> for secondary phone number, allow to remove numbers except the first one.
+-> Fixed at UI side if there is any multiple fields exists, except the first one, remaining fields
+even though those are configured as default can be removable. [[FIXED]]
 
 
 32) Bulk upload:
