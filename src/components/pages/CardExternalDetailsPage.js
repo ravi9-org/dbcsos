@@ -1,30 +1,61 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useParams } from "react-router";
 import Container from "react-bootstrap/Container";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+
+import html2canvas from "html2canvas";
 
 import CardItem from "../body/content.area/cards/CardItem";
 import Utils from "../Utils";
 import shareImage from "./../../assets/img/Share.png";
 import downloadImage from "./../../assets/img/Upload.png";
 
+import ContextComponent from "../AppContext";
+
 const CardExternalDetailsPage = () => {
+  let { setAlert, setLoadingState } = useContext(ContextComponent);
+
   const { cardid } = useParams();
   const cardPublicId = cardid;
+
+  let sendButton = useRef(null);
+
+  let [sendModalCanOpen, setSendModalCanOpen] = useState(false);
+
+  const handleClose = (e) => {
+    setSendModalCanOpen(false);
+  };
 
   let [canRender, setCanRender] = useState(false);
   let [cardInfo, setCardInfo] = useState({});
   let [cardId, setCardId] = useState(cardPublicId);
+  let [imageData, setImageData] = useState("");
+
+  let [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+    cardId,
+    publicId: cardId,
+    cardExternalLink: document.location.href,
+    image: "",
+  });
 
   const success = (res) => {
     let tempCardInfo = res?.data || {};
     setCardInfo(tempCardInfo);
-    setCardId(tempCardInfo?.id || '');
+    setCardId(tempCardInfo?.id || "");
 
     let addrId = "";
     let addrIdx = -1;
 
     res.data.userLinkedBadges.map((badge, index) => {
-      badge.badgeType === "address" && (addrId = badge.value) && (addrIdx = index);
+      badge.badgeType === "address" &&
+        (addrId = badge.value) &&
+        (addrIdx = index);
     });
     if (addrId.length) {
       const addrSuccess = (res) => {
@@ -51,7 +82,46 @@ const CardExternalDetailsPage = () => {
 
   const shareHandler = (e) => {
     e.preventDefault();
-    console.log("do nothing for now");
+    //console.log("opening modal dialog...");
+    generateImage();
+    setSendModalCanOpen(true);
+  };
+
+  const sendHandler = (e) => {
+    e.preventDefault();
+    setLoadingState({
+      applyMassk: true,
+      text: "Sending card mail",
+    });
+    const success = (res) => {
+      setLoadingState({
+        applyMassk: false,
+      });
+      handleClose();
+      setAlert({
+        show: true,
+        message: "Mailed successfully!",
+      });
+    };
+    const fail = (err) => {
+      debugger;
+      setLoadingState({
+        applyMassk: false,
+      });
+      setAlert({
+        show: true,
+        message: "Mailing failed!",
+      });
+      console.log(err);
+    };
+
+    formData.image = imageData;
+
+    try {
+      Utils.guestMail(formData).then(success, fail);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const downloadHandler = (e) => {
@@ -123,6 +193,41 @@ const CardExternalDetailsPage = () => {
     element.click();
   };
 
+  const inputHandler = (e) => {
+    let temp = { ...formData };
+    delete temp.image;
+    temp[e.currentTarget.id] = e.currentTarget.value;
+    setFormData(temp);
+    let canEnable = true;
+    Object.keys(temp).map((current) => {
+      temp[current].length === 0 && (canEnable = false);
+    });
+
+    if (canEnable) {
+      sendButton.current.classList.remove("indi-send-email-form-disable");
+    } else {
+      sendButton.current.classList.add("indi-send-email-form-disable");
+    }
+  };
+
+  const generateImage = async () => {
+    await prepareClipboardContent().then(() => {
+      //console.log(" card data added successfully...");
+    });
+  };
+
+  const prepareClipboardContent = async () => {
+    let element = document.querySelector(".indi-card-item-parent");
+
+    let canvas = await html2canvas(element, {
+        allowTaint: true,
+        useCORS: true,
+      }),
+      data = canvas.toDataURL("image/png");
+    // console.log(data);
+    setImageData(data);
+  };
+
   return (
     <>
       {canRender && (
@@ -149,6 +254,74 @@ const CardExternalDetailsPage = () => {
           </div>
         </Container>
       )}
+
+      <Modal centered show={sendModalCanOpen} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Send mail</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form>
+            <div className="indi-add-form-wrapper d-flex flex-column">
+              <div className="indi-add-form-item d-flex flex-column">
+                <div className="indi-add-form-item-input row">
+                  <FloatingLabel label="Name">
+                    <Form.Control
+                      type="text"
+                      className="indi-input-field"
+                      id="name"
+                      placeholder="Enter name"
+                      autoComplete="off"
+                      onChange={inputHandler}
+                    />
+                  </FloatingLabel>
+                </div>
+              </div>
+
+              <div className="indi-add-form-item d-flex flex-column">
+                <div className="indi-add-form-item-input row">
+                  <FloatingLabel label="Email">
+                    <Form.Control
+                      type="email"
+                      className="indi-input-field"
+                      id="email"
+                      placeholder="Enter email"
+                      autoComplete="off"
+                      onChange={inputHandler}
+                    />
+                  </FloatingLabel>
+                </div>
+              </div>
+
+              <div className="indi-add-form-item d-flex flex-column">
+                <div className="indi-add-form-item-input row">
+                  <FloatingLabel label="Message">
+                    <Form.Control
+                      as="textarea"
+                      rows="3"
+                      type="textarea"
+                      className="indi-input-field"
+                      id="message"
+                      placeholder="Enter message"
+                      autoComplete="off"
+                      onChange={inputHandler}
+                    />
+                  </FloatingLabel>
+                </div>
+              </div>
+            </div>
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            ref={sendButton}
+            variant="primary"
+            className="indi-send-email-form-disable"
+            onClick={sendHandler}
+          >
+            SEND
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

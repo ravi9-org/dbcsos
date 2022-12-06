@@ -1382,6 +1382,10 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   padding: 1rem;
 }
 
+.indi-app .form-floating>textarea.form-control {
+  height: auto;
+}
+
 .indi-app .form-floating>.form-select {
   height: 28px;
   margin-top: 8px;
@@ -1411,6 +1415,10 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   padding-top: 0;
   padding-bottom: 0;
   border-color: #2f4696;
+}
+
+.indi-app .form-floating>textarea.form-control:not(:placeholder-shown) {
+  padding-top: 10px;
 }
 
 .indi-app .form-floating>label {

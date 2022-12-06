@@ -232,7 +232,7 @@ Secondary bugs to fix (these can be fixed next week while the pilot has started)
 -> Duplicate of (11) item and already fixed. [[FIEXED]]
 
 39) On the web view, make the share contact functionality work
--> will enhance it.
+-> will enhance it. [[FIXED]]
 
 40) On the card view in the platform, make the “Send card” under the email option work (screenshot below)
 -> Duplicate of (12), yet to fix.

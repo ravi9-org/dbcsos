@@ -33,6 +33,7 @@ const REST_API = {
   BRANDS: REST_API_PREFIX + "/brands/",
   RESET_PASSWORD: REST_API_PREFIX + "/resetpassword",
   CARD_MAIL: REST_API_PREFIX + "/cardmail",
+  GUEST_MAIL: REST_API_PREFIX + "/guestmail",
 };
 
 const APP_URL_PREFIX = "";
@@ -913,6 +914,13 @@ const cardMail = (mailData) => {
   return axios.post(url, formData);
 };
 
+const guestMail = (mailData) => {
+  let formData = { ...mailData };
+  let url = REST_API.GUEST_MAIL;
+
+  return axios.post(url, formData);
+};
+
 const getUniqueSetOfArray = (arr) => {
   return [...new Set(arr)];
 };
@@ -1019,6 +1027,7 @@ const Utils = {
   isObjectEmpty,
   fileToDataUri,
   cardMail,
+  guestMail,
 };
 
 export default Utils;
