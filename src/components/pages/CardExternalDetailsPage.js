@@ -115,7 +115,7 @@ const CardExternalDetailsPage = () => {
     vcfData.push("END:VCARD");
 
     // console.log(vcfData);
-    const file = new Blob(vcfData, { type: "text/plain" });
+    const file = new Blob(vcfData, { type: "text/vcard;charset=utf-8" });
     const element = document.createElement("a");
     element.href = URL.createObjectURL(file);
     element.download = userFirstName.replaceAll(" ", "_") + ".vcf";
