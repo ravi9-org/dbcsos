@@ -351,12 +351,13 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-qrcode-box-codes {
   position: absolute;
-  bottom: -5px;
-  right: -10px;
+  bottom: 2px;
+  right: -12px;
 }
 
 .indi-wrap-overflow-icons {
   max-width: calc(100% - 90px);
+  border-bottom: 10px solid #fff;
 }
 
 .indi-place-me-bottom-left {
@@ -465,10 +466,16 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   white-space: nowrap;
 }
 
+.indi-app .indi-signature-title {
+  border-top: 10px solid #fff;
+  border-radius: 10px;
+}
+
 .indi-app .indi-signature-item-wrapper .indi-logo-image {
   padding: 0;
   border: 4px solid #232862;
   border-radius: 6px 0 0 6px;
+  margin-top: 12px;
 }
 
 .indi-app .indi-signature-item-wrapper .indi-logo-image img {
@@ -891,14 +898,17 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-signature-item-wrapper .indi-signature-item {
   border-radius: 10px;
-  padding: 16px 10px;
   min-width: 400px;
   max-width: 400px;
-  background: #fff;
   box-shadow: 0px 1px 6px #000;
   min-height: 192px;
   border: none;
-  border: 1px solid transparent;
+}
+
+.indi-app .indi-signature-item-wrapper  .indi-qrcode-box.row {
+  background-color: #fff;
+  margin: 0;
+  border-radius: 10px;
 }
 
 .indi-app .indi-signature-item-wrapper .indi-signature-item.indi-temp-border-for-email-signature {
@@ -913,13 +923,13 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   border-radius: 10px;
 }
 
-.indi-app .indi-qrcode-bg {
+.indi-app .indi-qrcode-box-img-col img.indi-qrcode-bg {
   background-size: contain;
   background-repeat: no-repeat;
   width: 100px;
   height: 100px;
   position: absolute;
-  bottom: -5px;
+  bottom: 10px;
   right: -2px;
   border: 2px solid #fff;
   border-radius: 50%;

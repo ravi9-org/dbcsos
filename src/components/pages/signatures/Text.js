@@ -146,12 +146,12 @@ const Text = (props) => {
               </div>
 
               <div className="indi-qrcode-box-img-col">
-                <div
-                  className="indi-qrcode-bg"
-                  style={{
-                    backgroundImage: `url(${cardInfo.cardImage})`,
-                  }}
-                ></div>
+                <img
+                        className="indi-qrcode-bg"
+                        src={cardInfo.cardImage}
+                        alt="profile_picture"
+                      />
+
               </div>
             </div>
           </div>

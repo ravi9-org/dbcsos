@@ -169,7 +169,7 @@ from the card user name. [[FIXED]]
 It looks like the black background issue when implementing the signature in outlook is back. 
 It was working well when I tested for Laurent’s asset’s and mine over the week end but now 
 showing again the black background. Can you please help fixing it asap?
--> need a config to reproduce it. last two days we fixed one issue in this area, ie., issue number (27).
+-> need a config to reproduce it. last two days we fixed one issue in this area, ie., issue number (27).  [[Fixed]]
 
 30) Save contact functionality:
 On the web view of the card, where testing the save contact functionality is works as expected 
