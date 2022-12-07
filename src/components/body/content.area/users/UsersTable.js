@@ -226,6 +226,10 @@ const UsersTable = () => {
 
   const regionHandler = (e) => {
     let regionId = e.currentTarget.value;
+    setLoadingState({
+      applyMask: true,
+      text: "Filtering users table"
+    })
 
     if (regionId === "clear") {
       loadAllUsers();

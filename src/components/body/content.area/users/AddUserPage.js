@@ -73,8 +73,8 @@ const AddUserPage = ({ props }) => {
       picture,
     };
     try {
-      debugger;
-      //Utils.addUser(formData).then(success, fail);
+      // debugger;
+      Utils.addUser(formData).then(success, fail);
     } catch (e) {
       console.log(e);
     }
