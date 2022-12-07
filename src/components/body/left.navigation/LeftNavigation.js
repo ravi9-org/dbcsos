@@ -6,8 +6,8 @@ import Utils from "../../Utils";
 import templatesImg from "../../../assets/img/navitems/dark/templates.png";
 import templatesActiveImg from "../../../assets/img/navitems/light/templates.png";
 
-import brandsImg from "../../../assets/img/navitems/dark/settings.png";
-import brandsActiveImg from "../../../assets/img/navitems/light/settings.png";
+import brandsImg from "../../../assets/img/navitems/dark/brands.png";
+import brandsActiveImg from "../../../assets/img/navitems/light/brands.png";
 
 import usersImg from "../../../assets/img/navitems/dark/users.png";
 import usersActiveImg from "../../../assets/img/navitems/light/users.png";
@@ -15,8 +15,8 @@ import usersActiveImg from "../../../assets/img/navitems/light/users.png";
 import addressesImg from "../../../assets/img/navitems/dark/addresses.png";
 import addressesActiveImg from "../../../assets/img/navitems/light/addresses.png";
 
-import badgesImg from "../../../assets/img/navitems/dark/settings.png";
-import badgesActiveImg from "../../../assets/img/navitems/light/settings.png";
+import badgesImg from "../../../assets/img/navitems/dark/badges.png";
+import badgesActiveImg from "../../../assets/img/navitems/light/badges.png";
 
 import cardsImg from "../../../assets/img/navitems/dark/cards.png";
 import cardsActiveImg from "../../../assets/img/navitems/light/cards.png";
