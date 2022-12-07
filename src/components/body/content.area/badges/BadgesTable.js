@@ -103,7 +103,9 @@ const BadgesTable = () => {
         tableColumns.forEach((col) => {
           if (col === "type") {
             let fieldType =
-            badgesInfo[index][col] === "text" ? "phone" : badgesInfo[index][col];
+              badgesInfo[index][col] === "text"
+                ? "phone"
+                : badgesInfo[index][col];
 
             let badgeDisplayName = Utils.BADGE_TYPES[fieldType].label;
             userTableData.push(badgeDisplayName);
@@ -209,7 +211,7 @@ const BadgesTable = () => {
     !Utils.isObjectEmpty(targetBadge) && setEditableBadge(targetBadge);
   };
 
-  useEffect(() => { }, [editableBadge]);
+  useEffect(() => {}, [editableBadge]);
 
   const closeAddModal = (e) => {
     setAddModalCanOpen(false);
@@ -218,11 +220,6 @@ const BadgesTable = () => {
   const closeEditModal = (e) => {
     setEditModalCanOpen(false);
   };
-
-  // const saveAction = (data) => {
-  //   //console.log(data);
-  //   debugger;
-  // };
 
   return (
     <div className="indi-body-cards-wrapper d-flex w-100">
@@ -234,7 +231,7 @@ const BadgesTable = () => {
             role="button"
             onClick={openAddModal}
           >
-            <img className="indi-w-20" src={AddIcon} alt="Edit-icon"></img>
+            <img className="indi-w-20" src={AddIcon} alt="add-icon"></img>
             Add
           </div>
           <div
@@ -242,7 +239,7 @@ const BadgesTable = () => {
             role="button"
             onClick={openEditModal}
           >
-            <img className="indi-w-20" src={EditIcon} alt="Edit-icon"></img>
+            <img className="indi-w-20" src={EditIcon} alt="edit-icon"></img>
             Edit
           </div>
 
@@ -302,7 +299,7 @@ const BadgesTable = () => {
             editableBadge,
             editableBadgeIndex,
             allBadges,
-            setAllBadges
+            setAllBadges,
           }}
         />
       )}

@@ -471,6 +471,14 @@ const addAddress = (addressData) => {
   return axios.post(url, formData);
 };
 
+const editAddress = (addressData, addressId) => {
+  let formData = { ...addressData };
+  delete formData.id;
+  let url = REST_API.ADDRESSES + addressId;
+
+  return axios.patch(url, formData);
+};
+
 const addBadge = (badgeData) => {
   let formData = { ...badgeData };
   delete formData.id;
@@ -998,6 +1006,7 @@ const Utils = {
   deleteAddresses,
   getAddresses,
   addAddress,
+  editAddress,
   bulkAddressUpload,
   getBadges,
   addBadge,

@@ -5,16 +5,32 @@ import ContextComponent from "../../../AppContext";
 import Utils from "../../../Utils";
 import DataTable from "../../../controls/table/DataTable";
 import AddIcon from "../../../../assets/img/add.png";
+import EditIcon from "../../../../assets/img/Edit.png";
 import DeleteIcon from "../../../../assets/img/Delete.png";
 import AddAddressPage from "./AddAddressPage";
 import AddressBulkUpload from "./AddressBulkUpload";
 import BulkUploadIcon from "../../../../assets/img/Upload.png";
+import EditAddressPage from "./EditAddressPage";
 
 const AddressesTable = () => {
   let [showDeleteModal, setShowDeleteModal] = useState(false);
   let [selectedItemCount, setSelectedItemCount] = useState(0);
 
+  const DISABLED_ICON = "indi-disable-action-icon";
+  let [editIconClass, setEditIconClass] = useState(DISABLED_ICON);
+
   let [tableSelectedItems, setTableSelectedItems] = useState([]);
+  let [addressIdForEdit, setAddressIdForEdit] = useState("");
+
+  useEffect(() => {
+    if (tableSelectedItems.length === 1) {
+      setEditIconClass("");
+      setAddressIdForEdit(tableSelectedItems[0]);
+    } else {
+      setEditIconClass(DISABLED_ICON);
+      setAddressIdForEdit("");
+    }
+  }, [tableSelectedItems]);
 
   let { setCanRedirectToLogin, setLoadingState, setAlert } =
     useContext(ContextComponent);
@@ -80,8 +96,10 @@ const AddressesTable = () => {
   let [tableData, setTableData] = useState([]);
   let [canRender, setCanRender] = useState(false);
   let [updateTable, setUpdateTable] = useState(false);
+  let [allAddresses, setAllAddresses] = useState([]);
 
   const success = (res) => {
+    setAllAddresses(res.data);
     setLoadingState({
       applyMask: false,
     });
@@ -183,6 +201,25 @@ const AddressesTable = () => {
     setAddModalCanOpen(true);
   };
 
+  let [editModalCanOpen, setEditModalCanOpen] = useState(false);
+  let [editableAddress, setEditableAddress] = useState({});
+  let [editableAddressIndex, setEditableAddressIndex] = useState(-1);
+
+  const openEditModal = (e) => {
+    e.preventDefault();
+    setEditModalCanOpen(true);
+    let targetAddress = {};
+    allAddresses.forEach((address, index) => {
+      if (address.id === addressIdForEdit) {
+        targetAddress = address;
+        setEditableAddressIndex(index);
+      }
+    });
+    !Utils.isObjectEmpty(targetAddress) && setEditableAddress(targetAddress);
+  };
+
+  useEffect(() => {}, [editableAddress]);
+
   const closeAddModal = (e) => {
     setAddModalCanOpen(false);
   };
@@ -209,8 +246,16 @@ const AddressesTable = () => {
             role="button"
             onClick={openAddModal}
           >
-            <img className="indi-w-20" src={AddIcon} alt="Edit-icon"></img>
+            <img className="indi-w-20" src={AddIcon} alt="add-icon"></img>
             Add
+          </div>
+          <div
+            className={`indi-body-action ${editIconClass}`}
+            role="button"
+            onClick={openEditModal}
+          >
+            <img className="indi-w-20" src={EditIcon} alt="edit-icon"></img>
+            Edit
           </div>
 
           <div className="indi-body-action" role="button" onClick={handleShow}>
@@ -267,6 +312,21 @@ const AddressesTable = () => {
             tableData,
             setTableData,
             success,
+          }}
+        />
+      )}
+
+      {editModalCanOpen && (
+        <EditAddressPage
+          props={{
+            editModalCanOpen,
+            setEditModalCanOpen,
+            tableData,
+            setTableData,
+            editableAddress,
+            editableAddressIndex,
+            allAddresses,
+            setAllAddresses,
           }}
         />
       )}

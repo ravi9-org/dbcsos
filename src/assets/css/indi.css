@@ -288,7 +288,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .indi-content-area-wrapper button.btn.btn-primary,
 .indi-app .modal-dialog button.btn.btn-primary {
   /* float: right; */
-  margin: 12px 0;
+  margin: 12px 0 12px 8px;
   background-color: #232862;
   border: 1px solid #232862;
 }
