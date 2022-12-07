@@ -128,12 +128,13 @@ const CardExternalDetailsPage = () => {
     //console.log(cardInfo);
 
     let userFirstName = cardInfo.userFieldInfo.firstName;
+    let userLastName = cardInfo.userFieldInfo.lastName;
     let userID = cardInfo.userFieldInfo.email;
     let userEmail = cardInfo.userFieldInfo.email;
     let title = cardInfo.userFieldInfo.title;
 
-    let url = "https://cmsedge.com";
-    let urlLink = "https://cmsedge.com";
+    let url = "https://www.internationalsos.com/";
+    let urlLink = "https://www.internationalsos.com/";
     let telephone = "";
 
     cardInfo.userLinkedBadges.map((badge) => {
@@ -153,7 +154,7 @@ const CardExternalDetailsPage = () => {
 
     vcfData.push("BEGIN:VCARD" + POSTFIX);
     vcfData.push("VERSION:3.0" + POSTFIX);
-    vcfData.push("FN:" + userFirstName + POSTFIX);
+    vcfData.push("FN:" + userFirstName +" "+ userLastName + POSTFIX);
     vcfData.push("UID:" + userID + POSTFIX);
     vcfData.push("EMAIL:" + userEmail + POSTFIX);
     vcfData.push("TEL;TYPE=WORK::" + telephone + POSTFIX);
