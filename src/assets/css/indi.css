@@ -1961,3 +1961,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   transform: translateX(10px) rotate(-45deg);
   transform-origin: left bottom;
 }
+
+.indi-app .indi-range-input {
+  padding-top: 29px;
+}

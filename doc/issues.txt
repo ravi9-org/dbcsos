@@ -221,7 +221,7 @@ the issue I had for Laurent’s one initially)
 Right now only people who are having a mouse can zoom in and out to adjust the picture 
 on their card, can you please implement the + and – button on it. 
 Also when trying to resize the focus circle the circle doesn’t maintain the ratio.
--> Will fix it.
+-> Will fix it. [[FIXED]]
 
 Secondary bugs to fix (these can be fixed next week while the pilot has started):
 

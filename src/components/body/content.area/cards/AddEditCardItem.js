@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { Button, Modal, Alert, OverlayTrigger, Popover } from "react-bootstrap";
+import {
+  Button,
+  Modal,
+  Alert,
+  OverlayTrigger,
+  Popover,
+  Form,
+} from "react-bootstrap";
 
 import { Cropper } from "react-cropper";
 
@@ -16,7 +23,6 @@ const AddCardItem = ({ props }) => {
   let { userData } = useContext(ContextComponent);
   let { cardCtxInfo } = useContext(CardContext);
 
-  
   let [pronoun, setPronoun] = useState(Utils.PRONOUNS[userData.pronoun]);
 
   let pageMode = props.pageMode || "add";
@@ -30,6 +36,7 @@ const AddCardItem = ({ props }) => {
   let croppedInputCardImage = useRef(null);
 
   const cropperRef = useRef(null);
+  const rangeInput = useRef(null);
 
   const onCropMove = (e) => {
     // TODO: remove this
@@ -113,7 +120,14 @@ const AddCardItem = ({ props }) => {
     </Popover>
   );
 
-  // fields?.map((field, index) => { 
+  let zoomDefaultValue = 1;
+  let prev = 1;
+
+  const rangeHandler = (e) => {
+    cropper.zoomTo(e.target.value);
+  };
+
+  // fields?.map((field, index) => {
   //   console.log(field);
   //   debugger;
   // });
@@ -233,7 +247,7 @@ const AddCardItem = ({ props }) => {
                   style={{ height: "200px", width: "100%" }}
                   ref={cropperRef}
                   cropmove={onCropMove}
-                  zoomTo={0.5}
+                  zoomTo={zoomDefaultValue}
                   initialAspectRatio={1}
                   preview=".img-preview"
                   src={cardImageOnModal}
@@ -247,6 +261,23 @@ const AddCardItem = ({ props }) => {
                     setCropper(instance);
                   }}
                   guides={true}
+                  // crop={(event) => {
+                  //   console.log(event.detail);
+                  // }}
+                  zoom={(e) => {
+                    let rangeValue = zoomDefaultValue;
+                    // console.log("zoom", e.detail.ratio);
+                    if (e.detail.ratio > 5) {
+                      e.preventDefault();
+                      rangeValue = 5;
+                    } else if (prev === e.detail.ratio && e.detail.ratio < 2) {
+                      rangeValue = 1;
+                    } else {
+                      rangeValue = e.detail.ratio;
+                    }
+                    rangeValue !== 1 && (prev = rangeValue);
+                    rangeInput.current.value = rangeValue;
+                  }}
                 />
 
                 <OverlayTrigger
@@ -264,6 +295,18 @@ const AddCardItem = ({ props }) => {
               </div>
             </div>
           </div>
+
+          <div className="indi-range-input">
+            <Form.Range
+              min={1.5}
+              max={5}
+              step={0.1}
+              defaultValue={zoomDefaultValue}
+              onChange={rangeHandler}
+              ref={rangeInput}
+            />
+          </div>
+
           <div className="indi-modal-card-crop-btn-wrapper">
             <Button variant="primary" onClick={handleDoCrop}>
               Save
