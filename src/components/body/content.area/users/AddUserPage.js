@@ -8,7 +8,7 @@ import Utils from "../../../Utils";
 import ContextComponent from "../../../AppContext";
 
 const AddUserPage = ({ props }) => {
-  let { setAlert } = useContext(ContextComponent);
+  let { setAlert, setLoadingState } = useContext(ContextComponent);
   let tableData = props?.tableData || [];
   let setTableData = props?.setTableData || (() => {});
   let REGIONS = Utils.REGIONS || {};
@@ -30,8 +30,15 @@ const AddUserPage = ({ props }) => {
   };
 
   const saveUser = (e) => {
+    setLoadingState({
+      applyMask: true,
+      text: "Creating user",
+    });
     const success = (res) => {
       hideModal();
+      setLoadingState({
+        applyMask: false
+      });
       setAlert({
         show: true,
         message: "User added successfully!",
@@ -56,6 +63,14 @@ const AddUserPage = ({ props }) => {
       setTableData(tempTableData);
     };
     const fail = (err) => {
+      setLoadingState({
+        applyMask: false
+      });
+      setAlert({
+        show: true,
+        message: "User addition failed",
+        type: "error",
+      });
       console.log(err);
     };
 
