@@ -13,53 +13,22 @@ const CardItem = (props) => {
   let enableSocialLinks = props?.enableSocialLinks ?? false;
 
   let cardObj = props.card || {};
-  let [cardData, setCardData] = useState(cardObj || {});
-
-  let [fields, setFields] = useState(cardData?.fields || []);
-  // let [fieldsData, setFieldsData] = useState(cardData?.fieldsData || []);
-  // let [fieldsSchema, setFieldsSchema] = useState(cardData?.fieldsSchema || {});
   let [applyActions, setApplyActions] = useState(props.applyActions || false);
-
-  let [templateBackgroundImage, setTemplateBackgroundImage] = useState("");
-  let [templateLogoImage, setTemplateLogoImage] = useState("");
 
   let [canRender, setCanRender] = useState(false);
 
-  let [cardCtxInfo, setCardCtxInfo] = useState({
-    fields: [],
-    data: [],
-    userLinkedBadges: [],
-    fieldsData: [],
-  });
+  let [cardCtxInfo, setCardCtxInfo] = useState({});
 
   const navigate = useNavigate();
 
-  let {
-    userData,
-    setCardObject = () => {},
-    setLoadingState,
-  } = useContext(ContextComponent);
+  let { userData, setLoadingState } = useContext(ContextComponent);
 
   userData = props?.userData || userData || {};
   let [pronoun, setPronoun] = useState("");
 
   const success = (res) => {
-    setCardData(res.data);
+    setCardCtxInfo(res.data);
     setPronoun(Utils.PRONOUNS[res.data.userFieldInfo.pronoun]);
-
-    setFields(res.data.userLinkedBadges);
-    setTemplateBackgroundImage(res.data.templateInfo.backgroundImage);
-    setTemplateLogoImage(res.data.templateInfo.logoImage);
-    //setFieldsData(res.data.fieldsData);
-    //setFieldsSchema(res.data.fieldsSchema);
-
-    // let tempCardCtxInfo = { ...cardCtxInfo };
-    // tempCardCtxInfo.fields = res.data.userLinkedBadges;
-    // tempCardCtxInfo.userLinkedBadges = res.data.userLinkedBadges;
-    // tempCardCtxInfo.data = res.data.fieldsData;
-    // tempCardCtxInfo.fieldsData = res.data.fieldsData;
-    // setCardCtxInfo(tempCardCtxInfo);
-    // setCardObject(tempCardCtxInfo);
 
     setCanRender(true);
     setLoadingState({
@@ -92,7 +61,7 @@ const CardItem = (props) => {
     if (applyActions) {
       e.preventDefault();
       navigate(Utils.APP_URLS.CARDS_PAGE + "/" + cardId, {
-        state: { cardData: cardData },
+        state: { cardData: cardCtxInfo },
       });
     }
   };
@@ -112,32 +81,33 @@ const CardItem = (props) => {
               applyActions ? "indi-card-with-actions" : ""
             }`}
             style={{
-              background: `url(${templateBackgroundImage})`,
+              background: `url(${cardCtxInfo.templateInfo.backgroundImage})`,
             }}
           >
             <div className="d-none1 indi-card-company-logo-wrapper">
-              <img src={templateLogoImage} alt="logoiamge" />
+              <img src={cardCtxInfo.templateInfo.logoImage} alt="logoiamge" />
             </div>
             <div className="indi-card-upload-picture">
               <img
                 className="indi-card-upload-picture-img"
-                src={cardData.croppedImage}
+                src={cardCtxInfo.croppedImage}
                 alt="upload img"
               />
             </div>
             <div className="indi-info-wrapper">
               <div className="indi-card-name fw-bold">
-                {cardData?.userFieldInfo?.firstName} {cardData?.userFieldInfo?.lastName} ({pronoun})
+                {cardCtxInfo?.userFieldInfo?.firstName}{" "}
+                {cardCtxInfo?.userFieldInfo?.lastName} ({pronoun})
               </div>
               <div className="indi-card-title">{userData?.title}</div>
             </div>
             <div className="indi-card-fields">
               <div className="indi-card-field-wrapper">
-                {fields?.map(
+                {cardCtxInfo.userLinkedBadges?.map(
                   (field, index) =>
                     !!field.value && (
                       <Field
-                        fieldProps={field}
+                        field={field}
                         fieldIndex={index}
                         key={index}
                         enableSocialLinks={enableSocialLinks}
@@ -146,9 +116,11 @@ const CardItem = (props) => {
                 )}
               </div>
             </div>
-            {showCardName && <div className="indi-template-title indi-place-me-bottom-left">
-              {cardData.cardName}
-            </div>}
+            {showCardName && (
+              <div className="indi-template-title indi-place-me-bottom-left">
+                {cardCtxInfo.cardName}
+              </div>
+            )}
           </div>
         </CardContext.Provider>
       )}

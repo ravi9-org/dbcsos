@@ -21,38 +21,11 @@ const EditCardPage = (props) => {
   let [croppedImageValue, setCroppedImageValue] = useState("");
 
   let [canRender, setCanRender] = useState(false);
-  // let [hasTemplateDetails, setHasTemplateDetails] = useState(false);
-
-  let [detailsForEditCardPage, setDetailsForEditCardPage] = useState({
-    template: {},
-    card: {},
-  });
-
-  let [templateLinkedBadges, setTemplateLinkedBadges] = useState({});
 
   const success = (res) => {
     setCardCtxInfo(res.data);
     setCardImageValue(res.data.cardImage);
     setCroppedImageValue(res.data.croppedImage);
-
-    let templateInfo = {
-      ...res.data.templateInfo,
-      userLinkedBadges: res.data.templateInfo.linkedBadges,
-    };
-    
-    let templateLinkedBadgesObj = {};
-    res.data.templateInfo.linkedBadges.forEach((badge) => {
-      templateLinkedBadgesObj[badge.badgeUID] = badge.id;
-    });
-    setTemplateLinkedBadges(templateLinkedBadgesObj);
-    
-    setTemplateData(templateInfo);
-
-    setDetailsForEditCardPage({
-      template: templateInfo,
-      fieldsData: [],
-      card: res.data,
-    });
 
     setCanRender(true);
   };
@@ -68,14 +41,11 @@ const EditCardPage = (props) => {
   const goBack = (e) => {
     navigate(Utils.APP_URLS.CARDS_PAGE);
   };
-
-  let inputElementClassNames = "indi-any-input-element";
   let imageInputElementClassNames = "indi-image-input-element";
   let croppedImageInputElementClassNames = "indi-cropped-image-input-element";
 
   const saveCard = (e) => {
     e.preventDefault();
-    let dataValues = [];
     let cardImageEle = document.getElementsByClassName(
       imageInputElementClassNames
     );
@@ -83,13 +53,7 @@ const EditCardPage = (props) => {
       croppedImageInputElementClassNames
     );
 
-    let inputElements = document.getElementsByClassName(inputElementClassNames);
     let imageValues = [];
-
-    for (let ele of inputElements) {
-      let val = ele?.value || "";
-      dataValues.push(val);
-    }
 
     let cardNameElement = document.getElementsByClassName(
       "indi-add-card-name-input"
@@ -113,24 +77,25 @@ const EditCardPage = (props) => {
       imageValues.push(imgVal);
     }
 
-    submitForm(dataValues, imageValues, cardNameValue, cardCustomIDValue);
+    submitForm(imageValues, cardNameValue, cardCustomIDValue);
   };
 
   const submitForm = (
-    dataValues = {},
     imageValues = [],
     cardNameValue = "",
     cardCustomIDValue = ""
   ) => {
-    let info = { ...cardCtxInfo };
-    let submitCardInfo = { ...info, userLinkedBadges: [] };
-    delete submitCardInfo.fieldsData;
-    info.userLinkedBadges.map((badge, index) => {
+    let badgesIds = {};
+    cardCtxInfo.templateInfo.linkedBadges.map((badge, index) => {
+      badgesIds[badge.badgeUID] = badge.id;
+    });
+    let submitCardInfo = { ...cardCtxInfo, userLinkedBadges: [] };
+    cardCtxInfo.userLinkedBadges.map((badge, index) => {
       let badgeData = {
-        id: templateLinkedBadges[badge.badgeUID],
+        id: badgesIds[badge.badgeUID],
         badgeName: badge.badgeName,
         badgeOrder: index,
-        value: dataValues[index],
+        value: badge.value,
       };
       submitCardInfo.userLinkedBadges.push(badgeData);
     });
@@ -182,20 +147,18 @@ const EditCardPage = (props) => {
       {canRender && (
         <form>
           <div className="indi-add-card-wrapper d-flex flex-column">
-            <div className="indi-add-card-title">Add Card</div>
+            <div className="indi-add-card-title">Edit Card</div>
             {
               <EditCardItem
                 className="indi-add-card-wrapper"
                 props={{
-                  pageInfo: detailsForEditCardPage,
                   pageMode: "edit",
-                  inputElementClassNames,
                 }}
               />
             }
             <div className="indi-add-card-item-footer d-flex d-flex-row">
               <div className="indi-add-card-page-badge-ribbon-wrapper">
-                <BadgesRibbon templateBadges={templateData.userLinkedBadges} />
+                <BadgesRibbon />
               </div>
 
               <div className="indi-add-card-page-footer-btn-wrapper d-flex d-flex-row">

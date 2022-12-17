@@ -3,12 +3,10 @@ import { Modal, Button, FloatingLabel, Form } from "react-bootstrap";
 import Utils from "../../Utils";
 import ContextComponent from "../../AppContext";
 
-const TextAreaInput = (props) => {
-  let schema = props.props.schema;
+const TextAreaInput = ({schema}) => {
   let fieldData = schema.value || schema.defaultValue || '';
-  let inputElementClassNames = props.props.inputElementClassNames;
-  let fieldClassNames = "indi-add-card-input-field " + inputElementClassNames;
-  let fieldName = props.props.fieldName;
+  let fieldClassNames = "indi-add-card-input-field ";
+  let fieldName = schema.fieldName;
 
   let { addrCtxData } = useContext(ContextComponent);
 
@@ -22,7 +20,6 @@ const TextAreaInput = (props) => {
 
   let [addrIds, setAddrIds] = useState(addrCtxData.ids || {});
   let [addrNames, setAddrNames] = useState(addrCtxData.addressNames);
-  let [addrValues, setAddrValues] = useState(addrCtxData.addresses);
   let [fullAddrValues, setFullAddrValues] = useState(addrCtxData.fullAddresses);
 
   let currentId = 0;
@@ -46,7 +43,9 @@ const TextAreaInput = (props) => {
   const [previewFullAddress, setPreviewFullAddress] =
     useState(currentFullAddress || addrCtxData["fullAddresses"][currentIndex]);
 
-  const onChangeInput = (e) => {};
+  const onChangeInput = (e) => {
+    schema.value = e.current.value;
+  };
 
   const showModal = (e) => {
     //setToggleModal(!toggleModal);
@@ -60,6 +59,7 @@ const TextAreaInput = (props) => {
     console.log("set data and close dialog");
     setShowLookupModal(false);
     console.log(previewId);
+    schema.value = previewId;
 
     inputEle.current.value = previewId;
     inputTextAreaEle.current.value = previewFullAddress;

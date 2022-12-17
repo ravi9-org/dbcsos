@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import {
-  Button,
-  Modal,
-  Alert,
-  OverlayTrigger,
-  Popover,
-  Form,
-} from "react-bootstrap";
+import { Button, Modal, OverlayTrigger, Popover, Form } from "react-bootstrap";
 
 import { Cropper } from "react-cropper";
 
@@ -16,20 +9,12 @@ import Field from "../../../controls/input.elements/Field";
 import Utils from "../../../Utils";
 
 const AddCardItem = ({ props }) => {
-  let pageInfo = props?.pageInfo || {};
-  let templateInfo = pageInfo?.template || {};
-  let cardInfo = pageInfo?.card || {};
-
   let { userData } = useContext(ContextComponent);
   let { cardCtxInfo } = useContext(CardContext);
 
   let [pronoun, setPronoun] = useState(Utils.PRONOUNS[userData.pronoun]);
 
-  let pageMode = props.pageMode || "add";
-
-  let inputElementClassNames = props.inputElementClassNames || "";
-
-  let templateBadges = templateInfo.linkedBadges;
+  let pageMode = props.pageMode ?? "add";
 
   let inputCardImage = useRef(null);
 
@@ -44,19 +29,17 @@ const AddCardItem = ({ props }) => {
     const { width, height } = cropper.getCroppedCanvas();
   };
 
-  let [fields, setFields] = useState(cardInfo.userLinkedBadges || []);
-  let [fieldsData, setFieldsData] = useState(cardInfo.fieldsData || {});
-  let [cardImage, setCardImage] = useState(cardInfo?.cardImage || "");
+  let [cardImage, setCardImage] = useState(cardCtxInfo?.cardImage || "");
   let [croppedImage, setCroppedImage] = useState(
-    cardInfo?.croppedImage || cardImage || ""
+    cardCtxInfo?.croppedImage || cardImage || ""
   );
-  let [cardName, setCardName] = useState(cardInfo?.cardName || "");
+  let [cardName, setCardName] = useState(cardCtxInfo?.cardName || "");
 
   const onChangeCardName = (e) => {
     let cardNameValue = e?.currentTarget?.value || "";
     setCardName(cardNameValue);
   };
-  let [cardCustomID, setCardCustomID] = useState(cardInfo?.customId || "");
+  let [cardCustomID, setCardCustomID] = useState(cardCtxInfo?.customId || "");
 
   const onChangeCardCustomID = (e) => {
     let cardCustomIDValue = e?.currentTarget?.value || "";
@@ -64,9 +47,8 @@ const AddCardItem = ({ props }) => {
   };
 
   useEffect(() => {
-    setFields(cardCtxInfo.userLinkedBadges);
-    setFieldsData(cardCtxInfo.fieldsData);
-  }, [cardCtxInfo.userLinkedBadges]);
+    console.log(" rendering AddEditCardItem...");
+  }, [cardCtxInfo]);
 
   const [showModal, setShowModal] = useState(false);
   const [cardImageOnModal, setCardImageOnModal] = useState(cardImage);
@@ -126,20 +108,15 @@ const AddCardItem = ({ props }) => {
   const rangeHandler = (e) => {
     cropper.zoomTo(e.target.value);
   };
-
-  // fields?.map((field, index) => {
-  //   console.log(field);
-  //   debugger;
-  // });
   return (
     <div
       className="indi-card-item-parent indi-add-card-wrapper card-with-bg"
       style={{
-        background: `url(${templateInfo.backgroundImage})`,
+        background: `url(${cardCtxInfo.templateInfo.backgroundImage})`,
       }}
     >
       <div className="d-none1 indi-card-company-logo-wrapper">
-        <img src={templateInfo.logoImage} alt="logoiamge" />
+        <img src={cardCtxInfo.templateInfo.logoImage} alt="logoiamge" />
       </div>
 
       <div className="indi-card-upload-picture indi-card-upload-picture-with-no-bg">
@@ -197,15 +174,10 @@ const AddCardItem = ({ props }) => {
               onChange={onChangeCardCustomID}
             ></input>
           </div>
-          {fields?.map((field, index) => (
+          {cardCtxInfo.userLinkedBadges?.map((field, index) => (
             <Field
               fieldIndex={index}
-              fieldProps={{
-                fieldSchema: field,
-                fieldType: field.badgeUID,
-                inputElementClassNames,
-                templateBadges,
-              }}
+              field={field}
               pageMode={pageMode}
               key={index}
             />

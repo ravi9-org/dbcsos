@@ -1,23 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import InputElement from "./InputElement";
 import ContextComponent from "../../AppContext";
 import CardContext from "../../body/content.area/cards/CardContext";
-import Utils from "../../Utils";
 
 const Field = (props = {}) => {
   let { cardCtxInfo, setCardCtxInfo } = useContext(CardContext);
   let { addrCtxData } = useContext(ContextComponent);
 
   let fieldIndex = props?.fieldIndex ?? -1;
-  let fieldProps = props.fieldProps;
-  let enableSocialLinks = props?.enableSocialLinks;
+  let fieldProps = props.field;
+  let enableSocialLinks = props?.enableSocialLinks ?? false;
   let fieldType = fieldProps.badgeUID;
   let showEmptyField = fieldProps?.showEmptyField || false;
   let fieldSchema = fieldProps;
-  let iconDarkImage =
-    fieldProps?.darkIconImage || fieldProps?.fieldSchema?.darkIconImage || "";
+  let iconDarkImage = fieldProps?.darkIconImage || "";
 
-  let isDefault = !!fieldProps?.fieldSchema?.default;
+  let isDefault = !!fieldProps?.default;
 
   let fieldData = fieldProps.value || fieldProps.defaultValue;
 
@@ -52,13 +50,11 @@ const Field = (props = {}) => {
   ) {
     for (let i = 0; i < fieldIndex; i++) {
       let badgeUID = cardCtxInfo.userLinkedBadges[i].badgeUID;
-      if (badgeUID === fieldProps.fieldSchema.badgeUID) {
+      if (badgeUID === fieldProps.badgeUID) {
         canRemoveField = true;
       }
     }
   }
-
-  let inputElementClassNames = fieldProps.inputElementClassNames;
 
   const removeField = (e) => {
     e.preventDefault();
@@ -67,11 +63,6 @@ const Field = (props = {}) => {
       tempCardCtxInfo?.userLinkedBadges?.filter((field, index) => {
         return index !== fieldIndex;
       });
-    tempCardCtxInfo.fieldsData = tempCardCtxInfo?.fieldsData?.filter(
-      (field, index) => {
-        return index !== fieldIndex;
-      }
-    );
     setCardCtxInfo(tempCardCtxInfo);
   };
 
@@ -97,6 +88,8 @@ const Field = (props = {}) => {
   }
 
   let [fullAddress, setFullAddress] = useState(initFullAddress);
+
+  useEffect(() => {}, [cardCtxInfo.userLinkedBadges]);
 
   return (
     <div className="indi-card-field-item d-flex">
@@ -134,8 +127,6 @@ const Field = (props = {}) => {
         <InputElement
           props={{
             fieldProps: fieldSchema,
-            fieldName: fieldType,
-            inputElementClassNames,
           }}
         />
       )}

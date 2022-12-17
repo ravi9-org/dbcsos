@@ -1,16 +1,16 @@
 import React, { useRef } from "react";
 
-const TextAreaInput = (props) => {
-  let schema = props.props.schema;
+const TextAreaInput = ({schema}) => {
   let fieldData = schema.value || schema.defaultValue || '';
-  let fieldName = props.props.fieldName;
-  let inputElementClassNames = props.props.inputElementClassNames;
-  let fieldClassNames = "indi-add-card-input-field " + inputElementClassNames;
+  let fieldName = schema.fieldName;
+  let fieldClassNames = "indi-add-card-input-field ";
   let inputEle = useRef(null);
   let value = fieldData;
   let isRequired = schema?.required || false;
   let isReadOnly = schema?.readonly || false;
-  const onChangeInput = (e) => {};
+  const onChangeInput = (e) => {
+    schema.value = e.currentTarget.value;
+  };
   return (
     <textarea
       className={fieldClassNames}

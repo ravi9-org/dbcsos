@@ -9,26 +9,24 @@ const Badge = (props) => {
   let badgeEle = useRef(null);
 
   let badge = props.badge || {};
-  //badgeUID,darkIconImage,iconImage,id,default,multiple,name,readonly,required,type
 
   let [isMultiple, setIsMultiple] = useState(badge.multiple);
-  
+
   let canFreeze = false;
   let [freezeBadge, setFreezeBadge] = useState(canFreeze);
-    let [classNameList, setClassNameList] = useState(
-      canFreeze ? FREEZED_STYLE : ""
-    );
+  let [classNameList, setClassNameList] = useState(
+    canFreeze ? FREEZED_STYLE : ""
+  );
 
   useEffect(() => {
     if (!isMultiple) {
-      cardCtxInfo?.userLinkedBadges.map(element => {
+      cardCtxInfo?.userLinkedBadges.map((element) => {
         badge.badgeUID === element.badgeUID && (canFreeze = true);
       });
     }
-  
+
     setFreezeBadge(canFreeze);
     setClassNameList(canFreeze ? FREEZED_STYLE : "");
-
   }, [cardCtxInfo]);
 
   const badgeSelected = (e) => {
@@ -39,14 +37,14 @@ const Badge = (props) => {
     } else {
       if (!isMultiple) {
         setFreezeBadge(true);
-        setClassNameList("indi-badge-freeze");
+        setClassNameList(FREEZED_STYLE);
       } else {
       }
       let tempCardCtxInfo = { ...cardCtxInfo };
       let tempFields = tempCardCtxInfo.userLinkedBadges;
-      let tempData = tempCardCtxInfo?.fieldsData || [];
-      tempFields.push(badge);
-      tempData.push(badge.defaultValue);
+      let tempBadge = { ...badge };
+      tempBadge.value = tempBadge.value || tempBadge.defaultValue;
+      tempFields.push(tempBadge);
       setCardCtxInfo(tempCardCtxInfo);
     }
   };

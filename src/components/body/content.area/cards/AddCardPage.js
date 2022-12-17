@@ -10,39 +10,57 @@ import CardContext from "./CardContext";
 
 const AddCard = (props) => {
   const navigate = useNavigate();
-  let { setAlert } = useContext(ContextComponent);
+  let { setAlert, userData } = useContext(ContextComponent);
 
   let [templateData, setTemplateData] = useState(
     props?.template?.selectedTemplate || {}
   );
 
   let detailsForAddCardPage = {
-    template: templateData,
-    card: {
-      templateId: templateData.id,
-      userLinkedBadges: [],
-      userId: Utils.getUserId(),
-      fieldsData: [],
-      cardImage: templateData.profilePicture,
-      croppedImage: templateData.profilePicture,
-    },
+    templateInfo: templateData,
+    templateId: templateData.id,
+    userLinkedBadges: [],
+    userId: Utils.getUserId(),
+    cardImage: templateData.profilePicture,
+    croppedImage: templateData.profilePicture,
+    userFieldInfo: { ...userData },
   };
+
+  //   department
+  // :
+  // "IT"
+  // email
+  // :
+  // "laks@cmsedge.com"
+  // firstName
+  // :
+  // "Lakshmana"
+  // lastName
+  // :
+  // "Ponnekanti"
+  // pronoun
+  // :
+  // "hehim"
+  // title
+  // :
+  //   "IT Vendor"
 
   templateData?.linkedBadges?.map((badge, index) => {
     if (badge.default) {
-      detailsForAddCardPage.card.userLinkedBadges.push(badge);
-      detailsForAddCardPage.card.fieldsData.push(badge.defaultValue);
+      let tempBadge = { ...badge };
+      tempBadge.value = tempBadge.defaultValue || "";
+      detailsForAddCardPage.userLinkedBadges.push(tempBadge);
     }
   });
 
   let [cardImageValue, setCardImageValue] = useState(
-    detailsForAddCardPage.template.profilePicture
+    detailsForAddCardPage.templateInfo.profilePicture
   );
   let [croppedImageValue, setCroppedImageValue] = useState(
-    detailsForAddCardPage.template.profilePicture
+    detailsForAddCardPage.templateInfo.profilePicture
   );
 
-  let [cardCtxInfo, setCardCtxInfo] = useState(detailsForAddCardPage.card);
+  let [cardCtxInfo, setCardCtxInfo] = useState(detailsForAddCardPage);
 
   let [canRender, setCanRender] = useState(false);
 
@@ -60,7 +78,6 @@ const AddCard = (props) => {
 
   const saveCard = (e) => {
     e.preventDefault();
-    let dataValues = [];
     let cardImageEle = document.getElementsByClassName(
       imageInputElementClassNames
     );
@@ -71,10 +88,10 @@ const AddCard = (props) => {
     let inputElements = document.getElementsByClassName(inputElementClassNames);
     let imageValues = [];
 
-    for (let ele of inputElements) {
-      let val = ele?.value || "";
-      dataValues.push(val);
-    }
+    // for (let ele of inputElements) {
+    //   let val = ele?.value || "";
+    //   dataValues.push(val);
+    // }
 
     let cardNameElement = document.getElementsByClassName(
       "indi-add-card-name-input"
@@ -97,24 +114,23 @@ const AddCard = (props) => {
       setCroppedImageValue(imgVal);
       imageValues.push(imgVal);
     }
-    submitForm(dataValues, imageValues, cardNameValue, cardCustomIDValue);
+    submitForm(imageValues, cardNameValue, cardCustomIDValue);
   };
 
   const submitForm = (
-    dataValues = {},
     imageValues = [],
     cardNameValue = "",
     cardCustomIDValue = ""
   ) => {
     let info = { ...cardCtxInfo };
     let submitCardInfo = { ...info, userLinkedBadges: [] };
-    delete submitCardInfo.fieldsData;
+
     info.userLinkedBadges.map((badge, index) => {
       let badgeData = {
         id: badge.id,
         badgeName: badge.badgeName,
         badgeOrder: index,
-        value: dataValues[index],
+        value: badge.value,
       };
       submitCardInfo.userLinkedBadges.push(badgeData);
     });
@@ -143,8 +159,6 @@ const AddCard = (props) => {
     }
   };
 
-  let templateBadges = props.template.selectedTemplate.linkedBadges;
-
   return (
     <CardContext.Provider
       value={{
@@ -160,15 +174,13 @@ const AddCard = (props) => {
               <AddCardItem
                 className="indi-add-card-wrapper"
                 props={{
-                  pageInfo: detailsForAddCardPage,
                   pageMode: "add",
-                  inputElementClassNames,
                 }}
               />
             }
             <div className="indi-add-card-item-footer d-flex d-flex-row">
               <div className="indi-add-card-page-badge-ribbon-wrapper">
-                <BadgesRibbon templateBadges={templateBadges} />
+                <BadgesRibbon />
               </div>
 
               <div className="indi-add-card-page-footer-btn-wrapper d-flex d-flex-row">
