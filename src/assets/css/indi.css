@@ -953,6 +953,12 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   padding-bottom: 8px;
 }
 
+.indi-app .indi-qrcode-box-personal-desgination {
+  position: relative;
+  top: -12px;
+  max-width: calc(100% - 56px);
+}
+
 .indi-app .indi-signature-template .indi-qrcode-box-info-col div span.indi-card-field-item-img {
   background-size: 20PX;
   background-position: 0px 2px;

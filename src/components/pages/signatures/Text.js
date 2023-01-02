@@ -94,7 +94,7 @@ const Text = (props) => {
                     {cardInfo?.userFieldInfo?.lastName}
                   </div>
                   <div className="indi-qrcode-box-personal-desgination">
-                    {userData.designation}
+                    {cardInfo?.userFieldInfo?.title}
                   </div>
                 </div>
                 <div className="indi-qrcode-box-contacts">
