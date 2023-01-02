@@ -905,7 +905,7 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   border: none;
 }
 
-.indi-app .indi-signature-item-wrapper  .indi-qrcode-box.row {
+.indi-app .indi-signature-item-wrapper .indi-qrcode-box.row {
   background-color: #fff;
   margin: 0;
   border-radius: 10px;
@@ -1325,9 +1325,10 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
   background-size: contain !important;
   background-repeat: no-repeat;
 }
+
 .indi-app .indi-img-preview.indi-dark-img-preview {
   border-radius: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .indi-app .indi-add-form-wrapper {
@@ -1964,4 +1965,23 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 
 .indi-app .indi-range-input {
   padding-top: 29px;
+}
+
+.tooltip {
+  pointer-events: none !important;
+}
+
+
+.indi-app .fade.show.bs-tooltip-bottom {
+  transform: translate(0px, 0px);
+  inset: 0px auto auto 0px;
+  position: absolute;
+}
+
+.indi-app .bs-tooltip-bottom .tooltip-arrow::before {
+  border-bottom-color: #304697;
+}
+
+.indi-app .tooltip-inner {
+  background-color: #304697;
 }

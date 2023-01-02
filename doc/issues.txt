@@ -257,6 +257,30 @@ version instead, let me know which format of the no tagline you will need and I 
 45) Include wechat badges (personal and company)
 -> Laks can fix it.
 
+==========================================================
+
+46) Shorten URLs
+[Ravi]: remove http(s)://www., font size to 14px
+
+47) Ability to move the mandatory fields
+[Ravi]: check the fesibility to shuffle fields while editing card
+
+48) Include the title
+[Ravi]: qr code, text, title should come without css alignment issues
+
+49) Alt text on badges icon
+[Ravi]: provide tooltip in badges ribbon.
+
+50) Edit option for users
+[Ravi]: provide user edit option
+
+51) Gender to be optional
+[Ravi]: user creation form, no value to display if blank
+
+52) User salutation
+[Ravi]: Blank/Dr. 
+
+
 =========================== Laks Items ========================
 1) send template linked badges while editing the car [[FIEXED]]
 
