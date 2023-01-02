@@ -269,7 +269,7 @@ version instead, let me know which format of the no tagline you will need and I 
 [Ravi]: qr code, text, title should come without css alignment issues
 
 49) Alt text on badges icon
-[Ravi]: provide tooltip in badges ribbon.
+[Ravi]: provide tooltip in badges ribbon. [[FIEXED]]
 
 50) Edit option for users
 [Ravi]: provide user edit option
