@@ -26,6 +26,14 @@ const Field = (props = {}) => {
   let showAsLink = false;
   let toWhere = fieldProps.value;
 
+  
+  if (fieldProps.badgeType === "url") {
+    fieldData = fieldData
+      .replace("https://", "")
+      .replace("http://", "")
+      .replace("www.", "");
+  }
+
   if (enableSocialLinks) {
     if (fieldProps.badgeType === "url") {
       showAsLink = true;
