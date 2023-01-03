@@ -266,19 +266,22 @@ version instead, let me know which format of the no tagline you will need and I 
 [Ravi]: check the fesibility to shuffle fields while editing card
 
 48) Include the title
-[Ravi]: qr code, text, title should come without css alignment issues  -- done
+[Ravi]: qr code, text, title should come without css alignment issues  [[FIXED]]
 
 49) Alt text on badges icon
-[Ravi]: provide tooltip in badges ribbon. [[FIEXED]]
+[Ravi]: provide tooltip in badges ribbon. [[FIXED]]
 
 50) Edit option for users
 [Ravi]: provide user edit option
 
 51) Gender to be optional
-[Ravi]: user creation form, no value to display if blank
+[Ravi]: user creation form, no value to display if blank [[FIXED]]
 
 52) User salutation
-[Ravi]: Blank/Dr. 
+[Ravi]: Blank/Dr. [[FIXED]]
+
+53) Address edit issue.
+[Ravi]: Consder all fields while editing.
 
 
 =========================== Laks Items ========================

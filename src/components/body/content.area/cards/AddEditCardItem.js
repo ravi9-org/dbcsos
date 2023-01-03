@@ -13,6 +13,7 @@ const AddCardItem = ({ props }) => {
   let { cardCtxInfo } = useContext(CardContext);
 
   let [pronoun, setPronoun] = useState(Utils.PRONOUNS[userData.pronoun]);
+  let [saluatation, setSaluatation] = useState(Utils.SALUATATION[userData?.saluatation ?? ""]);
 
   let pageMode = props.pageMode ?? "add";
 
@@ -145,7 +146,7 @@ const AddCardItem = ({ props }) => {
       </div>
       <div className="indi-info-wrapper">
         <div className="indi-card-name fw-bold">
-          {userData.firstName} {userData.lastName} ({pronoun})
+          {saluatation} {userData.firstName} {userData.lastName} ({pronoun})
         </div>
         <div className="indi-card-title">{userData.title}</div>
       </div>

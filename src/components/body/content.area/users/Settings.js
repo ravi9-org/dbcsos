@@ -312,6 +312,22 @@ const Settings = () => {
               />
             </FloatingLabel> */}
 
+            <FloatingLabel label="Select saluatation">
+              <Form.Select
+                defaultValue={userData.saluatation}
+                id="saluatation"
+                size="sm"
+                className="indi-input-field indi-input-select-field"
+                onChange={profileFieldChangeHandler}
+              >
+                {Object.keys(Utils.SALUATATION)?.map((key, index) => (
+                  <option value={key} key={index}>
+                    {Utils.SALUATATION[key]}
+                  </option>
+                ))}
+              </Form.Select>
+            </FloatingLabel>
+            
             <FloatingLabel label="Select pronoun">
               <Form.Select
                 defaultValue={userData.pronoun}

@@ -25,10 +25,12 @@ const CardItem = (props) => {
 
   userData = props?.userData || userData || {};
   let [pronoun, setPronoun] = useState("");
+  let [saluatation, setSaluatation] = useState("");
 
   const success = (res) => {
     setCardCtxInfo(res.data);
     setPronoun(Utils.PRONOUNS[res.data.userFieldInfo.pronoun]);
+    setSaluatation(Utils.SALUATATION[res.data.userFieldInfo.saluatation || ""]);
 
     setCanRender(true);
     setLoadingState({
@@ -96,7 +98,7 @@ const CardItem = (props) => {
             </div>
             <div className="indi-info-wrapper">
               <div className="indi-card-name fw-bold">
-                {cardCtxInfo?.userFieldInfo?.firstName}{" "}
+                {saluatation} {cardCtxInfo?.userFieldInfo?.firstName}{" "}
                 {cardCtxInfo?.userFieldInfo?.lastName} ({pronoun})
               </div>
               <div className="indi-card-title">{userData?.title}</div>

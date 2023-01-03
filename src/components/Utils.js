@@ -982,9 +982,15 @@ const REGIONS = {
 };
 
 const PRONOUNS = {
+  "": "Select",
   hehim: "He/Him",
   sheher: "She/Her",
   them: "Them",
+};
+
+const SALUATATION = {
+  "": "Select",
+  dr: "Dr."
 };
 
 const Utils = {
@@ -995,6 +1001,7 @@ const Utils = {
   BADGE_TYPES,
   REGIONS,
   PRONOUNS,
+  SALUATATION,
   userSessionExists,
   getUserProfile,
   getAllUsers,
