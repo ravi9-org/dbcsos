@@ -26,7 +26,6 @@ const Field = (props = {}) => {
   let showAsLink = false;
   let toWhere = fieldProps.value;
 
-  
   if (fieldProps.badgeType === "url") {
     fieldData = fieldData
       .replace("https://", "")
@@ -74,6 +73,28 @@ const Field = (props = {}) => {
     setCardCtxInfo(tempCardCtxInfo);
   };
 
+  const moveFieldUp = (e) => {
+    e.preventDefault();
+    shuffleFields(fieldIndex - 1, fieldIndex);
+  };
+
+  const moveFieldDown = (e) => {
+    e.preventDefault();
+    shuffleFields(fieldIndex, fieldIndex + 1);
+  };
+
+  const shuffleFields = (index1, index2) => {
+    let tempCardCtxInfo = { ...cardCtxInfo };
+
+    let field1 = { ...tempCardCtxInfo.userLinkedBadges[index1] };
+    let field2 = { ...tempCardCtxInfo.userLinkedBadges[index2] };
+
+    tempCardCtxInfo.userLinkedBadges[index1] = field2;
+    tempCardCtxInfo.userLinkedBadges[index2] = field1;
+
+    setCardCtxInfo(tempCardCtxInfo);
+  };
+
   let isLookupField = fieldType === "address";
 
   let initFullAddress = "";
@@ -101,6 +122,24 @@ const Field = (props = {}) => {
 
   return (
     <div className="indi-card-field-item d-flex">
+      {(mode === "edit" || mode === "add") && (
+        <div>
+          {fieldIndex !== 0 && (
+            <div className="indi-up-arrow" role="button" onClick={moveFieldUp}>
+              <i className="indi-arrow indi-up"></i>
+            </div>
+          )}
+          {fieldIndex !== cardCtxInfo.userLinkedBadges.length - 1 && (
+            <div
+              className="indi-down-arrow"
+              role="button"
+              onClick={moveFieldDown}
+            >
+              <i className="indi-arrow indi-down"></i>
+            </div>
+          )}
+        </div>
+      )}
       <div
         style={{ backgroundImage: `url(${iconDarkImage})` }}
         className="indi-card-field-item-img"

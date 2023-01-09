@@ -1991,3 +1991,51 @@ body.indi-app:not(.indi-app-on-macintosh)::-webkit-scrollbar-thumb:hover,
 .indi-app .tooltip-inner {
   background-color: #304697;
 }
+
+.indi-app .indi-up-arrow,
+.indi-app .indi-down-arrow {
+  /* background: url("../img/arrow.png") no-repeat; */
+  height: 10px;
+  width: 20px;
+  background-size: contain;
+  cursor: pointer;
+  opacity: 0;
+  margin-left: 2px;
+}
+
+.indi-app .indi-card-field-item:hover .indi-up-arrow,
+.indi-app .indi-card-field-item:hover .indi-down-arrow {
+  opacity: 1;
+}
+
+.indi-app .indi-down-arrow {
+  /* -webkit-transform: scaleY(-1);
+  transform: scaleY(-1); */
+}
+
+.indi-app .indi-arrow {
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.indi-app .indi-right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.indi-app .indi-left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.indi-app .indi-up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.indi-app .indi-down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
