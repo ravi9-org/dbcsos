@@ -14,7 +14,7 @@ const EditAddressPage = ({ props }) => {
   let editableAddressIndex = props?.editableAddressIndex || {};
 
   let setTableData = props?.setTableData || (() => {});
-  let [fullAddress, setFullAddress] = useState({});
+  let [fullAddress, setFullAddress] = useState(editableAddress);
 
   const hideModal = (e) => {
     props.setEditModalCanOpen(false);
